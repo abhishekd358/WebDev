@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v32 DOM Practice</title>
+</head>
+<body style="background-color: black; color: white;">
+    
+    <ul class="language">
+        <li>Javascript</li>
+    </ul>
+    
+</body>
+    <script>
+        // below we creating one li and appending it into ul in DOM under li
+        function myfunc(customtextforli){ // function that takes the custom text for li and also it create li
+            // creating li
+            const li = document.createElement('li');
+            // insert the text into li
+            li.innerHTML = `${customtextforli}`;
+            // selecting the ul by class and assign to variable
+            const ul = document.querySelector('.language');
+            //now we have to append it
+            ul.appendChild(li);
+        };
+        myfunc('Python');
+        myfunc('Java');
+        myfunc('Lama');
+
+
+        // below is the maximize method to creating new element. above method have to traverse through tree for every new element
+        function optimizeMyFunc(ocustomtextforli){
+            // creating the element that want to insert
+            const li = document.createElement('li');
+            // insert the text by creating a TextNode
+            const addText = document.createTextNode(`${ocustomtextforli}`);
+            // appending to li
+            li.append(addText);
+            // select element that where we want to append it
+            const ul = document.querySelector('.language');
+            // now append it
+            ul.append(li);
+        };
+            optimizeMyFunc('This one & below are optimize li');
+            optimizeMyFunc('React');
+
+
+
+        // ++++++++++++++++ Editing ++++++++++++++++++++++++++++++++
+       
+       
+        // =========== method 1 : only we replacing the text
+        // selecting the element where we want to edit
+        const editing = document.querySelector('li:nth-child(2)');
+        // changing the innerHTML text
+        editing.innerHTML = "this is done by DOM editing: before li value is 'Python'";
+        
+
+        // =========== method 2 : we creating a new element and directly we replacing with new one
+        // we want to replace the 3rd <li> element 
+        const li3rd = document.querySelector('li:nth-child(3)');
+
+        const new2method = document.createElement('li');
+        // entering the content for new created <li>
+        new2method.textContent = 'Method 2 editing';
+
+        // selecting the parent element <ul>
+        document.querySelector('.language');
+        // using replaceChild method to replace the previous existing element with new created one
+        li3rd.replaceWith(new2method); // Correct order: parent replaces the old child with the new child
+
+
+        // ============ method 3 -- outerHTML changing ========
+        // selecting element <li> that wnat to change
+        const method3 = document.querySelector('li:nth-child(6)');
+        //  now just change the outerHTML
+        method3.outerHTML = "<li>Method 3 edting 'outerHTML'</li>";
+
+
+        // ++++++++++++ Remove +++++++++++++++++++++++++++++++
+        
+        //  selecting the element that want to remove
+        const removeLi = document.querySelector('li:first-child');
+        // removing it
+        removeLi.remove()
+
+
+    </script>
+    
+
+</html>

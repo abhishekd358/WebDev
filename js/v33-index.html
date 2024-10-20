@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v32 DOM Practice</title>
+</head>
+<body style="background-color: black; color: white;">
+    <div class="parent">
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+
+    
+</body>
+<script>
+    const parent = document.querySelector('.parent')
+    // used to access HTMLCollection
+    console.log(parent.children[1].innerHTML) // accesing inner html text of the first div element
+    
+    parent.children[1].style.color = "blue";
+    console.log(parent.firstElementChild); // it return first element {in browser it works better way}
+    console.log(parent.lastElementChild); // it return last element {in browser it works better way}
+
+    
+    //looping
+    /*
+    for (let eachdiv = 0; eachdiv <= parent.children.length; eachdiv++){
+        console.log(parent.children[eachdiv].innerHTML);
+    };
+    */
+
+    const days = document.querySelector('.day')
+    console.log(days);
+    console.log(days.parentElement) // return parent element of the child
+    console.log(days.nextElementSibling) // return next element 
+    
+    
+    console.log("NODES: ", parent.childNodes) // it return NodeList
+    
+
+
+
+    // ++++++++++++++++CREATING ELEMENTS++++++++++++++++++++++++++++++++++++++++
+    const div = document.createElement('div')
+    console.log(div)
+
+    // adding property in the div
+    div.className = 'main-div'
+    div.id = 'myId'
+    // custom attribute setting
+    div.setAttribute('title', 'this is first title')
+    // styling
+    div.style.backgroundColor = 'blue'
+
+    
+    // adding text in div
+    div.innerText = "Hi, There"
+    // another way to add text in div
+    const addText = document.createTextNode("  this is New text")
+    div.append(addText)
+
+    // to display the created div on the screen 
+    document.body.appendChild(div)
+
+</script>
+</html>
