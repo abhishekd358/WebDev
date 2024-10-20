@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Document</title>
+<style>
+
+    div.form-main{
+        margin: 100px 0px 0px 100px;
+        background-color: #ffe1e1;
+        width: 580px;
+        height: 310px;
+        border-radius: 10px;
+        border: 1px solid rgb(203, 203, 203);
+    }
+
+    div.form-main:hover{
+        box-shadow: 1px 1px 30px 1px #ffc7c7;
+        background-color: #ffe5e5;
+    }
+
+   div.input-label{
+    font-family: 'Georgia';
+    font-size: 15px;
+    font-weight: 200;
+    padding: 10px 0px 0px 27px 
+   }
+
+   div.input-value{
+    padding: 10px 0px 0px 25px;
+
+   }
+   input{
+    border: 1px solid #caacac;
+    border-radius: 5px;
+    height: 32px;
+    width: 500px
+   }
+
+
+   input[placeholder]{
+    font-family: 'Georgia';
+    letter-spacing: 1;
+    padding-left: 20px;
+    
+   }
+
+   select.country-list{
+    font-family: 'Gorgia';
+    font-size: 16px;
+
+    margin-top: 10px;
+    border: 1px solid #caacac;
+    border-radius: 5px;
+    height: 35px;
+    width: 523px;
+    padding: 1px 0px 0px 20px;
+   }
+
+   button{
+    width: 523px;
+    height: 40px;
+    margin-top: 25px;
+    font-family: 'Georgia';
+    font-size: 18px;
+    font-weight: 800;
+    border: 1px solid #caacac;
+    border-radius: 5px;
+    background-color: rgb(197, 134, 134);
+    color: #ffffff;
+
+   }
+
+   button:hover{
+    background-color: #ffb5aa;
+    color: rgb(0, 0, 0);
+   }
+  
+
+</style>
+</head>
+
+
+<body>
+
+    <div class="form-main">
+    <form class="form-main-1">
+        
+        <div class="input-label"><label for="first-name" name="first-name" >First Name</label></div>
+        <div class="input-value"><input type="text" id="first-name" placeholder="Your name..."></div>
+        
+        <div class="input-label"><label for="last-name" name="first-name" >Last Name</label></div>
+        <div class="input-value"><input type="text" id="last-name" placeholder="Your last name..."></div>
+
+    
+            <div class="input-label"><label for="country-list" name="country-list" >Country</label><div>
+                
+                <select class='country-list' name="country-list">
+                    <option value="Austria">Austria</option>
+                    <option value="India">India</option>
+                    <option value="USA">USA</option>
+                </select>
+                
+                
+            <div class="btn-submit">
+                <button>SUBMIT</button>
+            </div>
+    </form>
+</div>
+</body>
+</html>
