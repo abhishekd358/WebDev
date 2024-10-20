@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <canvas id="canvas" width="1300" height="700" style="border:1px solid #000000;"></canvas>
+
+</body>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    //fillstyle -> used to fill the geometery with the color that we provide to fillstyle
+    ctx.fillstyle = 'red';
+    //below is filled rectangle
+    ctx.fillRect(50, 300, 300, 100);  //left(position) top(position) right(width) bottom(width)
+    
+    
+    ctx.strokeStyle = 'blue';
+    // below is border rectangle
+    ctx.strokeRect(200, 50, 100, 200); // all are capturing areas
+
+
+
+    ctx.beginPath();  // basically it kind of declaration of point to draw a circle on the canvas
+    ctx.arc(100, 200, 90,0, 2* Math.PI); // left postion, top postion, Size, 0-5(it arc size in clockwise direction),0-2(it arc size in clockwise direction)
+    ctx.fillStyle = 'purple';
+    ctx.fill(); // to get fill color circle
+    ctx.stroke(); // inherit color of strokestyle define before
+
+
+    ctx.font = '30px Georgia'
+    ctx.fillStyle = 'green';
+    ctx.fillText('Happy Learning', 100, 450); // text, left, top
+
+
+
+
+
+
+
+    // Intermediate 
+
+    const img = new Image();
+    img.src = '../../pr/media/clock.png'
+    img.onload = function() {
+        ctx.drawImage(img, 300, 400); //left , top
+    };
+
+
+    
+
+
+
+
+
+
+</script>
+</html>

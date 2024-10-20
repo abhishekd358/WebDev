@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Format</title>
+    <style>
+        table{
+            
+            background: rgb(238, 241, 220);
+            box-shadow: 0 20px 20px rgba(129, 127, 52, 0.5);
+        }
+        tr:hover{
+            background-color:  #30cdcd;
+        
+        }
+
+
+
+        
+        th{
+            font-family:'Times New Roman', Times, serif;
+            font-size: 50px; 
+            border: 1px solid darkseagreen;
+            font-weight: 400;
+            padding: 2px 25px 2px 25px;
+            color:darkslategrey
+            
+        }
+
+        td{
+            border: 10px solid darkseagreen;
+            font-family:'Times New Roman', Times, serif;
+            font-size: 20px; 
+            font-style: italic;
+            font-stretch: condensed;
+            border: 1px solid darkseagreen;
+            font-weight: 300;
+            padding: 10px 20px 10px 20px;
+            color:darkslategrey
+        }
+
+
+
+        caption{
+            text-shadow: 0 10px 8px rgba(168, 218, 107, 0.7);
+            margin: 50px 10px 10px 10px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            color:darkseagreen;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <caption> This is Perfect Practice of Table</caption>
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Profit</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Stationary</td>
+                <td>8000</td>
+                <td>2000</td>
+            </tr>
+
+            <tr>
+                <td>Fruits</td>
+                <td>12000</td>
+                <td>1600</td>
+            </tr>
+
+            <tr>
+                <td>Clothes</td>
+                <td>30000</td>
+                <td>10000</td>
+            </tr>
+
+            <tr>
+                <td>Electronics</td>
+                <td>70000</td>
+                <td>30000</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr style="background-color:rgb(235, 240, 141)">
+                <td colspan="2" style="text-align: center;  vertical-align: middle;">Total Profit</td>
+                <td>43600</td>
+            </tr>
+
+        </tfoot>
+    </table>
+    
+</body>
+</html>

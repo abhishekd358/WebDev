@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <canvas id="canvas" width="1300" height="700" style="border:1px solid #000000;"></canvas>
+
+</body>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+
+ctx.beginPath();
+ctx.arc(500, 300, 200, 0,2*Math.PI);
+ctx.fillStyle='yellow';
+ctx.fill();
+ctx.stroke();
+
+
+
+ctx.beginPath();
+ctx.arc(400, 250, 20, 0,2*Math.PI);
+ctx.fillStyle='black';
+ctx.fill();
+ctx.stroke();
+
+
+
+ctx.beginPath();
+ctx.arc(600, 250, 20, 0,2*Math.PI);
+ctx.fillStyle='black';
+ctx.fill();
+ctx.stroke();
+
+
+ctx.beginPath();
+ctx.arc(500, 400, 50, 0,Math.PI);
+ctx.fillStyle='black';
+ctx.fill();
+ctx.stroke();
+
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+<body>
+    <template id="template">
+        <h1 style="background-color: red;padding: 20px;">page name</h1>
+        <p style="background-color: aqua; padding: 20px;">this is paragraph of page</p>
+    </template>
+    
+</body>
+<script>
+
+    const data = {
+        pname : 'Animation',
+        paraname : 'THis is Animation page'
+    };
+    const template = document.getElementById('template');
+    const content = template.content.cloneNode(true);
+
+
+    content.querySelector('h1').innerHTML = data.pname;
+    content.querySelector('p').innerHTML = data.paraname;
+
+    document.body.appendChild(content);
+    
+
+    
+</script>
+
+
+
+</html>

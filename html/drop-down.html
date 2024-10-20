@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+
+/* NOT IMPORTANT:---> this .btn-main class i used here to only make it beutiful the functionality*/
+        .btn-main{
+            background-color: rgb(20, 154, 71);
+            color: rgb(255, 255, 255);
+            font-family: 'Poppins';
+            padding: 8px 50px;
+            font-size: 50px;
+            border: 1px solid rgb(167, 167, 167);
+            
+        }
+
+
+/*IMPORTANT:=> basically we have two div 
+                    1.main-div
+                    2.sub-div
+main-div ko hamne diplay kiya inline-block se
+fir,
+sub-div us ko display none kar diya to vo display nahi hoga hidden rahega
+then,
+
+
+we us jab .main-div ko :hover karenge to .sub-div dikhai dega giving the display value to block
+
+*/
+
+        .main-div{
+            display: inline-block;
+            
+        }
+
+       .sub-div{ 
+        display: none;
+       
+       }
+
+       .main-div:hover .sub-div{
+        display: block;
+       }
+    </style>
+
+</head>
+<body>
+
+    <div class="main-div">
+        <button class="btn-main">Links</button>
+        <div class="sub-div">
+            <li>Link 1</li>
+            <li>Link 2</li>
+            <li>Link 3</li>
+        </div>
+    </div>
+    
+</body>
+</html>
