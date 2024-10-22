@@ -5,6 +5,11 @@ const listColorTxt = ['#FFFAF0', '#FFFFFF', '#3A2A8A', '#EAB8E4']
 // i am selecting the element div that i want to change there colors
 const colordiv = document.querySelectorAll('.divcolor');
 
+
+/*
+
+========Using Arrow Function===================
+
 // you can use forEach() or map() used to loop and set color from the list 
 colordiv.forEach((individualDiv, index) =>{
     // now select each individual div and applying the eventListener of click
@@ -13,3 +18,13 @@ colordiv.forEach((individualDiv, index) =>{
         document.body.style.color = listColorTxt[index]  
     });
 });
+
+*/
+
+// using anonymous callback function
+colordiv.forEach( function (individualDiv, index) {
+    individualDiv.addEventListener('click', function(){
+        document.body.style.backgroundColor = listColorBg[index]
+        document.body.style.color = listColorTxt[index]  
+    });  
+})

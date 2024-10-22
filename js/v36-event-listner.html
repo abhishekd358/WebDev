@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        button{
+            padding: 15px 30px 15px 30px;
+            background-color: rgb(97, 97, 255);
+            font-family: 'Georgia';
+            color: white;
+            font-size: 2em;
+            border: 2px solid rgb(249, 255, 83); 
+            border-radius: 20px;   
+        }
+        #btn1{
+            position: absolute;
+            top: 35%;
+            left: 50%;;
+        }
+        #btn2{
+            position: absolute;
+            top: 45%;
+            left: 50%;
+        }
+
+        a{
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+
+    <ul>
+    <button id="btn1">Wrong</button>
+    <button id="btn2">Right</button>
+    </ul>
+
+
+    <ul id="animal">
+        <li>Lion</li>
+        <li>Tiger</li>
+        <li>Elephant</li>
+    </ul>
+
+    <a href="https://codepen.io/Mistikon/pen/zYgdpVW" id="link">Code pen link</a>
+
+
+
+
+
+    <!-- Script of js -->
+    <script>
+        // method 1 : to use the event 
+        document.getElementById('btn1').onclick = function() {
+        alert('This is wrong approach');
+        };
+
+        // method 2 : best approach 
+        document.getElementById('btn2').addEventListener('click', ()=> {
+            alert("This is right approach")}
+        )
+
+        
+
+
+        //  ==== event object ====
+        
+        document.getElementById('btn2').addEventListener('click', function(e){
+            console.log(e); // e => event object it has lots of proprty and methods
+        }, true) // false is default value 
+
+        // type , timestamp, preventDefault
+        // target, toElement, srcElement, currentTarget
+        //  clientX, clientY, screenX, screenY
+        // altkey, ctrlkey, shiftkey, keycode
+
+        /* event propagation has two context:
+                                1) event bubbling => false : is move from bottom to top , means goes to upstream
+                                2) event capturing => true : is move from top to bottom, means it goes to downward  */
+
+        // 1) event bubbbling
+        
+
+        /*
+        document.getElementById('ul').addEventListener('click', function(e){
+            console.log("click on outside the ul"); // e => event object it has lots of proprty and methods
+        }, false) // this will function run second
+
+        document.getElementById('btn1').addEventListener('click', function(e){
+            console.log('click on inside the btn1'); // e => event object it has lots of proprty and methods     
+        }, false)  // this will function run first
+
+        */
+
+
+
+        /* 
+        1)
+        in above both are same btn1 is nested inside ul.
+        so if i clicked on btn1 then ul also get activated because btn1 nested inside it.
+
+        so the first btn1 => code run first
+        then, ul => code run after
+
+        2) in second i.e event capturing
+        if pass 'true'
+        then, parent i.e code run from upward to downward
+
+        to stop this we can use
+
+        .stopPropagation()  method
+        
+        */
+
+
+
+        /*
+        document.getElementById('ul').addEventListener('click', function(e){
+            console.log("click on outside the ul"); // e => event object it has lots of proprty and methods
+        }, true) // this will function run first
+
+        document.getElementById('btn1').addEventListener('click', function(e){
+            console.log('click on inside the btn1'); // e => event object it has lots of proprty and methods
+            // e.stopPropagation() // this used to not go upward to downward means only print this nothing has to do with parent. only this will first print
+        }, true) // this will function run second
+
+        */
+
+
+
+
+
+        // ======= prevent default method ==========
+
+        // preventDefault  : basically it can disable the functions, it avoid the functionality of element, 
+
+        //  the link which redirected to codepen will not be possible beacuse of the preventDefault()
+        document.getElementById('link').addEventListener('click', function(e){
+            // e.preventDefault();
+            console.log('the link is clicked');
+            e.preventDefault();   
+        }, false);    
+
+
+        //======== removing the li from ul when clicked =======
+        document.querySelector('#animal').addEventListener('click', function(e){
+            // console.log(e);
+            // console.log(e.target) // return <li> when it clicked
+            console.log(e.target.parentNode);
+            let removeIt = e.target
+            removeIt.remove()
+        }); 
+
+    </script>
+</body>
+</html>
