@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is Heading</h1>
+    <button id="stopTimeout"> StopTimeout</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>This is paragraph</h2>
+    <button id="startinterval"> Start Interval</button>
+    <button id="stopinterval"> Stop Interval</button>
+    
+</body>
+<script>
+    
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+    // handler means callback function
+
+    // setTimeout(handler function, time in milli second) --- it basically run the code inside handler after milli second once and it stopped.
+    // clearTimeout() it used to stop the setTimeout before its execution time.
+
+    // Define a function to change the h1 content
+    function changeH1(){
+        document.querySelector('h1').innerHTML = 'this is Paragraph'
+        console.log('it runs')
+    };
+     const referenceVar= setTimeout(changeH1, 1500); // here only er have to set a refernece variable to setInterval so that it ID store in that recpective variable
+
+    // clearTimeout : below when user click on'stop' button the changeH1 get stop
+
+    document.querySelector('#stopTimeout').addEventListener('click', function(){
+        clearTimeout(referenceVar)
+        console.log('The changeH1 has stopped')
+    })
+
+
+
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // setInterval() : it run function after milli-second of interval continuously multiple times 
+    // clearInterval() : It stop the setInterval
+
+
+
+
+    function changeH2(){
+        console.log(Math.random());
+    };
+
+    document.querySelector('#startinterval').addEventListener('click', function () {
+        referenceofintervaltostop  = setInterval(changeH2, 1000); // here only er have to set a refernece variable to setInterval so that it ID store in that recpective variable
+    });
+    
+
+    document.querySelector('#stopinterval').addEventListener('click', function () {
+        clearInterval(referenceofintervaltostop);
+    });
+
+    // ++++++++++++++++++++++++NOTE+++++++++++++++++++++++++++++++++}
+    //Ensure that the variable used to store the setInterval reference is declared outside the event listeners, making it accessible for both starting and stopping the interval.
+    //Use the same variable name when calling clearInterval, as you've done, to stop the interval successfully.
+
+
+
+
+
+
+
+
+
+
+ 
+    
+
+
+
+</script>
+</html>
