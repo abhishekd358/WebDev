@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh; 
+        }
+
+        button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 20px;
+            background-color: black;
+            color:white;
+            border: 2px solid yellow;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Infinity Background Color Changer</h1>
+        <h3>Using Async Functionality of Javascript</h3>
+        <button id="btn1">Change</button>
+        <button id="btn2">Stop</button>
+    </div>
+</body>
+
+    <script>
+
+        // changing color
+        const clrGeneratorFunc = function(){
+            const hexr = '0123456789ABCDEF'
+            let bgcolor = "#"
+
+            for (let i = 0; i < 6; i++) {
+                bgcolor += hexr[Math.floor(Math.random() * 16)]  
+            }
+            return bgcolor 
+        }
+
+        function bgBodyChangeFunc(){
+            newColor = clrGeneratorFunc()
+            document.body.style.backgroundColor = newColor
+        }
+
+
+        let referenceForStopping; // declare var of setInterval in GLobal Scope so that it accesible to stop the interval  
+        document.getElementById('btn1').addEventListener('click', function(){
+            referenceForStopping = setInterval(bgBodyChangeFunc, 1000)
+        })
+
+
+        // stop color changing
+        document.getElementById('btn2').addEventListener('click', function(){
+            clearInterval(referenceForStopping)
+        })
+
+    </script>
+
+
+
+</html>
