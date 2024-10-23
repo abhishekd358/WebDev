@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API request</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: rgb(207, 200, 255);
+        }
+        .container{
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        
+        img {
+            border-radius: 50%;
+            margin-bottom: 20px; /* Adds space between image and text */
+        }
+
+        h2 {
+            margin-top: 10px; /* Adds space between text elements */
+        }
+
+
+
+        #box{
+            border: 2px solid rgb(255, 0, 221);
+            background-color: rgb(253, 214, 251);
+            width: 400px;
+            height: 500px;
+            border-radius: 20px;
+            position: relative;
+        }
+        #card{
+            margin: 50px;
+            text-align: center; 
+        }
+
+
+        #btn1{
+            position: absolute;
+            top: 45%;
+            left: 32%;
+            padding: 20px;
+            border: 3px solid white;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: rgb(255, 255, 255);
+            background-color: #ff65f7;
+        }
+
+
+        
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="box">
+            <div id="card">
+                <button id='btn1'>Show Me</button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+    <script>
+
+
+        const apiCall = new XMLHttpRequest() // this used to initates the functionality of the api
+        const url = "https://api.github.com/users/hiteshchoudhary" // storing the url in the var
+        apiCall.open("GET", url) // using get method trying to open the url after sending the request from .send()
+        apiCall.onreadystatechange = function(){ // it conti return the state , used for monitoring
+            // console.log(apiCall.readyState) // return s the status of the request
+            if(apiCall.readyState === 4){
+                // console.log(this.response)// you can give any name to reponse that comming from api
+                let data = JSON.parse(this.response) // we declaring variable to save everything comming response from the api call
+                console.log(data)  // the data that receive is in STRING format ,we have to convert into JSON Object 
+                console.log(data.followers)
+                let selectingDivCard = document.getElementById('card')
+                document.querySelector('#btn1').addEventListener('click', function(){
+                    selectingDivCard.innerHTML = 
+                    `   <img src= ${data.avatar_url} width= 300px height= 300px>
+                        <h2>Name : ${data.login} </h2>
+                        <h2>Followers : ${data.followers}
+                    `
+                })
+            }
+        }
+        apiCall.send()
+    
+    </script>
+
+
+
+</html>
