@@ -59,6 +59,12 @@
             color: rgb(255, 255, 255);
             background-color: #ff65f7;
         }
+        #btn1:hover{
+            color : #ff65f7;
+            background-color: rgb(0, 0, 0);
+            border: 3px solid #ff65f7;
+           
+        }
 
 
         
@@ -91,6 +97,8 @@
                 let data = JSON.parse(this.response) // we declaring variable to save everything comming response from the api call
                 console.log(data)  // the data that receive is in STRING format ,we have to convert into JSON Object 
                 console.log(data.followers)
+                
+                // below is dom part 
                 let selectingDivCard = document.getElementById('card')
                 document.querySelector('#btn1').addEventListener('click', function(){
                     selectingDivCard.innerHTML = 
