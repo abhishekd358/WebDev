@@ -26,6 +26,5 @@ console.log(Math.random())
 const min = 10
 const max = 20
 
-console.log(Math.round(Math.random() * (max-min + 1) + min ))
-
-
+// console.log(Math.round(Math.random() * (max-min + 1) + min ))
+console.log(Math.random() * (max-min + 1) + min)

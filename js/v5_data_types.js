@@ -44,10 +44,13 @@ let uniqueId = Symbol('id');  // unique representation
 // BigInt   : Two ways to deaclare the BigInt
 let bigIntValue = BigInt(123456789012345678901234567890);
 let anotherBigInt = 123456789012345678901234567890n;
+ 
+// typeof bigIntValue and anotherBigInt  ===> bigint
 
 
 
 // -----------------------------Non-Primitive (Reference) Data Types---------------------------------  
+
 
 // object  => python dictionary treated as Object in js
 let person = {
@@ -62,9 +65,9 @@ let person = {
 let fruits = ['apple', 'banana', 'cherry', 12, '21']; // type => Object
 let makeArr = Array(1, 2, 3, 4, 5) // type => Object
 // console.log(typeof makeArr)
-// console.log(Array.isArray(makeArr))
-//console.log(fruits)
-// console.log(Array.isArray(fruits))
+// console.log(Array.isArray(makeArr)) // true
+// console.log(typeof fruits)
+// console.log(Array.isArray(fruits)) // true
 
 // Function
 function greet(name) {
@@ -105,6 +108,6 @@ console.log(typeof {}); // "object"
 console.log(typeof []); // "object" (arrays are a type of object in JavaScript)
 console.log(typeof function() {}); // "function"
 console.log(typeof new Date()); // "object"
-console.log(typeof /ab+c/); // " "
+console.log(typeof /ab+c/); // "Object"
 
 */

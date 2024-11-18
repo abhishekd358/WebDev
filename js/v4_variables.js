@@ -1,8 +1,8 @@
 /* variable */
 const accountId = 12345
 let accountEmail = 'abhi@gmail.com' 
-var accountFirst_Name = 'Abhinav' // Avoid this
-accountLast_Name = 'Bindra' // Avoid this
+var accountFirst_Name = 'mosquito' // Avoid this
+accountLast_Name = 'Moskito' // Avoid this
 
 // two ways to print
 console.log(accountLast_Name);
@@ -19,11 +19,11 @@ console.table([accountId, accountEmail, accountFirst_Name, accountLast_Name]);
 
 ctrl + / to comments
 javascript has two things :
-    constant = value not chaange
-    variable = value change , mostly 'let' keyword use to declare.
-               Avoid to use the 'var' Keyword beacuse it has problem with scope
-               If empty varibale trated as 'undefined'
+    const = value not chaange
+    let = value change , mostly 'let' keyword use to declare.
+    var = Avoid to use the 'var' Keyword beacuse it has problem with scope
 
+               If empty varibale trated as 'undefined'
 
     *=------------===========CHAT GPT=================================*
     WHen to use the var and let
