@@ -114,10 +114,10 @@ GiveAnyNameFunc() // also need to call
 // method 2
 
 fetch('https://api.github.com/users/hiteshchoudhary').then(
-    function(responseOut){
+    function(responseOut){ // here responseOut is a response that is getting from the api and we give it name as responseOut
         return responseOut.json() // this return pass to next .then() method
     })
-    .then(function(data){
+    .then(function(data){ // here the above .then() pass the result to next .then()
         console.log(data)
     })
     .finally(function(){
