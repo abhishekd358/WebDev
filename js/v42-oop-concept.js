@@ -18,7 +18,7 @@ function myFunc(sentence, word, number){
     this.word = word;
     this.number = number;
 
-    // return this // it is implicitly passed, no compulsion to pass it
+    // return this // it is by default implicitly passed, no compulsion to pass it
 };
 
 

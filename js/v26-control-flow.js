@@ -24,12 +24,12 @@ switch (y) {
         console.log('feb')
         break;
     case 3:
-        console.log('march') 
+        console.log('march')  // here no break so , this will print
     case 4:
-        console.log('april')
+        console.log('april') // this also going to print
         break;
-    default:
-        console.log("nothing")
+    default: // runs if no case is present
+        console.log("nothing") 
         break;
 }
 
@@ -37,10 +37,10 @@ switch (y) {
 // falsy values ==> False, '', 0, -0, BigInt, 0n, null, undefined, NaN
 // truthy values ==> True, ' ', '0', 1, 'false', [], {}, function(){}
 
-
+8169528962
 // how to check array is empty
 const userEmail = []
-if (userEmail.length === 0){
+if (userEmail.length  === 0){
     console.log('Array is empty')
 }
 

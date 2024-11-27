@@ -5,7 +5,7 @@ function myFunc(p1, p2, ...p){
     return `p1:${p1} \np2:${p2} \nall values of p ${p}`
 }
 
-console.log(myFunc(10, 80, 70, 60, 50));
+console.log(myFunc(10, 80, 70, 60, 50)); 
 
 
 // =================Important====================
