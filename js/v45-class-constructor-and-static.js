@@ -15,7 +15,7 @@ class GiveClassName{
     method2(){
         console.log(`var2 is accessed : ${this.var2}`)
     }
-
+    // =============== Static ====================
     static method3(){  // static methods are not accessible to every instance of the same class
         console.log(`var3 is static accessed : ${this.var3}`)
     }
