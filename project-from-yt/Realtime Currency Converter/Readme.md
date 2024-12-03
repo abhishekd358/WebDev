@@ -6,6 +6,11 @@ The **Realtime Currency Converter** is a simple yet powerful web app that helps 
 🎥 **Inspired by:** [Shradha Khapra's tutorial](https://youtu.be/CyGodpqcid4?si=s3EPbdCJdXyW6rJW)
 
 ---
+
+## 🖼️ Preview
+![Realtime Currency Converter Preview](./preview.png)
+
+---
 🎃 **Trick:** Use Temp-Mail website to get free account to create free API Key.
 
 ---
@@ -33,10 +38,6 @@ The **Realtime Currency Converter** is a simple yet powerful web app that helps 
 3. 💸 Choose the currency you are converting *to*.  
 4. ✅ Get your result instantly in the result box!
 
----
-
-## 🖼️ Preview
-![Realtime Currency Converter Preview](./path-to-your-project-image.png)
 
 ---
 
