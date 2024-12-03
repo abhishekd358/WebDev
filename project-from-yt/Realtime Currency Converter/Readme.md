@@ -8,7 +8,7 @@ The **Realtime Currency Converter** is a simple yet powerful web app that helps 
 ---
 
 ## 🖼️ Preview
-![Realtime Currency Converter Preview](./preview.png)
+![Realtime Currency Converter Preview](./preview.jpg)
 
 ---
 🎃 **Trick:** Use Temp-Mail website to get free account to create free API Key.
