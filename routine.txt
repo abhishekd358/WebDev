@@ -7,3 +7,12 @@ added classess dynamically in react
 Get to Know about Styled Component Library
 Implemented Media Query and Hover Using Styled
 Used Props Inside a Styled Component
+
+
+6 Dec 2024
+download firebase understand the modernSDK and V9 SDK database setup
+created my-survey project 
+created Component (Container, Details, Question)
+Handling the Name and the Answers with the State
+Initialize the Firebase in React JS
+Send the DAta to the firebase
