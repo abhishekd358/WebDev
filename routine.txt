@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Learning react from WsCube Tech
 
 5 Dec 2024
@@ -16,3 +17,14 @@ created Component (Container, Details, Question)
 Handling the Name and the Answers with the State
 Initialize the Firebase in React JS
 Send the DAta to the firebase
+=======
+Learning react from WsCube Tech
+
+5 Dec 2024
+Created a registration form using react
+Show Hide password using dynamic styling
+added classess dynamically in react
+Get to Know about Styled Component Library
+Implemented Media Query and Hover Using Styled
+Used Props Inside a Styled Component
+>>>>>>> 482c2d47340062b25aa8482d45189356f77afc50
