@@ -1,0 +1,17 @@
+style componenent is library to create a componenent
+uuid use to generate unique data
+
+
+
+
+import {initializeApp} from 'firebase/app'
+import {getDatabase, ref, set} from 'firebase/database'
+
+SDK Setup
+
+cost app = initializeApp(firebaseConfig)
+const database = getDatabase(app)
+
+
+------if i want to send data -----
+ref(database , 'databaseName/'+uuid).set({datat-that-you-want-to-send})
