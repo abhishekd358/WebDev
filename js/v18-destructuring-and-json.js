@@ -71,3 +71,17 @@ Method 2:----
 
 
 */
+console.log("==== array destructuring.====");
+
+// array destructuring
+
+let arr = ['mesopotnia', 'Kaling', 'Oracus']
+
+let [var1, var2, var3] = arr // storing the mesopotnia -> var1,kaling -> var2,Oracus-> var3
+console.log(var1)
+console.log(typeof(var1)) // Sring
+console.log(var2)
+console.log(var3)
+
+let [v1, , V3] = arr // we not storing 'kaling' value to any other object
+console.log(v1, V3)
