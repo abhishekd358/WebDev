@@ -15,3 +15,69 @@ const database = getDatabase(app)
 
 ------if i want to send data -----
 ref(database , 'databaseName/'+uuid).set({datat-that-you-want-to-send})
+
+
+
+
+
+
+----------------------------------------------
+what is difference between library and framework?
+
+Modules are the basic building blocks.
+Libraries are collections of modules.
+Packages are distribution units that can include libraries and modules.
+Frameworks are comprehensive systems that include packages, libraries, and modules, along with additional tools and guidelines for application development.
+
+
+A library is a collection of pre-written code that developers can use to perform specific tasks or solve specific problems.
+You call a library in your code when you need it (called it no inversion)
+ Example :-React is a library for building user interfaces. You use React components and decide how to structure your application.
+
+Framework:
+    is a larger structure that provides the architecture for building an application. It dictates how your application should be structured.
+    The framework calls your code, rather than you calling the framework. This is often referred to as Inversion of Control.
+    Example : Angular (JavaScript): 
+              Django : 
+    less flexible.
+
+Node.Js: Node.js is neither a library nor a framework. It is a runtime environment.
+ it can be combined with frameworks like Express.js, NestJS
+  It is built on Google Chrome's V8 JavaScript engine 
+
+
+
+
+
++++++++=What is coponenet?
+is the fundamental building block of a React, reusable piece of UI logic that represents a part of the user interface.
+React components in designing scalable and maintainable applications. 
+Break down large UIs into smaller, testable units.
+ reduce code redundancy
+ two main types: 1.Functional Components=> stateless components , rely on React hooks like useState
+                2. Class Components=> statefull components, use this.state for managing state
+
+
+
+package.json -> have all the meta data about the files and dependencises
+manifest.json -> used to built progressive web app.
+
+when we run react app > then 'index.js' in src folder runs first.
+index.css -> used to give css that not change further
+
+
+
+
+
+
++++++++++++++++Export +++++
+
+why  we write : export default App;     ??????????????
+
+Use export default when your file exports a single primary value (e.g., a component).
+when we use default then we import with any name . beacause we by default it name is App. so it not mattter, it point to same Components.
+example:---- import hereWeCanGIveAnyName from './App';
+
+Use named exports when exporting multiple utilities from the same file. This makes imports clearer and reduces accidental naming conflicts.
+  example :--- import App, { helperFunction } from './App';
+
