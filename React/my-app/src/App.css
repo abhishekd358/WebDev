@@ -1,0 +1,43 @@
+body{
+  background-color: rgb(119, 163, 195);
+}
+
+
+.register-container{
+  width: 500%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(23, 82, 123);
+  border: 1px solid rgb(251, 255, 232);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgb(34, 106, 150);
+}
+
+.btnbox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn{
+  color: rgb(255, 255, 255);
+  background-color: rgb(246, 53, 162);
+  margin-top: 30px;
+  border-radius: 10px;
+  padding: 10px 25px 10px 25px;
+  border: 1px solid white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: Cambria;
+}
+
+
+.btnpwd{
+  margin-top: 30px;
+  margin-left: 30px;
+  padding: 10px 25px 10px 25px;
+  border-radius: 10px;
+  border: 1px solid white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: Cambria;
+}
