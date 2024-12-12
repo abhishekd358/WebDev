@@ -32,3 +32,18 @@ obj2.rollNo = 1
 
 console.log(obj1)
 console.log(obj2)
+
+
+
+//  we can't able to make a copy of the non -primitve data type so how can i make copy?
+//  we can use spread method
+
+let object1 = {
+    name : 'Abhijit',
+    rollNo: 123
+}
+
+let object2 = {...object1}  // now we have all keys of the Object1
+// if we change the object2 properties(keys) value we not see any change in Object1
+object2.name = "Herculus"
+console.log("-----this is object1-----\n",object1,"\n-----below you an see name changes-----\n",object2);
