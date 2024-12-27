@@ -37,7 +37,7 @@ switch (y) {
 // falsy values ==> False, '', 0, -0, BigInt, 0n, null, undefined, NaN
 // truthy values ==> True, ' ', '0', 1, 'false', [], {}, function(){}
 
-8169528962
+
 // how to check array is empty
 const userEmail = []
 if (userEmail.length  === 0){

@@ -39,7 +39,7 @@ console.log({...obj1, ...obj3})
 
 
 // Object properties
-console.log(Object.keys(obj3)); // return in list form all keys 
-console.log(Object.values(obj3)); // return in list form all values
+console.log(Object.keys(obj3)); // return list of all properties
+console.log(Object.values(obj3)); // return list of all values
 console.log(Object.entries(obj3)); // return the nested list of key, value list
 // Object.create(obj-name, properties)  => for this property one new object has to create which has its own properties and that going merge with the array that you want to.
