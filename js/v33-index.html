@@ -17,13 +17,15 @@
 </body>
 <script>
     const parent = document.querySelector('.parent')
-    // used to access HTMLCollection
+  
     console.log(parent.children[1].innerHTML) // accesing inner html text of the first div element
     
     parent.children[1].style.color = "blue";
+    console.log('---------------------------------------------------------------')
     console.log(parent.firstElementChild); // it return first element {in browser it works better way}
+    console.log('---------------------------------------------------------------')
     console.log(parent.lastElementChild); // it return last element {in browser it works better way}
-
+    console.log('---------------------------------------------------------------')
     
     //looping
     /*
@@ -34,15 +36,17 @@
 
     const days = document.querySelector('.day')
     console.log(days);
+    console.log('---------------------------------------------------------------')
     console.log(days.parentElement) // return parent element of the child
+    console.log('---------------------------------------------------------------')
     console.log(days.nextElementSibling) // return next element 
     
-    
+    console.log('---------------------------------------------------------------')
     console.log("NODES: ", parent.childNodes) // it return NodeList
     
 
 
-
+    console.log('---------------------------------------------------------------')
     // ++++++++++++++++CREATING ELEMENTS++++++++++++++++++++++++++++++++++++++++
     const div = document.createElement('div')
     console.log(div)

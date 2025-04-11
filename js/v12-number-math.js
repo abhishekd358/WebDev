@@ -6,7 +6,7 @@ console.log(typeof(nu))
 
 const num1 = new Number(123.896 )
 console.log(typeof(num1)) // object
-
+   
 
 const z = Number(100)
 console.log(typeof z)
@@ -27,4 +27,9 @@ const min = 10
 const max = 20
 
 // console.log(Math.round(Math.random() * (max-min + 1) + min ))
-console.log(Math.random() * (max-min + 1) + min)
+console.log(Math.round(Math.random()*(max-min+1)+min))
+
+
+
+console.log(Math.floor(12.01)) // return 12, its remove the numbers after the decimal point
+console.log(Math.round(12.10)) // return 12, its remove the numbers after the decimal point

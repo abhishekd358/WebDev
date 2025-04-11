@@ -1,4 +1,3 @@
-// 1. conversion of string to number (Number and parseInt and parseFloat)
 let num = Number('123')
 let intNum = parseInt('123'); // 123
 let floatNum = parseFloat('123.45'); // 123.45

@@ -1,5 +1,5 @@
 style componenent is library to create a componenent
-uuid use to generate unique data
+uuid use to generate unique id's
 
 
 
@@ -49,7 +49,7 @@ Node.Js: Node.js is neither a library nor a framework. It is a runtime environme
 
 
 
-+++++++=What is coponenet?
++++++++=What is componenet?
 is the fundamental building block of a React, reusable piece of UI logic that represents a part of the user interface.
 React components in designing scalable and maintainable applications. 
 Break down large UIs into smaller, testable units.
@@ -76,8 +76,135 @@ why  we write : export default App;     ??????????????
 
 Use export default when your file exports a single primary value (e.g., a component).
 when we use default then we import with any name . beacause we by default it name is App. so it not mattter, it point to same Components.
+
 example:---- import hereWeCanGIveAnyName from './App';
+
+====App.js=====
+````````````````````````````````````````````````````````````````````
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import GiveAnyName from './App'; // Renaming the default export t 'GiveAnyName'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Alex />
+  </React.StrictMode>
+);
+
+``````````````````````````````````````````````````````````````
+
+
 
 Use named exports when exporting multiple utilities from the same file. This makes imports clearer and reduces accidental naming conflicts.
   example :--- import App, { helperFunction } from './App';
 
+
+
+
+++++++++++++++++++++++++++++++++++++
+we use 'className' in component not 'id' because We using componenets repeatedly
+
+
+
++++++++++++++++Hooks++++++++++++++++++++++
+
+to avoid the traditional method to capture event and then modify the thing we use Hooks
+
+'useState' functionality have to be imported.
+ 
+ 'useState('you have to pass value here')' returns the array having the 
+                                                1. Variable : 
+                                                2. Function : use to change the value of the variable.
+                  Example::-->
+                  we use the array destructuring 
+                  const [title, setTitle] = useState(props.title);
+ 
+
+
+
++++++++++++++++++++++++++HANDLING INPUT IN REACT+++++++++++++++++++++++
+
+
+
+++++++++++++++++++TWO WAY BINDING+++++++++++++++++++++
+when so ever we reseting the value of the state or the hook variable after getting the user input. then it called  Two Way BINDING
+
+
+
+    we created Hooks
+            ||
+            \/
+    then we storing the hook vaiable value to Object properties
+            ||
+            \/
+    then using the Hooks Function we reset the value to the default value i.e Empty input
+
+
+
+++++++++++++++DATA TRANSFER++++++++++++++++
+
+
+
+
++++++++++++++++useEffect++++++++++++++++
+to stop the continuous fetching of the data from api it get re render the component
+to stop continuous Loop we use 'useEffect' method
+
+
+useEffect(()=>{
+  //code
+}, []);
+
+
+
++++++++++++++POST MEthod++++++++++++++++++++
+
+fetch(('url'),
+{method: 'POST', 
+  body: JSON.Stringfy(Data_that_u_want_to_pass), 
+  header:{
+    'content-Type' : 'application/json'
+    }
+  });
+
+
+
+
+
+
+======================================================
+
+
+* creating app with Vite
+>npm create vite@version_name
+*Select Library name > enter project name
+
+* install npm dependencises package
+>npm install
+
+* to start the project 
+>npm  run dev
+
+
+##############################
+npx create-react-app  app_name
+cd app_name
+npm start
+
+=================================================================
+
+
+(Src)main.jsx in Vite == (Src) index.js in CRA
+
+(Src)index.html in Vite == (Public) index.html in CRA
+
+
+===================================================================
+
+
+why useState we require?
+
+normal variable are immutable in react ui

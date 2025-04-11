@@ -98,7 +98,6 @@ GiveAnyName() // also need to call
 // +++++++++++++++++++++++API calling using fetch()+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 async function GiveAnyNameFunc() { // this is the way to create async funtion
-    // accessing the fifthPromise using variable name
     try{
         const response = await fetch('https://api.github.com/users/hiteshchoudhary') // promise is object not a function
         const  data = await response.json() //convert to json file format

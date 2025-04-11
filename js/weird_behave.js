@@ -4,7 +4,7 @@ console.log(NaN === NaN); // false
 
 // To check if a value is NaN, use Number.isNaN():
 let value3 = 123;
-console.log(Number.isNaN(value3)); // true
+console.log(Number.isNaN(value3)); // false
 
 // undefined increment to NaN
 let x;

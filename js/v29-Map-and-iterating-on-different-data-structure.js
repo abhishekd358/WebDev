@@ -12,9 +12,16 @@ myMap.set('US', 'United State of America');
 
 // 2. Using method of Map()
 console.log(myMap);
+console.log("=============================================");
+
 console.log(myMap.keys());
+console.log("=============================================");
+
 console.log(myMap.values());
+console.log("=============================================");
+
 console.log(myMap.has('IN'));
+console.log("=============================================");
 
 // for (const k of myMap.values()){
 //     console.log(k)
@@ -112,11 +119,38 @@ for (const key in object1) {
 
 arr = [1, 2, 3, 4, 5]
 
+
+console.log("******************* in    operator(membership operator)***********************")
+// this below loop print the array each element
+for (const k in arr){
+    console.log(arr[k])
+}
+
+console.log("******************* of    operator***********************")
+// this below loop print the array each element
+for (const k of arr){
+    console.log(arr[k-1])
+}
+
+console.log("****************forEach**************************")
+// print each element of the array
+arr.forEach( function(item, currentItemIndex, array){
+    console.log(item)
+    // console.log(item, currentItemIndex, array)
+})
+
+
+
+console.log("******************************************")
+// perform item*2 operation on each element of the array
 arr.forEach( function(item, currentItemIndex, array){
     console.log(item *2)
     // console.log(item, currentItemIndex, array)
 })
 
+
+
+console.log("******************************************")
 // with anonymous arrow function
 arr.forEach( (itemName) =>{
     console.log(itemName *100)
