@@ -1,0 +1,27 @@
+/* Container for all meal items */
+
+body{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: rgb(205, 239, 255);
+}
+
+.main-container {
+    display: grid;                    /* Use CSS Grid */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;                       
+    padding: 20px;                
+}
+
+/* Individual meal item container */
+
+
+.btn-menu{
+    margin-left: 1.5rem;
+}
+
+
+
+
+

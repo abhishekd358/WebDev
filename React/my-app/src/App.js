@@ -13,17 +13,17 @@ class App extends Component {
 
     this.state = {
       isRegistered: false,
+      showPwd : false,
       name: null,
       email: null,
-      password: null,
-      showPwd : false
+      password: null
     };
   }
 
   // Method to handle form submission
   RegistrationHandler = (event) => {
     event.preventDefault(); // Prevents default form submission behavior
-    // Retrieve data from the form
+    // Retrieve data from the form  
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.pwd.value;
