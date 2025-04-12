@@ -17,8 +17,12 @@ import CourseDynamic from './Topics/Routing/CourseDynamic.jsx';
 // importing for mealproject
 import MealPr from './MealProject/MealPr.jsx';
 
+// importing for understanding the createContext and useContext
+import IndianGov from './Topics/Context/IndianGov.jsx';
+
 
 function App() {
+ 
   return (
     <>
       {/* <UseEffectTopic />
@@ -26,7 +30,10 @@ function App() {
       <FormHandling/>
       <MultipleInputHandling />  */}
 
-      <MealPr />
+      {/* <MealPr /> */}
+
+
+      <IndianGov />
 
     {/* Routing understanding : to understand routing comment the above UseEffectTopic,ApiHandling,FormHandling,MultipleInputHandling this all be commented so you learn about routing    */}
     {/* <Router>
