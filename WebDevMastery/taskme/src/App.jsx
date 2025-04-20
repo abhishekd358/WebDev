@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import Addbox from "./Components/Addbox";
+import TableBox from "./Components/TableBox";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // data
+  const [taskList, setTaskList] = useState([]);
+
+
+// METHOD 1:
+  // creating method for deleting : we use splice
+  // const deleteHandler = (index) =>{
+  //   // creating a copy of taskList state
+  //   const copyOfTaskList = [...taskList]
+  //   // here we splice
+  //   copyOfTaskList.splice(index, 1)
+  //   // here we setting up
+  //   setTaskList(copyOfTaskList)
+    
+  // }
+
+
+// METHOD 2:
+    // using the filter method we doing update
+    const deleteHandler = (id) => {
+      const updatedTasks = taskList.filter((task) => task.id !== id);
+      setTaskList(updatedTasks);
+    };
+
+
+
+
+    // edit button logic : we create a state to record the id
+    const [id , setId] = useState('')
+    // first we capture the id 
+    // then if id is present in taskList we change the title and description using the setTitle  and setDescription method.
+  
+  
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Addbox taskList={taskList} setTaskList={setTaskList} id={id} setId={setId}/>
+      <TableBox taskList={taskList} setTaskList={setTaskList}  deleteHandler={deleteHandler} setId={setId}/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
