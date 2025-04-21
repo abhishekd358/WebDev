@@ -3,8 +3,9 @@ import React from 'react'
 import UseState from './Hooks/useState/UseState'
 import UseEffect from './Hooks/useEffect/UseEffect'
 
-import BgChanger from './Hooks/useLayoutEffect/BgChanger'
+import BgChanger from './Hooks/UseLayoutEffect/BgChanger'
 
+import ConsumingContext from './Hooks/useContext/ConsumingContext'
 const App = () => {
   return (
     <>
@@ -12,7 +13,10 @@ const App = () => {
       
       {/* <UseEffect /> */}
 
-      < BgChanger />
+      {/* < BgChanger /> */}
+
+
+      <ConsumingContext />
     </>
   )
 }
