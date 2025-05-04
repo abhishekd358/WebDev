@@ -6,6 +6,9 @@ import UseEffect from './Hooks/useEffect/UseEffect'
 import BgChanger from './Hooks/UseLayoutEffect/BgChanger'
 
 import ConsumingContext from './Hooks/useContext/ConsumingContext'
+
+
+import Counter from './Hooks/useReducer/Counter'
 const App = () => {
   return (
     <>
@@ -16,7 +19,10 @@ const App = () => {
       {/* < BgChanger /> */}
 
 
-      <ConsumingContext />
+      {/* <ConsumingContext /> */}
+
+
+      <Counter />
     </>
   )
 }
