@@ -5,16 +5,16 @@
 // so basically, when so every we change a discount when we click on button , the method of totalPricing embedded in the Cart Function without using in dom or anywhere it rerenders automatically to avoid this we use the useMemo() Hook 
 
 
-import React,{useState, useMemo} from 'react'
+import React, { useState, useMemo } from 'react'
+
+// moved item array outside the Cart function to prevent it from re-initializing on each render
+const item = [
+    {id: 1, name: 'Laptop', price: 80000},
+    {id: 2, name: 'Mobile', price: 58000},
+    {id: 3, name: 'Mouse', price: 4000},
+]
 
 const Cart = () => {
-
-    const item = ([
-        {id: 1, name: 'Laptop', price: 80000},
-        {id: 2, name: 'Mobile', price: 58000},
-        {id: 3, name: 'Mouse', price: 4000},
-    ])
-
 
     // here we creating a discount state so when a user click on the button 10% discount add automatically and overall discount shown
     const [discount, setDiscount] = useState(0)
@@ -39,13 +39,11 @@ const Cart = () => {
         const x = item.reduce((total, currentValue)=> total + currentValue.price, 0)
         console.log(x)
         return x
-    }, [item])
-    
-
+    }, [])  // empty dependency array since item is constant and outside
 
   return (
     <div>
-        {item.map((i)=>(
+        {item.map((i)=>( 
             <div key={i.id}>
                 <h5>Product Name: {i.name} </h5>
                 <p>Price: {i.price}</p>
