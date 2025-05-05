@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useReducer} from 'react'
 
 
 const CounterReducer = (state, action) =>{
@@ -10,7 +10,7 @@ const CounterReducer = (state, action) =>{
       return ({count : state.count-1});
   
     default:
-      return({count: state.count})
+      return state;
   }
 
 }
@@ -18,10 +18,15 @@ const CounterReducer = (state, action) =>{
 
 
 const Counter = () => {
-  const [count, setCount] = useState(0)
+  const [state, dispatch] = useReducer(CounterReducer, {count: 0})
   return (
-    <div>Counter</div>
+    <div>
+      <h1>counter : {state.count}</h1>
+      <button onClick = {()=>dispatch({type: 'INCREMENT'})}>Increment</button>
+      <button onClick = {()=>dispatch({type: 'DECREMENT'})}>Decrement</button>
+
+    </div>
   )
 }
 
-export default Counter
+export default Counter;

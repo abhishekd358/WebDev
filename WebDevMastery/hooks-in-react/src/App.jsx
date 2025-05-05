@@ -9,6 +9,8 @@ import ConsumingContext from './Hooks/useContext/ConsumingContext'
 
 
 import Counter from './Hooks/useReducer/Counter'
+
+import Cart from './Hooks/useMemo/Cart'
 const App = () => {
   return (
     <>
@@ -21,8 +23,11 @@ const App = () => {
 
       {/* <ConsumingContext /> */}
 
+      {/* for useReduce Hook */}
+      {/* <Counter /> */}
 
-      <Counter />
+      {/* for useMemo Hook */}
+      <Cart />
     </>
   )
 }
