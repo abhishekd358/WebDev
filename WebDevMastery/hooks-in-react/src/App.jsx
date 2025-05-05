@@ -13,6 +13,7 @@ import Counter from './Hooks/useReducer/Counter'
 import Cart from './Hooks/useMemo/Cart'
 
 import Index from './Hooks/useCallback'
+import IndexTrans from './Hooks/useTransition/IndexTrans'
 
 
 const App = () => {
@@ -35,7 +36,13 @@ const App = () => {
 
 
       {/* useCallback */}
-      < Index />    
+      {/* < Index />     */}
+
+
+      {/* useTransition */}
+      <IndexTrans />
+
+
     
     </>
 
