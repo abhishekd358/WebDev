@@ -9,7 +9,7 @@ import React,{useState, useMemo} from 'react'
 
 const Cart = () => {
 
-    const [item, setItem] = useState([
+    const item = ([
         {id: 1, name: 'Laptop', price: 80000},
         {id: 2, name: 'Mobile', price: 58000},
         {id: 3, name: 'Mouse', price: 4000},
