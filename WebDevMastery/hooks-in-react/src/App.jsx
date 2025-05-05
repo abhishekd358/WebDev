@@ -14,8 +14,8 @@ import Cart from './Hooks/useMemo/Cart'
 
 import Index from './Hooks/useCallback'
 import IndexTrans from './Hooks/useTransition/IndexTrans'
-
-
+import IndexRef from './Hooks/useRef/IndexRef'
+import IndexId from './Hooks/useId/IndexId'
 const App = () => {
   return (
     <>
@@ -40,7 +40,17 @@ const App = () => {
 
 
       {/* useTransition */}
-      <IndexTrans />
+      {/* <IndexTrans /> */}
+
+      {/* useRef */}
+      {/* < IndexRef /> */}
+
+
+      {/* useId */}
+      < IndexId />
+
+
+
 
 
     
