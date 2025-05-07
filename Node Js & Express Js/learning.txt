@@ -1,0 +1,7 @@
+1. Installation of nodemon 
+> npm i -g nodemon
+
+2.initiating the init (auto complete init)
+>npm init -y
+
+3. fs Module
