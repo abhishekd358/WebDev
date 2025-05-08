@@ -2,7 +2,8 @@
 
 // first we import the fs module in Es Module way
 
-import { appendFile, readdir, readFile , rename, stat, unlink, writeFile } from 'fs/promises'
+import { create } from 'domain';
+import { appendFile, mkdir, readdir, readFile , rename, stat, unlink, writeFile } from 'fs/promises'
 
 // 1. ===================== readFile ==================================
 // we use async arrow function
@@ -80,3 +81,19 @@ const info_file = async (fileName) => {
 }
 
 // info_file('MyNewFile.py')
+
+
+// 8. ============================= mkdir ==============================
+// it create folders 
+
+const create_dir = async (dirName) => {
+    await mkdir(dirName,{recursive: true})
+    console.log('Directory created');
+}
+
+// create_dir('New Folder')
+
+// we create multiple embedded directory in one another :-> for that we have to pass mkdir( ,{recursive:true})
+
+// create_dir('New Folder/sub Folder/xyz')
+
