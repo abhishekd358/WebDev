@@ -1,0 +1,10 @@
+Express Js is a Framework to handle the backend work
+
+cmd to install
+    > npm install epress
+        or
+    > npm i express
+
+after installing we get:
+                Fle:-> package-lock.json
+                Folder:-> node_modules
