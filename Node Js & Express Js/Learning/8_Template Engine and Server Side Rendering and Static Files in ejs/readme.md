@@ -17,10 +17,10 @@
 ## 🔧 Setting Up EJS Template Engine
 
 1. Install EJS via npm:
-
-   ```bash
+  ```bash
    npm install ejs
 ````
+
 
 2. `.ejs` files are stored inside the `views` folder by convention.
 
@@ -119,12 +119,4 @@ You’ve learned how to:
 
 ---
 
-```
-
----
-
-Just save the above content in a file called `README.md` and you're all set to push it to GitHub. ✨
-
-Would you also like me to give you a sample `app.js` code so your GitHub repo looks like a complete mini project? (ready for running with `node app.js`)  
-Just say **yes** — and I’ll give you that too!
 ```
