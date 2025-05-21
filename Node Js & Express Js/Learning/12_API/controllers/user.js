@@ -93,7 +93,7 @@ export const userLogin = async (req, res) => {
 
             // 7---- we use JWT for storing the user data in cookies , so user not require to login again and again
                 // jwt.sign(payload, secretOrPrivateKey, [options, callback])
-                const token = jwt.sign({userId:userExists._id}, 'bvd4#$$%354', {expiresIn:'2h'}) // expire the token in 2hour and secret key use for token verfication when it further anywhere used
+                const token = jwt.sign({userId:userExists._id}, process.env.JWT_SECRET, {expiresIn:'2h'}) // expire the token in 2hour and secret key use for token verfication when it further anywhere used
 
     //6---- if all above cases passed then user log In
     res.json({message:`${userExists.name} login successfully!.`,token, success:true})

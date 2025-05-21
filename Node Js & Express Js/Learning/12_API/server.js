@@ -2,11 +2,13 @@ import express from 'express';
 // to parse the body without ejs file for that we have to import a bodyParser
 import bodyParser from 'express';
 import mongoose from 'mongoose';
-import userRouter from './routes/routes.js'
-
+import userRouter from './routes/user_routes.js'
+import contactRouter from './routes/contact_routes.js'
+import dotenv from 'dotenv'
+dotenv.config();
 
 // DB connection 
-mongoose.connect('mongodb+srv://email:password@cluster0.wuxv9he.mongodb.net/', {dbName: 'userApiDB'}).then(()=> console.log('DB connected Successfully')).catch((error)=>console.log(error))
+mongoose.connect(process.env.DB_URI, {dbName: 'userApiDB'}).then(()=> console.log('DB connected Successfully')).catch((error)=>console.log(error))
 
 
 
@@ -26,9 +28,9 @@ app.get('/', (req, res)=>{
 
 // Routes 
 app.use('/api/user', userRouter)
+app.use('/api/contact', contactRouter)
 
 
 
-
-const port = 1200;
+const port = process.env.PORT;
 app.listen(port, ()=>console.log('server running successfully on port', port))
