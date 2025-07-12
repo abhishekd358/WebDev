@@ -33,3 +33,7 @@ console.log(Math.round(Math.random()*(max-min+1)+min))
 
 console.log(Math.floor(12.01)) // return 12, its remove the numbers after the decimal point
 console.log(Math.round(12.10)) // return 12, its remove the numbers after the decimal point
+
+
+console.log("----practice----")
+console.log(Math.round(Math.random()*(30-10)+ 10))
