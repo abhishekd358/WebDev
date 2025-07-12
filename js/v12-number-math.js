@@ -37,3 +37,29 @@ console.log(Math.round(12.10)) // return 12, its remove the numbers after the de
 
 console.log("----practice----")
 console.log(Math.round(Math.random()*(30-10)+ 10))
+
+
+
+
+console.log("----floor()-&-round()----")
+// Just chop off the decimal and go down.
+Math.floor(4.9); // → 4
+Math.floor(4.1); // → 4
+Math.floor(-4.9); // → -5 (goes more negative!)
+
+
+// If decimal is 0.5 or more, it goes up.
+// If less than 0.5, it goes down.
+Math.round(4.4); // → 4
+Math.round(4.5); // → 5
+Math.round(4.6); // → 5
+Math.round(-4.5); // → -4 (because it rounds away from zero)
+
+
+
+// | `Value`  | `Math.floor()` | `Math.round()` |
+// | ------ | -------------- | -------------- |
+// | `4.9`  | `4`            | `5`            |
+// | `4.1`  | `4`            | `4`            |
+// | `4.5`  | `4`            | `5`            |
+// | `-4.5` | `-5`           | `-4`           |
