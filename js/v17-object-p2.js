@@ -2,6 +2,9 @@ const object1 = new Object() // singelton
 const object2 = {} // Non-singleton
 
 
+// {} and new Object() both create objects.
+// The term "singleton" means only one instance, but just using new Object() does not make it a real singleton.
+
 const obj1 = {
     name : 'Lion',
     weight: '140kg'
