@@ -18,7 +18,8 @@ console.log(name2)
 
 
 
-// 2 Heap : reference
+// 2 Heap : reference     
+// this will going to be shallow copy
 let obj1 = {
     name : 'Abhijit',
     rollNo: 123
@@ -43,6 +44,7 @@ let object1 = {
     rollNo: 123
 }
 
+// this make a deep copy of the object1
 let object2 = {...object1}  // now we have all keys of the Object1
 // if we change the object2 properties(keys) value we not see any change in Object1
 object2.name = "Herculus"
