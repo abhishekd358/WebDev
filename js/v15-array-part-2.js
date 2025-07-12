@@ -39,3 +39,9 @@ const v3 = {
 console.log(Array.of(v1,v2,v3))
 
 
+// ======= Difference between Array.from() and Array.of() ===========
+
+const x =  "abhijit"
+console.log(Array.from(x)) // output : [ 'a', 'b', 'h', 'i', 'j', 'i', 't' ];
+console.log(Array.of(x)) // output : [ 'abhijit' ];
+
