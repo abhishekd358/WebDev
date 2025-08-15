@@ -1,0 +1,11 @@
+li{
+  /* style={{listStyle:"none", fontSize:"25px",backgroundColor:"orange", padding:'20px'} */
+  list-style: none;
+  background-color: rgb(193, 255, 255);
+  padding: 20px;
+  margin: 20px;
+}
+
+li:hover{
+  background-color: rgb(237, 255, 184)
+}

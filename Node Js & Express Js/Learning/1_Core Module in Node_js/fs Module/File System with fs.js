@@ -2,6 +2,11 @@
 
 // first we import the fs module in Es Module way
 
+
+
+
+
+
 import { appendFile, mkdir, readdir, readFile , rename, stat, unlink, writeFile } from 'fs/promises'
 
 // 1. ===================== readFile ==================================
