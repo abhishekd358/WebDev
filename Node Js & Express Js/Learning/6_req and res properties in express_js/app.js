@@ -5,10 +5,10 @@ import express from 'express';
 const app = express();
 
 
-// ======================= res Methods(response) ==============================================            
 // creating .get 
 app.get('/', (req, res)=>{
     
+// ======================= res Methods(response) ==============================================            
 
     // 1. .status : set the http status code
         res.status(200);  
@@ -40,10 +40,10 @@ app.get('/about', (req, res)=>{
 
 
 
-    // ======================= req Methods(request) ==============================================
 
 app.get('/user/:id', (req, res)=>{
 
+// ======================= req Methods(request) ==============================================
     // 1. .params : fetch and return parameter that in the url of the browser
         // localhost:1200/user/28    
     const UserId = req.params.id;
