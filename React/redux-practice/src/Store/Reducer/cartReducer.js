@@ -7,10 +7,49 @@ export const UPDATE_ITEMS_IN_CART = "cart/updateCart";
 export const INCREASE_ITEM_QUANTITY = "cart/increaseItemQuantity";
 export const DECREASE_ITEM_QUANTITY = "cart/decreaseItemQuantity";
 
+
+// Action Creators
+export function addCartItem(productData) {
+  return { type: ADD_ITEMS_IN_CART, payload: productData }
+}
+
+export function removeCartItem(productId) {
+  return { type: REMOVE_ITEMS_FROM_CART, payload: productId}
+}
+
+export function decreaseCartItemQuantity(productId) {
+  return {
+    type: DECREASE_ITEM_QUANTITY,
+    payload: { productId },
+  }
+}
+
+export function increaseCartItemQuantity(productId) {
+  return {
+    type: INCREASE_ITEM_QUANTITY,
+    payload: {productId}, //{productId: 12}
+  }
+}
+
+
+
+
 export default function cartReducer(state = [], action) {
   switch (action.type) {
-    case ADD_ITEMS_IN_CART:
-      return [...state, action.payload];
+    case ADD_ITEMS_IN_CART:{
+      const existingItem = state.find(
+        (cartItem) => cartItem.productId === action.payload.productId
+      )
+      if (existingItem) {
+        return state.map((cartItem) => {
+          if (cartItem.productId === existingItem.productId) {
+            return { ...cartItem, quantity: cartItem.quantity + 1 }
+          }
+          return cartItem
+        })
+      }
+      return [...state, { ...action.payload, quantity: 1 }]
+    }
     case REMOVE_ITEMS_FROM_CART:
       return state.filter(
         (item) => item.productId !== action.payload.productId
