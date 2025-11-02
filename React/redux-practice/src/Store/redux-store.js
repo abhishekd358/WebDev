@@ -51,7 +51,7 @@ export const myStore = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ 
 // myStore.dispatch({type: REMOVE_ITEMS_FROM_CART, payload: {productId: 1}})
 // myStore.dispatch({type: INCREASE_ITEM_QUANTITY, payload: {productId: 1}})
 
-
+  
 
 // // wishlist
 
