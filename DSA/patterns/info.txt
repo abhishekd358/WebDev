@@ -1,0 +1,9 @@
+// variable --------------
+        var : Function Scope , Hoisted initialized with "undefined"
+        let & const : block Scope, Hosited but not initialized (TDZ)
+
+
+
+Q 1: Temporal Dead Zone (TDZ)?
+Answer:
+The period between hoisting and initialization where a let or const variable exists but cannot be accessed.

@@ -1,0 +1,25 @@
+
+
+- in windows all file that we create for examples: 
+                                                abc              ls
+                                                index.html       node --version
+                                                hello.txt        echo $PS1
+        in this file if we write any cmd of linux that going to run that cmd 
+
+
+
+
+
+
+-two type of execuatable file :
+                        1.script: 
+                                -human readble files. 
+                                -written in high-level lang.
+                                -interpeter read this files
+                                -ex; .py, .js , .sh 
+                        2.binary
+                                -CPU readable file
+                                -machine readble code
+                                -ex; .exe, .dll
+
+        

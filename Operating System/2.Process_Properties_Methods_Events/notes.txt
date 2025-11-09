@@ -1,0 +1,8 @@
+-process ek global object hai jo Node.js me automatically available hota hai.
+
+
+| Category       | Description                                  | Example                           |
+| -------------- | -------------------------------------------- | --------------------------------- |
+| **Properties** | Static information about the current process | `process.pid`, `process.platform` |
+| **Methods**    | Actions you can perform on the process       | `process.exit()`, `process.cwd()` |
+| **Events**     | System-level signals                         | `'exit'`, `'uncaughtException'`   |
