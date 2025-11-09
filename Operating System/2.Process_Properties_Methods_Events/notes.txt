@@ -6,3 +6,13 @@
 | **Properties** | Static information about the current process | `process.pid`, `process.platform` |
 | **Methods**    | Actions you can perform on the process       | `process.exit()`, `process.cwd()` |
 | **Events**     | System-level signals                         | `'exit'`, `'uncaughtException'`   |
+
+
+| Event                | Description                         | Common Use Case                   |
+| -------------------- | ----------------------------------- | --------------------------------- |
+| `exit`               | Process is exiting                  | Close DB, clean up resources      |
+| `SIGINT`             | Ctrl + C pressed                    | Graceful shutdown                 |
+| `uncaughtException`  | Error not caught                    | Log error & stop app              |
+| `unhandledRejection` | Promise rejected without `.catch()` | Catch async errors                |
+| `beforeExit`         | Before Node exits                   | Debug exit timing                 |
+| `warning`            | Internal Node warning               | Detect deprecated/memory warnings |
