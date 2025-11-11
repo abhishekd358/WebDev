@@ -1,4 +1,9 @@
 
+-Linux doesn’t care about file extension.
+-When you run ./file, it executes the file line-by-line in bash by default (unless a shebang tells otherwise).
+-That’s why ls & echo work, but <html> fails.
+
+
 
 - in windows all file that we create for examples: 
                                                 abc              ls
