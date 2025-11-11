@@ -1,18 +1,29 @@
 
 
-====== In short =====
+====== In short Custom Package =====
 CJS (CommonJS):
-Default in Node.
-Use module.exports & require().
-package.json: only "main" & "name" needed.
+"type" ❌ not needed (default CommonJS)
+"main" → entry (index.js)
+"name" → package name
+use module.exports / require()
+
+
 
 ESM (ES6 Module):
-Use export & import.
-Need "type": "module" in package.json.
+"type": "module" ✅ required
+"main" → entry (index.js)
+"name" → package name
+use export / import
+
 
 Hybrid (CJS + ESM):
-Support both require & import.
-Add "main" (CJS), "module" (ESM), and "exports": { "require": ..., "import": ... }
+"name" → package name
+"main" → CJS entry (index.cjs)
+"module" → ESM entry (index.mjs)
+"exports" → define import/require paths
+
+
+
 
 ===== Imports Alias ========
 Define custom path shortcuts in package.json →
