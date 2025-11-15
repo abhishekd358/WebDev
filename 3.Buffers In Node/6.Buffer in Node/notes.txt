@@ -1,0 +1,6 @@
+Buffer not availble in browser
+Buffer only Node js base
+Buffer is also ArrayBuffer
+
+
+node Buffer is based on Typed Array Only based on:--> (Unit8Array)

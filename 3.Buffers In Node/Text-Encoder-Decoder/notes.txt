@@ -1,0 +1,8 @@
+TextDecoder:
+• Converts bytes → string (UTF-8, UTF-16 etc.)
+• Used when binary data represents text
+• Default encoding: UTF-8
+• Works on ArrayBuffer / Uint8Array
+• Must NOT be used for reading numbers
+• Opposite of TextEncoder
+
