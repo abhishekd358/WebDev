@@ -18,3 +18,5 @@ console.log(view.getInt8(2)) // this return our neagtive value
 console.log(view.getUint8(1))  // it not negative value that we set it alwayas Unsigned
 
 
+view.setUint16(0, 500); // this require 2 byte and it by default little indian , it Overwrite 0, 1 index in Buffers data
+console.log(view);
