@@ -4,3 +4,18 @@ Buffer is also ArrayBuffer
 
 
 node Buffer is based on Typed Array Only based on:--> (Unit8Array)
+
+
+Buffers created from raw data (Buffer.from([...])) use the Node.js internal buffer pool (8192 bytes).
+Therefore, buffer.buffer.byteLength = 8192 even if actual buffer size is small.
+
+
+
+
+b.byteLength  
+→ shows how many bytes THIS buffer holds  
+→ your usable size
+
+b.buffer.byteLength  
+→ shows the size of the underlying ArrayBuffer  
+→ often 8192 because Node uses a memory pool (slab)
