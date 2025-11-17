@@ -1,0 +1,34 @@
+Base64 is a character encoding that takes binary data and converts it to string/text. 
+	It has total 64 characters (a-z, A-Z, 0-9, /, +).
+	It use 6 bits only, and called as the subset of ASCII
+	In browser we have few methods, 
+		atob() ASCII to Binary
+		btoa() Binary to ASCII
+	This methods are limited, we can only pass string not actual binary data.
+	It converts the given string to binary(utf-8) and binary to base64 and vice versa for other method.
+	For base64 to work it need atleast 3 Byte of data, else it will add multiple zeros to fill the gap. And zeros Byte(8 Bit) will be replaced by =
+
+
+	Here is **the BEST notebook-friendly explanation** of **Base64 encoding steps**, with **very short, clean steps** and **an example for the letter `"a"`**.
+
+
+1. Convert character → ASCII
+2. Convert ASCII → 8-bit binary
+3. Pad binary to 24 bits
+4. Split 24 bits → 4 groups of 6 bits
+5. Convert each 6-bit group → decimal
+6. Map decimal → Base64 table
+7. Add padding `=` if input < 3 bytes
+
+   * 1 byte → `==`
+   * 2 bytes → `=`
+
+### **Example: "a"**
+
+* ASCII: 97
+* Binary: `01100001`
+* Padded 24 bits: `01100001 00000000 00000000`
+* Groups: `011000 010000 000000 000000`
+* Decimal: `24 16 0 0`
+* Base64: `YQ==`
+
