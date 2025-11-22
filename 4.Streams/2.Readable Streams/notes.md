@@ -1,4 +1,4 @@
----------------------------IMPORTANT POINT---------------------------------
+
 ✔ Default chunk size for: 
                 File streams is 64KB
                 Network streams is 16KB
