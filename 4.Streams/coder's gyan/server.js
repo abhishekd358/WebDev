@@ -26,7 +26,7 @@ const server = createServer(async (req, res) => {
   if (req.url == "/video") {
     // 1: Bad way to send file to client from server
     // when you send video like this so sudden hike in the use of MEMORY i.e RAM
-    const file = readFileSync("C:\\Users\\RUSHIKESH DHAWARE\\Desktop\\Data Structures and Algorithms using Python _ Mega Video _ DSA in Python in 1 video.mp4");
+    const file = readFileSync("C:\\Users\\Abhishek\\Desktop\\Data Structures and Algorithms using Python _ Mega Video _ DSA in Python in 1 video.mp4");
     res.writeHead(200, { "Content-Type": "video/mp4" });
 
     return res.end(file)
@@ -37,7 +37,7 @@ const server = createServer(async (req, res) => {
 
   if (req.url == "/goodvideo") {
     // fs module have createReadStream method which make it readble for stream
-    const stream = createReadStream("C:\\Users\\RUSHIKESH DHAWARE\\Desktop\\Data Structures and Algorithms using Python _ Mega Video _ DSA in Python in 1 video.mp4");
+    const stream = createReadStream("C:\\Users\\Abhishek\\Desktop\\Data Structures and Algorithms using Python _ Mega Video _ DSA in Python in 1 video.mp4");
     res.writeHead(200, { "Content-Type": "video/mp4" });
 
     // here we create a pipe that were we sending the video file to the CLIENT side i.e on RESPOSE
