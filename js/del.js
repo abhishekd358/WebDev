@@ -269,6 +269,8 @@ console.log('=======================PROMISES==================================')
 // Error handling → try/catch (cleaner than .catch).
 // Still uses the microtask queue internally.
 
+console.log('=======================TRY CATCH BLOCK==================================');
+
 console.log('=======================DOM==================================');
 
 // Q1:. Difference between Node vs Element?
