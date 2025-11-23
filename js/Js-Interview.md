@@ -129,12 +129,9 @@ Batch operations where you want **full report**, not stop on error.
 Promise.allSettled([p1, p2, p3]);
 ```
 
+---
 
-
-
-
-
-
+---
 
 
 # Error Handling (try/catch, throw)
@@ -175,6 +172,10 @@ Because the callback runs later in a different call stack.
 #### Q: Error bubbling in JS?
 If one catch doesn't handle the error → it moves up.
 
+---
+
+---
+
 
 # Object manipulation (copy, merge, destructure)
 
@@ -197,6 +198,10 @@ const { name: username } = user;
 const { city = "Delhi" } = user;
 ```
 
+
+---
+
+---
 
 # Array methods (map, filter, reduce, forEach, etc.)
 
@@ -234,6 +239,10 @@ forEach:
 ✔ not returns new array, it return **Undefined**
 
 
+---
+
+---
+
 
 # JSON vs Object
 
@@ -252,6 +261,10 @@ const obj = JSON.parse('{"name":"Rahul"}');
 const json = JSON.stringify({ name: "Rahul" });
 ```
 
+---
+
+---
+
 
 # DOM 
 
@@ -267,6 +280,9 @@ const json = JSON.stringify({ name: "Rahul" });
 ### What is the difference between NodeList and HTMLCollection?
 - HTMLCollection is live and contains only elements.
 - NodeList can contain any node and may be static or live (mostly static).
+
+
+---
 
 ## Event Bubbling & Event Capturing & Event Delegation
 **Event Bubbling:**
@@ -296,6 +312,8 @@ Each item me click event lagana inefficient hai.
 event.stopPropagation();
 ```
 
+---
+
 
 ## Debouncing & Throttling
 Both are performance optimization techniques used to control how often a function runs, especially for events that fire repeatedly (scroll, input, resize, mousemove).
@@ -311,6 +329,9 @@ Write it in your notes exactly like this 👇
 👉 Throttle = “Run every X ms max”
 
 Both are **performance optimization techniques** used to control how often a function runs, especially for events that fire repeatedly (scroll, input, resize, mousemove).
+
+
+---
 
 
 ### ✅ **Debouncing**
@@ -346,6 +367,8 @@ const input = document.querySelector("input");
 input.addEventListener("input", debounce(searchHandler, 400));
 ```
 
+
+---
 
 ### ✅ **Throttling**
 
@@ -383,6 +406,8 @@ window.addEventListener("scroll", throttle(logScroll, 500));
 
 ---
 
+---
+
 
 # ES6+ (Modern JavaScript Features)
 
@@ -403,12 +428,16 @@ window.addEventListener("scroll", throttle(logScroll, 500));
 console.log(user?.details?.address?.city);
 ```
 
+---
+
 ## Nullish Coalescing (??)
 **Return right side only when left is null or undefined.**
 ```
 let value = null ?? "Default";
 console.log(value); // "Default"
 ```
+
+---
 
 ## Iterators & Generators
 
@@ -471,6 +500,8 @@ console.log(it.next()); // { value: undefined, done: true }
 ```
 
 
+---
+
 ## Symbols + Sets, Maps, WeakSet, WeakMap
 
 ### Symbol
@@ -530,6 +561,7 @@ s.size; // 3
 | **WeakMap** | ✔ (only objects as keys) | ❌              | ❌         | ✔                        |
 
 
+
 ---
 
 
@@ -537,4 +569,162 @@ s.size; // 3
 
 # 🟤 6. Advanced JS Concepts
 
-### Deep Dive in **this**
+## Deep Dive in **this**
+- this depends on HOW a function is called, not where it's written.
+
+**Rule 1: Global this**
+- In Browser → window
+- In Node.js → {} (module object)
+
+**Rule 2: this inside a simple function**
+- strict mode → undefined
+- non-strict mode → window (browser)
+
+```
+function show() {
+  console.log(this);
+}
+show();
+```
+
+**RULE 3: Inside an object method**
+- this → object calling the method.
+```
+const obj = {
+  name: "Amit",
+  show() {
+    console.log(this.name);
+  }
+};
+
+obj.show(); // "Amit"
+```
+
+**Rule 4: this in Arrow Functions**
+- ⚠ ARROW FUNCTIONS DO NOT HAVE THEIR OWN this.
+- They take this from their surrounding scope (lexical this).
+
+**RULE 5: constructor function this**
+- new creates a new object
+- this = new object
+
+
+**RULE 6: this in Classes**
+- Simply behaves like constructor functions:
+
+
+**RULE 7: call(), apply(), bind()**
+- Used to control this manually.
+
+- call(obj, arg1, arg2, ...) -> calls function immediately with args one-by-one
+- apply(obj, [arg1, arg2, ...]) -> calls function immediately with args in array
+- bind(obj, a, b) -> does NOT run instantly, returns new function with fixed this
+
+```
+function hi(a, b) { console.log(this.name, a, b); }
+
+hi.call({ name: "Amit" }, 10, 20);
+hi.apply({ name: "Amit" }, [10, 20]);
+hi.bind({ name: "Amit" }, 10, 20);
+```
+
+---
+
+## CURRYING
+Currying means converting a function with multiple arguments into a series of nested functions, where each function accepts only one argument.
+
+In simple words:
+```
+Normal function: f(a, b, c)
+Curried function: f(a)(b)(c)
+```
+
+Benefits:
+- ✔ Reusability
+- ✔ Clean & readable code
+- ✔ Used in functional programming (React, Redux)
+
+ES6 Arrow function Example:
+```
+const add = a => b => a + b;
+add(2)(5) -> 7
+```
+
+---
+
+
+## MEMOIZATION
+
+- Memoization is a technique to speed up function execution by storing results of expensive function calls and returning cached results when the same inputs occur again.
+
+Uses:
+✔ Avoid repeated calculations
+✔ Improve performance
+✔ Common in React, recursion, search systems, caching APIs.
+
+General Memoization Utility Function:
+```
+function memoize(fn) {
+  const cache = {};
+
+  return function (...args) {
+    const key = JSON.stringify(args);
+
+    if (cache[key]) {
+      console.log("Returning from cache:", key);
+      return cache[key];
+    }
+
+    const result = fn(...args);
+    cache[key] = result;
+    return result;
+  };
+}
+```
+
+
+
+---
+
+## Garbage Collection:
+
+- Automatic memory management in JavaScript.
+- Removes unused / unreachable objects.
+
+🔍 Mark & Sweep Steps Alogrithm Steps:
+```
+1. Roots identify karo
+(Global variables, window, document, active functions, closures etc.)
+
+2. Mark Phase
+Jo values still reachable hain (linked by references) → unko mark kar diya jata hai.
+
+3. Sweep Phase
+Jo marked nahi hain (unreachable / no references) → unko remove (free memory) kar diya jata hai.
+```
+
+IN SHORT Algorithm:
+- ✔ Mark and Sweep:
+   1. Identify reachable objects (mark them)
+   2. Unreachable objects removed (sweep)
+
+Key term: Reachability
+- If no reference exists → eligible for GC.
+
+Avoid Memory Leaks:
+- ✔ remove event listeners
+- ✔ avoid unused global variables
+- ✔ clear unused arrays or objects
+
+#### Q: Can closures cause memory leaks?
+
+👉 YES, if unnecessary data captured.
+
+#### Q: Can we force GC in JavaScript?
+
+👉 Browser: No
+👉 Node: Yes (flag) but discouraged.
+
+#### Q: Why does JS need Automatic GC?
+
+👉 Because JS browser-first language hai, memory management developer-friendly nahi hota.
