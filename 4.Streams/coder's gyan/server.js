@@ -89,9 +89,9 @@ const server = createServer(async (req, res) => {
 // file(source) ----> trasfromStream(process) -----> outputFile(receiver)
 
 
-// file.pipe(uppercaseModificationStream).pipe(outputFile)
+file.pipe(uppercaseModificationStream).pipe(outputFile)
 
-// file.pipe(uppercaseModificationStream).on('error',()=>console.log(error)).pipe(outputFile).on('error',()=>console.log(error))
+file.pipe(uppercaseModificationStream).on('error',()=>console.log(error)).pipe(outputFile).on('error',()=>console.log(error))
 // -------------------------- limitiation on this above is that we not able to handle the error if occur when during flow of data and we processing  
 
 // but this above error handling is not good way ---------------------
