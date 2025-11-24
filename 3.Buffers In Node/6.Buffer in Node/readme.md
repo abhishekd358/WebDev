@@ -1,6 +1,6 @@
 
 
-# 📝 **Node.js Buffer — Notes (Final Clean Version)**
+# 📝 **READ notes.txt for SHORT SUMMARY*
 
 ## ⭐ 1. **What is Buffer?**
 

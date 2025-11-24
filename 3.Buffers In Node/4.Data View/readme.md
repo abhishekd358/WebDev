@@ -243,19 +243,3 @@ Network protocols often use **big-endian**, CPUs use **little-endian**.
 ---
 
 ---
-
-# 📌 Ready for Next Topic?
-
-Shall we continue to **“Typed Arrays”** — jisme tu samjhega:
-
-* Uint8Array
-* Int16Array
-* Float32Array
-* How they connect to ArrayBuffer
-* Their performance advantage
-* Memory alignment
-
-Bol bhai → **“Typed Arrays” explain karo**?
-
-
-
