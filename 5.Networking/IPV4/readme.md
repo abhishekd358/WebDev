@@ -299,12 +299,6 @@ Jise duniya ka koi bhi banda access kar sakta hai.
 
 
 
-
-webchat@p2mm1g.i935.752v.4900.2401.IP
-
-webchat@7b4su5.depe.3uah.0085.2601.IP
-
-
 # ✅ Port 
 
 A **Port Number** is a unique number that identifies a specific process or service or program running on a device.
@@ -324,6 +318,11 @@ In simple words:
   * Room 3 = SSH
   * etc.
 
+#### Difference Between Open, Closed, Filtered Ports
+- Open → Accepts connections
+- Closed → No service on that port
+- Filtered → Blocked by firewall / ISP
+
 ### In Short 
 * Port number identifies **specific services** inside a device.
 * IP identifies the **device**, port identifies the **application**.
@@ -340,5 +339,38 @@ In simple words:
 * Multiple services cannot use the **same port on the same IP** at the same time.
 
 ---
+
+
+
+# ✅ MAC Address
+
+When devices communicate inside your home network, MAC address is used.
+
+Example:
+Your mobile wants to send data to your laptop on same WiFi.
+
+Steps:
+```
+1. Mobile asks: “What is the MAC of this IP?”
+2. Laptop replies with MAC address
+3. Mobile sends packets using laptop’s MAC
+```
+This process uses ARP (Address Resolution Protocol).
+
+
+### In Short
+- MAC = Media Access Control address, 48-bit, unique hardware address.
+- Format: 6 groups of hex numbers (A4:B1:C2:00:11:3F).
+- Assigned by manufacturer, stored in NIC.
+- Works at Layer 2 (Data Link Layer).
+- Used only in LAN communication, does not go to the internet.
+- Identifies hardware, not network location.
+- IP can change; MAC stays constant (unless spoofed).
+- ARP converts IP → MAC.
+- Wi-Fi routers use MAC filtering for access control.
+- First 3 bytes (OUI) identify device manufacturer.
+- It never leaves your local network (not sent to Internet)
+
+https://www.chatindian.com/mobile-chat/
 
 
