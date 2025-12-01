@@ -372,6 +372,8 @@ This process uses ARP (Address Resolution Protocol).
 - It never leaves your local network (not sent to Internet)
 
 
+---
+
 # ✅ OSI Model (Open Systems Interconnection Model)
 
 
@@ -405,4 +407,72 @@ It tells us **what happens at each stage** when you send a message, open a websi
 
 
 
+---
 
+
+# ✅ Understanding the TCP/IP Model
+
+OSI model is **theoretical**, but
+TCP/IP model is **practical and implemented everywhere**.
+
+The **TCP/IP Model** (Transmission Control Protocol / Internet Protocol Model) defines **how data travels across the internet**.
+
+It has **4 layers**:
+
+```
+4. Application Layer  
+3. Transport Layer  
+2. Internet Layer  
+1. Network Access Layer
+```
+
+This is much simpler and practical than OSI's 7 layers.
+
+
+* TCP/IP is the **real internet model**, OSI is a theoretical reference.
+* TCP/IP has **4 layers**: Application, Transport, Internet, Network Access.
+* Application layer combines OSI: App + Presentation + Session.
+* Transport layer = TCP/UDP + ports.
+* Internet layer = IP addressing + routers + routing.
+* Network Access layer = MAC + switches + LAN communication.
+* TCP is reliable, UDP is fast.
+
+### OSI vs TCP/IP Model Comparison
+
+| **OSI Model Layer**       | **TCP/IP Model Layer**   | **Data Name (PDU)**    | **Description**                                                                 |
+|---------------------------|--------------------------|-------------------------|---------------------------------------------------------------------------------|
+| **Application (Layer 7)** | **Application**          | **Data**               | Provides services for end-user applications like HTTP, FTP, DNS, SMTP.         |
+| **Presentation (Layer 6)**| **Application**          | **Data**               | Handles data format translation, encryption, and compression.                  |
+| **Session (Layer 5)**     | **Application**          | **Data**               | Manages sessions (establishment, maintenance, and termination).                |
+| **Transport (Layer 4)**   | **Transport**            | **Segment (TCP)** / **Datagram (UDP)** | Ensures reliable or fast delivery with protocols like TCP or UDP.              |
+| **Network (Layer 3)**     | **Internet**             | **Packet**             | Handles logical addressing (IP addresses) and routes data between networks.    |
+| **Data Link (Layer 2)**   | **Network Access**       | **Frame**              | Structures packets into frames, adds MAC addresses, and manages error checking.|
+| **Physical (Layer 1)**    | **Network Access**       | **Bits**               | Transmits raw binary data as electrical, optical, or radio signals.            |
+
+
+---
+
+
+# ✅ TCP and UDP: The Backbone of the Internet
+-------------------- I N  S H O R T -----------------------------
+* TCP and UDP are transport layer protocols.
+
+* TCP = Reliable, slow, ordered, connection-oriented.
+
+* UDP = Fast, no guarantee, connectionless.
+
+* TCP uses 3-way handshake.
+  * SYN → Client asks to connect
+  * SYN + ACK → Server agrees
+  * ACK → Client confirms
+
+* UDP is used in: video calls, VoIP, gaming, streaming.
+
+* TCP is used in: websites, email, FTP, SSH.
+
+* TCP header is larger; UDP header is smaller.
+
+* Both use port numbers to identify services.
+
+* TCP focuses on accuracy; UDP focuses on speed.
+  
