@@ -209,7 +209,7 @@ Subnet Mask: 255.255.255.0
 Gateway: 192.168.1.1
 ```
 ---
-# ✅ 5. Special IPv4 Addresses
+# 5. Special IPv4 Addresses
 | Address             | Meaning                              |
 | ------------------- | ------------------------------------ |
 | **127.0.0.1**       | Loopback / localhost                 |
@@ -220,7 +220,7 @@ Gateway: 192.168.1.1
 
 ---
 
-# ✅ **10. Why IPv4 Is Running Out?**
+# **10. Why IPv4 Is Running Out?**
 
 Because:
 
@@ -232,21 +232,23 @@ Solution:
 
 ---
 
+---
+🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺🔻🔺
+---
 
+# ✅ Private vs Public IP Address
 
-# Private vs Public IP Address
-
-## Public IP Address
+#### Public IP Address
 - Public IP = Internet ka official address
 Jise duniya ka koi bhi banda access kar sakta hai.
 -Ye IP ISP (Jio, Airtel, BSNL, ACT) tumhare router/mobile ko dete hain.
 - but you can take your own public IP by your service provider
 
-## Private IP Address
+#### Private IP Address
 - Router ke peeche jo devices hote hain
 - Private IP = Ghar/office ke andar device ka internal address.
 
-## ⚔️ Final Comparison Table (Pros & Cons)
+### ⚔️ Final Comparison Table (Pros & Cons)
 | Type           | Benefits                                             | Drawbacks                                                    |
 | -------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
 | **Private IP** | Secure, free, unlimited devices, LAN fast            | Internet access nahi, hosting nahi, port forwarding required |
@@ -255,7 +257,7 @@ Jise duniya ka koi bhi banda access kar sakta hai.
 
 
 
-# DNS (Domain Name System & Sever)
+# ✅ DNS (Domain Name System & Sever)
 
 * DNS = Domain Name System; converts domain names to IP addresses.
 * Ip address get through Domain Name in cmd:```nslookup <flipkart.com>```
@@ -279,6 +281,13 @@ Jise duniya ka koi bhi banda access kar sakta hai.
 # Understanding IPv6 Addresses in Depth
 * IPv6 = 128-bit next generation IP address system.
 * Needed because IPv4 addresses (4.3B) were running out.
+* Most IPv6 public addresses on phones/laptops are dynamic because of privacy extensions.
+* IPv6 does NOT use NAT.
+* IPv6 link-local addresses always exist even without internet.
+* IPv6 has types:
+  * GUA (Global Unicast) → Public IPv6
+  * ULA (Unique Local) → Private IPv6 (like 192.168.x.x)
+  * Link-Local (fe80) → Local only
 * IPv6 has **3.4 × 10³⁸** addresses.
 * IPv6 format: 8 groups of 4 hex digits separated by colons.
 * Shortening rules: remove leading zeros & use `::` only once.
@@ -287,4 +296,49 @@ Jise duniya ka koi bhi banda access kar sakta hai.
 * Internet currently runs in **dual-stack mode** (IPv4 + IPv6).
 
 ---
+
+
+
+
+webchat@p2mm1g.i935.752v.4900.2401.IP
+
+webchat@7b4su5.depe.3uah.0085.2601.IP
+
+
+# ✅ Port 
+
+A **Port Number** is a unique number that identifies a specific process or service or program running on a device.
+
+In simple words:
+
+#### **IP address = identifies the device**
+#### **Port number = identifies the specific service on that device**
+
+
+* Your laptop = a house
+* IP address = house address
+* Port numbers = different rooms
+
+  * Room 1 = HTTP server
+  * Room 2 = Database
+  * Room 3 = SSH
+  * etc.
+
+### In Short 
+* Port number identifies **specific services** inside a device.
+* IP identifies the **device**, port identifies the **application**.
+* Total ports = 65,536 (0–65535).
+* Port categories:
+
+  * **Well-known (0–1023)**
+  * **Registered (1024–49151)**
+  * **Dynamic/Private (49152–65535)**
+* Common ports: 80 (HTTP), 443 (HTTPS), 22 (SSH), 53 (DNS), 3306 (MySQL), 27017 (MongoDB).
+* Port + IP = Socket (e.g., 192.168.1.10:3000).
+* Ports can be open, closed, or filtered by firewall/ISP.
+* If a port is blocked or not listening, no device on the network can access it.
+* Multiple services cannot use the **same port on the same IP** at the same time.
+
+---
+
 
