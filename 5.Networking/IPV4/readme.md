@@ -371,6 +371,38 @@ This process uses ARP (Address Resolution Protocol).
 - First 3 bytes (OUI) identify device manufacturer.
 - It never leaves your local network (not sent to Internet)
 
-https://www.chatindian.com/mobile-chat/
+
+# ✅ OSI Model (Open Systems Interconnection Model)
+
+
+The **OSI Model** explains how data travels from one device to another across a network.
+
+It tells us **what happens at each stage** when you send a message, open a website, upload a file, etc.
+
+
+```
+7. Application  
+6. Presentation  
+5. Session  
+4. Transport  
+3. Network  
+2. Data Link  
+1. Physical
+```
+
+* OSI Model has **7 layers** explaining how data travels between devices.
+* Layers: Application, Presentation, Session, Transport, Network, Data Link, Physical.
+* **Layer 7**: User-level protocols (HTTP, DNS).
+* **Layer 6**: Encryption/Decryption (TLS).
+* **Layer 5**: Session creation & management.
+* **Layer 4**: TCP/UDP + port numbers.
+* **Layer 3**: IP addressing + routers.
+* **Layer 2**: MAC addressing + switches.
+* **Layer 1**: Physical hardware (cables, wifi).
+* Switch works at **L2**, router at **L3**, hub at **L1**, firewall at **L3/L4/L7**.
+* OSI Model is theoretical, used for understanding.
+* Real-world networks follow **TCP/IP Model** (4 layers).
+
+
 
 
