@@ -476,3 +476,39 @@ This is much simpler and practical than OSI's 7 layers.
 
 * TCP focuses on accuracy; UDP focuses on speed.
   
+
+---
+
+# ✅ SSH 
+
+**SSH (Secure Shell)** is a protocol that allows you to safely access another computer over a network (LAN or Internet).
+
+SSH = Remote control of a computer terminal **securely**.
+
+
+
+* SSH stands for **Secure Shell**.
+* Used for **safe remote terminal access**.
+* Runs on **TCP port 22**.
+* Very secure → uses encryption & key-pairs.
+* Needs: SSH server installed, service running, port 22 open.
+* Works inside LAN using **private IP**.
+* Works over Internet using **public IP** + port forwarding.
+* Two authentication methods:
+  * Password
+  * Public/Private key (recommended)
+* SCP uses SSH for secure file transfer.
+* SSH is used in cloud servers, DevOps, backend deployment, Linux management.
+
+
+#### **SSH Command to access server terminal by client:**
+SSH command syntax:
+```
+ssh username@server-ip
+```
+
+Example:
+```
+ssh ubuntu@54.23.121.5
+```
+---
