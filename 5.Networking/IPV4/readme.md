@@ -495,12 +495,13 @@ SSH = Remote control of a computer terminal **securely**.
 * Works inside LAN using **private IP**.
 * Works over Internet using **public IP** + port forwarding.
 * Two authentication methods:
-  * Password
-  * Public/Private key (recommended)
+    * Password
+    * Public/Private key (recommended)
 * SCP uses SSH for secure file transfer.
 * SSH is used in cloud servers, DevOps, backend deployment, Linux management.
-
-
+* SSH Command to access server terminal by client: ```ssh username@server-ip```
+    * example: ```ssh xyzterminal@192.168.0.113```
+  
 #### **SSH Command to access server terminal by client:**
 SSH command syntax:
 ```
@@ -512,3 +513,47 @@ Example:
 ssh ubuntu@54.23.121.5
 ```
 ---
+
+
+# ✅ SSH Public and Private Keys
+SSH uses **key cryptography** to authenticate you without a password.
+
+An SSH key pair has TWO parts:
+
+#### ✔ **1. Public Key (`id_rsa.pub`)**
+
+* Safe to share
+* Goes on the *server*
+* Works like a **lock**
+
+#### ✔ **2. Private Key (`id_rsa`)**
+
+* **NEVER shared**
+* Stays on your laptop
+* Works like a **key to the lock**
+
+👉 Together they create a secure authentication system.
+
+* SSH keys = Public key + Private key pair.
+* Private key stays on your system → DO NOT share.
+* Public key goes to server → safe to share.
+* Public key stored on server Folder: ```~/.ssh/authorized_keys```.
+* Use ssh-keygen -t rsa -b 4096 to generate keys.
+* Passwordless login uses key-based authentication.
+* Improves security (cannot be brute forced).
+* Mandatory for cloud servers like AWS, DigitalOcean.
+* NEVER upload private keys anywhere.
+
+
+- ```ssh-keygen -t rsa -b 4096``` → generates strong 4096-bit RSA SSH key pair
+- ```-t rsa``` = RSA algorithm  , -t means type of key.
+- ```-b 4096``` = 4096-bit strength (secure), -b means number of bits (strength of the key).
+
+
+
+
+
+
+---
+
+
