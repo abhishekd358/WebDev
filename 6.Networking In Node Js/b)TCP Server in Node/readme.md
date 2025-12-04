@@ -111,8 +111,44 @@ TCP gives data in **chunks**, so you must read it as a stream.
         // as soon as we write we end socket
         socket.end()
 ```
+browser show the **hello world** because 
+This is NOT a real HTTP response, but…
 
-TCP gives data in **chunks**, so you must read it as a stream.
+✔ The browser sees the `HTTP` keyword
+✔ And sees two newlines (`\n\n`)
+✔ It **loosely assumes it's an HTTP header section**
+
+So the browser says:
+
+> “OK… this *looks something like HTTP*, I'll try to show it”
+
+🔥 That’s why **you can see "hello world" in the browser**, even though this is not valid HTTP.
+
+But again — it’s just luck.
+If Chrome becomes strict, this can break anytime.
+
+
+### Correct HTTP From a TCP Server
+
+Here is the **correct** way to reply to browser using TCP:
+
+```js
+socket.write(
+  "HTTP/1.1 200 OK\r\n" +
+  "Content-Type: text/plain\r\n" +
+  "Content-Length: 11\r\n" +
+  "\r\n" +
+  "hello world"
+);
+```
+
+Important rules:
+
+* Headers end with `\r\n\r\n`
+* Must include status line (`HTTP/1.1 200 OK`)
+* Content-Length is recommended
+
+Now the browser will always show the response.
 
 ---
 
