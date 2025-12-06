@@ -1,115 +1,94 @@
 import { readdir } from "fs/promises";
+import { createReadStream } from "node:fs";
 import { open, readFile } from "node:fs/promises";
 import http from "node:http";
 import mime from "mime-types";
 
 const app = http.createServer(async (req, res) => {
+  // favicon.ico route
+  if(req.url === '/favicon.ico') return res.end('Not Found Icon')
 
-  // favicon request ignore
-  if (req.url === "/favicon.ico") return res.end("No Icon");
-
-  // Home route
+  // home route
   if (req.url === "/") {
     serveDirectory(req, res);
-    return;
-  }
+  } else {
+    try {
 
-  try {
-    // ----------------------------
-    // 1️⃣ Check if download is requested
-    // ----------------------------
-    const isDownload = req.url.includes("?download=1");
+      // clean url before opening file
+        const isDownload = req.url.includes("?download=1");
+        const cleanPath = req.url.replace("?download=1", "");
+      // if the file we create read stream
+      const fileHandle = await open(`./Storage${decodeURIComponent(cleanPath)}`);
 
-    // remove the ?download=1 to get the ACTUAL file path
-    const cleanPath = req.url.replace("?download=1", "");
+      // we checking is dir or file
+      const stat = await fileHandle.stat();
 
-    // ----------------------------
-    // 2️⃣ Open the file or folder
-    // ----------------------------
-    const fileHandle = await open(`./Storage${decodeURIComponent(cleanPath)}`);
+      if (stat.isDirectory()) {
+        // if it is folder
+        serveDirectory(req, res);
+      
+      } else {
+        // if it file
 
-    const stat = await fileHandle.stat();
+        // for file : custom header passing ---------------------------------
+        const mimeType = mime.lookup(cleanPath) || "application/octet-stream";
+        res.setHeader("Content-Type", mimeType);
+        // -------------------------------------------------------------------------
 
-    // ----------------------------
-    // 3️⃣ If folder → show directory listing
-    // ----------------------------
-    if (stat.isDirectory()) {
-      serveDirectory(req, res);
-      return;
+
+        const fileName = cleanPath.split("/").pop();
+
+
+        // ========================= download
+        if(isDownload){
+          res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
+        }else{
+          // open
+          res.setHeader("Content-Disposition", "inline; filename=\"${fileName}\"");
+        }
+
+        // ================================================
+
+        const contentFile = fileHandle.createReadStream();
+        contentFile.pipe(res);
+      }
+    } catch (error) {
+      console.log(error.message);
+      res.end("Not Found!");
     }
-
-    // ----------------------------
-    // 4️⃣ If file → serve file
-    // ----------------------------
-
-    // Detect correct MIME type
-    const mimeType = mime.lookup(cleanPath) || "application/octet-stream";
-    res.setHeader("Content-Type", mimeType);
-
-    // filename (last part of URL)
-    const fileName = cleanPath.split("/").pop();
-
-    // ----------------------------
-    // 5️⃣ Download Mode
-    // ----------------------------
-    if (isDownload) {
-      // "attachment" forces download
-      res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
-    } else {
-      // "inline" opens in browser (pdf, images, text, videos stream)
-      res.setHeader("Content-Disposition", "inline");
-    }
-
-    // Create a Readable stream
-    const contentStream = fileHandle.createReadStream();
-
-    // Pipe file → browser
-    contentStream.pipe(res);
-
-  } catch (error) {
-    console.log(error.message);
-    res.end("Not Found!");
   }
 });
 
-
-
-// ===================================================================
-// SERVE DIRECTORY FUNCTION
-// ===================================================================
+// ======================= Reading or serving directory
 async function serveDirectory(req, res) {
-  // Read folder content
+  // if it is a folder
   const files = await readdir(`./Storage${req.url}`);
-
+  // looping on files
   let dynamicHtml = "";
-
   files.forEach((element) => {
+    dynamicHtml += `<li>${element}</li>
+    
+    <a href=".${req.url === "/" ? "" : req.url}/${element}"><button>Open</button></a>
 
-    // element = file or folder name
+    <a href=".${req.url === "/" ? "" : req.url}/${element}?download=1"><button>Download</button></a>
 
-    dynamicHtml += `
-    <li>${element}</li>
 
-    <!-- OPEN BUTTON -->
-    <a href=".${req.url === "/" ? "" : req.url}/${element}">
-      <button>Open</button>
-    </a>
-
-    <!-- DOWNLOAD BUTTON -->
-    <a href=".${req.url === "/" ? "" : req.url}/${element}?download=1">
-      <button>Download</button>
-    </a>
     `;
   });
 
-  // Load HTML template
+  // we read the home html and reder it and also rednder dynamic html
   const htmlRead = await readFile("homeTemplate.html", "utf-8");
-
-  // Replace placeholder
+  // now from html we replace the static ${} to dyamic
   return res.end(htmlRead.replace("${dynamicHtml}", dynamicHtml));
 }
 
 
-// Server
+
+
+
+// port
 const PORT = 3000;
-app.listen(PORT, () => console.log("Server running on:", PORT));
+
+app.listen(PORT, () => {
+  console.log("Server Running on Port:", PORT);
+});
