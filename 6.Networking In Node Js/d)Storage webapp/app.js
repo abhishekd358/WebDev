@@ -1,57 +1,66 @@
 import { readdir } from "fs/promises";
-import { createReadStream, readFile } from "node:fs";
-import { open } from "node:fs/promises";
+import { createReadStream } from "node:fs";
+import { open, readFile } from "node:fs/promises";
 import http from "node:http";
 
 const app = http.createServer(async (req, res) => {
+  // favicon.ico route
+  if(req.url === '/favicon.ico') return res.end('Not Found Icon')
+
   // home route
   if (req.url === "/") {
-    const files = await readdir(
-      "C:\\Users\\RUSHIKESH DHAWARE\\Desktop\\Chai with Js\\6.Networking In Node Js\\d)Storage webapp\\Storage"
-    );
-    // looping on files
-    let dynamicHtml = "";
-    files.forEach((element) => {
-      dynamicHtml += `<li><a href="./${element}">${element}</a></li>`;
-    });
+    serveDirectory(req, res);
+  } else {
+    try {
+      // if the file we create read stream
+      const fileHandle = await open(`./Storage${decodeURIComponent(req.url)}`);
 
-    return res.end(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storage webapp</title>
-</head>
-<body>
-
-    <h1>My Storage:</h1>
-     <ul>
-     ${dynamicHtml}
-     
-     </ul>
-</body>
-</html>`);
-  }else{
-      //   file based route
-
-      try {
-       const currentFileROute = req.url
-    const fileHandle =await open(`C:\\Users\\RUSHIKESH DHAWARE\\Desktop\\Chai with Js\\6.Networking In Node Js\\d)Storage webapp\\Storage\\${currentFileROute}`)
-    // console.log(fileHandle)
-
-    const contentFile = fileHandle.createReadStream()
-    contentFile.pipe(res) 
-      } catch (error) {
-        console.log(error.message)
-        res.end('Not Found!')
+      // we checking is dir or file
+      const stat = await fileHandle.stat();
+      if (stat.isDirectory()) {
+        serveDirectory(req, res);
+        // if it file
+      } else {
+        const contentFile = fileHandle.createReadStream();
+        contentFile.pipe(res);
       }
-
+    } catch (error) {
+      console.log(error.message);
+      res.end("Not Found!");
+    }
   }
-
-
-
-
 });
+
+// ======================= Reading or serving directory
+async function serveDirectory(req, res) {
+  // if it is a folder
+  const files = await readdir(`./Storage${req.url}`);
+  // looping on files
+  let dynamicHtml = "";
+  files.forEach((element) => {
+    dynamicHtml += `<li>${element}</li>
+    
+    <a href=".${
+      req.url === "/" ? "" : req.url
+    }/${element}"><button>Open</button></a>
+
+    <a href=".${
+      req.url === "/" ? "" : req.url
+    }/${element}"><button>Download</button></a>
+
+
+    `;
+  });
+
+  // we read the home html and reder it and also rednder dynamic html
+  const htmlRead = await readFile("homeTemplate.html", "utf-8");
+  // now from html we replace the static ${} to dyamic
+  return res.end(htmlRead.replace("${dynamicHtml}", dynamicHtml));
+}
+
+
+
+
 
 // port
 const PORT = 3000;
