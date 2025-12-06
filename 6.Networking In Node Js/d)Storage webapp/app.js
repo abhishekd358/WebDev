@@ -1,94 +1,104 @@
-import { readdir } from "fs/promises";
-import { createReadStream } from "node:fs";
-import { open, readFile } from "node:fs/promises";
-import http from "node:http";
-import mime from "mime-types";
+// ======================= IMPORTS =======================
+import { readdir } from "fs/promises"; // To read directories asynchronously
+import { createReadStream } from "node:fs"; // To stream files to the client
+import { open, readFile } from "node:fs/promises"; // Open files and read template HTML
+import http from "node:http"; // Create HTTP server
+import mime from "mime-types"; // Detect file MIME types for proper Content-Type headers
 
+// ======================= CREATE SERVER =======================
 const app = http.createServer(async (req, res) => {
-  // favicon.ico route
-  if(req.url === '/favicon.ico') return res.end('Not Found Icon')
+  // ---------------------- Ignore favicon requests ----------------------
+  if(req.url === '/favicon.ico') return res.end('Not Found Icon');
 
-  // home route
+  // ---------------------- Home route ("/") ----------------------
   if (req.url === "/") {
+    // Show the directory listing for the root folder
     serveDirectory(req, res);
-  } else {
-    try {
+    return; // Stop further processing
+  }
 
-      // clean url before opening file
-        const isDownload = req.url.includes("?download=1");
-        const cleanPath = req.url.replace("?download=1", "");
-      // if the file we create read stream
-      const fileHandle = await open(`./Storage${decodeURIComponent(cleanPath)}`);
+  try {
+    // ---------------------- Detect download ----------------------
+    // Check if the URL includes "?download=1"
+    const isDownload = req.url.includes("?download=1");
 
-      // we checking is dir or file
-      const stat = await fileHandle.stat();
+    // Remove "?download=1" from URL to get the real file path
+    const cleanPath = req.url.replace("?download=1", "");
 
-      if (stat.isDirectory()) {
-        // if it is folder
-        serveDirectory(req, res);
-      
-      } else {
-        // if it file
+    // ---------------------- Open file ----------------------
+    // Open the file handle (async) from the Storage folder
+    const fileHandle = await open(`./Storage${decodeURIComponent(cleanPath)}`);
 
-        // for file : custom header passing ---------------------------------
-        const mimeType = mime.lookup(cleanPath) || "application/octet-stream";
-        res.setHeader("Content-Type", mimeType);
-        // -------------------------------------------------------------------------
+    // ---------------------- Check if it's a directory ----------------------
+    const stat = await fileHandle.stat();
 
-
-        const fileName = cleanPath.split("/").pop();
-
-
-        // ========================= download
-        if(isDownload){
-          res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
-        }else{
-          // open
-          res.setHeader("Content-Disposition", "inline; filename=\"${fileName}\"");
-        }
-
-        // ================================================
-
-        const contentFile = fileHandle.createReadStream();
-        contentFile.pipe(res);
-      }
-    } catch (error) {
-      console.log(error.message);
-      res.end("Not Found!");
+    if (stat.isDirectory()) {
+      // If it is a directory, show its contents
+      serveDirectory(req, res);
+      return;
     }
+
+    // ---------------------- Serve file ----------------------
+    // Detect proper MIME type (e.g., video/mp4, image/png)
+    const mimeType = mime.lookup(cleanPath) || "application/octet-stream";
+    res.setHeader("Content-Type", mimeType);
+
+    // Get the file name from the path (last part after "/")
+    const fileName = cleanPath.split("/").pop();
+
+    // ---------------------- Set download or open ----------------------
+    if (isDownload) {
+      // Force download
+      res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
+    } else {
+      // Open in browser inline (for videos, images, PDFs, etc.)
+      res.setHeader("Content-Disposition", `inline; filename="${fileName}"`);
+    }
+
+    // ---------------------- Stream the file ----------------------
+    const contentFile = fileHandle.createReadStream();
+    contentFile.pipe(res);
+
+  } catch (error) {
+    // ---------------------- Error handling ----------------------
+    // If file not found or any error occurs
+    console.log(error.message);
+    res.end("Not Found!");
   }
 });
 
-// ======================= Reading or serving directory
+// ======================= SERVE DIRECTORY FUNCTION =======================
 async function serveDirectory(req, res) {
-  // if it is a folder
+  // Read all files/folders in the requested directory
   const files = await readdir(`./Storage${req.url}`);
-  // looping on files
+
+  // Generate dynamic HTML for each file/folder
   let dynamicHtml = "";
   files.forEach((element) => {
-    dynamicHtml += `<li>${element}</li>
-    
-    <a href=".${req.url === "/" ? "" : req.url}/${element}"><button>Open</button></a>
+    dynamicHtml += `
+      <li>${element}</li>
 
-    <a href=".${req.url === "/" ? "" : req.url}/${element}?download=1"><button>Download</button></a>
+      <!-- Open button -->
+      <a href=".${req.url === "/" ? "" : req.url}/${element}">
+        <button>Open</button>
+      </a>
 
-
+      <!-- Download button -->
+      <a href=".${req.url === "/" ? "" : req.url}/${element}?download=1">
+        <button>Download</button>
+      </a>
     `;
   });
 
-  // we read the home html and reder it and also rednder dynamic html
+  // Read the HTML template
   const htmlRead = await readFile("homeTemplate.html", "utf-8");
-  // now from html we replace the static ${} to dyamic
+
+  // Replace placeholder in template with the dynamic file list
   return res.end(htmlRead.replace("${dynamicHtml}", dynamicHtml));
 }
 
-
-
-
-
-// port
+// ======================= START SERVER =======================
 const PORT = 3000;
-
 app.listen(PORT, () => {
   console.log("Server Running on Port:", PORT);
 });
