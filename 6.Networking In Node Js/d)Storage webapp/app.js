@@ -1,70 +1,115 @@
 import { readdir } from "fs/promises";
-import { createReadStream } from "node:fs";
 import { open, readFile } from "node:fs/promises";
 import http from "node:http";
+import mime from "mime-types";
 
 const app = http.createServer(async (req, res) => {
-  // favicon.ico route
-  if(req.url === '/favicon.ico') return res.end('Not Found Icon')
 
-  // home route
+  // favicon request ignore
+  if (req.url === "/favicon.ico") return res.end("No Icon");
+
+  // Home route
   if (req.url === "/") {
     serveDirectory(req, res);
-  } else {
-    try {
-      // if the file we create read stream
-      const fileHandle = await open(`./Storage${decodeURIComponent(req.url)}`);
+    return;
+  }
 
-      // we checking is dir or file
-      const stat = await fileHandle.stat();
-      if (stat.isDirectory()) {
-        serveDirectory(req, res);
-        // if it file
-      } else {
-        const contentFile = fileHandle.createReadStream();
-        contentFile.pipe(res);
-      }
-    } catch (error) {
-      console.log(error.message);
-      res.end("Not Found!");
+  try {
+    // ----------------------------
+    // 1️⃣ Check if download is requested
+    // ----------------------------
+    const isDownload = req.url.includes("?download=1");
+
+    // remove the ?download=1 to get the ACTUAL file path
+    const cleanPath = req.url.replace("?download=1", "");
+
+    // ----------------------------
+    // 2️⃣ Open the file or folder
+    // ----------------------------
+    const fileHandle = await open(`./Storage${decodeURIComponent(cleanPath)}`);
+
+    const stat = await fileHandle.stat();
+
+    // ----------------------------
+    // 3️⃣ If folder → show directory listing
+    // ----------------------------
+    if (stat.isDirectory()) {
+      serveDirectory(req, res);
+      return;
     }
+
+    // ----------------------------
+    // 4️⃣ If file → serve file
+    // ----------------------------
+
+    // Detect correct MIME type
+    const mimeType = mime.lookup(cleanPath) || "application/octet-stream";
+    res.setHeader("Content-Type", mimeType);
+
+    // filename (last part of URL)
+    const fileName = cleanPath.split("/").pop();
+
+    // ----------------------------
+    // 5️⃣ Download Mode
+    // ----------------------------
+    if (isDownload) {
+      // "attachment" forces download
+      res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
+    } else {
+      // "inline" opens in browser (pdf, images, text, videos stream)
+      res.setHeader("Content-Disposition", "inline");
+    }
+
+    // Create a Readable stream
+    const contentStream = fileHandle.createReadStream();
+
+    // Pipe file → browser
+    contentStream.pipe(res);
+
+  } catch (error) {
+    console.log(error.message);
+    res.end("Not Found!");
   }
 });
 
-// ======================= Reading or serving directory
+
+
+// ===================================================================
+// SERVE DIRECTORY FUNCTION
+// ===================================================================
 async function serveDirectory(req, res) {
-  // if it is a folder
+  // Read folder content
   const files = await readdir(`./Storage${req.url}`);
-  // looping on files
+
   let dynamicHtml = "";
+
   files.forEach((element) => {
-    dynamicHtml += `<li>${element}</li>
-    
-    <a href=".${
-      req.url === "/" ? "" : req.url
-    }/${element}"><button>Open</button></a>
 
-    <a href=".${
-      req.url === "/" ? "" : req.url
-    }/${element}"><button>Download</button></a>
+    // element = file or folder name
 
+    dynamicHtml += `
+    <li>${element}</li>
 
+    <!-- OPEN BUTTON -->
+    <a href=".${req.url === "/" ? "" : req.url}/${element}">
+      <button>Open</button>
+    </a>
+
+    <!-- DOWNLOAD BUTTON -->
+    <a href=".${req.url === "/" ? "" : req.url}/${element}?download=1">
+      <button>Download</button>
+    </a>
     `;
   });
 
-  // we read the home html and reder it and also rednder dynamic html
+  // Load HTML template
   const htmlRead = await readFile("homeTemplate.html", "utf-8");
-  // now from html we replace the static ${} to dyamic
+
+  // Replace placeholder
   return res.end(htmlRead.replace("${dynamicHtml}", dynamicHtml));
 }
 
 
-
-
-
-// port
+// Server
 const PORT = 3000;
-
-app.listen(PORT, () => {
-  console.log("Server Running on Port:", PORT);
-});
+app.listen(PORT, () => console.log("Server running on:", PORT));
