@@ -137,3 +137,30 @@ Examples that *will NOT* trigger it:
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"> 
 
 
+
+
+
+# 📝 Static File in Express
+
+**Topic: Serving Static Files in Express**
+
+* Static files = files served "as-is" (HTML, CSS, JS, images, etc.).
+* Express provides a built-in middleware → `express.static()`.
+* Syntax:
+
+  ```js
+  app.use(express.static("folderName"));
+  ```
+* Express automatically maps files to URLs → no need to write routes.
+* Static folder should be a dedicated directory like `public/`.
+* You can use multiple static folders.
+* You can set a URL prefix like:
+
+  ```js
+  app.use("/static", express.static("public"));
+  ```
+* Only the static folder’s contents are publicly accessible.
+* Used for frontend assets, website UI, images, downloads, etc.
+
+
+
