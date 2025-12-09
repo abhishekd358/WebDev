@@ -164,3 +164,35 @@ Examples that *will NOT* trigger it:
 
 
 
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"> 
+
+
+# 📝  Sending JSON Using Express
+
+**Topic: Sending JSON using Express**
+
+* JSON (JavaScript Object Notation) is used for API communication.
+* Express method for sending JSON:
+
+  ```js
+  res.json(data)
+  ```
+* `res.json()` auto sets:
+
+  * `Content-Type: application/json`
+  * Converts object → JSON string
+* Prefer `res.json()` over `res.send()` when returning API data.
+* JSON can be:
+
+  * Object
+  * Array
+  * Nested objects
+  * Mixed data
+* To send status + JSON:
+
+  ```js
+  res.status(200).json({...})
+  ```
+* JSON is the most common format for REST APIs and backend communication.
+
