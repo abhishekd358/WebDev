@@ -219,3 +219,21 @@ Examples that *will NOT* trigger it:
   * `Access-Control-Allow-Credentials`  → `credentials`  
 
 * CORS issues happen **only in browsers**, not in Postman/cURL/Node.
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 📝 **Preflight Request**
+* Preflight Means -> OPTIONS request made to the server by browser to checks what are allowed like(header, method..etc) and what are not allowed.
+* Preflight request = browser sends a **pre-check OPTIONS request** before the actual request.
+* Browser asks server if specific methods/headers/origin are allowed.
+* Preflight occurs when request is **non-simple**.
+* Simple requests (no preflight):
+  GET, HEAD, POST with simple content types.
+* Non-simple requests (trigger preflight):
+  PUT, PATCH, DELETE, custom headers, JSON content-type, credentials.
+* In Express, CORS library automatically handles preflight:
+
+  ```js
+  app.use(cors())
+  ```
