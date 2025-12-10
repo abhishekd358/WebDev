@@ -196,3 +196,26 @@ Examples that *will NOT* trigger it:
   ```
 * JSON is the most common format for REST APIs and backend communication.
 
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"> 
+
+
+# 📝 **CORS (Cross-Origin Resource Sharing)** 
+
+* Browsers enforce **Same Origin Policy (SOP)** for security.
+
+* Different origin → Browser blocks request.
+
+* CORS is a mechanism to allow communication between different origins.
+
+
+
+* **Common CORS headers:**
+
+  * `Access-Control-Allow-Origin`   → `origin` 
+  * `Access-Control-Allow-Methods`  →  `methods`  
+  * `Access-Control-Allow-Headers`  → `allowedHeaders`  
+  * `Access-Control-Allow-Credentials`  → `credentials`  
+
+* CORS issues happen **only in browsers**, not in Postman/cURL/Node.
