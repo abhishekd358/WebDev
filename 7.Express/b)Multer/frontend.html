@@ -6,13 +6,24 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>uplaoding file using multer easy way</h1>
     <form action="http://localhost:8000/upload", enctype="multipart/form-data", method="POST">
         <!-- we sending file from here to the route -->
         <input type="file" name="file" id="">
         <!-- with 'name' attribute file captureable on server -->
          <input type="submit" value="submit">
+
+    </br>
+</form>
+
+<h1>uploading using Disk upload method</h1>
+    <form action="http://localhost:8000/disk", enctype="multipart/form-data", method="POST">
+         <!-- we sending file from here to the route -->
+        <input type="file" name="secondMethod" id="">
+        <!-- with 'name' attribute file captureable on server -->
+         <input type="submit" value="submit">
+
     </form>
-    
     <!-- script -->
 </body>
 </html>
