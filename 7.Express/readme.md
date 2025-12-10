@@ -276,3 +276,45 @@ Examples that *will NOT* trigger it:
 ### **6. Code on Demand (optional)**
 
 * Server can send executable code to the client (rarely used).
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+# 📝 **COOKIES**
+
+### ⚠️ Cookies & Security
+
+| Issue                            | Solution                    |
+| -------------------------------- | --------------------------- |
+| XSS attack steals cookies        | Use **HttpOnly**            |
+| Man-in-the-middle steals cookies | Use **Secure + HTTPS**      |
+| CSRF attack                      | Use **SameSite=Lax/Strict** |
+
+
+
+**NOTES:**
+
+* Cookies are small pieces of data stored in the **browser**.
+* Used to maintain **state** because HTTP is **stateless**.
+* Browser automatically sends cookies in every request to the server.
+
+* Cookie attributes:
+
+  * `Expires` / `Max-Age` → lifespan
+  * `HttpOnly` → secure, JS cannot access
+  * `Secure` → HTTPS only
+  * `SameSite` → prevents CSRF
+  * `Path` → route where cookie works
+* Types:
+
+  * Session cookies
+  * Persistent cookies
+  * HttpOnly cookies
+  * Secure cookies
+* Express:
+
+  * Set cookie → `res.cookie(name, value, options)`
+  * Read cookie → `req.cookies` (needs cookie-parser)
+  * Clear cookie → `res.clearCookie(name)`
+* Cookies are essential for authentication flows.
