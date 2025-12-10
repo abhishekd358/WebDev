@@ -237,3 +237,42 @@ Examples that *will NOT* trigger it:
   ```js
   app.use(cors())
   ```
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 📝 REST API
+* **API = Application Programming Interface**
+* **REST = Representational State Transfer**
+* A **REST API** is a API that follows a specific style/architecture called REST API.
+
+## **REST: 6 Architectural Constraints**
+
+### **1. Client–Server**
+
+* Client (UI) and server (backend) are separate.
+* Server handles logic; client handles display.
+
+### **2. Stateless**
+
+* Each request contains all required information.
+* Server does NOT store session state.
+
+### **3. Cacheable**
+
+* Responses must indicate if they can be cached.
+* Improves performance and reduces load.
+
+### **4. Uniform Interface** *(most important)*
+
+* Use standard HTTP methods (GET/POST/PUT/DELETE).
+* Resource-based URLs (no action verbs).
+* Consistent request/response format (JSON/XML).
+
+### **5. Layered System**
+
+* Client doesn’t know if it's talking to the real server or a layer (proxy, load balancer, etc.).
+
+### **6. Code on Demand (optional)**
+
+* Server can send executable code to the client (rarely used).
