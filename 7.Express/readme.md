@@ -224,7 +224,7 @@ Examples that *will NOT* trigger it:
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 # 📝 **Preflight Request**
-* Preflight Means -> OPTIONS request made to the server by browser to checks what are allowed like(header, method..etc) and what are not allowed.
+* Preflight Means -> OPTIONS request trigger automatically beofre other request to the server by browser to checks what are allowed like(header, method..etc) and what are not allowed.
 * Preflight request = browser sends a **pre-check OPTIONS request** before the actual request.
 * Browser asks server if specific methods/headers/origin are allowed.
 * Preflight occurs when request is **non-simple**.
