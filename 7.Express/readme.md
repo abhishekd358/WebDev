@@ -350,6 +350,56 @@ Examples that *will NOT* trigger it:
 When a browser sends form data to a server, it does so in different **Content-Types**.
 These define *how* the data is encoded and how the backend should parse it.
 
+
+## In Short:
+
+### 1. `application/x-www-form-urlencoded`  (default)
+
+- Fields separated by `&`  
+  Example: `name=John&age=30`
+- File data **not** sent, only filenames
+- Use in Express:
+
+  ```js
+  express.urlencoded({ extended: false })
+  ```
+
+
+### 2. `multipart/form-data`
+
+* Fields separated by boundaries like `--WebKitFormBoundary`
+* File data is sent as **binary** along with fields
+* Used for **file uploads**
+* Handled in Express using **Multer** middleware
+
+
+
+### 3. `text/plain`
+
+* Fields separated by new lines (`\n`)
+* File data **not** sent, only filenames
+* Use in Express:
+
+  ```js
+  express.text()
+  ```
+
+---
+
+### 4. `application/json`
+
+* Data sent as a **JSON string**
+* Use in Express:
+
+  ```js
+  express.json()
+  ```
+
+## Read IN DETAILS: 
+
+<details>
+  <summary>📌 READ IN DETAILS:</summary>
+
 ---
 
 ### 🌟 **1️⃣ application/x-www-form-urlencoded**
@@ -519,3 +569,6 @@ npm install body-parser-xml
 | Simple message             | text/plain                   |
 
 ---
+
+
+</details>
