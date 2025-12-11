@@ -302,7 +302,7 @@ Examples that *will NOT* trigger it:
 * Cookie attributes:
 
   * `Expires` / `Max-Age` → lifespan
-  * `HttpOnly` → secure, JS cannot access
+  * `HttpOnly` → secure, JS cannot access (ONLY SET BY SERVER not from browser)
   * `Secure` → HTTPS only
   * `SameSite` → prevents CSRF
   * `Path` → route where cookie works
@@ -318,3 +318,204 @@ Examples that *will NOT* trigger it:
   * Read cookie → `req.cookies` (needs cookie-parser)
   * Clear cookie → `res.clearCookie(name)`
 * Cookies are essential for authentication flows.
+
+### Unified Comparison Table
+| Feature / Action                | Server                                           | Browser JavaScript   |
+| ------------------------------- | ------------------------------------------------ | -------------------- |
+| Set cookie                      | ✅ Yes                                            | ✅ Yes (non-HttpOnly) |
+| Read cookie                     | ❌ Cannot read (server receives only via request) | ✅ Yes (non-HttpOnly) |
+| Update cookie                   | ✅ Yes                                            | ✅ Yes (non-HttpOnly) |
+| Delete cookie                   | ✅ Yes                                            | ✅ Yes (non-HttpOnly) |
+| Set HttpOnly                    | ✅ Yes                                            | ❌ No                 |
+| Read HttpOnly cookie            | ❌ No                                             | ❌ No                 |
+| Modify HttpOnly cookie          | ❌ No                                             | ❌ No                 |
+| Delete HttpOnly cookie          | ❌ No                                             | ❌ No                 |
+| Set Secure                      | ✅ Yes                                            | ❌ No                 |
+| Set SameSite                    | ✅ Yes                                            | ❌ No                 |
+| Set Path                        | ✅ Yes                                            | ❌ No                 |
+| Set Domain                      | ✅ Yes                                            | ❌ No                 |
+| Set Max-Age/Expires             | ✅ Yes                                            | ❌ No                 |
+| Cookies auto-sent with requests | Browser does it                                  | Browser does it      |
+
+
+
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 🧾 **Understanding Different Types of Form Data**
+
+When a browser sends form data to a server, it does so in different **Content-Types**.
+These define *how* the data is encoded and how the backend should parse it.
+
+---
+
+### 🌟 **1️⃣ application/x-www-form-urlencoded**
+
+➡️ **Most common form submission type**
+
+➡️ Used for plain text inputs (login forms, search bars)
+
+This is what HTML forms use by default:
+
+```html
+<form method="POST">
+```
+
+Or explicitly:
+
+```html
+<form method="POST" enctype="application/x-www-form-urlencoded">
+```
+
+### Format:
+
+```
+username=rahul&password=12345
+```
+
+### How to parse in Express:
+
+```js
+app.use(express.urlencoded({ extended: true }));
+```
+
+---
+
+### 🌟 **2️⃣ multipart/form-data**
+
+➡️ Used for **file uploads**
+
+➡️ Required when using `<input type="file">`
+
+```html
+<form enctype="multipart/form-data">
+```
+
+### Important:
+
+* Express **cannot parse this format**
+* You MUST use **Multer**
+
+```js
+const multer = require("multer");
+app.post("/upload", upload.single("photo"), (req, res) => {});
+```
+
+---
+
+### 🌟 **3️⃣ application/json**
+
+➡️ Used by modern frontend frameworks (React, Vue, Angular)
+➡️ Used by APIs, AJAX calls, fetch(), axios()
+
+Example payload:
+
+```json
+{
+  "username": "rahul",
+  "password": "12345"
+}
+```
+
+### How to parse in Express:
+
+```js
+app.use(express.json());
+```
+
+### Note:
+
+This triggers **CORS preflight**, because it is “non-simple”.
+
+---
+
+### 🌟 **4️⃣ text/plain**
+
+➡️ Very simple raw text
+➡️ Rarely used in modern APIs
+➡️ Sometimes used for debugging
+
+Example:
+
+```
+Hello this is plain text
+```
+
+### Express parsing:
+
+Express **does NOT** parse this by default.
+
+You must add body-parser:
+
+```js
+app.use(express.text());
+```
+
+---
+
+### 🌟 **5️⃣ application/octet-stream**
+
+➡️ Used for raw binary data
+➡️ Used for streaming, video uploads, blobs
+
+Example:
+
+* Uploading a video file as a binary stream
+* Uploading large files without form-data
+
+### Express does NOT parse this automatically.
+
+You must use:
+
+* Raw body parser
+* Or custom stream handling
+
+```js
+app.use(express.raw({ type: 'application/octet-stream' }));
+```
+
+---
+
+### 🌟 **6️⃣ application/xml / text/xml**
+
+➡️ Used by old SOAP systems
+➡️ Some payment gateways still use it
+
+Express cannot parse XML by default.
+
+Need external package:
+
+```
+npm install body-parser-xml
+```
+
+---
+
+### 🌟 **Important Comparison Table**
+
+| Content-Type                          | Purpose                     | Express Support         |
+| ------------------------------------- | --------------------------- | ----------------------- |
+| **application/x-www-form-urlencoded** | Regular form inputs         | ✔️ express.urlencoded() |
+| **multipart/form-data**               | File uploads                | ❌ Needs Multer          |
+| **application/json**                  | API requests, frontend apps | ✔️ express.json()       |
+| **text/plain**                        | Raw text                    | ✔️ express.text()       |
+| **application/octet-stream**          | Binary data                 | ✔️ express.raw()        |
+| **application/xml**                   | Legacy XML APIs             | ❌ Need XML parser       |
+
+---
+
+### 🧠 **Which Form Type Should You Use?**
+
+| Task                       | Best Form Data Type          |
+| -------------------------- | ---------------------------- |
+| Login form                 | x-www-form-urlencoded / JSON |
+| React/Angular API requests | JSON                         |
+| Upload image               | multipart/form-data          |
+| Upload video stream        | octet-stream                 |
+| Old systems (SOAP)         | XML                          |
+| Simple message             | text/plain                   |
+
+---
