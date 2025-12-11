@@ -574,6 +574,101 @@ npm install body-parser-xml
 </details>
 
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
 
+# 🚀 **Difference Between `extended: true` and `extended: false`**
+
+## 🧠 NOTES  (Very Important)
+
+* `express.urlencoded()` parses URL-encoded form data.
+* `extended: false` → uses **querystring**, only simple key-value pairs.
+* `extended: true` → uses **qs**, supports **nested objects & arrays**.
+* Most modern APIs and forms need nested objects → **always prefer `extended: true`**.
+* Example:
+
+  * `address[city]=Delhi` becomes:
+
+    * With false → `'address[city]': 'Delhi'`
+    * With true → `{ address: { city: 'Delhi' } }`
+* `qs` is more powerful and safer for parsing complex form data.
+
+
+## 📌 READ IN DETAILS 
+
+<details>
+
+Express uses a middleware called:
+
+```js
+app.use(express.urlencoded({ extended: true }));
+```
+
+This middleware is used to parse **URL-encoded form data** (data coming from HTML forms with POST method and `application/x-www-form-urlencoded`).
+
+---
+
+# ✔️ **Meaning of `extended` Option**
+
+### **1️⃣ extended: false**
+
+* Uses **Node.js core module `querystring`** to parse data.
+* **Does NOT support nested objects**.
+* Only supports simple key-value pairs.
+
+### Example form:
+
+```
+name=John&age=25&address[city]=Mumbai
+```
+
+👉 `extended: false` will turn this into:
+
+```js
+{
+  name: 'John',
+  age: '25',
+  'address[city]': 'Mumbai'
+}
+```
+
+### ❌ It treats nested values as normal strings.
+
+---
+
+# ✔️ **2️⃣ extended: true**
+
+* Uses **`qs` library** (more powerful parser).
+* Supports:
+
+  * Nested objects
+  * Arrays
+  * Deep form structures
+  * Perfect for advanced form handling
+  * Required when building APIs that accept nested data.
+
+
+Same form:
+
+```
+address[city]=Mumbai&address[pincode]=400001
+```
+
+👉 `extended: true` will parse it as:
+
+```js
+{
+  address: {
+    city: 'Mumbai',
+    pincode: '400001'
+  }
+}
+```
+
+</details>
+
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
