@@ -1,6 +1,5 @@
 # 1️⃣ Types Of NoSql Databses:
 
-```
 ✔ NoSQL databases are divided into 4 main types based on data model & use case.
 
 ✔ 1) Document-Based (MongoDB)
@@ -24,12 +23,12 @@
    - Best for relationship-heavy data
    - Used in social networks, recommendations, fraud detection
 
-```
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 # 2️⃣ What is MongoDB
 
-```
+
 ✔ MongoDB is a document-based NoSQL database.
 
 ✔ Data is stored in JSON-like (BSON) documents instead of tables.
@@ -52,13 +51,13 @@
 ✔ Interview Line:
    "MongoDB is a document-based NoSQL database ideal for scalable web applications."
 
-```
+
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 # 3️⃣ JSON vs BSON
 
-```
+
 ✔ MongoDB looks like JSON externally but stores data internally in BSON.
 
 ✔ JSON (JavaScript Object Notation):
@@ -81,13 +80,13 @@
 ✔ Interview Line:
    "MongoDB stores data internally in BSON, a binary representation of JSON for performance."
 
-```
+
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 # 4️⃣ MongoDB Architecture
 
-```
+
 ✔ MongoDB Architecture = Client → Server → Database → Collection → Document
 
 ✔ Components:
@@ -110,10 +109,33 @@
 ✔ Interview Line:
    "MongoDB architecture consists of client, server, database, collection, and document; clusters (replica sets/shards) provide high availability and scalability. Data is stored internally in BSON."
 
-```
+
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+# 5️⃣ Creating Database and Collection 
+
+✔ Creating a Database:
+   - `use <db>` → select or temporarily create database
+   - Database created permanently on first document insert
+   - List all databses: `show dbs`
+
+✔ Creating a Collection:
+   - `db.createCollection("<name>")` → optional, can auto-create on first insert
+   - List all collections: `show collections`
+
+✔ Inserting First Document (auto-creates DB & collection):
+   ```js
+   db.users.insertOne({
+     name: "Rahul",
+     age: 22,
+     skills: ["JS","React"]
+   })
+   ```
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 6️⃣ Document Structure & Data Types
 
 ### Read
 
