@@ -402,7 +402,7 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-# UPDATE
+# 1️⃣0️⃣ UPDATE
 
 ✔ UPDATE = **Modify existing documents in a collection**
 
@@ -525,8 +525,204 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
 ✔ Interview Line:
    "Upsert performs update or insert in one operation, while replaceOne replaces the entire document except _id."
 
+---
+## 📍 findOneAndUpdate()
+
+```findOneAndUpdate()``` → perform action + return affected document
+
+ **findOneAndUpdate():**
+   - Finds first matching document
+   - Updates it
+   - Returns old or updated document
+
+   **Syntax:**
+   ```c++
+     db.collection.findOneAndUpdate(
+       { filter },
+       { updateOperator },
+       { options }
+     )
+   ```
+
+   **Example:**
+   ```c++
+     db.users.findOneAndUpdate(
+       { name: "Aman" },
+       { $set: { age: 26 } },
+       { returnNewDocument: true }
+     )
+   ```
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+# 1️⃣1️⃣ DELETE
+
+✔ DELETE = Remove documents from a collection
+
+✔ **Methods**:
+   - `deleteOne()`  → deletes first matching document
+   - `deleteMany()` → deletes all matching documents
+
+</br>
+
+✔ **Syntax**:
+```c++
+   db.collection.deleteOne({ filter })
+
+   db.collection.deleteMany({ filter })
+```
+
+</br>
+
+✔ ⚠️ **Important Rule:**
+   - Filter carefully
+   - Wrong filter → data loss
+   - {} in deleteMany() → deletes entire collection documents
+
+</br>
+
+✔ **Examples:**
+
+1️⃣ deleteOne():
+```c++
+db.users.deleteOne({ name: "Rahul" })
+
+db.users.deleteOne({ _id: ObjectId("64f1a2b3c456def7890abc12") })
+```
+2️⃣ deleteMany():
+```c++
+db.users.deleteMany({ city: "Delhi" })
+db.users.deleteMany({ age: { $lt: 18 } })
+db.users.deleteMany({})   // VERY DANGEROUS
+```
+
+✔ **Result Object:**
+   `{
+     acknowledged: true,
+     deletedCount: <number of docs deleted>
+   }`
+
+✔ **Best Practices:**
+   - Test filter with find() before delete
+   - Prefer `_id` for safe deletion
+   - Avoid **{ }** unless absolutely sure
+   - Use deleteMany only when bulk removal required
+
+</br>
+
+✔ Interview Line:
+   "MongoDB DELETE operations remove documents using deleteOne() or deleteMany() based on filter conditions. Use cautiously to prevent data loss."
+
+---
+
+## 📍findOneAndDelete() & findOneAndUpdate()
+
+
+ **findOneAndDelete():**
+   - Finds first matching document
+   - Deletes it
+   - Returns deleted document
+
+   Syntax:
+   ```c++
+     db.collection.findOneAndDelete({ filter })
+   ```
+   Example:
+   ```c++
+     db.users.findOneAndDelete({ name: "Rahul" })
+   ```
+   Output:
+   ```
+     {
+       value: { _id: ObjectId("..."), name: "Rahul", age: 23 },
+       ok: 1
+     }
+   ```
+</br>
+
+✔ Interview Line:
+   "findOneAndUpdate() and findOneAndDelete() perform the operation and return the affected document, ideal for real-time apps."
+
+--- 
+
+## 📍 drop() vs deleteMany()
+
+✔ Purpose:
+   - Both remove data from collection
+   - Behavior differs
+
+</br>
+
+✔ **deleteMany():**
+   - Deletes matching documents
+   - Collection remains
+   - Syntax:
+     `db.users.deleteMany({})`
+   - Return: `{ acknowledged, deletedCount }`
+
+</br>
+
+
+✔ **drop():**
+   - **Deletes entire collection**
+   - Collection removed from DB
+   - Syntax:`db.users.drop()`
+   - Notes:
+     * Permanent delete
+     * Returns true/false
+     * Collection gone → structure gone
+   - Risky → use carefully
+
+</br>
+
+
+✔ Interview Line:
+   "deleteMany() deletes documents but keeps the collection, whereas drop() removes the entire collection from the database."
+
+---
+
+## 📍 Soft Delete
+
+✔ **Purpose:**
+   - Soft Delete = logically delete data
+   - Data stays in DB, user doesn’t see it
+   - Safer than hard delete
+
+</br>
+
+✔ **Implementation:**
+
+1️⃣ Mark as deleted:
+```c++
+db.users.updateOne(
+  { _id: ObjectId("...") },
+  { 
+    $set: { 
+      isDeleted: true,
+      deletedAt: new Date()
+    } 
+  }
+)
+```
+
+
+</br>
+
+✔ **Soft vs Hard Delete:**
+
+| Feature       | Soft Delete | Hard Delete |
+| ------------- | ----------- | ----------- |
+| Data recover  | ✅           | ❌           |
+| Audit / logs  | ✅           | ❌           |
+| Risk          | Low         | High        |
+| Companies use | ✅           | ❌ (rare)    |
+
+</br>
+
+✔ Interview Line:
+   "Soft delete is preferred over hard delete using flags like `isDeleted` to preserve data and enable recovery."
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ### Read
 
