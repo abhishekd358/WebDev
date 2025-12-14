@@ -56,7 +56,7 @@
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-# 3 JSON vs BSON
+# 3️⃣ JSON vs BSON
 
 ```
 ✔ MongoDB looks like JSON externally but stores data internally in BSON.
@@ -84,6 +84,36 @@
 ```
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 4️⃣ MongoDB Architecture
+
+```
+✔ MongoDB Architecture = Client → Server → Database → Collection → Document
+
+✔ Components:
+   - Server (mongod): Handles requests, stores data
+   - Client (mongosh / Compass / Node driver): Sends queries
+   - Database: Logical container of collections
+   - Collection: Stores documents, no fixed schema
+   - Document: Smallest data unit, JSON-like
+   - Cluster: Group of servers (nodes) providing:
+       • High availability (replica sets)
+       • Horizontal scaling (sharding)
+       • Fault tolerance
+
+✔ Query Flow:
+   1. Client sends query
+   2. Server/Cluster receives request
+   3. Executes on database → collection → documents
+   4. Returns data to client
+
+✔ Interview Line:
+   "MongoDB architecture consists of client, server, database, collection, and document; clusters (replica sets/shards) provide high availability and scalability. Data is stored internally in BSON."
+
+```
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
 
 ### Read
 
