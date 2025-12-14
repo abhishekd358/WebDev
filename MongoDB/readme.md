@@ -49,6 +49,7 @@
    - Columns → Fields
 
 ✔ Interview Line:
+
    "MongoDB is a document-based NoSQL database ideal for scalable web applications."
 
 
@@ -78,6 +79,7 @@
    - JSON = Human language, BSON = Machine language
 
 ✔ Interview Line:
+
    "MongoDB stores data internally in BSON, a binary representation of JSON for performance."
 
 
@@ -107,6 +109,7 @@
    4. Returns data to client
 
 ✔ Interview Line:
+
    "MongoDB architecture consists of client, server, database, collection, and document; clusters (replica sets/shards) provide high availability and scalability. Data is stored internally in BSON."
 
 
@@ -132,10 +135,75 @@
      skills: ["JS","React"]
    })
    ```
+✔ Tips:
+
+- Database name = lowercase, no spaces
+- Collection = plural (users, posts)
+- _id auto-generated
+- First insert auto-creates DB & collection
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 # 6️⃣ Document Structure & Data Types
+
+✔ Key = Field Name, Value = Field Value
+
+✔ Supports nested objects & arrays
+
+✔ Flexible schema → different documents can have different fields
+
+
+✔ Common Data Types:
+   - String → "Rahul"
+   - Number → 22, 3.14
+   - Boolean → true / false
+   - Array → ["JS","React"]
+   - Object → { city: "Delhi" }
+   - Date → ISODate("2025-12-14T10:00:00Z")
+   - ObjectId → unique _id
+   - Null → null
+   - Binary → BinData(...)
+
+
+✔ `_id` Field:
+   - Automatically created if not provided
+   - Unique identifier for each document
+
+✔ Interview One-Liner:
+
+   "MongoDB documents are JSON-like objects stored in collections with flexible data types including String, Number, Boolean, Array, Object, Date, and ObjectId."
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 7️⃣ _id Field (Auto ObjectId Explained)
+
+✔ `_id` field:
+   - Default **primary key**
+   - Automatically created for every MongoDB document
+   - Uniquely identifies each document
+
+✔ ObjectId:
+   - **12-byte** unique identifier
+   - Structure:
+        - 4 bytes → timestamp (seconds since epoch)
+        - 5 bytes → random value (machine + process)
+        - 3 bytes → incrementing counter
+
+✔ Custom `_id`:
+   - Allowed (e.g., "_id": "user_101")
+   - If provided, MongoDB won’t generate ObjectId
+   - ObjectId recommended for consistency
+
+✔ Real-Life Analogy:
+   - `_id` = National ID / Passport number
+
+✔ Interview Line:
+
+   "**_id** is a unique identifier automatically generated for each MongoDB document, usually an ObjectId, but **can be customized if needed**."
+
+
+
 
 ### Read
 
