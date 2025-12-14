@@ -203,6 +203,61 @@
    "**_id** is a unique identifier automatically generated for each MongoDB document, usually an ObjectId, but **can be customized if needed**."
 
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 8️⃣ CREATE
+
+- CREATE Operation = Insert new document(s) into a collection
+- Collection auto-created on first insert if not exist
+- Commands: ```insertOne()``` → single document, ```insertMany()``` → multiple documents
+
+</br>
+
+✔ **```insertOne()```**:
+   - Inserts a single document
+
+   - Syntax: ```db.collection.insertOne({ key: value, ... })```
+
+   - `_id` auto-generated unless custom provided
+   
+   - Supports nested objects & arrays
+   
+   - Returns: ```{ acknowledged: true, insertedId: ObjectId(...) }```
+   
+   - Errors: duplicate `_id`, connection/server issues
+
+</br>
+
+✔ **```insertMany()```**:
+   - Inserts multiple documents at once
+   
+   - Syntax: ```db.collection.insertMany([ {...}, {...}, ... ], { ordered: true/false })```
+   
+   - Supports nested objects & arrays
+   
+   - Returns: ```{ acknowledged: true, insertedIds: [ObjectId(...), ...] }```
+   
+   - Ordered (default): stops at first error
+   
+   - Unordered (ordered: false): continues inserting remaining documents
+   
+   - Errors: duplicate `_id` in ordered mode stops insert; unordered skips errors
+   
+   - Interview Line: "insertMany() inserts multiple documents at once, supports nested objects, arrays, and ordered/unordered options."
+
+</br>
+
+✔ Best Practices:
+   1. Prefer auto ObjectId unless custom needed
+   2. Validate data before insert
+   3. Use ordered: false for bulk inserts to skip errors
+   4. Use meaningful field names
+   5. Keep document size <16MB
+
+✔ Common Errors:
+   - Duplicate `_id` → E11000
+   - Invalid data type if validation exists
+   - Connection / server errors
 
 
 ### Read
