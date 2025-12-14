@@ -317,9 +317,12 @@
        - `.limit(2)` → first 2 documents
        - `.skip(2)` → skip first 2 documents
        - `.sort({ age: -1 })` → descending
+            - `-1` => Decending (higher to lower)
+            - `+1` => Ascending(lower to higher)
    
    - Interview Line: "find() fetches multiple documents using queries, supports projection, limit, skip, sort, and returns a cursor."
 
+---
 
 ## 📍 Query Operators
 
@@ -362,6 +365,39 @@
 
 ✔ Interview Line:
    "MongoDB query operators like $gt, $lt, $in, $or, $and, $exists allow filtering documents with powerful conditions, including nested fields and arrays."
+
+---
+
+## 📍 Projections
+
+✔ **Projection** = **Select which fields to show in query result**
+
+✔ MongoDB version of SQL SELECT
+
+✔ **Syntax:**
+```c++
+db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
+```
+
+</br>
+
+✔ **Rules:**
+   - 1 → include field
+   - 0 → exclude field
+   - Cannot mix include (1) & exclude (0) together
+     (Exception: _id can be excluded)
+
+</br>
+
+✔ **_id Field:**
+   - Included by default
+   - Use _id: 0 to hide
+
+
+</br>
+
+✔ Interview Line:
+   "Projection in MongoDB allows selecting specific fields to include or exclude in query results."
 
 
 
