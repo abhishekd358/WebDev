@@ -1,4 +1,4 @@
-# Types Of NoSql Databses:
+# 1️⃣ Types Of NoSql Databses:
 
 ```
 ✔ NoSQL databases are divided into 4 main types based on data model & use case.
@@ -24,17 +24,36 @@
    - Best for relationship-heavy data
    - Used in social networks, recommendations, fraud detection
 
-✔ MongoDB is preferred for MERN because:
-   - JSON-like structure (JS friendly)
-   - Flexible schema
-   - Easy integration with Node & React
-   - Scales well
+```
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 2️⃣ What is MongoDB
+
+```
+✔ MongoDB is a document-based NoSQL database.
+
+✔ Data is stored in JSON-like (BSON) documents instead of tables.
+
+✔ Data Structure:
+   SQL      → Table → Row → Column
+   MongoDB  → Database → Collection → Document
+
+✔ Key Features:
+   - Horizontally scalable
+   - Schema-less (flexible structure, no ALTER TABLE)
+   - High performance (fast read/write + indexing)
+
+✔ MongoDB vs SQL (Core Difference):
+   - Tables → Collections
+   - Rows → Documents
+   - Columns → Fields
 
 ✔ Interview Line:
    "MongoDB is a document-based NoSQL database ideal for scalable web applications."
+
 ```
 
-
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
 
