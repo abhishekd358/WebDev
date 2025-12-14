@@ -307,7 +307,7 @@
    
    - Returns cursor (pointer to documents)
    
-   - **Convert to array**: .toArray()
+   - **Convert to array**: `.toArray()`
    
    - Nested field query: `db.users.find({ "address.city": "Delhi" }).toArray()`
    
@@ -327,12 +327,12 @@
 ## 📍 Query Operators
 
 ✔ **Comparison Operators:**
-   - $gt → greater than
-   - $gte → greater than or equal
-   - $lt → less than
-   - $lte → less than or equal
-   - $eq → equal (optional)
-   - $ne → not equal
+   - `$gt` → greater than
+   - `$gte` → greater than or equal
+   - `$lt` → less than
+   - `$lte` → less than or equal
+   - `$eq` → equal (optional)
+   - `$ne` → not equal
    - Example: `{ age: { $gt: 22 } }`
 
 </br>
@@ -382,8 +382,8 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
 </br>
 
 ✔ **Rules:**
-   - 1 → include field
-   - 0 → exclude field
+   - `1` → include field
+   - `0`→ exclude field
    - Cannot mix include (1) & exclude (0) together
      (Exception: _id can be excluded)
 
@@ -399,6 +399,133 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
 ✔ Interview Line:
    "Projection in MongoDB allows selecting specific fields to include or exclude in query results."
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# UPDATE
+
+✔ UPDATE = **Modify existing documents in a collection**
+
+</br>
+
+✔ **Methods:**
+   - `updateOne()`  → updates first matching document
+
+```c++
+   db.collection.updateOne(
+       { filter },
+     { updateOperator },
+     { options }
+   )
+```
+- `updateMany()` → updates all matching documents
+
+```c++
+   db.collection.updateMany(
+     { filter },
+     { updateOperator },
+     { options }
+   )
+```
+
+</br>
+
+✔ ⚠️ **Important Rule:**
+   - Direct value update NOT allowed
+   - Always use update operators
+
+  ```
+  ❌ { age: 23 } //wrong way
+  ✔ { $set: { age: 23 } } //right way 
+```
+
+</br>
+
+✔ **Common Update Operators:**
+   - `$set`   → update/add field
+   - `$inc`   → increment number
+   - `$unset` → remove field
+   - `$push`  → add item to array
+   - `$pull`  → remove item from array
+   - `upsert` → update or insert
+
+</br>
+
+✔ Examples:
+   - Update single field: `{ $set: { age: 23 } }`
+   - Update multiple fields: `{ $set: { age: 24, city: "Delhi" } }`
+   - Increment: `{ $inc: { age: 1 } }`
+   - Remove field: `{ $unset: { city: "" } }`
+   - Nested field: `{ $set: { "address.city": "Mumbai" } }`
+
+✔ Result Object:
+   - **matchedCount**  → documents found
+   - **modifiedCount** → documents updated
+
+</br>
+
+✔ Interview Line:
+   "MongoDB updates modify existing documents using update operators like $set via updateOne or updateMany."
+
+
+## 📍 Upsert
+
+✔ UPSERT = Update + Insert
+   - **Document exists** → UPDATE
+   - **Document not exists** → INSERT
+
+✔ **Used with:**
+   - updateOne()
+   - updateMany()
+   - replaceOne()
+
+✔ **Upsert Syntax:**
+```c++
+   db.collection.updateOne(
+     { filter },
+     { $set: { field: value } },
+     { upsert: true }
+   )
+```
+
+✔ Interview Line:
+   "Upsert performs update or insert in one operation."
+
+## 📍replaceOne()
+
+✔ **replaceOne():**
+   - Replaces FULL document
+   - Update operators NOT allowed
+   - _id remains same
+   - Old fields removed if not included
+
+</br>
+
+✔ **Syntax:**
+```c++
+   db.collection.replaceOne(
+     { filter },
+     { fullDocument },
+     { upsert: true } // optional
+   )
+```
+
+</br>
+
+✔ **updateOne vs replaceOne:**
+   - `updateOne` → partial update (safe)
+   - `replaceOne` → full replace (risky)
+
+</br>
+
+✔ **Real-Life Analogy:**
+   - updateOne = edit profile
+   - replaceOne = delete & recreate profile with same ID
+
+✔ Interview Line:
+   "Upsert performs update or insert in one operation, while replaceOne replaces the entire document except _id."
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
 ### Read
@@ -407,3 +534,4 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
     ```db.<collection_name>.find({}, {<specific_key>})```
     - **example** fetching only cars from India country: ```db.cars.find({}, {country:"India"})
     
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
