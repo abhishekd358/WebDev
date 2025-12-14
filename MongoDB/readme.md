@@ -216,13 +216,16 @@
 ✔ **```insertOne()```**:
    - Inserts a single document
 
-   - Syntax: ```db.collection.insertOne({ key: value, ... })```
-
+   - Syntax: 
+   
+   ```c++
+   db.collection.insertOne({ key: value, ... })
+   ```
    - `_id` auto-generated unless custom provided
    
    - Supports nested objects & arrays
    
-   - Returns: ```{ acknowledged: true, insertedId: ObjectId(...) }```
+   - **Returns**: ```{ acknowledged: true, insertedId: ObjectId(...) }```
    
    - Errors: duplicate `_id`, connection/server issues
 
@@ -231,11 +234,14 @@
 ✔ **```insertMany()```**:
    - Inserts multiple documents at once
    
-   - Syntax: ```db.collection.insertMany([ {...}, {...}, ... ], { ordered: true/false })```
+   - Syntax: 
+   ```c++
+   db.collection.insertMany([ {...}, {...}, ... ], { ordered: true/false })
+   ```
    
    - Supports nested objects & arrays
    
-   - Returns: ```{ acknowledged: true, insertedIds: [ObjectId(...), ...] }```
+   - **Returns**: `{ acknowledged: true, insertedIds: [ObjectId(...), ...] }`
    
    - Ordered (default): stops at first error
    
@@ -255,9 +261,67 @@
    5. Keep document size <16MB
 
 ✔ Common Errors:
-   - Duplicate `_id` → E11000
+   - Duplicate `_id` → **E11000**
    - Invalid data type if validation exists
    - Connection / server errors
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 9️⃣ READ
+
+✔ READ Operation = Retrieve documents from a collection
+
+</br>
+
+✔ **```findOne()```**:
+
+   - Fetches first matching document
+   
+   - Syntax: 
+   ```c++
+   db.collection.findOne({ query }, { projection })
+   ```
+   - **Query** => filter 
+   
+   - **Projection** => fields to show/hide
+   
+   - Example: ```db.users.findOne({ name: "Rahul" })```
+   
+   - **Nested field query**: ```db.users.findOne({ "address.city": "Delhi" })```
+   
+   - Returns single document or null
+   
+   - Interview Line: "findOne() fetches the first document matching a query and allows projection."
+
+</br>
+
+✔ **```find()```**:
+
+   - Fetches all matching documents
+   
+   - **Syntax**: 
+   
+   ```c++
+   db.collection.find({ query }, { projection })
+   ```
+   
+   - Returns cursor (pointer to documents)
+   
+   - **Convert to array**: .toArray()
+   
+   - Nested field query: `db.users.find({ "address.city": "Delhi" }).toArray()`
+   
+   - Projection: ```db.users.find({ skills: "React" }, { name:1, skills:1, _id:0 }).toArray()```
+   
+   - Limit / Skip / Sort:
+       - `.limit(2)` → first 2 documents
+       - `.skip(2)` → skip first 2 documents
+       - `.sort({ age: -1 })` → descending
+   
+   - Interview Line: "find() fetches multiple documents using queries, supports projection, limit, skip, sort, and returns a cursor."
+
+
+
 
 
 ### Read
