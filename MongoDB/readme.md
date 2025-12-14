@@ -321,6 +321,47 @@
    - Interview Line: "find() fetches multiple documents using queries, supports projection, limit, skip, sort, and returns a cursor."
 
 
+## 📍 Query Operators
+
+✔ **Comparison Operators:**
+   - $gt → greater than
+   - $gte → greater than or equal
+   - $lt → less than
+   - $lte → less than or equal
+   - $eq → equal (optional)
+   - $ne → not equal
+   - Example: `{ age: { $gt: 22 } }`
+
+</br>
+
+✔ **Logical Operators:**
+   - $or → either condition true
+   - $and → both conditions true
+   - Example: `{ $or: [ { age: 22 }, { name: "Riya" } ] }`
+
+</br>
+
+✔ **Array Operators:**
+   - $in → value exists in array
+   - $nin → value not in array
+   - Example: `{ skills: { $in: ["React","Node"] } }`
+
+</br>
+
+✔ **Existence Operator:**
+   - $exists → check if field exists or missing
+   - Example: `{ address: { $exists: true } }`
+
+</br>
+
+✔ **Nested Queries:**
+   - Query nested objects or array fields
+   - Example: `db.users.find({ "address.city": "Delhi" })`
+
+</br>
+
+✔ Interview Line:
+   "MongoDB query operators like $gt, $lt, $in, $or, $and, $exists allow filtering documents with powerful conditions, including nested fields and arrays."
 
 
 
