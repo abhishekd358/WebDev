@@ -35,12 +35,13 @@
 ✔ Data is stored in JSON-like (BSON) documents instead of tables.
 
 ✔ Data Structure:
-   SQL      → Table → Row → Column
-   MongoDB  → Database → Collection → Document
+   MySQL   → Database → Table → Row → Column
+   MongoDB → Database → Collection → Document → Field
+
 
 ✔ Key Features:
    - Horizontally scalable
-   - Schema-less (flexible structure, no ALTER TABLE)
+   - Schema-less (flexible structure)
    - High performance (fast read/write + indexing)
 
 ✔ MongoDB vs SQL (Core Difference):
@@ -55,7 +56,34 @@
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+# 3 JSON vs BSON
 
+```
+✔ MongoDB looks like JSON externally but stores data internally in BSON.
+
+✔ JSON (JavaScript Object Notation):
+   - Human-readable
+   - Lightweight
+   - Limited data types (no Date, no Binary)
+   - Slower for large data
+
+✔ BSON (Binary JSON):
+   - Binary format (machine-friendly)
+   - Supports rich data types: Date, Binary, Int32/Int64, ObjectId
+   - Faster read/write
+   - Efficient storage
+   - Used internally by MongoDB
+
+✔ Key Concept:
+   - Write JSON → MongoDB converts it to BSON automatically
+   - JSON = Human language, BSON = Machine language
+
+✔ Interview Line:
+   "MongoDB stores data internally in BSON, a binary representation of JSON for performance."
+
+```
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ### Read
 
