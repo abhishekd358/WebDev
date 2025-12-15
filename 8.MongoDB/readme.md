@@ -70,3 +70,56 @@ Databases use their own protocols over TCP to talk to clients:
 
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+## 3 Mongo Shell In Details
+
+<details>
+  <summary>📌 READ IN DETAILS:</summary>
+
+## What is Mongo Shell?
+- mongosh = MongoDB Shell (CLI client)
+- Uses MongoDB Wire Protocol (TCP), **NOT HTTP**
+- **Built on Node.js** - contains embedded Node.js runtime
+- Works even without installing external Node.js
+- Default connects to: **mongodb://localhost:27017**
+
+## Key Features
+### 1. Node.js Environment
+- JavaScript REPL like Node.js
+- Node core modules available (fs, os, path, http)
+- process object available
+- Better syntax highlighting than Node REPL
+
+### 2. Mongodb Node Environment Behaviors
+- **Promises auto-resolve** in console (shows result, not Promise object)
+- Undefined values don’t print
+-  **Can run .js files**: `mongosh --nodb app.js`
+
+### 3. Server Management
+- Can start HTTP servers inside mongo shell
+- Use `process.exit()` to stop
+- Has **exit** function variable to quit shell
+
+### Important Commands:
+
+- `mongosh --nodb` → # enable Node.js interpreter without connecting to DB
+- `.editor` → multi-line editor
+- `exit` → quit shell
+
+### MongoDB-Specific Variables (when connected):
+- db → current database (object)
+- show → list DBs / collections (function)
+- use → switch database (function)
+- it → iterate cursor 
+
+### Cool Fact:
+- mongosh (~109MB) = Node.js runtime + MongoDB client
+- Can be used as JS interpreter without Node.js
+- Built using Node.js for client-side functionality
+
+### Interview Line:
+"mongosh is a Node.js-based MongoDB shell that connects via MongoDB wire protocol and allows executing JavaScript with database commands."
+
+
+</details>
