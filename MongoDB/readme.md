@@ -153,16 +153,36 @@
 ✔ Flexible schema → different documents can have different fields
 
 
-✔ Common Data Types:
-   - String → "Rahul"
-   - Number → 22, 3.14
-   - Boolean → true / false
-   - Array → ["JS","React"]
-   - Object → { city: "Delhi" }
-   - Date → ISODate("2025-12-14T10:00:00Z")
-   - ObjectId → unique _id
-   - Null → null
-   - Binary → BinData(...)
+✔ **Common Data Types:**
+   - `String` → "Rahul"
+   - `Number` → 22, 3.14
+   - `Boolean` → true / false
+   - `Array` → ["JS","React"]
+   - `Object` → { city: "Delhi" }
+   - `Date` → ISODate("2025-12-14T10:00:00Z")
+   - `ObjectId` → unique _id
+   - `Null` → null
+   - `Binary` → BinData(...)
+   - `Double` → 22.5, 3.14
+   - `Int32` → 22
+
+</br>
+
+**⚠️ Unregular Use (Less Common / Special):**
+
+* `Int64 (Long)` → NumberLong(9000000000)
+* `Decimal128` → NumberDecimal("99.99")
+* `Timestamp` → Timestamp(1690000000, 1)
+* `RegularExpression` → /^Rahul/i
+* `JavaScript` → function() { return x + 1 }
+* `JavaScriptWithScope` → Code("x + y", { y: 5 })
+* `UUID` → UUID("550e8400-e29b-41d4-a716-446655440000")
+* `MinKey` → MinKey()
+* `MaxKey` → MaxKey()
+* `Symbol` → Symbol("test") (deprecated)
+* `Undefined` → undefined (deprecated)
+
+</br>
 
 
 ✔ `_id` Field:
@@ -313,7 +333,7 @@
    
    - Projection: ```db.users.find({ skills: "React" }, { name:1, skills:1, _id:0 }).toArray()```
    
-   - Limit / Skip / Sort:
+   - **Limit / Skip / Sort / Count:**
        - `.limit(2)` → first 2 documents
        - `.skip(2)` → skip first 2 documents
        - `.sort({ age: -1 })` → descending
@@ -321,6 +341,46 @@
             - `+1` => Ascending(lower to higher)
    
    - Interview Line: "find() fetches multiple documents using queries, supports projection, limit, skip, sort, and returns a cursor."
+
+---
+
+## 📍 Cursor
+
+* **Cursor (MongoDB):**
+
+  * A cursor is a pointer to the result set returned by a query
+  * Created automatically when using `.find()`
+  * Retrieves documents in batches instead of all at once
+  * Improves performance and memory usage
+
+* **Iterating Cursor:**
+
+  * `.forEach()` → loop through all documents
+  * `.hasNext()` → check if more documents exist
+  * `.next()` → fetch the next document
+
+* **Convert Cursor to Array:**
+
+  * `.toArray()` → convert all results into an array (loads all data into memory)
+
+* **Limit / Skip / Sort / Count:**
+
+  * `.limit(2)` → first 2 documents
+  * `.skip(2)` → skip first 2 documents
+  * `.sort({ age: -1 })` → descending order by age
+
+    * `-1` → Descending (higher to lower)
+    * `+1` → Ascending (lower to higher)
+  * `.count()` → count number of documents in cursor
+
+* **Cursor Control:**
+
+  * `.noCursorTimeout()` → prevent cursor from timing out
+  * `.close()` → manually close the cursor
+
+* **Batching:**
+
+  * `.batchSize(10)` → fetch 10 documents per batch
 
 ---
 
@@ -340,7 +400,7 @@
 ✔ **Logical Operators:**
    - $or → either condition true
    - $and → both conditions true
-   - Example: `{ $or: [ { age: 22 }, { name: "Riya" } ] }`
+   - Example: `{ $or: [ { condtion:1 },{ condtion:2 }, { name: "Alexander" } ] }`
 
 </br>
 
@@ -614,7 +674,7 @@ db.users.deleteMany({})   // VERY DANGEROUS
 
 ---
 
-## 📍findOneAndDelete() & findOneAndUpdate()
+## 📍findOneAndDelete()
 
 
  **findOneAndDelete():**
@@ -724,10 +784,151 @@ db.users.updateOne(
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+
+
+
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
 ### Read
 
 - fetching specific key-value from the document 
     ```db.<collection_name>.find({}, {<specific_key>})```
     - **example** fetching only cars from India country: ```db.cars.find({}, {country:"India"})
-    
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+db.cars.find({engine:{$gt:1400}})
+
+
+db.car.find({engine:{$and: [{$gt:1400}, {$lt:1498}]}})
+
+
+$type
+$size
+$all
+
+
+
+Cursor :
+count
+sort
+limit
+skip
+
+
+# agggreagation
+
+db.collecgtionName.aggregate(
+   [
+      {stage: 1},
+      {stage: 2},
+      {stage: 3},
+      
+   ]
+)
+
+Grouping
+sortbycount
+unwind
+
+
+
+# variables
+1) system
+
+   -```$$<system_variable>```
+   - example: $$NOW
+
+2)user
+   - Object.keys(this)
+
+
+# Data modeling
+document nesting level <100
+size of document must be <16MB
+
+- embedded Document
+- reference Document
+what is $lookup -> to left join the two collections
+
+
+# schema validation
+- applying validation or resctriction so user can not enter any useless data .
+
+- constraint =
+
+# index
+
+- is a data structure
+- uses binary tree
+
+
+
+
+# Transactions
+
+# Sharding
+
+# Replications
+
+
+
+
+
+.explain("executionStats")
+
+
+
+
+-------------------- MONGODB UNIVERSITY
+
+
+# DOCUMENT MODELS
+
+
+# connection string 
+
+2 type of connection string :
+
+1) +SRV (default) : 
+mognodb:[+srv]://[username:password@]host1:[port1][....hostN:[portN]]/[defaultAuthDB][?options]
+
+@localhost:27017
+2)
+
+
+#  chainging port using --port <port_number>
+# m0, m2, m5 clusters : maximum of 500 open connection
+
+
+# load() method
+# external editor : edit() 
+         config.get()
+         config.set('editor', 'visual studio')
+
+
+
+
+
+
+```
+onnecting to a MongoDB Database Using the MongoDB Shell
+In this unit, you learned how to:
+
+Define a connection string and how it is used to connect to a MongoDB cluster
+Locate the connection string for an Atlas cluster
+Identify the basic components of a standard connection string
+Install the MongoDB Shell, or mongosh
+Connect to a local MongoDB instance using mongosh
+Connect to an Atlas cluster using mongosh
+Troubleshoot MongoDB Atlas connection errors
+Retrieve and insert a document using mongosh
+Write and use a JavaScript function inside a mongosh session
+Use the db.getSiblingDb() method to change databases within a script
+Use the load() method to load and run a JavaScript file in mongosh
+Use an external editor within mongosh
+```
