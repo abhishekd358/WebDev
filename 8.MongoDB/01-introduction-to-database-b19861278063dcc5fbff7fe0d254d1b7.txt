@@ -1,0 +1,827 @@
+00:00:00,000 --> 00:00:06,000
+You are very welcome in this first video of the database section. In this section, we will master the database in detail.
+
+2
+00:00:06,000 --> 00:00:11,000
+We will mainly understand the MongoDB database. What is MongoDB? How does MongoDB work?
+
+3
+00:00:11,000 --> 00:00:15,000
+But with this, your understanding of the database will be completely clear.
+
+4
+00:00:15,000 --> 00:00:19,000
+After that, you can use MySQL database or any other database.
+
+5
+00:00:19,000 --> 00:00:23,000
+Because we will understand the core principle of the database.
+
+6
+00:00:23,000 --> 00:00:26,000
+So now we will answer this question that what is a database?
+
+7
+00:00:26,000 --> 00:00:39,000
+so we use database in different contexts, so we use database to clear what is database and database management system
+
+8
+00:00:39,000 --> 00:00:51,000
+so we use mongodb database, mysql database, postgresql database, so these are all database management tools
+
+9
+00:00:51,000 --> 00:01:05,000
+It is a database management system, there are a lot of things in it, and what is a database, if these are not a database, then if any of these tools are used, whether it is MySQL or MongoDB,
+
+10
+00:01:05,000 --> 00:01:15,000
+By using them, when we properly store our data in a structured way, then we say that this is our database, where our entire data is stored,
+
+11
+00:01:15,000 --> 00:01:19,000
+In a way, we can call it storage where all our data is stored.
+
+12
+00:01:19,000 --> 00:01:22,000
+Here I have also written the definition of the database.
+
+13
+00:01:22,000 --> 00:01:27,000
+Our database is an organized collection of data designed for efficient storage.
+
+14
+00:01:27,000 --> 00:01:31,000
+That means it should be stored in such a way that it does not consume too much space.
+
+15
+00:01:31,000 --> 00:01:34,000
+Our data should be stored in a very small space.
+
+16
+00:01:34,000 --> 00:01:40,000
+And it is designed for efficient storage and for efficient retrieval.
+
+17
+00:01:40,000 --> 00:01:44,000
+That means if we have stored the data, then we have to fetch the data.
+
+18
+00:01:44,000 --> 00:01:46,000
+we have to retrieve the data
+
+19
+00:01:46,000 --> 00:01:48,000
+so for efficient retrieval
+
+20
+00:01:48,000 --> 00:01:50,000
+that data is stored in a particular way
+
+21
+00:01:50,000 --> 00:01:52,000
+and
+
+22
+00:01:52,000 --> 00:01:54,000
+management by users and applications
+
+23
+00:01:54,000 --> 00:01:56,000
+means we can store it
+
+24
+00:01:56,000 --> 00:01:58,000
+in an efficient way and in an efficient way
+
+25
+00:01:58,000 --> 00:02:00,000
+we can retrieve it and manage it
+
+26
+00:02:00,000 --> 00:02:02,000
+suppose we have to change something
+
+27
+00:02:02,000 --> 00:02:04,000
+or update something
+
+28
+00:02:04,000 --> 00:02:06,000
+so all those things
+
+29
+00:02:06,000 --> 00:02:08,000
+we can do in the database
+
+30
+00:02:08,000 --> 00:02:10,000
+so this is how data is stored
+
+31
+00:02:10,000 --> 00:02:12,000
+so that all these operations can be performed
+
+32
+00:02:12,000 --> 00:02:15,000
+can be performed efficiently.
+
+33
+00:02:15,000 --> 00:02:18,000
+So, that whole storage is called a database.
+
+34
+00:02:18,000 --> 00:02:21,000
+Now, why do we need a database?
+
+35
+00:02:21,000 --> 00:02:25,000
+So, till now, the data that we have stored here,
+
+36
+00:02:25,000 --> 00:02:28,000
+stored in JSON files like this,
+
+37
+00:02:28,000 --> 00:02:31,000
+and this is the data of our files,
+
+38
+00:02:31,000 --> 00:02:33,000
+this is the data of our directories,
+
+39
+00:02:33,000 --> 00:02:35,000
+and this is the data of our users.
+
+40
+00:02:35,000 --> 00:02:37,000
+So, now our data is quite less.
+
+41
+00:02:37,000 --> 00:02:39,000
+What does it mean? It is negligible.
+
+42
+00:02:39,000 --> 00:02:44,000
+the real world application has millions of users
+
+43
+00:02:44,000 --> 00:02:47,000
+imagine how many users YouTube has
+
+44
+00:02:47,000 --> 00:02:49,000
+when there are millions of subscribers
+
+45
+00:02:49,000 --> 00:02:52,000
+how many people are on YouTube
+
+46
+00:02:52,000 --> 00:02:55,000
+there are millions of users
+
+47
+00:02:55,000 --> 00:02:58,000
+if we store all these data in this way
+
+48
+00:02:58,000 --> 00:03:01,000
+then our process will be very slow
+
+49
+00:03:01,000 --> 00:03:03,000
+because what we are doing here
+
+50
+00:03:03,000 --> 00:03:06,000
+when a new user comes to the data
+
+51
+00:03:06,000 --> 00:03:09,000
+so we are deleting all this and creating a new user
+
+52
+00:03:09,000 --> 00:03:14,000
+now if we want we can improve this thing by adding our logic
+
+53
+00:03:14,000 --> 00:03:19,000
+how? we have to write a logic in node.js
+
+54
+00:03:19,000 --> 00:03:21,000
+that we have to remove a comma of last
+
+55
+00:03:21,000 --> 00:03:23,000
+means we have to remove a square bracket
+
+56
+00:03:23,000 --> 00:03:26,000
+and by adding a comma we have to add a new object
+
+57
+00:03:26,000 --> 00:03:30,000
+and by adding a new object we have to add a square bracket
+
+58
+00:03:30,000 --> 00:03:35,900
+so this way our writing process will be a bit efficient
+
+59
+00:03:35,900 --> 00:03:40,120
+but this way we will have to do a lot of optimizations
+
+60
+00:03:40,120 --> 00:03:45,220
+for example if we have millions of users and if we want any data from that
+
+61
+00:03:45,220 --> 00:03:51,940
+if we want any user name then in one million, if the data of the user is in the last of the array
+
+62
+00:03:51,940 --> 00:03:56,060
+then we have to do a complete loop to find it
+
+63
+00:03:56,060 --> 00:04:05,660
+and then in the last it will be difficult to query and retrieve the data
+
+64
+00:04:05,660 --> 00:04:14,060
+it used to be like this in the 1990s or before when databases were not that popular
+
+65
+00:04:14,060 --> 00:04:20,060
+then people used to store data in their files
+
+66
+00:04:20,060 --> 00:04:23,660
+JSON format was also not there, so they used to store data in different formats
+
+67
+00:04:23,660 --> 00:04:26,560
+and it was called ISAM
+
+68
+00:04:26,560 --> 00:04:29,560
+Indexed Sequential Access Method
+
+69
+00:04:29,560 --> 00:04:33,860
+this is a method by which we store data in our disk
+
+70
+00:04:33,860 --> 00:04:35,860
+and manage it properly
+
+71
+00:04:35,860 --> 00:04:38,560
+and it is efficient and fast
+
+72
+00:04:38,560 --> 00:04:41,360
+in the indexed manner, when things are indexed
+
+73
+00:04:41,360 --> 00:04:44,360
+we can retrieve it fast
+
+74
+00:04:44,360 --> 00:04:48,560
+so this was developed by IBM in 1960
+
+75
+00:04:48,560 --> 00:04:52,560
+and it must have been used from 1960 to 1980s
+
+76
+00:04:52,560 --> 00:04:56,560
+now what was the problem here?
+
+77
+00:04:56,560 --> 00:05:00,560
+here the problem was how to store the data?
+
+78
+00:05:00,560 --> 00:05:02,560
+how to fetch it?
+
+79
+00:05:02,560 --> 00:05:06,560
+how to secure the data in an efficient way?
+
+80
+00:05:06,560 --> 00:05:09,560
+how to retrieve it in an efficient way?
+
+81
+00:05:09,560 --> 00:05:12,560
+all this logic had to be written by the developer
+
+82
+00:05:12,560 --> 00:05:14,560
+the back-end developer will write it
+
+83
+00:05:14,560 --> 00:05:16,560
+like we have the code of app.js
+
+84
+00:05:16,560 --> 00:05:26,560
+In this we will write the logic of how to fetch the data, how to store the data, how to query the data in an efficient way, we will have to write all this logic on our own.
+
+85
+00:05:26,560 --> 00:05:34,560
+So then the birth of databases is born, and it is not right to say only databases, the birth of database management systems.
+
+86
+00:05:34,560 --> 00:05:44,560
+And the only work of these database management systems was to properly store the data and whenever we need it, to retrieve the data in a very fast way.
+
+87
+00:05:44,560 --> 00:05:47,560
+so the developers work became very easy
+
+88
+00:05:47,560 --> 00:05:50,560
+they used to store the data very efficiently
+
+89
+00:05:50,560 --> 00:05:52,560
+they didn't store it in their code
+
+90
+00:05:52,560 --> 00:05:54,560
+they used to store it separately
+
+91
+00:05:54,560 --> 00:05:56,560
+and it was very efficient
+
+92
+00:05:56,560 --> 00:05:58,560
+it was very fast and reliable
+
+93
+00:05:58,560 --> 00:06:00,560
+there were many features
+
+94
+00:06:00,560 --> 00:06:02,560
+now we will understand DBMS in detail
+
+95
+00:06:02,560 --> 00:06:04,560
+here I have written the definition of DBMS
+
+96
+00:06:04,560 --> 00:06:06,560
+you can read it
+
+97
+00:06:06,560 --> 00:06:08,560
+and here also I have written
+
+98
+00:06:08,560 --> 00:06:10,560
+where did it go
+
+99
+00:06:10,560 --> 00:06:12,560
+our database
+
+100
+00:06:12,560 --> 00:06:28,560
+why do we need a database, organized data, efficient retrieval, data consistency and integrity, security, scalability, separation of concern
+
+101
+00:06:28,560 --> 00:06:33,760
+we will write the logic of our application in our code
+
+102
+00:06:33,760 --> 00:06:39,760
+the work of storing data and managing data will be completely different
+
+103
+00:06:39,760 --> 00:06:42,760
+so for all these reasons we should use a separate database
+
+104
+00:06:42,760 --> 00:06:46,760
+and we understand what are the components of a database
+
+105
+00:06:46,760 --> 00:06:50,760
+the database management system has many different components
+
+106
+00:06:50,760 --> 00:06:54,760
+but the main two components are a server
+
+107
+00:06:54,760 --> 00:06:56,760
+is a database server
+
+108
+00:06:56,760 --> 00:06:58,760
+and a database client
+
+109
+00:06:58,760 --> 00:07:00,760
+there are two components
+
+110
+00:07:00,760 --> 00:07:02,760
+so let's understand this
+
+111
+00:07:02,760 --> 00:07:04,760
+with the help of drawing
+
+112
+00:07:04,760 --> 00:07:06,760
+so here we have a database
+
+113
+00:07:06,760 --> 00:07:08,760
+so in database there are two
+
+114
+00:07:08,760 --> 00:07:10,760
+softwares, one software
+
+115
+00:07:10,760 --> 00:07:12,760
+will be our server
+
+116
+00:07:12,760 --> 00:07:14,760
+this is not our node.js server
+
+117
+00:07:14,760 --> 00:07:16,760
+database has its own
+
+118
+00:07:16,760 --> 00:07:18,760
+separate server, it is not a http server
+
+119
+00:07:18,760 --> 00:07:20,760
+this will be a tcp server
+
+120
+00:07:20,760 --> 00:07:22,760
+tcp
+
+121
+00:07:22,760 --> 00:07:25,260
+Databases directly talk about TCP
+
+122
+00:07:25,260 --> 00:07:27,260
+They have their own protocol
+
+123
+00:07:27,260 --> 00:07:30,760
+Like MongoDB's MongoDB wire protocol
+
+124
+00:07:30,760 --> 00:07:32,760
+Here
+
+125
+00:07:32,760 --> 00:07:36,760
+Any database has its own protocol
+
+126
+00:07:36,760 --> 00:07:37,760
+Like
+
+127
+00:07:37,760 --> 00:07:40,760
+MongoDB
+
+128
+00:07:40,760 --> 00:07:42,760
+Wire protocol
+
+129
+00:07:45,760 --> 00:07:47,760
+This MongoDB wire protocol
+
+130
+00:07:47,760 --> 00:07:49,760
+MongoDB uses
+
+131
+00:07:49,760 --> 00:07:54,460
+and mysql has mysql client server protocol
+
+132
+00:07:54,460 --> 00:07:56,460
+you can call it mysql protocol
+
+133
+00:07:56,460 --> 00:07:59,960
+mysql protocol
+
+134
+00:07:59,960 --> 00:08:04,460
+so everyone works on their own protocol
+
+135
+00:08:04,460 --> 00:08:06,460
+ok
+
+136
+00:08:06,460 --> 00:08:08,460
+these are made directly on tcp
+
+137
+00:08:08,460 --> 00:08:10,460
+these are not all http servers
+
+138
+00:08:10,460 --> 00:08:12,460
+so whenever
+
+139
+00:08:12,460 --> 00:08:14,460
+we will install in our system
+
+140
+00:08:14,460 --> 00:08:16,460
+like when we will install in mongodb
+
+141
+00:08:16,460 --> 00:08:18,460
+then we will have to install two things
+
+142
+00:08:18,460 --> 00:08:21,160
+one is server and other one is client
+
+143
+00:08:21,160 --> 00:08:22,360
+what is client?
+
+144
+00:08:22,360 --> 00:08:25,460
+client is like a shell
+
+145
+00:08:25,460 --> 00:08:29,260
+and it sends network request
+
+146
+00:08:29,260 --> 00:08:31,860
+here it will send network request
+
+147
+00:08:31,860 --> 00:08:34,160
+if data has to be saved then also
+
+148
+00:08:34,160 --> 00:08:36,160
+and if data has to be retrieved then also
+
+149
+00:08:36,160 --> 00:08:38,660
+by using mongodb protocol or
+
+150
+00:08:38,660 --> 00:08:41,460
+by using the server protocol
+
+151
+00:08:41,460 --> 00:08:45,260
+this became tcp server or
+
+152
+00:08:45,260 --> 00:08:46,860
+our db server
+
+153
+00:08:46,860 --> 00:08:50,860
+db is our database server
+
+154
+00:08:50,860 --> 00:08:54,860
+this is our db client
+
+155
+00:08:54,860 --> 00:09:00,860
+now in the case of mongodb we have mongodb shell
+
+156
+00:09:00,860 --> 00:09:03,860
+in the case of mysql we have mysql shell
+
+157
+00:09:03,860 --> 00:09:05,860
+this is a terminal based application
+
+158
+00:09:05,860 --> 00:09:09,860
+and this client can be of many types
+
+159
+00:09:09,860 --> 00:09:11,860
+it can be a ui client
+
+160
+00:09:11,860 --> 00:09:17,300
+like in mongodb we have an application called mongodb compass
+
+161
+00:09:17,300 --> 00:09:20,100
+there we can use UI to send request
+
+162
+00:09:20,100 --> 00:09:22,260
+we can add data
+
+163
+00:09:22,260 --> 00:09:25,820
+we can update and retrieve all these things
+
+164
+00:09:25,820 --> 00:09:29,340
+means we can use UI also
+
+165
+00:09:29,340 --> 00:09:31,340
+so this is our client
+
+166
+00:09:31,340 --> 00:09:32,540
+and what happens
+
+167
+00:09:32,540 --> 00:09:36,500
+like when we are using node.js
+
+168
+00:09:36,500 --> 00:09:43,500
+so there we will not use shell or GUI application of client
+
+169
+00:09:43,500 --> 00:09:45,500
+we will use in programming language
+
+170
+00:09:45,500 --> 00:09:51,500
+so there client will be node.js for this server
+
+171
+00:09:51,500 --> 00:09:55,500
+node.js
+
+172
+00:09:55,500 --> 00:09:57,500
+this is our programming language
+
+173
+00:09:57,500 --> 00:09:59,500
+whatever programming language we are using
+
+174
+00:09:59,500 --> 00:10:08,500
+Now our database management system makes packages for different programming languages
+
+175
+00:10:08,500 --> 00:10:10,500
+which we can call drivers.
+
+176
+00:10:10,500 --> 00:10:14,500
+We can't call drivers, MongoDB calls drivers.
+
+177
+00:10:14,500 --> 00:10:16,500
+MySQL calls connectors.
+
+178
+00:10:16,500 --> 00:10:21,500
+But we can call packages like NPM install, MongoDB.
+
+179
+00:10:21,500 --> 00:10:25,500
+After that we will be able to communicate to our MongoDB server.
+
+180
+00:10:25,500 --> 00:10:30,000
+in that package mysql protocol is built in
+
+181
+00:10:30,000 --> 00:10:32,500
+how to request in mysql protocol
+
+182
+00:10:32,500 --> 00:10:34,500
+how to get response from there
+
+183
+00:10:34,500 --> 00:10:36,500
+so all this happens
+
+184
+00:10:36,500 --> 00:10:38,500
+just you have to understand that
+
+185
+00:10:38,500 --> 00:10:40,500
+dbms is some piece of software
+
+186
+00:10:40,500 --> 00:10:41,500
+ok
+
+187
+00:10:41,500 --> 00:10:43,500
+in that there will be a server and a client
+
+188
+00:10:43,500 --> 00:10:45,500
+now client for our server
+
+189
+00:10:45,500 --> 00:10:47,500
+for our database server
+
+190
+00:10:47,500 --> 00:10:50,500
+for that our client will be node.js
+
+191
+00:10:50,500 --> 00:10:52,500
+and for our react application
+
+192
+00:10:52,500 --> 00:10:54,500
+for that server will be node.js
+
+193
+00:10:54,500 --> 00:10:56,500
+So a server can also be a client.
+
+194
+00:10:56,500 --> 00:11:02,500
+So we have theoretically understood what a database management system is.
+
+195
+00:11:02,500 --> 00:11:04,500
+It has different components.
+
+196
+00:11:04,500 --> 00:11:06,500
+Like the server has many more components.
+
+197
+00:11:06,500 --> 00:11:10,500
+Like it has a storage engine named Wireshark.
+
+198
+00:11:10,500 --> 00:11:16,500
+Similarly, the databases have different storage engines.
+
+199
+00:11:16,500 --> 00:11:18,500
+And there are many more different components.
+
+200
+00:11:18,500 --> 00:11:21,500
+In this we can do authentication.
+
+201
+00:11:21,500 --> 00:11:34,500
+we just have to install this server, it is an application, it will be like an exe file, if you are in windows, if you are in other systems, then you will get an executable file of unix,
+
+202
+00:11:34,500 --> 00:11:42,500
+as soon as we double click and start it, it will start, our server will start and we can create different users in it,
+
+203
+00:11:42,500 --> 00:11:54,220
+i.e. we can define different permissions like what can a user do, what can he read, what can he write, or what can he read and write, i.e. we can define its permissions.
+
+204
+00:11:54,220 --> 00:12:03,660
+So there are many systems in this, i.e. there are many things in the server, but the main thing is that it is a server and a client.
+
+205
+00:12:03,660 --> 00:12:18,660
+So now we will do it practically and we will understand it in detail, we are understanding it theoretically from above what it is and it is important to have this theoretical knowledge so that we can take an overall picture of how our database works.
+
+206
+00:12:18,660 --> 00:12:24,660
+I hope you have understood what a database is, what is a database management system and why we should use databases.
+
+207
+00:12:24,660 --> 00:12:27,660
+Let's meet in the next video and see what are the different types of databases.
+
