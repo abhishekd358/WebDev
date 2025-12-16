@@ -183,3 +183,62 @@ Databases use their own protocols over TCP to talk to clients:
 
   
 </details>
+
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 5 Databases, Collections, Documents
+
+<details>
+  <summary>📌 Empty:</summary>
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 6 CREATE
+
+<details>
+  <summary>📌 READ IN DETAILS:</summary>
+
+</br>
+
+- CREATE Operation = Insert new document(s) into a collection
+- Collection auto-created on first insert if not exist
+- `_id` auto-generated unless custom provided
+
+- **After insert Returns**: `{ acknowledged: true, insertedIds: [ObjectId(...), ...] }`
+
+- Supports nested objects & arrays
+
+</br>
+
+✔ **```insertOne()```**:
+   - Inserts a single document
+
+   - Syntax: 
+   
+   ```c++
+   db.collection.insertOne({ key: value, ... })
+   ```
+   
+</br>
+
+✔ **```insertMany()```**:
+   - Inserts multiple documents at once
+   
+   - Syntax: 
+   ```c++
+   db.collection.insertMany([ {...}, {...}, ... ], { ordered: true/false })
+   ```
+   
+- Ordered (default): stops at first error
+   
+- Unordered (ordered: false): continues inserting remaining documents
+   
+- Errors: duplicate `_id` in ordered mode stops insert; unordered skips errors
+
+</details>

@@ -229,7 +229,11 @@
 
 - CREATE Operation = Insert new document(s) into a collection
 - Collection auto-created on first insert if not exist
-- Commands: ```insertOne()``` → single document, ```insertMany()``` → multiple documents
+- `_id` auto-generated unless custom provided
+
+- **After insert Returns**: `{ acknowledged: true, insertedIds: [ObjectId(...), ...] }`
+
+- Supports nested objects & arrays
 
 </br>
 
@@ -241,14 +245,7 @@
    ```c++
    db.collection.insertOne({ key: value, ... })
    ```
-   - `_id` auto-generated unless custom provided
    
-   - Supports nested objects & arrays
-   
-   - **Returns**: ```{ acknowledged: true, insertedId: ObjectId(...) }```
-   
-   - Errors: duplicate `_id`, connection/server issues
-
 </br>
 
 ✔ **```insertMany()```**:
@@ -259,17 +256,12 @@
    db.collection.insertMany([ {...}, {...}, ... ], { ordered: true/false })
    ```
    
-   - Supports nested objects & arrays
+- Ordered (default): stops at first error
    
-   - **Returns**: `{ acknowledged: true, insertedIds: [ObjectId(...), ...] }`
+- Unordered (ordered: false): continues inserting remaining documents
    
-   - Ordered (default): stops at first error
-   
-   - Unordered (ordered: false): continues inserting remaining documents
-   
-   - Errors: duplicate `_id` in ordered mode stops insert; unordered skips errors
-   
-   - Interview Line: "insertMany() inserts multiple documents at once, supports nested objects, arrays, and ordered/unordered options."
+- Errors: duplicate `_id` in ordered mode stops insert; unordered skips errors
+
 
 </br>
 
