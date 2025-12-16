@@ -426,5 +426,173 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
    "Projection in MongoDB allows selecting specific fields to include or exclude in query results."
 
 </details>
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+
+## 8 UPDATE
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+
+✔ UPDATE
+- Used to modify existing documents in a collection
+
+✔ Update Methods
+- `updateOne()`  → updates first matching document
+- `updateMany()` → updates all matching documents
+
+
+
+#### 🔹 **Basic Syntax**
+
+```
+db.collection.updateOne(
+  { filter },
+  { updateOperator },
+  { options }
+)
+
+db.collection.updateMany(
+  { filter },
+  { updateOperator },
+  { options }
+)
+```
+
+
+#### ⚠️ **IMPORTANT RULE**
+
+```
+❌ Direct value update NOT allowed
+   { age: 23 }
+
+✔ Always use update operators
+   { $set: { age: 23 } }
+```
+
+---
+
+## 🔹 **Common Update Operators**
+
+```
+- `$set`    → add / update field
+- `$inc`    → increment number
+- `$unset`  → remove field
+- `$push`   → add item to array
+- `$pull`   → remove item from array
+```
+
+#### 🔹 **Update Examples**
+
+```
+✔ Update single field
+{ $set: { age: 23 } }
+
+✔ Update multiple fields
+{ $set: { age: 24, city: "Delhi" } }
+
+✔ Increment value
+{ $inc: { age: 1 } }
+
+✔ Remove field
+{ $unset: { city: "" } }
+
+✔ Update nested field
+{ $set: { "address.city": "Mumbai" } }
+```
+
+## 📍 **UPSERT (Update + Insert)**
+
+
+✔ If document exists → UPDATE
+✔ If document does not exist → INSERT
+
+✔ Used with:
+- updateOne()
+- updateMany()
+- replaceOne()
+
+
+#### 🔹 **Upsert Syntax**
+
+```
+db.collection.updateOne(
+  { filter },
+  { $set: { field: value } },
+  { upsert: true }
+)
+```
+
+
+#### 📍 **replaceOne()**
+
+```
+✔ replaceOne()
+- Replaces FULL document
+- Update operators NOT allowed
+- _id remains same
+- Old fields removed if not included
+```
+
+#### 🔹 **Syntax**
+
+```
+db.collection.replaceOne(
+  { filter },
+  { fullDocument },
+  { upsert: true } // optional
+)
+```
+
+#### 🔹 **updateOne vs replaceOne**
+
+```
+- updateOne  → partial update (safe)
+- replaceOne → full replace (risky)
+```
+
+
+#### 📍 **findOneAndUpdate()**
+
+```
+✔ findOneAndUpdate()
+- Finds first matching document
+- Updates it
+- Returns old or updated document
+```
+
+#### 🔹 **Syntax**
+
+```
+db.collection.findOneAndUpdate(
+  { filter },
+  { updateOperator },
+  { options }
+)
+```
+
+#### 🔹 **Example**
+
+```
+db.users.findOneAndUpdate(
+  { name: "Aman" },
+  { $set: { age: 26 } },
+  { returnNewDocument: true }
+)
+```
+
+### ⚡ **INTERVIEW ONE-LINERS**
+
+```
+✔ MongoDB updates use update operators like $set with updateOne or updateMany.
+✔ Upsert performs update or insert in a single operation.
+✔ replaceOne replaces the entire document except _id.
+✔ findOneAndUpdate returns the affected document after update.
+```
+
+
+</br>
