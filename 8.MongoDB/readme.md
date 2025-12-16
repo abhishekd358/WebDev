@@ -242,3 +242,189 @@ Databases use their own protocols over TCP to talk to clients:
 - Errors: duplicate `_id` in ordered mode stops insert; unordered skips errors
 
 </details>
+
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 7 READ
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+✔ READ Operation = Retrieve documents from a collection
+
+</br>
+
+✔ **```findOne()```**:
+
+   - Fetches first matching document
+   
+   - Syntax: 
+   ```c++
+   db.collection.findOne({ query }, { projection })
+   ```
+   - **Query** => filter 
+   
+   - **Projection** => fields to show/hide
+   
+   - Example: ```db.users.findOne({ name: "Rahul" })```
+   
+   - **Nested field query**: ```db.users.findOne({ "address.city": "Delhi" })```
+   
+   - Returns single document or null
+   
+   - Interview Line: "findOne() fetches the first document matching a query and allows projection."
+
+</br>
+
+✔ **```find()```**:
+
+   - Fetches all matching documents
+   
+   - **Syntax**: 
+   
+   ```c++
+   db.collection.find({ query }, { projection })
+   ```
+   
+   - Returns cursor (pointer to documents)
+   
+   - **Convert to array**: `.toArray()`
+   
+   - Nested field query: `db.users.find({ "address.city": "Delhi" }).toArray()`
+   
+   - Projection: ```db.users.find({ skills: "React" }, { name:1, skills:1, _id:0 }).toArray()```
+   
+   - **Limit / Skip / Sort / Count:**
+       - `.limit(2)` → first 2 documents
+       - `.skip(2)` → skip first 2 documents
+       - `.sort({ age: -1 })` → descending
+            - `-1` => Decending (higher to lower)
+            - `+1` => Ascending(lower to higher)
+   
+   - Interview Line: "find() fetches multiple documents using queries, supports projection, limit, skip, sort, and returns a cursor."
+
+---
+
+## 📍 Cursor
+
+* **Cursor (MongoDB):**
+
+  * A cursor is a pointer to the result set returned by a query
+  * Created automatically when using `.find()`
+  * Retrieves documents in batches instead of all at once
+  * Improves performance and memory usage
+
+* **Iterating Cursor:**
+
+  * `.forEach()` → loop through all documents
+  * `.hasNext()` → check if more documents exist
+  * `.next()` → fetch the next document
+
+* **Convert Cursor to Array:**
+
+  * `.toArray()` → convert all results into an array (loads all data into memory)
+
+* **Limit / Skip / Sort / Count:**
+
+  * `.limit(2)` → first 2 documents
+  * `.skip(2)` → skip first 2 documents
+  * `.sort({ age: -1 })` → descending order by age
+
+    * `-1` → Descending (higher to lower)
+    * `+1` → Ascending (lower to higher)
+  * `.count()` → count number of documents in cursor
+
+* **Cursor Control:**
+
+  * `.noCursorTimeout()` → prevent cursor from timing out
+  * `.close()` → manually close the cursor
+
+* **Batching:**
+
+  * `.batchSize(10)` → fetch 10 documents per batch
+
+---
+
+## 📍 Query Operators
+
+✔ **Comparison Operators:**
+   - `$gt` → greater than
+   - `$gte` → greater than or equal
+   - `$lt` → less than
+   - `$lte` → less than or equal
+   - `$eq` → equal (optional)
+   - `$ne` → not equal
+   - Example: `{ age: { $gt: 22 } }`
+
+</br>
+
+✔ **Logical Operators:**
+   - `$or` → either condition true
+   - `$and` → both conditions true
+   - Example2: `{ $or: [ { condtion:1 },{ condtion:2 }, { name: "Alexander" } ] }`
+
+</br>
+
+✔ **Array Operators:**
+   - $in → value exists in array
+   - $nin → value not in array
+   - Example: `{ skills: { $in: ["React","Node"] } }`
+
+</br>
+
+✔ **Existence Operator:**
+   - $exists → check if field exists or missing
+   - Example: `{ address: { $exists: true } }`
+
+</br>
+
+✔ **Nested Queries:**
+   - Query nested objects or array fields
+   - Example: `db.users.find({ "address.city": "Delhi" })`
+
+</br>
+
+✔ Interview Line:
+   "MongoDB query operators like $gt, $lt, $in, $or, $and, $exists allow filtering documents with powerful conditions, including nested fields and arrays."
+
+---
+
+## 📍 Projections
+
+✔ **Projection** = **Select which fields to show in query result**
+
+✔ MongoDB version of SQL SELECT
+
+✔ **Syntax:**
+```c++
+db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
+```
+
+</br>i
+
+✔ **Rules:**
+   - `1` → include field
+   - `0`→ exclude field
+   - Cannot mix include (1) & exclude (0) together
+     (Exception: _id can be excluded)
+
+</br>
+
+✔ **_id Field:**
+   - Included by default
+   - Use _id: 0 to hide
+
+
+</br>
+
+✔ Interview Line:
+   "Projection in MongoDB allows selecting specific fields to include or exclude in query results."
+
+</details>
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+

@@ -390,9 +390,9 @@
 </br>
 
 ✔ **Logical Operators:**
-   - $or → either condition true
-   - $and → both conditions true
-   - Example: `{ $or: [ { condtion:1 },{ condtion:2 }, { name: "Alexander" } ] }`
+   - `$or` → either condition true
+   - `$and` → both conditions true
+   - Example2: `{ $or: [ { condtion:1 },{ condtion:2 }, { name: "Alexander" } ] }`
 
 </br>
 
@@ -431,7 +431,7 @@
 db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
 ```
 
-</br>
+</br>i
 
 ✔ **Rules:**
    - `1` → include field
