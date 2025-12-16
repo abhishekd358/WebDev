@@ -940,3 +940,63 @@ Document Structure & Data Types
 
 ✔ Interview Line
 "MongoDB stores data as binary files on disk, by default in C:\data\db, and the storage path can be customized using --dbpath."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 13) MongoDB Configuration using `mongod.cfg`
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+✔ What is mongod.cfg?
+- Configuration file for MongoDB server
+- Controls server behavior (storage, network, logs, port)
+- Used mainly when MongoDB runs as a SERVICE
+
+</br>
+
+✔ Config File Location (Windows)
+- Found in: Windows Services → MongoDB Server → Properties
+- Example:
+  `mongod.exe --config "C:\Program Files\MongoDB\Server\8.0\bin\mongod.cfg"`
+
+</br>
+
+✔ Important Config Options
+- storage.dbPath → database file location
+- systemLog.destination → file / console logs
+- net.bindIp → allowed IP addresses
+- net.port → server port (default 27017)
+
+</br>
+
+✔ Run MongoDB with Custom Config
+- Command:
+  `mongod --config <your_custom_path>`
+
+</br>
+
+✔ Network Configuration
+- Default: bindIp = 127.0.0.1 (localhost only)
+- Allow remote access:
+  net:
+    bindIp: 0.0.0.0
+- Port can also be changed from 27017
+
+</br>
+
+✔ Multiple MongoDB Servers
+- Possible using:
+  - Different dbPath
+  - Different ports
+  - Different config files
+
+
+</br>
+
+✔ Interview Line
+"MongoDB server behavior is configured using mongod.cfg, which defines dbPath, port, bind IP, and logging, especially when running MongoDB as a service."
