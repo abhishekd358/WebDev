@@ -945,7 +945,7 @@ Document Structure & Data Types
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 13) MongoDB Configuration using `mongod.cfg`
+## 13)🤯 MongoDB Configuration using `mongod.cfg`
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -1000,3 +1000,51 @@ Document Structure & Data Types
 
 ✔ Interview Line
 "MongoDB server behavior is configured using mongod.cfg, which defines dbPath, port, bind IP, and logging, especially when running MongoDB as a service."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 14) 🤯 Accessing MongoDB Server from Anywhere  
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+✔ Goal
+- Access MongoDB server from outside local machine
+- From another PC, mobile, or anywhere in the world
+- Find IPv4 and IPv6 of your device using cmd: `ipconfig`
+
+✔ Bind IP Configuration
+- Default: 127.0.0.1 (localhost only)
+- For remote access:
+  net:
+    bindIp: 0.0.0.0        # All IPv4
+    # or
+    bindIp: [::],0.0.0.0     # IPv6 + IPv4
+
+✔ IPv6 Requirement
+- Global (internet) access requires IPv6
+- **Enable in config:**
+  net:
+    `ipv6: true`
+- Or start server with:
+  `mongod --ipv6`
+
+
+✔ Global Access using IPv6
+- Connection string format:
+  mongodb://[IPv6_address]:27017
+- Square brackets are mandatory
+
+
+
+✔ Key Takeaway
+- bindIp + ipv6 = remote MongoDB access
+- IPv6 enables global connectivity
+- MongoDB works over TCP like any server
+
+✔ Interview Line
+"MongoDB can be accessed remotely by configuring bindIp and enabling IPv6, allowing global connections over TCP port 27017."
