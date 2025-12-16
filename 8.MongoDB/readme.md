@@ -778,3 +778,71 @@ db.users.updateOne(
 ✔ Interview Line:
    "Soft delete is preferred over hard delete using flags like `isDeleted` to preserve data and enable recovery."
 </br>
+
+</details>
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+## 10 Data Structure and Data Types
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+Document Structure & Data Types
+
+✔ Key = Field Name, Value = Field Value
+
+✔ Supports nested objects & arrays
+
+✔ Flexible schema → different documents can have different fields
+
+
+✔ **Common Data Types:**
+   - `String` → "Rahul"
+   - `Number` → 22, 3.14
+   - `Boolean` → true / false
+   - `Array` → ["JS","React"]
+   - `Object` → { city: "Delhi" }
+   - `Date` → ISODate("2025-12-14T10:00:00Z")
+   - `ObjectId` → unique _id
+   - `Null` → null
+   - `Binary` → BinData(...)
+   - `Double` → 22.5, 3.14
+   - `Int32` → 22
+
+</br>
+
+**⚠️ Unregular Use (Less Common / Special):**
+
+* `Int64 (Long)` → NumberLong(9000000000)
+* `Decimal128` → NumberDecimal("99.99")
+* `Timestamp` → Timestamp(1690000000, 1)
+* `RegularExpression` → /^Rahul/i
+* `JavaScript` → function() { return x + 1 }
+* `JavaScriptWithScope` → Code("x + y", { y: 5 })
+* `UUID` → UUID("550e8400-e29b-41d4-a716-446655440000")
+* `MinKey` → MinKey()
+* `MaxKey` → MaxKey()
+* `Symbol` → Symbol("test") (deprecated)
+* `Undefined` → undefined (deprecated)
+
+</br>
+
+
+✔ `_id` Field:
+   - Automatically created if not provided
+   - Unique identifier for each document
+
+✔ Interview One-Liner:
+
+   "MongoDB documents are JSON-like objects stored in collections with flexible data types including String, Number, Boolean, Array, Object, Date, and ObjectId."
+
+</details>
+
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
