@@ -1,4 +1,4 @@
-## 1 Intro to Databases
+## 1) Intro to Databases
 
 <details>
   <summary>📌 READ IN DETAILS:</summary>
@@ -33,7 +33,7 @@ Databases use their own protocols over TCP to talk to clients:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 2 Type of Databases
+## 2) Type of Databases
 
 <details>
   <summary>📌 READ IN DETAILS:</summary>
@@ -72,7 +72,7 @@ Databases use their own protocols over TCP to talk to clients:
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 3 Mongo Shell In Details
+## 3) Mongo Shell In Details
 
 <details>
   <summary>📌 READ IN DETAILS:</summary>
@@ -132,7 +132,7 @@ Databases use their own protocols over TCP to talk to clients:
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 4 MongoDB Server 
+## 4) MongoDB Server 
 
 <details>
   <summary>📌 READ IN DETAILS:</summary>
@@ -189,17 +189,44 @@ Databases use their own protocols over TCP to talk to clients:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 5 Databases, Collections, Documents
+## 5) Databases, Collections, Documents
 
 <details>
-  <summary>📌 Empty:</summary>
+  <summary>📌 READ IN DETAILS</summary>
+
+</br>
+
+
+✔ Creating a Database:
+   - `use <db>` → select or temporarily create database
+   - Database created permanently on first document insert
+   - List all databses: `show dbs`
+
+✔ Creating a Collection:
+   - `db.createCollection("<name>")` → optional, can auto-create on first insert
+   - List all collections: `show collections`
+
+✔ Inserting First Document (auto-creates DB & collection):
+   ```js
+   db.users.insertOne({
+     name: "Rahul",
+     age: 22,
+     skills: ["JS","React"]
+   })
+   ```
+✔ Tips:
+
+- Database name = lowercase, no spaces
+- Collection = plural (users, posts)
+- _id auto-generated
+- First insert auto-creates DB & collection
 
 </details>
 
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 6 CREATE
+## 6) CREATE
 
 <details>
   <summary>📌 READ IN DETAILS:</summary>
@@ -248,7 +275,7 @@ Databases use their own protocols over TCP to talk to clients:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 7 READ
+## 7) READ
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -430,7 +457,7 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 8 UPDATE
+## 8) UPDATE
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -600,7 +627,7 @@ db.users.findOneAndUpdate(
 
 
 
-## 9 DELETE
+## 9) DELETE
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -783,7 +810,7 @@ db.users.updateOne(
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 10 Data Structure and Data Types
+## 10) Data Structure and Data Types
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -846,3 +873,37 @@ Document Structure & Data Types
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
+## 11) _id Field (Auto ObjectId Explained)
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+✔ `_id` field:
+   - Default **primary key**
+   - Automatically created for every MongoDB document
+   - Uniquely identifies each document
+
+✔ ObjectId:
+   - **12-byte** unique identifier
+   - Structure:
+        - 4 bytes → timestamp (seconds since epoch)
+        - 5 bytes → random value (machine + process)
+        - 3 bytes → incrementing counter
+
+✔ Custom `_id`:
+   - Allowed (e.g., "_id": "user_101")
+   - If provided, MongoDB won’t generate ObjectId
+   - ObjectId recommended for consistency
+
+✔ Real-Life Analogy:
+   - `_id` = National ID / Passport number
+
+✔ Interview Line:
+
+   "**_id** is a unique identifier automatically generated for each MongoDB document, usually an ObjectId, but **can be customized if needed**."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
