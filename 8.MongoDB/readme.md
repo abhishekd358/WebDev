@@ -390,6 +390,11 @@ Databases use their own protocols over TCP to talk to clients:
 
 </br>
 
+✔ ** type of Data:**
+    - `$type` → to query base on Data Type
+
+</br>
+
 ✔ **Logical Operators:**
    - `$or` → either condition true
    - `$and` → both conditions true
@@ -824,6 +829,9 @@ Document Structure & Data Types
 
 ✔ Flexible schema → different documents can have different fields
 
+### Note: 
+ - normal `Number` data type is convert to `Int32`
+ - Long Number i.e `NumberLong` is convert to `Int64`
 
 ✔ **Common Data Types:**
    - `String` → "Rahul"
@@ -835,7 +843,7 @@ Document Structure & Data Types
    - `ObjectId` → unique _id
    - `Null` → null
    - `Binary` → BinData(...)
-   - `Double` → 22.5, 3.14
+   - `Double` → for Float Numbers (22.5, 3.14)
    - `Int32` → 22
 
 </br>
@@ -843,7 +851,8 @@ Document Structure & Data Types
 **⚠️ Unregular Use (Less Common / Special):**
 
 * `Int64 (Long)` → NumberLong(9000000000)
-* `Decimal128` → NumberDecimal("99.99")
+* `Decimal128` →High Precision value ex:- NumberDecimal("99.99")
+
 * `Timestamp` → Timestamp(1690000000, 1)
 * `RegularExpression` → /^Rahul/i
 * `JavaScript` → function() { return x + 1 }
@@ -907,3 +916,27 @@ Document Structure & Data Types
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 12) Where Mongodb Store Data Locally?  
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+- when mongoDB server run Locally then the Data store in `C:\data\db\` path 
+
+- Folder must exist before starting MongoDB
+- If missing → MongoDB server error
+
+- Data stored in BINARY format
+- Not human-readable (not text/JSON)
+
+**✔ Custom Data Directory**
+- MongoDB allows custom storage location
+- Command:
+  `mongod --dbpath <C:\custom\folder>`
+
+
+✔ Interview Line
+"MongoDB stores data as binary files on disk, by default in C:\data\db, and the storage path can be customized using --dbpath."
