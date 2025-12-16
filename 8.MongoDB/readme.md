@@ -82,7 +82,7 @@ Databases use their own protocols over TCP to talk to clients:
 - Uses MongoDB Wire Protocol (TCP), **NOT HTTP**
 - **Built on Node.js** - contains embedded Node.js runtime
 - Works even without installing external Node.js
-- Default connects to: **mongodb://localhost:27017**
+- Default connects to: **mongodb://localhost:27017** i.e **127.0.0.1:27017**
 
 ## Key Features
 ### 1. Node.js Environment
@@ -122,4 +122,64 @@ Databases use their own protocols over TCP to talk to clients:
 "mongosh is a Node.js-based MongoDB shell that connects via MongoDB wire protocol and allows executing JavaScript with database commands."
 
 
+</details>
+
+
+
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+## 4 MongoDB Server 
+
+<details>
+  <summary>📌 READ IN DETAILS:</summary>
+
+</br>
+
+✔ MongoDB Server
+- mongod = MongoDB server (stores actual data)
+- Mogodb Server build using C++,along with other languages. 
+- Data is stored on server, NOT in shell
+
+</br>
+
+✔ Components Installed
+- `mongod` → database server (C++)
+- `mongosh` → command-line client
+- MongoDB Compass → GUI tool
+
+</br>
+
+✔ **MongoDB Server :**
+- Server runs on: `localhost:27017`
+- Uses **TCP** protocol
+- Default DBs:
+  - **admin**
+  - **config**
+  - **local**
+
+</br>
+
+✔ Common Issues in MongoDB Server
+- Create folder manually (Windows):
+  `C:\data\db`
+- Add MongoDB `/bin` to system **PATH**
+
+
+</br>
+
+✔ Networking
+- MongoDB uses TCP (not HTTP)
+- Can run on custom IP/Port
+- Supports remote connections (IPv4 / IPv6)
+
+</br>
+
+✔ Interview Line
+“mongod is the MongoDB server process that stores data, while mongosh is a client used to interact with the server.”
+
+  
 </details>
