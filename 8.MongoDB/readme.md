@@ -1048,3 +1048,24 @@ Document Structure & Data Types
 
 ✔ Interview Line
 "MongoDB can be accessed remotely by configuring bindIp and enabling IPv6, allowing global connections over TCP port 27017."
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 15)🤯 Running .js script file as a CMD file to MongoSH  
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+- we using javascript file as a initiator to MongoSH to run different query when our Mongod server is running  
+
+```c++
+mongosh <your_script_name>.js
+```
+
+- Inside the JS file, now you can write Query of mongo like (use db, CRUD, show ....etc)
+
+</details>
+
