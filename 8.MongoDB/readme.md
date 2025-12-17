@@ -1069,3 +1069,159 @@ mongosh <your_script_name>.js
 
 </details>
 
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+## 16) MongoDB Driver 
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+✔ MongoDB Driver
+- MongoDB provides official drivers for many languages
+- Node.js driver install:
+  `npm install mongodb`
+
+✔ MongoClient
+- `mongoClient` is used to connect Node.js with MongoDB
+- Imported from "mongodb" package
+- Manages connection pooling internally
+
+✔ Connecting to MongoDB
+- Create client using connection string
+- Use `client.connect()` to establish connection
+- If DB name not provided → connects to "test" database by default
+
+✔ Access Database
+- Get database reference:
+  `const db = client.db("database_name")`
+
+✔ Access Collection
+- Get collection:
+  `const collection = db.collection("collection_name")`
+
+✔ Read Data
+- Fetch documents:
+  `collection.find().toArray()`
+- find() returns cursor → convert to array
+
+✔ List Collections
+- List all collections in a database:
+  `db.listCollections().toArray()`
+
+✔ Admin Operations
+- Access admin database:
+  `client.db().admin()`
+- List all databases:
+  `admin.listDatabases()`
+
+✔ Connection Lifecycle
+- Connection stays open until:
+  `client.close()`
+- Real apps use ONE shared connection (connection pool)
+
+
+✔ **Interview Line**
+"In Node.js, MongoDB is accessed using the official MongoDB driver via MongoClient, which manages connection pooling and database operations."
+
+</details>
+
+### Implementing the CRUD using Mongodb Node Js Driver
+
+<details>
+  <summary>📌 Implementation :</summary>
+
+- create a .js file
+- run `npm init -y`
+- install `npm i mongodb`
+
+```ts
+// this file now act a SHELL but in JavaScript language
+
+// creating a mongo client
+import { MongoClient } from 'mongodb';
+
+// connect to mongodb
+const client1 = await MongoClient.connect(process.env.DB_URL);
+
+try {
+  // 1️⃣ list all databases
+  const myDB = await client1.db().admin().listDatabases();
+  console.log("Databases:", myDB.databases.map(db => db.name));
+
+  // -------------------------------------------------
+  // 2️⃣ create database (MongoDB creates DB lazily)
+  const testDB = client1.db('TestDB');
+
+  // -------------------------------------------------
+  // 3️⃣ create collection
+  await testDB.createCollection('users');
+  console.log("Collection created: users");
+
+  // -------------------------------------------------
+  // 4️⃣ list collections in TestDB
+  const allCollections = await testDB.listCollections().toArray();
+  console.log(
+    "Collections:",
+    allCollections.map(col => col.name)
+  );
+
+  // -------------------------------------------------
+  // 5️⃣ getting specific collection
+  const myCollections = testDB.collection('users');
+
+  // ----------------------- CRUD --------------------
+
+  // 6️⃣ CREATE
+
+  // insert one document
+  await myCollections.insertOne({
+    name: "Alice",
+    age: 25
+  });
+
+  console.log("One document inserted");
+
+  // -------------------------------------------------
+  // 7️⃣ READ
+
+  // read all documents
+  const users = await myCollections.find({}).toArray();
+  console.log("All Users:", users);
+
+  // read one document
+  const oneUser = await myCollections.findOne({ name: "Alice" });
+  console.log("One User:", oneUser);
+
+  // -------------------------------------------------
+  // 8️⃣ UPDATE
+
+  await myCollections.updateOne(
+    { name: "Alice" },
+    { $set: { age: 26 } }
+  );
+
+  console.log("One document updated");
+
+  // -------------------------------------------------
+  // 9️⃣ DELETE
+
+  await myCollections.deleteOne({ name: "Alice" });
+
+  console.log("One document deleted");
+
+} catch (error) {
+  console.error("Error:", error);
+} finally {
+  // 🔚 closing client connection
+  await client1.close();
+  console.log("MongoDB connection closed");
+}
+
+```
+</br>
