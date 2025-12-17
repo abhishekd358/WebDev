@@ -1277,3 +1277,76 @@ try {
   * `.batchSize(10)` → use to make how much document element fetch from server in 1 call over the network (fetch 10 documents per batch)
 
 </details>
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+## 18) Why MongoDB **ObjectId** Is Not a String
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+
+### **1. Storage Efficiency**
+- A **string representation** of ObjectId (e.g., `"507f1f77bcf86cd799439011"`) takes **24 bytes** (UTF-8 encoding).
+- The **binary ObjectId** takes only **12 bytes**.
+- **Savings**: **50% less storage and network traffic**.
+
+### **2. Binary Format (BSON)**
+- MongoDB stores and transfers data in **BSON** (Binary JSON), not plain JSON.
+- ObjectId is a **BSON data type**, stored as a **12-byte binary value**.
+- When transferred over the network, only the **12-byte binary data** is sent, not a string.
+
+### **3. Components of ObjectId**
+ObjectId is a **12-byte binary value** divided into:
+
+| Bytes | Purpose |
+|-------|---------|
+| **4 bytes** | **Timestamp** (seconds since Unix epoch) |
+| **5 bytes** | **Host identifier** (hash of machine hostname) |
+| **3 bytes** | **Incrementing counter** (unique within process) |
+
+This structure ensures **uniqueness** and **sortability by creation time**.
+
+
+## **Working with ObjectId in Node.js**
+
+### **Creating an ObjectId**
+```javascript
+import { ObjectId } from 'mongodb';
+const oid = new ObjectId(); // Generates a new ObjectId
+```
+
+### **ObjectId Internals**
+- ObjectId is a **class** in the MongoDB driver.
+- The actual binary data is stored in a **`buffer`** property.
+- Example:
+  ```javascript
+  const oid = new ObjectId('507f1f77bcf86cd799439011');
+  console.log(oid.buffer); // <Buffer 50 7f 1f 77 bc f8 6c d7 99 43 90 11>
+  ```
+
+
+### **Useful ObjectId Methods**
+| Method | Purpose |
+|--------|---------|
+| **`toString()`** | Converts to 24-character hex string |
+| **`equals(otherId)`** | Compares two ObjectIds |
+| **`getTimestamp()`** | Returns creation date |
+| **`ObjectId.isValid(string)`** | Checks if a string is a valid ObjectId |
+
+Example:
+```javascript
+console.log(ObjectId.isValid('507f1f77bcf86cd799439011')); // true
+console.log(ObjectId.isValid('invalid')); // false
+```
+
+
+
+**Key Takeaway**: ObjectId is stored and transferred in **binary format** for **efficiency**. It’s a **class instance** in Node.js with useful methods for comparison, validation, and timestamp extraction. Always use **`.equals()`** for comparison and **`ObjectId.isValid()`** for validation.
+
+
