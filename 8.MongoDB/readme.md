@@ -1049,6 +1049,7 @@ Document Structure & Data Types
 ✔ Interview Line
 "MongoDB can be accessed remotely by configuring bindIp and enabling IPv6, allowing global connections over TCP port 27017."
 
+</details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
@@ -1225,3 +1226,54 @@ try {
 
 ```
 </br>
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+## 17) Cursor
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+
+  * A cursor is a pointer to the result set returned by a query
+  * Created automatically when using `.find()`
+  * Retrieves documents in batches instead of all at once
+  * Improves performance and memory usage
+
+* **Iterating Cursor:**
+
+  * `.forEach()` → loop through all documents
+  * `.hasNext()` → check if more documents exist
+  * `.next()` → fetch the next document
+
+* **Convert Cursor to Array:**
+
+  * `.toArray()` → convert all results into an array (loads all data into memory)
+
+* **Limit / Skip / Sort / Count:**
+
+  * `.limit(2)` → first 2 documents
+  * `.skip(2)` → skip first 2 documents
+  * `.sort({ age: -1 })` → descending order by age
+
+    * `-1` → Descending (higher to lower)
+    * `+1` → Ascending (lower to higher)
+  * `.count()` → count number of documents in cursor
+
+* **Cursor Control:**
+
+  * `.noCursorTimeout()` → prevent cursor from timing out
+  * `.close()` → manually close the cursor
+
+* **Batching:**
+- MongoDB returns documents in batches, not all at once.
+- Batch size controls how many docs are returned per network request.
+
+  * `.batchSize(10)` → use to make how much document element fetch from server in 1 call over the network (fetch 10 documents per batch)
+
+</details>
