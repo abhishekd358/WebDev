@@ -1584,9 +1584,9 @@ await db.command({
 
 ## 1️⃣ Validator (Schema Validation)
 
--> Rules applied on a collection to validate documents
--> Ensures correct structure & data types
--> Defined using `$jsonSchema` or query expressions
+- Rules applied on a collection to validate documents
+- Ensures correct structure & data types
+- Defined using `$jsonSchema` or query expressions
 
 Example:
 
@@ -1616,14 +1616,16 @@ validator: {
 
 ## 2️⃣ validationLevel
 
--> Decides **which documents** are validated
+- "`strict` validation poore documents fields ke types ko check karta hai, jabki `moderate` sirf updated fields type ko validate karta hai."
+
+- Decides **which documents** are validated
 
 Options:
--> `strict` (default)
+- `strict` (default)
 
 * Validate **all inserts & updates**
 
--> `moderate`
+- `moderate`
 
 * Validate only **new or updated fields**
 * Old invalid data allowed
@@ -1638,14 +1640,14 @@ validationLevel: "strict"
 
 ## 3️⃣ validationAction
 
--> Decides **what happens when validation fails**
+- Decides **what happens when validation fails**
 
 Options:
--> `error` (default)
+- `error` (default)
 
 * Reject operation
 
--> `warn`
+- `warn`
 
 * Allow operation
 * Log warning in server logs
