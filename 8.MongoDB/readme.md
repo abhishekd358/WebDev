@@ -1350,3 +1350,94 @@ console.log(ObjectId.isValid('invalid')); // false
 **Key Takeaway**: ObjectId is stored and transferred in **binary format** for **efficiency**. It’s a **class instance** in Node.js with useful methods for comparison, validation, and timestamp extraction. Always use **`.equals()`** for comparison and **`ObjectId.isValid()`** for validation.
 
 
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 19) `command({})`, `runCommand({})` in Mongodb
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+- **MongoDB commands** are essentially requests sent to the MongoDB server to perform various operations.
+- **Commands vs. Methods**:
+  - Methods like `find()`, `insertOne()`, `updateOne()` are convenient abstractions that internally run commands.
+  - Using `db.runCommand()` (in Shell) or `db.command()` (in Node.js driver) allows direct execution of raw commands, offering more power and flexibility.
+
+---
+
+## 🔧 **How to Run Commands in Different Environments**
+
+| Environment | Method | Description |
+|-------------|--------|-------------|
+| **Mongo Shell** | `db.runCommand({ commandName: value })` | Interactive, best for administration and debugging |
+| **Node.js Driver** | `db.command({ commandName: value })` | Returns a Promise, used in application code |
+
+> ✅ Both methods work similarly, just with slight syntax differences.
+
+---
+
+## 📁 **Common Commands Examples**
+
+| Command | Description | Example (Shell) | Requires Admin? |
+|---------|-------------|----------------|-----------------|
+| **listDatabases** | Lists all databases | `db.runCommand({ listDatabases: 1 })` | ✅ Yes (must be run in admin database) |
+| **listCollections** | Lists collections in current database | `db.runCommand({ listCollections: 1 })` | ❌ No |
+| **create** | Creates a new collection | `db.runCommand({ create: "collectionName" })` | ❌ No |
+| **dropDatabase** | Drops the current database | `db.runCommand({ dropDatabase: 1 })` | ❌ No |
+| **hostInfo** | Shows server host information | `db.runCommand({ hostInfo: 1 })` | ❌ No |
+| **serverStatus** | Shows server status and metrics | `db.runCommand({ serverStatus: 1 })` | ✅ Yes |
+
+
+
+
+## Node.js Driver → `db.command({})`
+
+```js
+// get all collections
+await db.command({ listCollections: 1 })
+```
+
+```js
+// get database stats
+await db.command({ dbStats: 1 })
+```
+
+```js
+// find documents
+await db.command({
+  find: "users",
+  limit: 5
+})
+```
+
+---
+
+## Mongo Shell → `db.runCommand({})`
+
+```js
+// get all collections
+db.runCommand({ listCollections: 1 })
+```
+
+```js
+// database stats
+db.runCommand({ dbStats: 1 })
+```
+
+```js
+// find documents
+db.runCommand({
+  find: "users",
+  limit: 5
+})
+```
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
