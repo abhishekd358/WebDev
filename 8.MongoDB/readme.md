@@ -1442,7 +1442,7 @@ db.runCommand({
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 18) Schema
+## 20) Schema
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -1486,7 +1486,7 @@ db.runCommand({
 
 </details>
 
-### 💡 Extra Gyan: Implementation of schema in mongoSH
+#### 💡 Extra Gyan: Implementation of schema in mongoSH & mongoClient
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -1497,7 +1497,8 @@ MongoDB allows **schema validation** using **`$jsonSchema`** to enforce structur
 
 ---
 
-## 1️⃣ **Create Collection with Schema (mongosh)**
+## 1️⃣ **Create Collection with Schema (mongoSH and Node js Driver)**
+-  implementation is same for mongoSH and mongodb mongoClient
 
 ```js
 db.createCollection("users", {
@@ -1521,18 +1522,8 @@ db.createCollection("users", {
 ✔ Invalid inserts will fail
 
 
-## 3️⃣ **Validation Options**
 
-| Option                      | Meaning                           |
-| --------------------------- | --------------------------------- |
-| `validationLevel: strict`   | All inserts & updates validated   |
-| `validationLevel: moderate` | Only new/updated fields validated |
-| `validationAction: error`   | Reject invalid data               |
-| `validationAction: warn`    | Allow but log warning             |
-
----
-
-## 4️⃣ **Common BSON Types**
+## 3️⃣ **Common BSON Types**
 
 ```js
 string, int, long, double, decimal
@@ -1543,28 +1534,139 @@ array, object, null
 ✔ BSON ≠ JSON
 ✔ MongoDB stores data in **binary (BSON)**
 
----
 
-## 5️⃣ **Schema in Node.js (MongoClient)**
+
+
+## 4️⃣ Changing Existing schema 
+
+- only use `callMod` field
 
 ```js
-await db.createCollection("users", {
+await db.command({
+  collMod: "users",
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["email"],
+      required: ["name", "email"],
       properties: {
+        name: { bsonType: "string" },
         email: { bsonType: "string" },
-        status: { enum: ["active", "inactive"] }
+        status: { enum: ["active", "inactive", "pending"] }
       }
     }
-  }
+  },
+  validationLevel: "moderate"
 });
+
 ```
-
-
 
 ## ⚡ **Interview One-Liner**
 
 > MongoDB supports schema validation using `$jsonSchema` to enforce structure, data types, and constraints at the database level.
+
+</details>
+
+#### 💡 validator, validationLevel and validationAction
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+## 1️⃣ Validator (Schema Validation)
+
+-> Rules applied on a collection to validate documents
+-> Ensures correct structure & data types
+-> Defined using `$jsonSchema` or query expressions
+
+Example:
+
+```
+validator: {
+  $jsonSchema: {
+    bsonType: "object",
+    required: ["name", "age"],
+    properties: {
+      name: { bsonType: "string" },
+      age: { bsonType: "int", minimum: 18 }
+    }
+  }
+}
+```
+
+
+## 2️⃣ validationLevel
+
+-> Decides **which documents** are validated
+
+Options:
+-> `strict` (default)
+
+* Validate **all inserts & updates**
+
+-> `moderate`
+
+* Validate only **new or updated fields**
+* Old invalid data allowed
+
+Example:
+
+```
+validationLevel: "strict"
+```
+
+
+
+## 3️⃣ validationAction
+
+-> Decides **what happens when validation fails**
+
+Options:
+-> `error` (default)
+
+* Reject operation
+
+-> `warn`
+
+* Allow operation
+* Log warning in server logs
+
+Example:
+
+```
+validationAction: "error"
+```
+
+
+
+## All Together (Create Collection)
+
+```
+db.createCollection("users", {
+  validator: { $jsonSchema: { bsonType: "object" } },
+  validationLevel: "strict",
+  validationAction: "error"
+})
+```
+
+
+## One-Line Memory Notes
+
+```
+validator        → rules
+validationLevel  → when rules apply
+validationAction → what to do on fail
+```
+
+
+
+## Interview Line
+
+"validator defines rules, validationLevel controls scope, and validationAction controls behavior on failure."
+
+</details>
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
