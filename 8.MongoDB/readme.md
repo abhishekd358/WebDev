@@ -1486,7 +1486,7 @@ db.runCommand({
 
 </details>
 
-#### 💡 Extra Gyan: Implementation of schema in mongoSH & mongoClient
+### ✅: Implementation of schema in mongoSH & mongoClient
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -1575,7 +1575,7 @@ await db.command({
 
 </details>
 
-### IMP✅: validator, validationLevel and validationAction
+### ✅: validator, validationLevel and validationAction
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -1645,11 +1645,11 @@ validationLevel: "strict"
 Options:
 - `error` (default)
 
-* Reject operation
+* if first error or anything wrong see in validation it directly fails
 
 - `warn`
 
-* Allow operation
+* even validation rule fail it run and save warning in server logs
 * Log warning in server logs
 
 Example:
@@ -1688,6 +1688,79 @@ validationAction → what to do on fail
 </details>
 
 
+### ✅: finding invalid Schema documents in MongoDB
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+**✔ Problem**
+- Large collections → manual checking impossible
+- Need automated way to find documents not following schema validation
+- MongoDB supports schema validation using `$jsonSchema`
+
+</br>
+
+**✔ What are Invalid / Non-Compliant Documents?**
+- Documents that exist in collection
+- But do NOT satisfy validation rules
+- Data is valid JSON, but violates schema
+
+</br>
+
+**✔ Method 1: Mongo Shell (mongosh)**
+
+1) Count Invalid Documents
+  `db.users.validate()`
+
+Important fields in output:
+- `nInvalidDocuments`
+- `nNonCompliantDocuments`
+- warnings (if schema violations exist)
+
+2) Find Actual Invalid Documents
+- Get schema from collection metadata
+- Use `$nor` + `$jsonSchema`
+
+Example:
+```js
+  const schema =
+    db.getCollectionInfos({ name: "users" })[0]
+      .options.validator.$jsonSchema;
+
+  db.users.find({ $nor: [{ $jsonSchema: schema }] })
+```
+
+**✔ Method 2: Node.js Driver**
+
+1) Validate collection
+  `await db.command({ validate: "users" })`
+
+2) Get schema
+```js
+  const info = await db.listCollections({ name: "users" }).toArray();
+  const schema = info[0].options.validator.$jsonSchema;
+```
+3) Find invalid documents
+```js
+  db.collection("users")
+    .find({ $nor: [{ $jsonSchema: schema }] })
+```
+
+
+
+✔ Useful Operators
+- `$jsonSchema `→ applies schema rules
+- `$nor` → finds documents NOT matching schema
+
+
+
+
+✔ Interview Line
+"MongoDB can detect non-compliant documents using collection validation and `$jsonSchema` queries with `$nor`."
+
+</details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
