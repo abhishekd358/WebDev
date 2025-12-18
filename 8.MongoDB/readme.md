@@ -1441,3 +1441,130 @@ db.runCommand({
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+
+## 18) Schema
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+✔ What is Schema Design?
+- Planning document structure before storing data
+- Decide fields, data types, nesting, defaults
+
+✔ Schema-less ≠ Structure-less
+- MongoDB allows flexibility
+- But production apps NEED discipline
+
+✔ Why Schema Design is Important
+- Prevents messy data
+- Improves readability
+- Easier maintenance
+- Better performance & validation
+
+✔ Good Schema Example
+
+```js
+{
+  _id: ObjectId,
+  name: String,
+  email: String,
+  password: String,
+  role: "user" | "admin",
+  isDeleted: Boolean,
+  createdAt: Date
+}
+```
+
+✔ Schema Design vs Data Modeling
+- Data Modeling → collections & relationships
+- Schema Design → document-level structure
+
+✔ Interview One-Liner
+"MongoDB is schema-less, but schema design is essential for building scalable and maintainable applications."
+
+</details>
+
+### 💡 Extra Gyan: Implementation of schema in mongoSH
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+MongoDB allows **schema validation** using **`$jsonSchema`** to enforce structure even though it’s schema-less.
+
+---
+
+## 1️⃣ **Create Collection with Schema (mongosh)**
+
+```js
+db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["name", "email"],
+      properties: {
+        name: { bsonType: "string" },
+        email: { bsonType: "string" },
+        age: { bsonType: "int", minimum: 18 }
+      }
+    }
+  },
+  validationLevel: "strict",
+  validationAction: "error"
+});
+```
+
+✔ Enforces structure at DB level
+✔ Invalid inserts will fail
+
+
+## 3️⃣ **Validation Options**
+
+| Option                      | Meaning                           |
+| --------------------------- | --------------------------------- |
+| `validationLevel: strict`   | All inserts & updates validated   |
+| `validationLevel: moderate` | Only new/updated fields validated |
+| `validationAction: error`   | Reject invalid data               |
+| `validationAction: warn`    | Allow but log warning             |
+
+---
+
+## 4️⃣ **Common BSON Types**
+
+```js
+string, int, long, double, decimal
+bool, date, objectId
+array, object, null
+```
+
+✔ BSON ≠ JSON
+✔ MongoDB stores data in **binary (BSON)**
+
+---
+
+## 5️⃣ **Schema in Node.js (MongoClient)**
+
+```js
+await db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["email"],
+      properties: {
+        email: { bsonType: "string" },
+        status: { enum: ["active", "inactive"] }
+      }
+    }
+  }
+});
+```
+
+
+
+## ⚡ **Interview One-Liner**
+
+> MongoDB supports schema validation using `$jsonSchema` to enforce structure, data types, and constraints at the database level.
+
