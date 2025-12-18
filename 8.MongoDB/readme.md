@@ -1495,6 +1495,13 @@ db.runCommand({
 
 MongoDB allows **schema validation** using **`$jsonSchema`** to enforce structure even though it’s schema-less.
 
+- `$jsonSchema`:
+  - is a international standard
+  - Defines strict structure, data types, and rules for documents.
+  - Supports nested validation.
+
+
+
 ---
 
 ## 1️⃣ **Create Collection with Schema (mongoSH and Node js Driver)**
@@ -1510,13 +1517,15 @@ db.createCollection("users", {
         name: { bsonType: "string" },
         email: { bsonType: "string" },
         age: { bsonType: "int", minimum: 18 }
-      }
+      },
+      additionalProperties: false/true
     }
   },
   validationLevel: "strict",
   validationAction: "error"
 });
 ```
+
 
 ✔ Enforces structure at DB level
 ✔ Invalid inserts will fail
@@ -1566,7 +1575,7 @@ await db.command({
 
 </details>
 
-#### 💡 validator, validationLevel and validationAction
+### IMP✅: validator, validationLevel and validationAction
 
 <details>
   <summary>📌 READ IN DETAILS :</summary>
@@ -1589,10 +1598,20 @@ validator: {
     properties: {
       name: { bsonType: "string" },
       age: { bsonType: "int", minimum: 18 }
-    }
+    },
+    additionalProperties: true/false
   }
 }
 ```
+
+</br>
+
+- `validator` → rules
+- `required` → must fields
+- `properties` → field types
+- `additionalProperties` → extra fields allowed?
+- `validationLevel` → when rules apply
+- `validationAction` → what happens on fail
 
 
 ## 2️⃣ validationLevel
