@@ -1796,7 +1796,7 @@ Example:
 </details>
 
 
-### 2️⃣ Implementation of Transaction with Nodjs Drivers or MongoSH
+### 2️⃣ Implementation of Transaction with Nodejs Drivers or MongoSH
 <details>
   <summary>📌 READ IN DETAILS :</summary>
 
@@ -1907,6 +1907,7 @@ runTransaction();
 
 </details>
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ## 22) ACID
 
@@ -1990,7 +1991,7 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 
 </details>
 
-
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
 ## 23) Backup and Restore
@@ -2145,7 +2146,7 @@ mongorestore --gzip --archive=/backup/mongo/mongodb_backup.gz
 
 </details>
 
-
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ## 24) Import and Export
 
@@ -2259,6 +2260,128 @@ mongoimport --db mydatabase --collection users --username admin --password secre
 5. **Drop existing collection before importing**
 ```sh
 mongoimport --db mydatabase --collection users --drop --file users.json
+```
 
 </details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+## 25) Authentication & Authorization
+
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+
+</br>
+
+### Authentication vs Authorization
+- Authentication → Who you are (login)
+- Authorization → What you can do (permissions)
+
+### Default MongoDB Behavior
+- Authentication is DISABLED by default
+- Anyone with IP + port can access full DB
+
+
+### Enabling Authentication
+- Using flag:
+  `mongod --auth`
+
+- Using config file (mongod.cfg):
+  `security:
+    authorization: enabled`
+
+### Admin User (First Step)
+- Must be created BEFORE auth blocks access
+- Created in admin database
+- Uses root role
+
+</br>
+
+ **use admin**
+
+```js
+  db.createUser({
+    user: "admin",
+    pwd: "password",
+    roles: [{ role: "root", db: "admin" }]
+  })
+```
+
+### Login (Authenticate)
+  `db.auth("admin", "password")`
+
+### Creating App Users
+- Create users with least privilege
+
+</br>
+
+ **use appDB**
+
+```js
+  db.createUser({
+    user: "appUser",
+    pwd: "pass",
+    roles: [{ role: "readWrite", db: "appDB" }]
+  })
+```
+
+### Read-Only User
+- Can only read data
+
+```js
+  db.createUser({
+    user: "readonly",
+    pwd: "pass",
+    roles: [{ role: "read", db: "appDB" }]
+  })
+```
+
+### Common Built-in Roles
+- `read` → read only
+- `readWrite` → read + write
+- `dbAdmin` → DB structure, no data access
+- `userAdmin` → manage users
+- `dbOwner` → full DB control
+- `root` → full server control
+
+
+### Connection String
+- Same DB:
+  `mongodb://user:pass@localhost:27017/appDB`
+
+- Different auth DB:
+  `mongodb://user:pass@localhost:27017/appDB?authSource=admin`
+
+### Managing Users
+- View users:
+  `db.getUsers()`
+
+- Update roles (REPLACES old roles):
+
+```js
+  db.updateUser("user", {
+    roles: [{ role: "readWrite", db: "appDB" }]
+  })
+```
+
+- Delete user:
+  `db.dropUser("user")`
+
+### Logout
+  `db.logout()`
+
+### Node.js Connection
+- Use same auth connection string
+- MongoClient handles authentication automatically
+
+### Best Practices
+- Always enable auth in production
+- Use least privilege principle
+- Never use root user in applications
+- Separate admin & app users
+
+### Interview Line
+"Authentication verifies user identity, while authorization controls access using roles. MongoDB uses role-based access control (RBAC)."
+
 
