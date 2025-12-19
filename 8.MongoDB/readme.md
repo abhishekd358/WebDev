@@ -1796,8 +1796,110 @@ Example:
 </details>
 
 
-### 1️⃣ Implementation of Transaction with Nodjs Drivers or MongoSH
+### 2️⃣ Implementation of Transaction with Nodjs Drivers or MongoSH
 <details>
   <summary>📌 READ IN DETAILS :</summary>
 
 </br>
+
+✔ What are Transactions?
+- Group of operations executed as ONE unit
+- Either ALL succeed or ALL fail (Atomicity)
+- Used when multiple collections must stay consistent
+
+✔ Prerequisite
+- Transactions require Replica Set
+- Standalone MongoDB ❌ not supported
+- MongoDB Atlas ✔ enabled by default
+
+✔ Common Error
+"Transaction numbers are only allowed on a replica set member"
+
+✔ Replica Set Setup (Local)
+1) Enable replica set in `mongod.cfg`
+   replication:
+     `replSetName: "myreplicaset"`
+
+2) Start MongoDB
+3) Initialize:
+   `rs.initiate()`
+4) Check:
+   `rs.status()`
+
+✔ Connection String
+`mongodb://localhost:27017/dbname?replicaSet=myreplicaset`
+
+✔ Transaction Flow (IMPORTANT)
+1) startSession()
+2) startTransaction()
+3) Perform DB operations (PASS session)
+4) commitTransaction() on success
+5) abortTransaction() on error
+6) endSession()
+
+
+✔ Interview Line
+"MongoDB transactions provide ACID guarantees across multiple documents and collections using sessions and replica sets."
+
+
+</details>
+
+### 3️⃣ Code 
+<details>
+  <summary>📌 READ IN DETAILS :</summary>
+</br>
+
+```js
+const { MongoClient } = require("mongodb");
+
+const uri = "mongodb://localhost:27017/bankdb?replicaSet=myreplicaset";
+const client = new MongoClient(uri);
+
+async function runTransaction() {
+  await client.connect();
+
+  // Create Session
+  const session = client.startSession();
+
+  try {
+    // 1️⃣ Start transaction
+    session.startTransaction();
+
+    const db = client.db("bankdb");
+    const users = db.collection("users");
+    const accounts = db.collection("accounts");
+
+    // 2️⃣ Operation 1: Insert User
+    const userResult = await users.insertOne(
+      { name: "Rahul", createdAt: new Date() },
+      { session }
+    );
+
+    // 3️⃣ Operation 2: Insert Account
+    await accounts.insertOne(
+      {
+        userId: userResult.insertedId,
+        balance: 1000
+      },
+      { session }
+    );
+
+    // 4️⃣ Commit transaction
+    await session.commitTransaction();
+    console.log("Transaction committed successfully");
+
+  } catch (error) {
+    // ❌ If any error → rollback
+    await session.abortTransaction();
+    console.log("Transaction aborted");
+
+  } finally {
+    // 5️⃣ End session
+    session.endSession();
+    await client.close();
+  }
+}
+
+runTransaction();
+
+```
