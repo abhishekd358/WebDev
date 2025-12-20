@@ -1944,6 +1944,64 @@ Example:
 
 </details>
 
+### 📝Embedding vs Referencing
+
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+✔ Embedding
+- Related data stored inside the SAME document
+- Faster reads (single query)
+- Best for small, limited, rarely changing data
+- One-to-few relationships
+
+Example:
+User → Address
+Blog → Limited comments
+
+✔ Referencing
+- Related data stored in SEPARATE collections
+- Linked using ObjectId references
+- Better for large, growing, frequently updated data
+- One-to-many / many-to-many relationships
+
+Example:
+User → Orders
+Product → Reviews
+
+✔ Key Differences
+Embedding:
+- Very fast read
+- Data duplication possible
+- Limited scalability (document size limit)
+
+Referencing:
+- Needs extra query / lookup
+- No duplication
+- Highly scalable
+
+✔ Performance Rule
+- Read-heavy + small data → Embed
+- Write-heavy + large data → Reference
+
+✔ Hybrid Approach (Most Used)
+- Embed small info
+- Reference large or shared data
+- Real-world apps ALWAYS use hybrid modeling
+
+✔ MERN App Example
+Order:
+- userId → referenced
+- items → embedded
+
+✔ Interview Line
+"Embedding improves read performance by storing related data in the same document, while referencing improves scalability by storing data in separate collections using ObjectIds."
+
+</details>
+
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
