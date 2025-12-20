@@ -1,7 +1,7 @@
 ## 1) Intro to Databases
 
 <details>
-  <summary>📌 READ IN DETAILS:</summary>
+  <summary>👉🏼 READ IN DETAILS:</summary>
 
 ```
 Database
@@ -36,9 +36,9 @@ Databases use their own protocols over TCP to talk to clients:
 ## 2) Type of Databases
 
 <details>
-  <summary>📌 READ IN DETAILS:</summary>
+  <summary>👉🏼 READ IN DETAILS:</summary>
 
-#### **2 Main Types of Databases:**
+### ** Main Types of Databases:**
 
 1️⃣ Relational (SQL):
    - Uses tables (rows & columns)
@@ -72,19 +72,165 @@ Databases use their own protocols over TCP to talk to clients:
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 3) Mongo Shell In Details
+## 3) Types Of NoSql Databses:
 
 <details>
-  <summary>📌 READ IN DETAILS:</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
-## What is Mongo Shell?
+</br>
+
+
+✔ NoSQL databases are divided into 4 main types based on data model & use case.
+
+✔ 1) Document-Based (MongoDB)
+   - Data stored as JSON/BSON documents
+   - Flexible schema, nested objects, arrays
+   - BEST for MERN stack, web apps, APIs
+
+✔ 2) Key-Value (Redis)
+   - Data = key → value
+   - Extremely fast
+   - Used for caching, sessions, OTPs
+   - Not suitable for complex queries
+
+✔ 3) Column-Based (Cassandra)
+   - Data stored in columns (not rows)
+   - Handles huge data & high write load
+   - Used in analytics, big data, IoT
+
+✔ 4) Graph Database (Neo4j)
+   - Data stored as nodes & relationships
+   - Best for relationship-heavy data
+   - Used in social networks, recommendations, fraud detection
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 4) What is MongoDB
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+
+✔ MongoDB is a document-based NoSQL database.
+
+✔ Data is stored in JSON-like (BSON) documents instead of tables.
+
+✔ Data Structure:
+   MySQL   → Database → Table → Row → Column
+   MongoDB → Database → Collection → Document → Field
+
+
+✔ Key Features:
+   - Horizontally scalable
+   - Schema-less (flexible structure)
+   - High performance (fast read/write + indexing)
+
+✔ MongoDB vs SQL (Core Difference):
+   - Tables → Collections
+   - Rows → Documents
+   - Columns → Fields
+
+✔ Interview Line:
+
+   "MongoDB is a document-based NoSQL database ideal for scalable web applications."
+
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 5) JSON vs BSON
+
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+✔ MongoDB looks like JSON externally but stores data internally in BSON.
+
+✔ JSON (JavaScript Object Notation):
+   - Human-readable
+   - Lightweight
+   - Limited data types (no Date, no Binary)
+   - Slower for large data
+
+✔ BSON (Binary JSON):
+   - Binary format (machine-friendly)
+   - Supports rich data types: Date, Binary, Int32/Int64, ObjectId
+   - Faster read/write
+   - Efficient storage
+   - Used internally by MongoDB
+
+✔ Key Concept:
+   - Write JSON → MongoDB converts it to BSON automatically
+   - JSON = Human language, BSON = Machine language
+
+✔ Interview Line:
+
+   "MongoDB stores data internally in BSON, a binary representation of JSON for performance."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 6) MongoDB Architecture
+
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+
+✔ MongoDB Architecture = Client → Server → Database → Collection → Document
+
+✔ Components:
+   - Server (mongod): Handles requests, stores data
+   - Client (mongosh / Compass / Node driver): Sends queries
+   - Database: Logical container of collections
+   - Collection: Stores documents, no fixed schema
+   - Document: Smallest data unit, JSON-like
+   - Cluster: Group of servers (nodes) providing:
+       • High availability (replica sets)
+       • Horizontal scaling (sharding)
+       • Fault tolerance
+
+✔ Query Flow:
+   1. Client sends query
+   2. Server/Cluster receives request
+   3. Executes on database → collection → documents
+   4. Returns data to client
+
+✔ Interview Line:
+
+   "MongoDB architecture consists of client, server, database, collection, and document; clusters (replica sets/shards) provide high availability and scalability. Data is stored internally in BSON."
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 7) Mongo Shell In Details
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+### What is Mongo Shell?
 - mongosh = MongoDB Shell (CLI client)
 - Uses MongoDB Wire Protocol (TCP), **NOT HTTP**
 - **Built on Node.js** - contains embedded Node.js runtime
 - Works even without installing external Node.js
 - Default connects to: **mongodb://localhost:27017** i.e **127.0.0.1:27017**
 
-## Key Features
+### Key Features
 ### 1. Node.js Environment
 - JavaScript REPL like Node.js
 - Node core modules available (fs, os, path, http)
@@ -124,18 +270,13 @@ Databases use their own protocols over TCP to talk to clients:
 
 </details>
 
-
-
-
-
-
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 4) MongoDB Server 
+## 8) MongoDB Server 
 
 <details>
-  <summary>📌 READ IN DETAILS:</summary>
+  <summary>👉🏼 READ IN DETAILS:</summary>
 
 </br>
 
@@ -189,10 +330,10 @@ Databases use their own protocols over TCP to talk to clients:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 5) Databases, Collections, Documents
+## 9) Databases, Collections, Documents
 
 <details>
-  <summary>📌 READ IN DETAILS</summary>
+  <summary>👉🏼 READ IN DETAILS</summary>
 
 </br>
 
@@ -226,10 +367,10 @@ Databases use their own protocols over TCP to talk to clients:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 6) CREATE
+## 10) CREATE
 
 <details>
-  <summary>📌 READ IN DETAILS:</summary>
+  <summary>👉🏼 READ IN DETAILS:</summary>
 
 </br>
 
@@ -275,10 +416,10 @@ Databases use their own protocols over TCP to talk to clients:
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 7) READ
+## 11) READ
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -335,9 +476,13 @@ Databases use their own protocols over TCP to talk to clients:
    
    - Interview Line: "find() fetches multiple documents using queries, supports projection, limit, skip, sort, and returns a cursor."
 
----
+</details>
 
-## 📍 Cursor
+### 📝 Cursor
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
 
 * **Cursor (MongoDB):**
 
@@ -375,9 +520,14 @@ Databases use their own protocols over TCP to talk to clients:
 
   * `.batchSize(10)` → fetch 10 documents per batch
 
----
+</details>
 
-## 📍 Query Operators
+### 📝 Query Operators
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
 
 ✔ **Comparison Operators:**
    - `$gt` → greater than
@@ -424,9 +574,15 @@ Databases use their own protocols over TCP to talk to clients:
 ✔ Interview Line:
    "MongoDB query operators like $gt, $lt, $in, $or, $and, $exists allow filtering documents with powerful conditions, including nested fields and arrays."
 
----
+</details>
 
-## 📍 Projections
+
+### 📝 Projections
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
 
 ✔ **Projection** = **Select which fields to show in query result**
 
@@ -462,169 +618,181 @@ db.collection.find({ query }, { field: 1, field: 0, _id: 0 })
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 8) UPDATE
+## 12) UPDATE
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+✔ UPDATE = **Modify existing documents in a collection**
+
+</br>
+
+✔ **Methods:**
+   - `updateOne()`  → updates first matching document
+
+```c++
+   db.collection.updateOne(
+       { filter },
+     { updateOperator },
+     { options }
+   )
+```
+- `updateMany()` → updates all matching documents
+
+```c++
+   db.collection.updateMany(
+     { filter },
+     { updateOperator },
+     { options }
+   )
+```
+
+</br>
+
+✔ ⚠️ **Important Rule:**
+   - Direct value update NOT allowed
+   - Always use update operators
+
+  ```
+  ❌ { age: 23 } //wrong way
+  ✔ { $set: { age: 23 } } //right way 
+```
+
+</br>
+
+✔ **Common Update Operators:**
+   - `$set`   → update/add field
+   - `$inc`   → increment number
+   - `$unset` → remove field
+   - `$push`  → add item to array
+   - `$pull`  → remove item from array
+   - `upsert` → update or insert
+
+</br>
+
+✔ Examples:
+   - Update single field: `{ $set: { age: 23 } }`
+   - Update multiple fields: `{ $set: { age: 24, city: "Delhi" } }`
+   - Increment: `{ $inc: { age: 1 } }`
+   - Remove field: `{ $unset: { city: "" } }`
+   - Nested field: `{ $set: { "address.city": "Mumbai" } }`
+
+✔ Result Object:
+   - **matchedCount**  → documents found
+   - **modifiedCount** → documents updated
+
+</br>
+
+✔ Interview Line:
+   "MongoDB updates modify existing documents using update operators like $set via updateOne or updateMany."
+
+</details>
+
+### 📝 Upsert
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
 
-✔ UPDATE
-- Used to modify existing documents in a collection
+✔ UPSERT = Update + Insert
+   - **Document exists** → UPDATE
+   - **Document not exists** → INSERT
 
-✔ Update Methods
-- `updateOne()`  → updates first matching document
-- `updateMany()` → updates all matching documents
+✔ **Used with:**
+   - updateOne()
+   - updateMany()
+   - replaceOne()
 
-
-
-#### 🔹 **Basic Syntax**
-
-```
-db.collection.updateOne(
-  { filter },
-  { updateOperator },
-  { options }
-)
-
-db.collection.updateMany(
-  { filter },
-  { updateOperator },
-  { options }
-)
+✔ **Upsert Syntax:**
+```c++
+   db.collection.updateOne(
+     { filter },
+     { $set: { field: value } },
+     { upsert: true }
+   )
 ```
 
+✔ Interview Line:
+   "Upsert performs update or insert in one operation."
 
-#### ⚠️ **IMPORTANT RULE**
+</details>
 
-```
-❌ Direct value update NOT allowed
-   { age: 23 }
+### 📝 replaceOne()
 
-✔ Always use update operators
-   { $set: { age: 23 } }
-```
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
----
+</br>
 
-#### 🔹 **Common Update Operators**
+✔ **replaceOne():**
+   - Replaces FULL document
+   - Update operators NOT allowed
+   - _id remains same
+   - Old fields removed if not included
 
-```
-- `$set`    → add / update field
-- `$inc`    → increment number
-- `$unset`  → remove field
-- `$push`   → add item to array
-- `$pull`   → remove item from array
-```
+</br>
 
-#### 🔹 **Update Examples**
-
-```
-✔ Update single field
-{ $set: { age: 23 } }
-
-✔ Update multiple fields
-{ $set: { age: 24, city: "Delhi" } }
-
-✔ Increment value
-{ $inc: { age: 1 } }
-
-✔ Remove field
-{ $unset: { city: "" } }
-
-✔ Update nested field
-{ $set: { "address.city": "Mumbai" } }
+✔ **Syntax:**
+```c++
+   db.collection.replaceOne(
+     { filter },
+     { fullDocument },
+     { upsert: true } // optional
+   )
 ```
 
-#### 📍 **UPSERT (Update + Insert)**
+</br>
 
+✔ **updateOne vs replaceOne:**
+   - `updateOne` → partial update (safe)
+   - `replaceOne` → full replace (risky)
 
-✔ If document exists → UPDATE
-✔ If document does not exist → INSERT
+</br>
 
-✔ Used with:
-- updateOne()
-- updateMany()
-- replaceOne()
+✔ **Real-Life Analogy:**
+   - updateOne = edit profile
+   - replaceOne = delete & recreate profile with same ID
 
+✔ Interview Line:
+   "Upsert performs update or insert in one operation, while replaceOne replaces the entire document except _id."
 
-#### 🔹 **Upsert Syntax**
+</details>
 
-```
-db.collection.updateOne(
-  { filter },
-  { $set: { field: value } },
-  { upsert: true }
-)
-```
+### 📝findOneAndUpdate()
 
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
-#### 📍 **replaceOne()**
+</br>
 
-```
-✔ replaceOne()
-- Replaces FULL document
-- Update operators NOT allowed
-- _id remains same
-- Old fields removed if not included
-```
+```findOneAndUpdate()``` → perform action + return affected document
 
-#### 🔹 **Syntax**
+ **findOneAndUpdate():**
+   - Finds first matching document
+   - Updates it
+   - Returns old or updated document
 
-```
-db.collection.replaceOne(
-  { filter },
-  { fullDocument },
-  { upsert: true } // optional
-)
-```
+   **Syntax:**
+   ```c++
+     db.collection.findOneAndUpdate(
+       { filter },
+       { updateOperator },
+       { options }
+     )
+   ```
 
-#### 🔹 **updateOne vs replaceOne**
-
-```
-- updateOne  → partial update (safe)
-- replaceOne → full replace (risky)
-```
-
-
-#### 📍 **findOneAndUpdate()**
-
-```
-✔ findOneAndUpdate()
-- Finds first matching document
-- Updates it
-- Returns old or updated document
-```
-
-#### 🔹 **Syntax**
-
-```
-db.collection.findOneAndUpdate(
-  { filter },
-  { updateOperator },
-  { options }
-)
-```
-
-#### 🔹 **Example**
-
-```
-db.users.findOneAndUpdate(
-  { name: "Aman" },
-  { $set: { age: 26 } },
-  { returnNewDocument: true }
-)
-```
-
-### ⚡ **INTERVIEW ONE-LINERS**
-
-```
-✔ MongoDB updates use update operators like $set with updateOne or updateMany.
-✔ Upsert performs update or insert in a single operation.
-✔ replaceOne replaces the entire document except _id.
-✔ findOneAndUpdate returns the affected document after update.
-```
+   **Example:**
+   ```c++
+     db.users.findOneAndUpdate(
+       { name: "Aman" },
+       { $set: { age: 26 } },
+       { returnNewDocument: true }
+     )
+   ```
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
@@ -632,10 +800,10 @@ db.users.findOneAndUpdate(
 
 
 
-## 9) DELETE
+## 13) DELETE
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -701,9 +869,15 @@ db.users.deleteMany({})   // VERY DANGEROUS
 ✔ Interview Line:
    "MongoDB DELETE operations remove documents using deleteOne() or deleteMany() based on filter conditions. Use cautiously to prevent data loss."
 
----
+</details>
 
-## 📍findOneAndDelete()
+
+### 📝findOneAndDelete()
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
 
 
  **findOneAndDelete():**
@@ -731,9 +905,14 @@ db.users.deleteMany({})   // VERY DANGEROUS
 ✔ Interview Line:
    "findOneAndUpdate() and findOneAndDelete() perform the operation and return the affected document, ideal for real-time apps."
 
---- 
+</details>
 
-## 📍 drop() vs deleteMany()
+### 📝 drop() vs deleteMany()
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
 
 ✔ Purpose:
    - Both remove data from collection
@@ -767,9 +946,14 @@ db.users.deleteMany({})   // VERY DANGEROUS
 ✔ Interview Line:
    "deleteMany() deletes documents but keeps the collection, whereas drop() removes the entire collection from the database."
 
----
+</details>
 
-## 📍 Soft Delete
+### 📝 Soft Delete
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
 
 ✔ **Purpose:**
    - Soft Delete = logically delete data
@@ -812,13 +996,14 @@ db.users.updateOne(
 </br>
 
 </details>
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 10) Data Structure and Data Types
+## 14) Data Structure and Data Types
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 Document Structure & Data Types
@@ -882,10 +1067,10 @@ Document Structure & Data Types
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 11) _id Field (Auto ObjectId Explained)
+## 15) _id Field (Auto ObjectId Explained)
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -917,10 +1102,10 @@ Document Structure & Data Types
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 12) Where Mongodb Store Data Locally?  
+## 16) Where Mongodb Store Data Locally?  
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -945,10 +1130,10 @@ Document Structure & Data Types
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 13)🤯 MongoDB Configuration using `mongod.cfg`
+## 17)🤯 MongoDB Configuration using `mongod.cfg`
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1005,10 +1190,10 @@ Document Structure & Data Types
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 14) 🤯 Accessing MongoDB Server from Anywhere  
+## 18) 🤯 Accessing MongoDB Server from Anywhere  
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1022,7 +1207,7 @@ Document Structure & Data Types
 - For remote access:
   net:
     bindIp: 0.0.0.0        # All IPv4
-    # or
+    ### or
     bindIp: [::],0.0.0.0     # IPv6 + IPv4
 
 ✔ IPv6 Requirement
@@ -1053,10 +1238,10 @@ Document Structure & Data Types
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 15)🤯 Running .js script file as a CMD file to MongoSH  
+## 19)🤯 Running .js script file as a CMD file to MongoSH  
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1076,10 +1261,10 @@ mongosh <your_script_name>.js
 
 
 
-## 16) MongoDB Driver 
+## 20) MongoDB Driver 
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1135,7 +1320,7 @@ mongosh <your_script_name>.js
 ### Implementing the CRUD using Mongodb Node Js Driver
 
 <details>
-  <summary>📌 Implementation :</summary>
+  <summary>👉🏼 Implementation :</summary>
 
 - create a .js file
 - run `npm init -y`
@@ -1232,10 +1417,10 @@ try {
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 17) Cursor
+## 21) Cursor
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1283,10 +1468,10 @@ try {
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 18) Why MongoDB **ObjectId** Is Not a String
+## 22) Why MongoDB **ObjectId** Is Not a String
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1313,7 +1498,7 @@ ObjectId is a **12-byte binary value** divided into:
 This structure ensures **uniqueness** and **sortability by creation time**.
 
 
-## **Working with ObjectId in Node.js**
+### **Working with ObjectId in Node.js**
 
 ### **Creating an ObjectId**
 ```javascript
@@ -1357,10 +1542,10 @@ console.log(ObjectId.isValid('invalid')); // false
 
 
 
-## 19) `command({})`, `runCommand({})` in Mongodb
+## 23) `command({})`, `runCommand({})` in Mongodb
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1371,7 +1556,7 @@ console.log(ObjectId.isValid('invalid')); // false
 
 ---
 
-## 🔧 **How to Run Commands in Different Environments**
+### 🔧 **How to Run Commands in Different Environments**
 
 | Environment | Method | Description |
 |-------------|--------|-------------|
@@ -1382,7 +1567,7 @@ console.log(ObjectId.isValid('invalid')); // false
 
 ---
 
-## 📁 **Common Commands Examples**
+### 📁 **Common Commands Examples**
 
 | Command | Description | Example (Shell) | Requires Admin? |
 |---------|-------------|----------------|-----------------|
@@ -1396,7 +1581,7 @@ console.log(ObjectId.isValid('invalid')); // false
 
 
 
-## Node.js Driver → `db.command({})`
+### Node.js Driver → `db.command({})`
 
 ```js
 // get all collections
@@ -1418,7 +1603,7 @@ await db.command({
 
 ---
 
-## Mongo Shell → `db.runCommand({})`
+### Mongo Shell → `db.runCommand({})`
 
 ```js
 // get all collections
@@ -1442,10 +1627,10 @@ db.runCommand({
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 20) Schema
+## 24) Schema
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1486,10 +1671,10 @@ db.runCommand({
 
 </details>
 
-### ✅: Implementation of schema in mongoSH & mongoClient
+### 📝: Implementation of schema in mongoSH & mongoClient
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1504,7 +1689,7 @@ MongoDB allows **schema validation** using **`$jsonSchema`** to enforce structur
 
 ---
 
-## 1️⃣ **Create Collection with Schema (mongoSH and Node js Driver)**
+### 1️⃣ **Create Collection with Schema (mongoSH and Node js Driver)**
 -  implementation is same for mongoSH and mongodb mongoClient
 
 ```js
@@ -1532,7 +1717,7 @@ db.createCollection("users", {
 
 
 
-## 3️⃣ **Common BSON Types**
+### 3️⃣ **Common BSON Types**
 
 ```js
 string, int, long, double, decimal
@@ -1546,7 +1731,7 @@ array, object, null
 
 
 
-## 4️⃣ Changing Existing schema 
+### 4️⃣ Changing Existing schema 
 
 - only use `callMod` field
 
@@ -1569,20 +1754,20 @@ await db.command({
 
 ```
 
-## ⚡ **Interview One-Liner**
+### ⚡ **Interview One-Liner**
 
 > MongoDB supports schema validation using `$jsonSchema` to enforce structure, data types, and constraints at the database level.
 
 </details>
 
-### ✅: validator, validationLevel and validationAction
+### 📝: validator, validationLevel and validationAction
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
-## 1️⃣ Validator (Schema Validation)
+### 1️⃣ Validator (Schema Validation)
 
 - Rules applied on a collection to validate documents
 - Ensures correct structure & data types
@@ -1614,7 +1799,7 @@ validator: {
 - `validationAction` → what happens on fail
 
 
-## 2️⃣ validationLevel
+### 2️⃣ validationLevel
 
 - "`strict` validation poore documents fields ke types ko check karta hai, jabki `moderate` sirf updated fields type ko validate karta hai."
 
@@ -1638,7 +1823,7 @@ validationLevel: "strict"
 
 
 
-## 3️⃣ validationAction
+### 3️⃣ validationAction
 
 - Decides **what happens when validation fails**
 
@@ -1660,7 +1845,7 @@ validationAction: "error"
 
 
 
-## All Together (Create Collection)
+### All Together (Create Collection)
 
 ```
 db.createCollection("users", {
@@ -1671,7 +1856,7 @@ db.createCollection("users", {
 ```
 
 
-## One-Line Memory Notes
+### One-Line Memory Notes
 
 ```
 validator        → rules
@@ -1681,17 +1866,17 @@ validationAction → what to do on fail
 
 
 
-## Interview Line
+### Interview Line
 
 "validator defines rules, validationLevel controls scope, and validationAction controls behavior on failure."
 
 </details>
 
 
-### ✅: finding invalid Schema documents in MongoDB
+### 📝: finding invalid Schema documents in MongoDB
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1762,12 +1947,12 @@ Example:
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 21) Transaction
+## 25) Transaction
 
  
 ### 1️⃣ What is a Transaction?
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1798,7 +1983,7 @@ Example:
 
 ### 2️⃣ Implementation of Transaction with Nodejs Drivers or MongoSH
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1846,7 +2031,7 @@ Example:
 
 ### 3️⃣ Code 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 </br>
 
 ```js
@@ -1909,10 +2094,10 @@ runTransaction();
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 22) ACID
+## 26) ACID
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -1923,7 +2108,7 @@ runTransaction();
 
 MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 
-## 1️⃣ **Atomicity**
+### 1️⃣ **Atomicity**
 
 * A transaction is treated as **one single unit**
 * Either **all operations succeed** or **all fail**
@@ -1931,7 +2116,7 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 * If any operation inside a transaction fails, **entire transaction is rolled back**
 
 
-## 2️⃣ **Consistency**
+### 2️⃣ **Consistency**
 
 * Database moves from **one valid state to another**
 * Data must follow **schema rules, constraints, and business logic**
@@ -1943,7 +2128,7 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 * Transactions ensure rules are not broken
 
 
-## 3️⃣ **Isolation**
+### 3️⃣ **Isolation**
 
 * Transactions execute **independently**
 * One transaction cannot see **partial changes** of another
@@ -1953,7 +2138,7 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 * Uses **snapshot isolation**
 * Reads inside a transaction see a **consistent snapshot**
 
-## 4️⃣ **Durability**
+### 4️⃣ **Durability**
 
 * Once a transaction is committed, data is **permanently saved**
 * Data survives **crashes or power failure**
@@ -1964,7 +2149,7 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 * Writes are confirmed by **majority nodes**
 
 
-## ⚠️ **Important Notes (Exam / Interview)**
+### ⚠️ **Important Notes (Exam / Interview)**
 
 * ACID transactions require **Replica Set**
 * Standalone MongoDB ❌ does NOT support transactions
@@ -1973,7 +2158,7 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 
 ---
 
-## 📝 **One-Line Definitions (Memorize)**
+### 📝 **One-Line Definitions (Memorize)**
 
 * **Atomicity:** All operations succeed or fail together
 * **Consistency:** Data remains valid after transaction
@@ -1982,7 +2167,7 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 
 
 
-## ✅ **Key Takeaways**
+### ✅ **Key Takeaways**
 
 * MongoDB is **NoSQL + ACID**
 * ACID is achieved using **transactions**
@@ -1994,10 +2179,10 @@ MongoDB supports **ACID transactions** (from v4.0+) using **replica sets**.
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 23) Backup and Restore
+## 27) Backup and Restore
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -2148,10 +2333,10 @@ mongorestore --gzip --archive=/backup/mongo/mongodb_backup.gz
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## 24) Import and Export
+## 28) Import and Export
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
@@ -2267,10 +2452,10 @@ mongoimport --db mydatabase --collection users --drop --file users.json
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 25) Authentication & Authorization
+## 29) Authentication & Authorization
 
 <details>
-  <summary>📌 READ IN DETAILS :</summary>
+  <summary>👉🏼 READ IN DETAILS :</summary>
 
 </br>
 
