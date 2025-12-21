@@ -2627,4 +2627,301 @@ mongoimport --db mydatabase --collection users --drop --file users.json
 ### Interview Line
 "Authentication verifies user identity, while authorization controls access using roles. MongoDB uses role-based access control (RBAC)."
 
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+## 30 Indexes
+
+### 📝 What is Indexes ?
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+✔ Index
+- Index = shortcut for fast data search
+- Avoids scanning every document
+- Similar to book index page
+
+✔ Without Index
+- MongoDB performs COLLECTION SCAN(`COLLSCAN`)
+- Checks every document one by one
+- Slow for large data
+
+✔ With Index
+- MongoDB searches in index first(`IXSCAN`)
+- Directly jumps to required document
+- Very fast query performance
+
+✔ How Index Works
+- Stores field value + pointer to document
+- Data stored in sorted structure
+- MongoDB uses B-Tree internally
+
+✔ Default Index
+- MongoDB auto-creates index on _id
+- Unique and fast by default
+
+
+✔ Trade-off
+- Read operations become fast
+- Write operations slightly slow (index maintenance)
+
+✔ Interview Line
+"MongoDB index improves query performance by avoiding full collection scans and enabling faster lookups."
+</details>
+
+
+
+### 📝 Common index method
+
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+**NOTE**
+- `1` for ascending 
+- `-1` for descending 
+
+</br>
+
+**✔ `createIndex()`**
+- Creates an index on a field
+- Improves query performance
+
+Syntax:
+```js
+db.collection.createIndex({ field: 1 })   // Ascending
+db.collection.createIndex({ field: -1 })  // Descending
+```
+
+Example:
+`db.users.createIndex({ email: 1 })`
+
+------------------------------------------------
+
+**✔ `getIndexes()`**
+- Shows all indexes of a collection
+- Used to verify existing indexes
+
+Example:
+`db.users.getIndexes()`
+
+------------------------------------------------
+
+**✔ `dropIndex()`**
+- Removes a specific index
+- Use when index is no longer needed
+
+Syntax:
+`db.collection.dropIndex({ field: 1 })`
+
+Example:
+`db.users.dropIndex({ email: 1 })`
+
+------------------------------------------------
+
+**✔ `dropIndexes()`**
+- Removes all indexes except `_id`
+- Dangerous in production
+
+Example:
+`db.users.dropIndexes()`
+
+------------------------------------------------
+
+</details>
+
+
+### 📝 Type of Indexes
+
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+**✔ Single Field Index**
+
+- Index on one field
+- Most common index
+- Fast search on single field
+
+Example:
+```c++
+db.users.createIndex({ email: 1 })
+```
+
+Query:
+
+```c++
+db.users.find({ email: "a@gmail.com" })
+```
+--------------------------------
+
+**✔ Compound Index**
+
+- Index on multiple fields
+- Field order matters
+- Best for filter + sort queries
+
+Example:
+```c++
+db.orders.createIndex({ name: 1, age: -1 })
+```
+
+Query:
+
+```c++
+db.orders.find({ name: "Rakesh" }).sort({ age: -1 })
+```
+--------------------------------
+
+**✔ Multikey Index**
+- Used for array fields
+- MongoDB auto-creates multikey index
+- One index entry per array element
+
+Document:
+```c++
+{ name: "Laptop", tags: ["electronics", "gaming"] }
+```
+Example:
+```c++
+db.products.createIndex({ tags: 1 })
+```
+
+Query:
+```c++
+db.products.find({ tags: "gaming" })
+```
+--------------------------------
+
+**✔ Text Index**
+- Used for text search
+- Supports `$text` and `$search`
+- Only ONE text index per collection
+
+Example:
+```c++
+db.posts.createIndex({ title: "text", content: "text" })
+```
+Query:
+```c++
+db.posts.find({ $text: { $search: "mongodb" } })
+```
+--------------------------------
+
+**✔ Unique Index**
+- Prevents duplicate values
+- Common for email, username
+- Duplicate insert → error
+
+Example:
+```c++
+db.users.createIndex({ email: 1 }, { unique: true })
+```
+Insert:
+```c++
+db.users.insertOne({ email: "a@gmail.com" }) ❌ (if already exists)
+```
+--------------------------------
+
+**✔ Sparse Index**
+- Index only documents where field exists
+- Ignores missing fields
+- Useful for optional fields
+
+Example:
+```c++
+db.users.createIndex({ phone: 1 }, { sparse: true })
+```
+Query:
+```c++
+db.users.find({ phone: "9999999999" })
+```
+--------------------------------
+
+**✔ TTL Index**
+- Auto deletes documents after time
+- Used for sessions, OTPs, logs
+
+Example:
+```c++
+db.sessions.createIndex(
+  { createdAt: 1 },
+  { expireAfterSeconds: 3600 }
+)
+```
+Meaning:
+Document auto delete after 1 hour
+
+--------------------------------
+
+**✔ Hashed Index**
+- Used mainly for sharding
+- Ensures even data distribution
+- Not for range queries
+
+Example:
+```c++
+db.users.createIndex({ userId: "hashed" })
+```
+--------------------------------
+
+**✔ Index Rule**
+- Index improves read performance
+- Too many indexes slow inserts & updates
+- Always index based on query pattern
+
+--------------------------------
+
+
+</details>
+
+
+### `explain()`
+
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+**✔ `explain()`**
+- Used to analyze query performance
+- Shows how MongoDB executes a query
+- Helps detect slow queries
+
+**✔ Syntax**
+`db.collection.find(query).explain()`
+
+**✔ Explain Modes**
+1. `queryPlanner`
+   - Shows chosen query plan
+   - Which index MongoDB plans to use
+
+2. `executionStats` (MOST IMPORTANT)
+   - Actual execution details
+   - Time taken and documents scanned
+
+3. `allPlansExecution`
+   - Shows all query plans MongoDB tried
+
+**✔ Key Fields to Check (executionStats)**
+- `nReturned` → documents returned
+- `totalDocsExamined` → documents scanned
+- `totalKeysExamined` → index entries scanned
+- `executionTimeMillis` → time taken
+
+**✔ COLLSCAN vs IXSCAN**
+- COLLSCAN → full collection scan (slow ❌)
+- IXSCAN → index scan (fast ✅)
+
+</details>
+
 
