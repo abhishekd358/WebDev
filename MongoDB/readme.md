@@ -924,3 +924,150 @@ Use the db.getSiblingDb() method to change databases within a script
 Use the load() method to load and run a JavaScript file in mongosh
 Use an external editor within mongosh
 ```
+
+
+>>> how to install mongosh in shell of ubuntu
+- 1 . for this it require gnupg package
+- 2. Import the public key that's used by the package management system by running the following command:
+```wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | tee /etc/apt/trusted.gpg.d/server-7.0.asc```
+- 3.```apt install -y mongodb-mongosh```
+
+
+>>> loading js file in mongo db
+`load` method used to load js file in mongosh
+
+
+
+
+
+
+# Shcema degin and optimzation 
+- optimize your schema
+   - single collection pattern
+      - `realtedTo`, `docType`
+   -Subset Pattern 
+   - bucket pattern
+   - outlier pattern
+   - archive pattern
+
+### my notes
+- Single Collection Pattern groups related documents of different types into one collection to reduce queries and avoid $lookup.
+
+- scale your data model
+
+
+
+-------------------------------------------------------------
+# Shcema degin and optimzation 
+## 1) Single Collection Pattern (Quick Notes)
+
+### Problem
+
+-> Multiple collections → multiple queries / $lookup (slow)
+-> Embedding not possible due to:
+
+* Unbounded arrays
+* 16MB document size limit
+
+---
+
+### Solution: Single Collection Pattern
+
+-> Store **different but related document types** in **one collection**
+-> Avoid multiple queries
+-> Avoid expensive `$lookup`
+
+---
+
+### When to Use
+
+-> Many-to-many relationships
+-> One-to-many relationships
+-> When embedding is not a good option
+
+---
+
+### Variant 1: docType + relatedTo (Many-to-Many)
+
+### Fields
+
+```
+docType   → identifies document type (book, review, user)
+relatedTo → array of related document IDs
+```
+
+### Steps
+
+-> Add `docType` field to all documents
+-> Add `relatedTo` array
+-> Move all docs to single collection
+-> Create index on `relatedTo`
+
+### Use Case
+
+-> Book ↔ Reviews ↔ Users
+
+### Memory Line
+
+```
+docType → type
+relatedTo → relation
+```
+
+---
+
+### Variant 2: Overloaded Field (One-to-Many only)
+
+### Overloaded Field
+
+-> One field used for:
+
+* Document identification
+* Relationship modeling
+
+### Example Field
+
+```
+sc_id
+```
+
+### Values
+
+```
+Book   → sc_id = bookId
+Review → sc_id = bookId/reviewId
+```
+
+### Query Logic
+
+```
+All related docs → sc_id startsWith bookId
+Only reviews     → sc_id startsWith bookId/
+```
+
+### Index
+
+-> Create index on `sc_id`
+
+---
+
+### Comparison
+
+```
+Many-to-Many → docType + relatedTo
+One-to-Many  → overloaded field
+```
+
+---
+
+### Advantages
+
+-> Fewer queries
+-> No $lookup
+-> Better read performance
+
+---
+
+### Exam / Interview Line
+
+> "Single collection pattern groups related documents of different types into one collection to improve read performance and avoid $lookup."
