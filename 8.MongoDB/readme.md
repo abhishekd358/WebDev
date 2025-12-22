@@ -2632,7 +2632,7 @@ mongoimport --db mydatabase --collection users --drop --file users.json
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-## 30 Indexes
+## 30) Indexes
 
 ### 📝 What is Indexes ?
 
@@ -2884,7 +2884,7 @@ db.users.createIndex({ userId: "hashed" })
 </details>
 
 
-### `explain()`
+### 📝 explain()
 
 
 <details>
@@ -2925,3 +2925,382 @@ db.users.createIndex({ userId: "hashed" })
 </details>
 
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+## 31) Aggregation
+
+### 📝 What is aggregation?
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+**✔ What is Aggregation?**
+- Process + transform + summarize data
+- Works on multiple documents
+- Produces new calculated results
+
+
+**Pipeline format:**
+[ Stage1 → Stage2 → Stage3 ]
+
+**✔ Basic Syntax**
+
+```c++
+db.collection.aggregate([
+  { stage1 },
+  { stage2 }
+])
+```
+
+✔ Interview Line
+"Aggregation in MongoDB transforms and summarizes data using pipeline stages."
+
+
+</details>
+
+### 📝 `$match` & `$group`
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+
+#### ✅ **$match**
+
+* Used to **filter documents** in aggregation pipeline
+* Works like `find()` but **inside aggregate**
+* Reduces number of documents early
+* Improves performance when placed first
+
+Example:
+
+```js
+db.orders.aggregate([
+  { $match: { status: "DELIVERED" } }
+])
+```
+
+
+
+✔ **$match with operators**
+
+* Supports `$gt`, `$lt`, `$gte`, `$lte`, `$in`, etc.
+* Multiple conditions work as AND
+
+Example:
+
+```js
+db.orders.aggregate([
+  {
+    $match: {
+      amount: { $gt: 500 },
+      status: "DELIVERED"
+    }
+  }
+])
+```
+
+---
+
+
+#### ✅ **$group**
+
+* Used to **combine multiple documents**
+* Creates summary / report data
+* Similar to SQL `GROUP BY`
+* Changes the shape of output data
+
+
+✔ **$group Structure**
+
+* `_id` is **mandatory**
+* `_id` defines grouping key
+* Uses accumulators for calculations
+
+Syntax:
+
+```js
+{
+  $group: {
+    _id: <field>,
+    result: { accumulator }
+  }
+}
+```
+
+✔ **$group – Average example**
+
+* Calculates average value
+
+Example:
+
+```js
+db.scores.aggregate([
+  {
+    $group: {
+      _id: "$player",
+      avgScore: { $avg: "$score" }
+    }
+  }
+])
+```
+
+
+✔ **Common Accumulators**
+
+* `$sum` → total / count
+* `$avg` → average
+* `$min` → minimum
+* `$max` → maximum
+* `$push` → values into array
+* `$addToSet` → unique values array
+
+
+✔ **$match vs $group**
+
+* `$match` → filters documents , reduces data count
+* `$group` → combines documents, reshapes data
+
+
+
+✔ **Best Practice Flow**
+
+* Always filter first
+* Then group
+* Then sort / project
+
+Example:
+
+```js
+db.orders.aggregate([
+  { $match: { status: "DELIVERED" } },
+  {
+    $group: {
+      _id: "$month",
+      totalSales: { $sum: "$amount" }
+    }
+  }
+])
+```
+
+---
+✔ **Rule of Thumb**
+
+* Sirf filter karna hai → `$match`
+* Summary / report banana hai → `$group`
+
+---
+
+✔ **Interview Line**
+"`$match` filters documents for performance, while `$group` aggregates documents into summarized results."
+
+</details>
+
+### 📝 `$project` &  `$lookup` & `$unwind`
+
+<details>
+  <summary>👉🏼 READ IN DETAILS :</summary>
+
+</br>
+
+✅ **$project**
+
+* Used to **shape output data**
+* Select, Exclude,  unwanted, Rename and Create calculated fields
+* Works only on output (does not change stored data)
+
+Example:
+
+```js
+db.users.aggregate([
+  {
+    $project: {
+      name: 1,
+      email: 1,
+      _id: 0
+    }
+  }
+])
+```
+
+
+✔ **$project – Rename Field**
+
+* Used to give an existing field a new name`
+
+Example:
+
+```js
+db.users.aggregate([
+  {
+    $project: {
+      userName: "$name",
+      _id: 0
+    }
+  }
+])
+```
+
+
+✔ **$project – Calculated Field**
+
+* Used to create new calculated fields
+* Common operators: `$add`, `$multiply`, `$subtract`, `$divide`
+
+Example:
+
+```js
+db.orders.aggregate([
+  {
+    $project: {
+      totalPrice: { $multiply: ["$price", "$qty"] }
+    }
+  }
+])
+```
+
+
+✔ **$project – Important Rule **
+
+* You **cannot mix** `1` and `0` in `$project`
+* `_id` is the **only exception**
+
+✔ Correct:
+
+```js
+{ name: 1, _id: 0 }
+```
+
+❌ Wrong:
+
+```js
+{ name: 1, email: 0 }
+```
+
+
+---
+
+✅ **$lookup**
+
+* Used to **join two collections**
+* Works like SQL `JOIN`
+* Output is **always an array**
+* Used for one-to-one and one-to-many relationships
+
+
+✔ **$lookup – Basic Syntax**
+
+* `from` → foreign collection
+* `localField` → current collection field
+* `foreignField` → joined collection field
+* `as` → output array field name
+
+Example:
+
+```js
+db.orders.aggregate([
+  {
+    $lookup: {
+      from: "users",
+      localField: "userId",
+      foreignField: "_id",
+      as: "user"
+    }
+  }
+])
+```
+
+---
+
+✔ **$lookup – Output**
+
+* Joined data comes as an array
+
+Example Output:
+
+```js
+"user": [
+  { "name": "Amit", "email": "a@gmail.com" }
+]
+```
+
+
+---
+
+✅ **$unwind**
+
+* Used to **flatten the array**
+* Mostly used after `$lookup`
+
+
+✔ **$unwind – Example Data**
+
+```js
+{
+  name: "Order1",
+  items: ["pen", "book", "eraser"]
+}
+```
+
+
+✔ **$unwind – Example**
+
+```js
+db.orders.aggregate([
+  { $unwind: "$items" }
+])
+```
+
+Output:
+
+```
+{ name: "Order1", items: "pen" }
+{ name: "Order1", items: "book" }
+{ name: "Order1", items: "eraser" }
+```
+
+---
+
+✔ **$project vs $lookup vs $unwind**
+
+* `$project` → select / shape fields
+* `$lookup` → join collections
+* `$unwind` → break arrays
+
+---
+
+✔ **Real Dashboard Pipeline**
+
+```js
+db.orders.aggregate([
+  {
+    $lookup: {
+      from: "users",
+      localField: "userId",
+      foreignField: "_id",
+      as: "user"
+    }
+  },
+  { $unwind: "$user" },
+  {
+    $project: {
+      orderId: 1,
+      "user.name": 1,
+      amount: 1
+    }
+  }
+])
+```
+
+---
+
+✔ **Interview Line**
+"`$project` shapes the output, `$lookup` joins collections, and `$unwind` flattens arrays.`"
+
+</details>
