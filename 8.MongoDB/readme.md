@@ -38,7 +38,7 @@ Databases use their own protocols over TCP to talk to clients:
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
 
-### ** Main Types of Databases:**
+### **Main Types of Databases:**
 
 1️⃣ Relational (SQL):
    - Uses tables (rows & columns)
@@ -198,9 +198,9 @@ Databases use their own protocols over TCP to talk to clients:
    - Collection: Stores documents, no fixed schema
    - Document: Smallest data unit, JSON-like
    - Cluster: Group of servers (nodes) providing:
-       • High availability (replica sets)
-       • Horizontal scaling (sharding)
-       • Fault tolerance
+       - High availability (replica sets)
+       - Horizontal scaling (sharding)
+       - Fault tolerance
 
 ✔ Query Flow:
    1. Client sends query
