@@ -92,3 +92,125 @@ User.create({ name: "Anurag" })
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 3) Side Effect Import i ES6
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+- side effect import file run instantly
+
+- syntax as follow
+```c++
+import 'file_name_that_wnat_to_execute_instantly'; // Side-effect import
+import './user-model.js';
+```
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 4) Mongoose Schema & Types
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+
+**✔ What is Schema?**
+- Blueprint of document structure
+- Defines fields, types & validation
+- Controls what data is allowed
+
+**✔ What is Model?**
+- Represents MongoDB collection
+- Used for CRUD operations
+- Created using `mongoose.model(name, schema)`
+
+**✔ Ways to Create Schema**
+1) Inline (simple, less control)
+
+```c++
+  const userSchema = {
+  name: String,
+  age: Number
+}
+```
+
+2) Explicit (recommended)
+
+```c++
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+  name: { type: String, required: true },
+  age: { type: Number, required: true }
+}, {
+  timestamps: true,
+  strict: 'throw'
+});
+```
+
+**✔ ObjectId Usage**
+- Use `mongoose.Schema.Types.ObjectId`
+- Common for referencing documents
+
+```c++
+parentId: {
+  type: Schema.Types.ObjectId,  // Correct way
+  required: function() { return this.age < 16 }  // Conditional requirement
+}
+```
+
+**✔ Common Field Types**
+
+- `String`     → text data
+- `Number`     → numeric values
+- `Boolean`    → true / false
+- `Date`       → date & time
+- `Buffer`     → binary data (images, files)
+- `ObjectId`   → reference to another document
+- `Array`      → list of values
+- `Mixed`      → any data type
+- `Map`        → key-value pairs
+- `Decimal128` → high-precision decimal numbers
+
+**✔ Schema Field Options**
+
+- `type`         → data type
+- `required`     → must exist (Mongoose validation)
+- `default`      → auto value
+- `unique`       → creates UNIQUE INDEX (DB-level)
+- `enum`         → fixed allowed values like option in array
+- `min`          → minimum number
+- `max`          → maximum number
+- `minlength`    → minimum string length
+- `maxlength`    → maximum string length
+- `match`        → regex validation
+- `trim`         → remove spaces
+- `lowercase`    → convert to lowercase
+- `uppercase`    → convert to uppercase
+- `select`       → hide/show in query
+- `immutable`    → cannot be changed after creation
+- `index`        → creates index (non-unique)
+- `sparse`       → index only non-null values
+- `validate`     → custom validation function
+- `alias`        → alternate field name
+
+
+
+**✔ Schema Options**
+- `timestamps` → adds createdAt, updatedAt
+- `strict`: true → ignore extra fields
+- `strict`: "throw" → error on extra fields
+- `collection` → custom collection name
+- `versionKey` → __v control
+
+
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
