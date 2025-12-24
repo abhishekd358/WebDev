@@ -164,25 +164,13 @@ parentId: {
 }
 ```
 
-**✔ Common Field Types**
-
-- `String`     → text data
-- `Number`     → numeric values
-- `Boolean`    → true / false
-- `Date`       → date & time
-- `Buffer`     → binary data (images, files)
-- `ObjectId`   → reference to another document
-- `Array`      → list of values
-- `Mixed`      → any data type
-- `Map`        → key-value pairs
-- `Decimal128` → high-precision decimal numbers
-
 **✔ Schema Field Options**
 
 - `type`         → data type
 - `required`     → must exist (Mongoose validation)
-- `default`      → auto value
+- `select`       → hide/show fields
 - `unique`       → creates UNIQUE INDEX (DB-level)
+- `default`      → auto value
 - `enum`         → fixed allowed values like option in array
 - `min`          → minimum number
 - `max`          → maximum number
@@ -192,7 +180,6 @@ parentId: {
 - `trim`         → remove spaces
 - `lowercase`    → convert to lowercase
 - `uppercase`    → convert to uppercase
-- `select`       → hide/show in query
 - `immutable`    → cannot be changed after creation
 - `index`        → creates index (non-unique)
 - `sparse`       → index only non-null values
@@ -333,3 +320,61 @@ Validators DO NOT run on update by default
 </details>
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+
+
+# 7) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+✔ What is ref?
+- ref defines relationship between collections
+- Tells ObjectId belongs to which model
+- Used inside schema with ObjectId
+
+✔ Example
+User → Post (One user, many posts)
+
+✔ User Schema
+```js
+const User = mongoose.model("User", {
+  name: String
+});
+```
+
+✔ Post Schema with ref
+```js
+const Post = mongoose.model("Post", {
+  title: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
+});
+```
+
+---
+
+✔ What is populate?
+- Converts ObjectId into actual document
+- Fetches related data
+- Works like JOIN
+
+✔ With populate
+- `Post.find().populate("user")`
+
+Output:
+```js
+{
+  title: "Hello",
+  user: {
+    _id: "64ab...",
+    name: "Rahul"
+  }
+}
+```
+
+✔ Populate Multiple Fields Selection from User Collection
+- `Post.find().populate("user", "name email")`
+
+</details>
