@@ -322,7 +322,7 @@ Validators DO NOT run on update by default
 
 
 
-# 7) 
+# 7) `ref` and `populate()`
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -376,5 +376,94 @@ Output:
 
 ✔ Populate Multiple Fields Selection from User Collection
 - `Post.find().populate("user", "name email")`
+
+</details>
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 4) Virtuals in Mongoose ?
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+**✔ What are Virtuals?**
+- Virtuals are fields NOT stored in MongoDB
+- They are calculated at runtime
+- Available only in Mongoose document
+- Used for derived / computed values
+
+
+✔ Default Virtual
+- Every document has `id`
+- `id` = string version of `_id`
+
+Example:
+
+```js
+user._id → ObjectId("...") //objectId
+user.id  → "64ab..." //string 
+```
+
+
+✔ Creating Virtuals (Two Ways)
+
+**Method 1: Schema Options (Recommended)**
+
+```js
+const userSchema = new mongoose.Schema({
+  age: Number,
+  hobbies: [String]
+}, {
+  virtuals: {
+    isAdult: {
+      get() {
+        return this.age >= 18;
+      }
+    }
+  }
+});
+```
+
+**Method 2: schema.virtual()**
+
+```js
+userSchema.virtual("emailDomain")
+  .get(function () {
+    return this.email.split("@")[1];
+  });
+```
+
+
+✔ Getter Virtual (Read-only)
+- Returns computed value
+- Does not change DB
+
+✔ Setter Virtual (Write logic)
+- Updates real fields
+- Must call save()
+
+
+Example:
+
+```js
+hobbiesString: {
+  get() {
+    return this.hobbies.join(", ");
+  },
+  set(val) {
+    this.hobbies = val.split(", ");
+  }
+}
+```
+
+✔ Important Rules ⚠️
+- Virtuals are NOT queryable
+- Can't use in find(), sort(), filter
+- Don't use arrow functions (need this)
+
+
 
 </details>
