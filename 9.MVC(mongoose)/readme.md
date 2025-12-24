@@ -214,3 +214,76 @@ parentId: {
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+
+
+# 5) Thenable Object in JavaScript?
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+**✔ What is a Thenable?**
+- Any object that has a `.then()` method
+- JavaScript treats it as Promise-like
+- `await` works because `.then()` exists
+
+**✔ Simple Definition**
+Thenable → any object that contains a then() method
+
+**✔ Core Rule ⚠️**
+- JS checks ONLY for `.then()`
+- Does NOT check `instanceof Promise`
+
+✔ Basic Example
+```c++
+const obj = {
+  then(resolve) {
+    resolve("Hello");
+  }
+};
+```
+
+**✔ Basic Example with `await`**
+```c++
+const thenable = {
+  then(resolve) {
+    resolve(42);
+  }
+};
+
+async function test() {
+  const value = await thenable;
+  console.log(value);
+}
+
+test();
+```
+
+**✔ How await Works Internally**
+- Checks: does object have `.then()`?
+- If yes → treats it like a Promise
+- Calls `.then(resolve, reject)`
+
+**✔ Promise vs Thenable**
+- Promise → native JS object
+- Thenable → any object behaving like Promise
+- All Promises are thenables
+- Not all thenables are Promises
+
+
+**✔ Interview Line **
+"A thenable is any object with a `then()` method that JavaScript treats like a Promise in async/await and promise chains."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 6) Mongoose Schema & Types
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</details>
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
