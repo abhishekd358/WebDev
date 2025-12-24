@@ -279,10 +279,56 @@ test();
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-# 6) Mongoose Schema & Types
+# 6) Validator in Mongoose Schema
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+**✔ What is a Validator?**
+- Validator → rule that checks data before saving to DB
+
+**✔ Syntax **
+
+```js
+validate:
+  validator: function(value) { 
+    return true/false 
+  }
+  message:"error msg"
+```
+
+**✔ Example (Concept)**
+
+```
+Age must be 18 or above
+```
+
+- Solution
+
+```js
+const userSchema = new mongoose.Schema({
+  age: {
+    type: Number,
+    validate: {
+      validator: function (num) {
+        return num >= 18;
+      },
+      message: "Age must be 18 or above"
+    }
+  }
+});
+```
+
+
+**✔ Important Facts** 
+
+```
+Validators run before save()
+Validators run on create()
+Validators DO NOT run on update by default
+```
+
 
 </details>
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
