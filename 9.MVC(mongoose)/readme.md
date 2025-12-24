@@ -384,7 +384,7 @@ Output:
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-# 4) Virtuals in Mongoose ?
+# 8) Virtuals in Mongoose ?
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -464,6 +464,145 @@ hobbiesString: {
 - Can't use in find(), sort(), filter
 - Don't use arrow functions (need this)
 
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 9) Middlewares in mongoose?
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+- Middleware → functions that run before or after a Mongoose operation
+- Also called Hooks
+
+
+✔ Simple Meaning
+
+- Kaam hone se pehle, ya baad kuch extra logic chalana
+
+✔ Example:
+
+- Save se pehle → password hash
+- Delete ke baad → cleanup
+
+
+
+✔  Types of Mongoose Middleware 
+
+| Type                 | Runs On                |
+| -------------------- | ---------------------- |
+| Document Middleware  | save, validate, remove |
+| Query Middleware     | find, findOne, update  |
+| Model Middleware     | insertMany             |
+| Aggregate Middleware | aggregate              |
+
+
+
+✔ Middleware Syntax
+
+```js
+schema.pre("event", function(next) {})
+schema.post("event", function(doc) {})
+```
+
+
+- `pre`  → before operation
+- `post` → after operation
+
+✔ 1️⃣ Document Middleware
+
+- Runs on:
+  - `save`
+  - `validate`
+  - `remove`
+
+
+✔ Example: Hash password before save
+
+- Schema
+
+```js
+userSchema.pre("save", function (next) {
+  this.password = "hashed_" + this.password;
+  next();
+});
+```
+
+
+✔ Post Middleware Example
+
+```js
+userSchema.post("save", function (doc) {
+  console.log("User saved:", doc._id);
+});
+```
+
+
+✔  2️⃣ Query Middleware
+
+- Runs on:
+  - `find`
+  - `findOne`
+  - `update`
+  - `findOneAndUpdate`
+  - `deleteOne`
+
+✔  Example: Exclude soft-deleted data
+
+```js
+userSchema.pre("find", function () {
+  this.where({ isDeleted: false });
+});
+```
+
+
+✔ 3️⃣ Model Middleware
+
+- Runs on:
+  - `insertMany`
+
+
+✔ Example
+
+```js
+userSchema.pre("insertMany", function (next, docs) {
+  docs.forEach(d => d.createdAt = new Date());
+  next();
+});
+```
+
+
+✔ 4️⃣ Aggregate Middleware
+
+- Runs on:
+  - `aggregate`
+
+✔ Example
+
+```js
+userSchema.pre("aggregate", function () {
+  this.pipeline().unshift({ $match: { isDeleted: false } });
+});
+```
+
+
+# Memory Tricks
+
+Document → data change
+Query    → data fetch
+Model    → bulk insert
+Aggregate→ pipeline
+
+
+# Interview One-Liner
+
+> Mongoose middleware allows running logic before or after database operations such as save, find, and update.
 
 
 </details>
