@@ -477,23 +477,26 @@ hobbiesString: {
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
 
+</br>
+
 
 - Middleware → functions that run before or after a Mongoose operation
 - Also called Hooks
+- in middleware order is matter
 
 
-✔ Simple Meaning
+**✔ Simple Meaning**
 
 - Kaam hone se pehle, ya baad kuch extra logic chalana
 
-✔ Example:
+**✔ Example:**
 
 - Save se pehle → password hash
 - Delete ke baad → cleanup
 
 
 
-✔  Types of Mongoose Middleware 
+**✔ Types of Mongoose Middleware **
 
 | Type                 | Runs On                |
 | -------------------- | ---------------------- |
@@ -504,7 +507,7 @@ hobbiesString: {
 
 
 
-✔ Middleware Syntax
+**✔ Middleware Syntax**
 
 ```js
 schema.pre("event", function(next) {})
@@ -515,7 +518,7 @@ schema.post("event", function(doc) {})
 - `pre`  → before operation
 - `post` → after operation
 
-✔ 1️⃣ Document Middleware
+**✔ 1️⃣ Document Middleware**
 
 - Runs on:
   - `save`
@@ -523,7 +526,7 @@ schema.post("event", function(doc) {})
   - `remove`
 
 
-✔ Example: Hash password before save
+**✔ Example: Hash password before save**
 
 - Schema
 
@@ -535,7 +538,7 @@ userSchema.pre("save", function (next) {
 ```
 
 
-✔ Post Middleware Example
+**✔ Post Middleware Example**
 
 ```js
 userSchema.post("save", function (doc) {
@@ -544,7 +547,7 @@ userSchema.post("save", function (doc) {
 ```
 
 
-✔  2️⃣ Query Middleware
+**✔ 2️⃣ Query Middleware**
 
 - Runs on:
   - `find`
@@ -553,7 +556,7 @@ userSchema.post("save", function (doc) {
   - `findOneAndUpdate`
   - `deleteOne`
 
-✔  Example: Exclude soft-deleted data
+**✔ Example: Exclude soft-deleted data**
 
 ```js
 userSchema.pre("find", function () {
@@ -562,13 +565,13 @@ userSchema.pre("find", function () {
 ```
 
 
-✔ 3️⃣ Model Middleware
+**✔ 3️⃣ Model Middleware**
 
 - Runs on:
   - `insertMany`
 
 
-✔ Example
+**✔ Example**
 
 ```js
 userSchema.pre("insertMany", function (next, docs) {
@@ -578,12 +581,12 @@ userSchema.pre("insertMany", function (next, docs) {
 ```
 
 
-✔ 4️⃣ Aggregate Middleware
+**✔ 4️⃣ Aggregate Middleware**
 
 - Runs on:
   - `aggregate`
 
-✔ Example
+**✔ Example**
 
 ```js
 userSchema.pre("aggregate", function () {
@@ -592,7 +595,7 @@ userSchema.pre("aggregate", function () {
 ```
 
 
-# Memory Tricks
+**✔ Memory Tricks**
 
 Document → data change
 Query    → data fetch
@@ -600,9 +603,93 @@ Model    → bulk insert
 Aggregate→ pipeline
 
 
-# Interview One-Liner
+**✔ Interview One-Liner**
 
 > Mongoose middleware allows running logic before or after database operations such as save, find, and update.
 
-
 </details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 10) Document Versioning in Mongoose (__v)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+**✔ What is Document Versioning?**
+
+- Mongoose uses `__v` field for versioning
+- Helps prevent data loss in concurrent updates
+- Based on Optimistic Concurrency Control
+
+**✔ __v Field**
+
+- Automatically added by Mongoose
+- Tracks document version
+- Used internally during save/update
+
+
+**✔ Default Behavior (IMPORTANT)**
+
+- __v increments ONLY when arrays change
+- Non-array fields (age, balance) do NOT increment __v by default
+
+
+Example:
+
+```js
+user.hobbies.push("Cricket");
+await user.save(); // __v++
+
+user.age = 22;
+await user.save(); // __v unchanged
+```
+
+**✔ Why Arrays are Special?**
+
+- Arrays are prone to concurrent conflicts
+- Multiple users may modify different elements
+- Versioning prevents silent overwrites
+
+
+**✔ The Concurrent Update Problem**
+
+- Two users read same document
+- Both modify & save
+- Last write wins → data loss ❌
+
+
+
+**✔ Solution: Enable Optimistic Concurrency**
+
+
+```js
+const schema = new mongoose.Schema({...}, {
+  optimisticConcurrency: true
+});
+```
+
+**✔ Now:**
+
+* ALL field changes are version-checked
+* Conflicting saves throw VersionError
+* Data loss prevented ✅
+
+
+
+**✔ Versioning Options**
+
+| Option                      | Meaning                  |
+| --------------------------- | ------------------------ |
+| versionKey: false           | Disable versioning ❌     |
+| versionKey: "__ver"         | Custom version field     |
+| optimisticConcurrency: true | Enable full protection ✅ |
+
+
+
+**✔ Interview Line**
+
+"Mongoose uses the __v field for optimistic concurrency control to prevent data loss during concurrent document updates."
