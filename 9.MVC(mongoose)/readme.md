@@ -287,7 +287,7 @@ validate:
 
 **✔ Example (Concept)**
 
-```
+
 Age must be 18 or above
 ```
 
