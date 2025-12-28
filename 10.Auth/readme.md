@@ -1,5 +1,4 @@
 # 1) Stateful vs Serverless
-
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
 
@@ -40,7 +39,7 @@
 - **JWT**: Often misused; refresh tokens make it stateful anyway.
 - **Hybrid approach**: Common in practice (JWT + refresh token).
 
-</deatils>
+</details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
@@ -87,3 +86,60 @@ Hashing is the process of converting data into a fixed-size bits, which typicall
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 3) createHash() in Node.js (Crypto)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+**✔ What is createHash()?**
+- `createHash()` is a method from Node.js crypto module
+- Used to generate HASH of data
+- Hash = one-way encrypted value (cannot be reversed)
+
+
+**✔ Import crypto module**
+- `createHash()` -> Creates hash object 
+- `update()` -> Adds data to hash 
+- `digest()` -> Final output 
+
+```js
+const crypto = require("crypto");
+```
+
+```js
+crypto.createHash(algorithm)
+```
+
+**✔ Basic Example**
+
+```js
+const crypto = require("crypto");
+
+const hash = crypto
+  .createHash("sha256")
+  .update("password123")
+  .digest("hex");
+
+console.log(hash);
+```
+
+
+**✔ When to Use createHash()?**
+- File checksum
+- Tokens
+- API signature
+- Non-password hashing
+
+
+**✔ Interview Line **
+
+"createHash() is used to generate a one-way cryptographic hash of data using algorithms like SHA-256."
+
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
