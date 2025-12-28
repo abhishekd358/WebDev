@@ -218,3 +218,83 @@ Example: Hash `5e1c309e...`
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 5) Signing Cookies in Node.js
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+### Why Sign Cookies?
+- To prevent users from modifying sensitive data in cookies (such as expiration time, user information, etc.)
+- Even if cookies are Base64 encoded, users can still decode and modify the content
+- Signing allows verification of whether cookie data has been altered
+
+## Implementation Steps for Signing
+
+### 1. Create a Signing Function
+```javascript
+// Import crypto module
+import crypto from 'crypto';
+
+// Define secret key (should use environment variables in real projects)
+const SECRET_KEY = 'pro-coder-storage-app';
+
+// Create signature
+const signature = crypto
+  .createHash('sha256')  // Use SHA-256 algorithm
+  .update(payload)       // Add cookie data
+  .update(SECRET_KEY)    // Add secret key
+  .digest('base64url');  // Output in base64url format
+```
+
+### 2. Send Signed Cookies
+- Convert raw data to Base64 format
+- Generate signature for the data
+- Connect data and signature using a separator (like a dot `.`)
+- Send format: `base64data.signature`
+
+### 3. Verify Signatures
+```javascript
+// Receive cookie and split it
+const [payloadBase64, oldSignature] = token.split('.');
+
+// Recalculate signature
+const newSignature = crypto
+  .createHash('sha256')
+  .update(payload)      // Use received data
+  .update(SECRET_KEY)   // Use the same secret key
+  .digest('base64url');
+
+// Compare signatures
+if (newSignature !== oldSignature) {
+  // Signature invalid, cookie tampered with
+  res.clearCookie('token');
+  return res.status(401).send('Not logged in');
+}
+```
+
+
+###  Signature Algorithm Choice
+- Use SHA-256 hash algorithm
+- Output format uses base64url (URL-compatible, no padding characters)
+
+
+## Connection to JSON Web Tokens (JWT)
+- JWT uses the same fundamental principle
+- JWT has three parts separated by two dots: `header.payload.signature`
+- Understanding cookie signing helps understand JWT principles
+- jwt signature as follow:
+
+```js
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  secret_key
+)
+```
+
+#
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
