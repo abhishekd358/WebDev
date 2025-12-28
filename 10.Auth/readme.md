@@ -143,3 +143,78 @@ console.log(hash);
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+
+
+# 4) How Hashing is Used in Git 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+## 1. Git's Hash Mechanism
+- **Algorithm**: Git uses **SHA-1** for hashing (historically)
+- **Purpose**: Identifies commits, files, and objects uniquely
+- **Output Format**: 40-character hexadecimal string
+
+## 2. Git Object Hashing Process
+
+### What Git Actually Hashes:
+Git doesn't hash raw file content directly. Instead, it creates a **Git object** by prepending metadata:
+
+```
+Format: "blob <content_length>\0<file_content>"
+```
+
+Example for a file containing "hello world":
+```javascript
+// Git creates this structure:
+const gitObject = "blob 11\0hello world";
+// Then hashes this entire string with SHA-1
+```
+
+### Node.js Code to Recreate Git's Hash:
+```javascript
+import { readFile } from 'fs/promises';
+import crypto from 'crypto';
+
+async function calculateGitHash(filename) {
+    // Read file content
+    const fileData = await readFile(filename);
+    
+    // Create Git object format
+    const contentLength = fileData.length;
+    const gitObject = `blob ${contentLength}\0${fileData}`;
+    
+    // Calculate SHA-1 hash
+    const hash = crypto.createHash('sha1');
+    hash.update(gitObject);
+    const gitHash = hash.digest('hex');
+    
+    return gitHash;
+}
+```
+
+## 3. Git's Storage Structure
+
+### How Git Stores Hashed Objects:
+1. **First 2 characters** → Folder name
+2. **Remaining 38 characters** → File name inside folder
+
+Example: Hash `5e1c309e...`
+- Folder: `.git/objects/5e/`
+- File: `1c309e...` (compressed content)
+
+### Git Object Types:
+1. **Blob**: File content
+2. **Tree**: Directory structure
+3. **Commit**: Commit metadata
+4. **Tag**: Tag references
+
+
+### Key Takeaways:
+1. Git uses **SHA-1** for object identification
+2. Hashes are calculated on **structured objects**, not raw files
+3. **Avalanche effect** ensures even minor changes produce different hashes
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
