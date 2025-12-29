@@ -446,3 +446,71 @@ Rainbow Table → already stored hashes used to guess original passwords
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 8) Side Effect Import i ES6
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+✔ What is a KDF?
+- Cryptographic algorithm to derive strong keys from passwords
+- Makes weak passwords secure
+- Designed to be slow & expensive for attackers
+
+
+✔ How KDF Works
+Password + Salt
+→ Hash
+→ Hash again
+→ Repeat (100,000+ times)
+→ Final secure hash
+
+✔ 3 Magic Ingredients 🔥
+1) Salt
+   - Random per user
+   - Same password ≠ same hash
+   - Stops rainbow tables
+
+2) Iterations
+   - Number of hash rounds
+   - Slows brute-force attacks
+   - Recommended: 100k–300k+
+
+3) Key Length
+   - Output size
+   - Recommended: 32 bytes
+
+✔ PBKDF2 (Node.js Built-in KDF)
+- Available in crypto module
+- Uses HMAC internally
+- Slow by design (good)
+
+Example:
+`crypto.pbkdf2(password, salt, iterations, keyLen, algo)`
+
+✔ Password Storage Format
+- Store hash + salt together
+- Example: hash.salt (base64url)
+
+✔ Password Verification Flow
+1) Split stored hash & salt
+2) Recalculate hash with entered password
+3) Compare hashes
+4) Match → login success
+
+✔ Comparison (IMPORTANT)
+- sha256 → fast, unsafe
+- HMAC → better, still fast
+- PBKDF2 → slow, secure
+- bcrypt → slower, easier
+- Argon2 → most secure (modern)
+
+
+✔ Interview Line 
+"A Key Derivation Function securely hashes passwords using salt and multiple iterations to resist brute-force and rainbow table attacks."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
