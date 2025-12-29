@@ -298,3 +298,113 @@ HMACSHA256(
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+# 6) Cookie Parser & Signed Cookies (Node.js / Express)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+**✔ What is Cookie Parser?**
+- Express middleware for handling cookies
+- Automatically parses cookies from request headers
+- Makes cookies available as JS objects
+
+**✔ Problem Without Cookie Parser**
+- Manual parsing of Cookie header
+- String splitting & decoding
+- No built-in signing / verification
+- Error-prone & messy
+
+**✔ Installation**
+`npm install cookie-parser`
+
+**✔ Basic Setup**
+`app.use(cookieParser())`
+- Parsed cookies → req.cookies
+
+**✔ 1️⃣ Setting Normal Cookie**
+`res.cookie("username", "john", { httpOnly: true })`
+
+**✔ Reading Normal Cookie**
+`req.cookies.username`
+
+**✔ 2️⃣ What is Signed Cookie?**
+- Cookie with tamper-detection
+- Uses secret key + hashing
+- NOT encryption (data is readable)
+
+**✔ Setup for Signed Cookies**
+app.use(cookieParser("SECRET_KEY"))
+
+**✔ Sending Signed Cookie**
+res.cookie("token", "data", { signed: true })
+
+✔ Reading Signed Cookie
+req.signedCookies.token
+- Valid → value available
+- Tampered → false / undefined
+
+**✔ Behind the Scenes**
+- Cookie stored as: `s:value.signature`
+- Server recalculates signature
+- If mismatch → cookie rejected
+
+**✔ Security Benefit**
+- Detects cookie modification
+- Prevents privilege escalation
+- Protects userId, roles, session data
+
+**✔ Important Rules ⚠️**
+- Signed ≠ Encrypted
+- User can SEE data
+- User cannot MODIFY data silently
+
+**✔ Where to Store Secret?**
+- Environment variables
+`process.env.COOKIE_SECRET`
+
+**✔ When to Use Signed Cookies?**
+- User sessions
+- Auth tokens
+- Role / permission data
+
+**✔ Complete Implemented example**
+
+```js
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const app = express();
+app.use(cookieParser('test-secret'));
+
+// Set a signed cookie
+app.get('/set', (req, res) => {
+  res.cookie('myCookie', 'secretData', { signed: true });
+  res.send('Cookie set! Try visiting /get');
+});
+
+// Get the cookie
+app.get('/get', (req, res) => {
+  const normal = req.cookies.myCookie;
+  const signed = req.signedCookies.myCookie;
+  
+  res.send(`
+    Normal cookie: ${normal}<br>
+    Signed cookie: ${signed}<br>
+    Try modifying the cookie in browser and refresh!
+  `);
+});
+
+app.listen(3000);
+```
+
+
+
+**✔ Interview Line**
+
+"cookie-parser simplifies cookie handling in Express and signed cookies add tamper detection using a secret key."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
