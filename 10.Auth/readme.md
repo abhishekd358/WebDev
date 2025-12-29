@@ -408,3 +408,41 @@ app.listen(3000);
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+# 7) What are Rainbow Tables?
+
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+**✔ What are Rainbow Tables?**
+- Precomputed tables of password → hash mappings
+- Used to crack hashed passwords quickly
+
+✔ Simple Definition
+Rainbow Table → already stored hashes used to guess original passwords
+
+✔ Protection Against Rainbow Tables 🔐
+1) Salting (MOST IMPORTANT)
+   salt + password → hash
+   - Same password ≠ same hash
+
+2) Slow Hashing Algorithms
+   - bcrypt
+   - pbkdf2
+   - scrypt
+   - argon2
+
+✔ NOT Safe for Passwords ❌
+- md5
+- sha1
+- sha256 (without salt)
+
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
