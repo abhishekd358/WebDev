@@ -514,3 +514,68 @@ Example:
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 9) What is bcrypt?
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+- Password hashing algorithm
+- Built specifically for storing passwords securely
+- Uses salt + slow hashing (by design)
+
+
+
+✔ bcrypt Internals
+- Based on Blowfish cipher
+- Adds random salt automatically
+- Hashing cost controlled by "salt rounds"
+
+✔ Salt Rounds (Cost Factor)
+- Determines how slow hashing is
+- Each increase doubles the work
+
+Example:
+
+```
+10 rounds → ok
+12 rounds → recommended
+14+ → very slow
+```
+
+✔ How bcrypt Hash Looks
+`$2b$12$randomSaltAndHashHere`
+
+Meaning:
+`$2b$` → bcrypt version
+`12`   → salt rounds
+`rest` → salt + hash
+
+✔ Hashing Password (Node.js)
+`const bcrypt = require('bcrypt');`
+
+`const hash = await bcrypt.hash(password, 12);`
+
+✔ Verifying Password
+`const isMatch = await bcrypt.compare(password, hash);`
+
+✔ IMPORTANT
+- Never compare hashes manually
+- Always use `bcrypt.compare()`
+
+
+✔ bcrypt vs sha256
+- sha256 → fast ❌
+- bcrypt → slow ✅ (secure)
+
+
+
+✔ Interview Line 
+"bcrypt is a password hashing algorithm that uses salting and adaptive cost to protect against brute-force and rainbow table attacks."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
