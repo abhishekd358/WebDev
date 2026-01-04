@@ -294,7 +294,7 @@ HMACSHA256(
 )
 ```
 
-#
+
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
@@ -671,3 +671,177 @@ For login sessions, traditional **cookie-based sessions with server-side storage
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
+
+
+
+# 10) Sending Emails Using Node.js (Nodemailer)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+## ✅ What is Nodemailer?
+
+* **Nodemailer** is a **Node.js library** used to send emails
+  * Email verification
+  * OTP
+  * Password reset
+  * Notifications
+  * Order confirmations
+
+
+## ✅ Installation
+
+```bash
+npm install nodemailer
+```
+
+## ✅ Core Email Flow
+
+```
+Node.js App
+   ↓
+Nodemailer
+   ↓
+SMTP Server (Gmail / Outlook / Custom)
+   ↓
+User Inbox
+```
+
+## ✅ Basic Setup (Gmail Example)
+
+```js
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false, // Use true for port 465, false for port 587
+  auth: {
+    user: "maddison53@ethereal.email",
+    pass: "jn7jnAPss4f63QBp6D",
+  },
+});
+```
+
+### 📌 Important Notes
+
+* ❌ Do NOT use Gmail normal password
+* ✅ Enable **2-Step Verification**
+* ✅ Generate **App Password**
+* Store credentials in `.env`
+
+
+
+## ✅ Sending a Simple Email
+
+```js
+// Send an email using async/await
+(async () => {
+  const info = await transporter.sendMail({
+    from: '"firstName lastName" <your-email@xyz.com>',
+    to: "bar@example.com, baz@example.com",
+    subject: "Hello ✔",
+    text: "Hello world?", // Plain-text version of the message
+    html: "<b>Hello world?</b>", // HTML version of the message
+  });
+
+  console.log("Message sent:", info.messageId);
+})();
+```
+
+
+## ✅ Sending HTML Email
+
+```js
+const mailOptions = {
+  from: "your_email@gmail.com",
+  to: "user@gmail.com",
+  subject: "Verify Your Email",
+  html: `
+    <h2>Email Verification</h2>
+    <p>Click the button below</p>
+    <a href="https://example.com/verify">Verify</a>
+  `
+};
+```
+
+---
+
+## ✅ Async / Await Version (Recommended)
+
+```js
+await transporter.sendMail({
+  from: process.env.EMAIL,
+  to: user.email,
+  subject: "OTP Verification",
+  html: `<h3>Your OTP is ${otp}</h3>`
+});
+```
+
+---
+
+## ✅ Common Email Types in MERN Apps
+
+| Use Case        | Email Content          |
+| --------------- | ---------------------- |
+| Signup          | Verification link      |
+| Login           | OTP                    |
+| Forgot Password | Reset link             |
+| Orders          | Invoice / confirmation |
+| Admin           | Alerts                 |
+
+---
+
+## ✅ Environment Variables (.env)
+
+```env
+EMAIL=your_email@gmail.com
+EMAIL_PASS=your_app_password
+```
+
+```js
+require("dotenv").config();
+```
+
+---
+
+## ✅ Error Handling Best Practices
+
+* Wrap `sendMail()` in `try/catch`
+* Handle:
+
+  * Invalid email
+  * SMTP failure
+  * Network issues
+* Never expose error details to users
+
+---
+
+## ✅ Security Best Practices 🔐
+
+* Never hardcode email/password
+* Always use `.env`
+* Rate-limit OTP emails
+* Add expiry time for OTP
+* Use HTTPS links only
+
+---
+
+## ✅ Interview One-Liner ⭐
+
+> Nodemailer is a Node.js library used to send emails through SMTP servers for features like verification, OTP, and notifications.
+
+---
+
+## ✅ Summary (Quick Revision)
+
+* Nodemailer = email sender for Node.js
+* Uses SMTP
+* Gmail needs App Password
+* Supports text + HTML
+* Used for OTP, reset, verification
+* Secure with env variables
+
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
