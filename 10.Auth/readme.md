@@ -845,3 +845,279 @@ require("dotenv").config();
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 11) OTP Email System (User Register) Using Nodemailer + Separate OTP Model (TTL Based) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+## 🔁 Overall Flow (UNCHANGED)
+
+```
+User registers
+   ↓
+Create User (unverified)
+   ↓
+Generate OTP
+   ↓
+Save OTP in OTP collection (TTL = 10 min)
+   ↓
+Send OTP via email
+   ↓
+User submits OTP
+   ↓
+Verify OTP
+   ↓
+Mark user as verified
+```
+
+---
+
+## 📦 Step 1: Install Packages
+
+```bash
+npm install nodemailer dotenv mongoose
+```
+
+---
+
+## 🔐 Step 2: Nodemailer Setup (Same as Before)
+
+### `.env`
+
+```env
+EMAIL=yourgmail@gmail.com
+EMAIL_PASS=your_gmail_app_password
+```
+
+---
+
+### `utils/sendEmail.js`
+
+```js
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+const sendEmail = async ({ to, subject, html }) => {
+  await transporter.sendMail({
+    from: `"My App" <${process.env.EMAIL}>`,
+    to,
+    subject,
+    html
+  });
+};
+
+module.exports = sendEmail;
+```
+
+---
+
+## 🧠 Step 3: OTP Generator (Same)
+
+### `utils/generateOtp.js`
+
+```js
+const generateOtp = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+module.exports = generateOtp;
+```
+
+---
+
+## 👤 Step 4: User Model (OTP REMOVED)
+
+### `models/User.js`
+
+```js
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: {
+    type: String,
+    unique: true
+  },
+  password: String,
+
+  isVerified: {
+    type: Boolean,
+    default: false
+  }
+});
+
+module.exports = mongoose.model("User", userSchema);
+```
+
+---
+
+## 🔑 Step 5: OTP Model (NEW – IMPORTANT)
+
+### `models/Otp.js`
+
+```js
+const mongoose = require("mongoose");
+
+const otpSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+
+  otp: {
+    type: String,
+    required: true
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    expires: 600   // ⏱️ Auto-delete after 10 minutes
+  }
+});
+
+module.exports = mongoose.model("Otp", otpSchema);
+```
+
+### 📌 Why this is powerful
+
+* MongoDB **automatically deletes OTP**
+* No cron job needed
+* Clean & secure
+* Industry standard
+
+---
+
+## 📝 Step 6: Register API (Create User + Send OTP)
+
+### `routes/auth.js`
+
+```js
+const express = require("express");
+const router = express.Router();
+
+const User = require("../models/User");
+const Otp = require("../models/Otp");
+const sendEmail = require("../utils/sendEmail");
+const generateOtp = require("../utils/generateOtp");
+
+router.post("/register", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // 1️⃣ Check existing user
+    const exists = await User.findOne({ email });
+    if (exists) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
+
+    // 2️⃣ Create user (unverified)
+    const user = await User.create({
+      name,
+      email,
+      password // hash in real apps
+    });
+
+    // 3️⃣ Generate OTP
+    const otp = generateOtp();
+
+    // 4️⃣ Save OTP in OTP collection
+    await Otp.create({
+      userId: user._id,
+      otp
+    });
+
+    // 5️⃣ Send OTP Email
+    await sendEmail({
+      to: email,
+      subject: "Verify your email (OTP)",
+      html: `
+        <h2>Email Verification</h2>
+        <p>Your OTP is:</p>
+        <h1>${otp}</h1>
+        <p>Valid for 10 minutes</p>
+      `
+    });
+
+    res.status(201).json({
+      message: "OTP sent to email",
+      userId: user._id
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+module.exports = router;
+```
+
+---
+
+## ✅ Step 7: Verify OTP API (Using OTP Model)
+
+```js
+router.post("/verify-otp", async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    // 1️⃣ Find user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // 2️⃣ Find OTP record
+    const otpRecord = await Otp.findOne({
+      userId: user._id,
+      otp
+    });
+
+    if (!otpRecord) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    // 3️⃣ Verify user
+    user.isVerified = true;
+    await user.save();
+
+    // 4️⃣ Delete OTP manually (optional, TTL will also handle)
+    await Otp.deleteMany({ userId: user._id });
+
+    res.json({ message: "Email verified successfully" });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+```
+
+---
+
+## 🔐 Step 8: Block Login Until Verified
+
+```js
+if (!user.isVerified) {
+  return res.status(403).json({ message: "Please verify your email" });
+}
+```
+
+
+
+## 🧠 Interview One-Liner
+
+> We store OTPs in a separate collection with a TTL index so MongoDB automatically expires them, ensuring security, scalability, and clean user documents.
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
