@@ -62,6 +62,8 @@
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
 
+</br>
+
 ✔ Native `.env` Support (Node.js v20+ )
 - No dotenv package needed
 - Built-in support using `-env-file flag`
@@ -101,6 +103,79 @@ const port = process.env.PORT;
 .env.production
 .env.test
 ```
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+# 3) SQL Injection & NoSQL Injection 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is SQL Injection?
+- Attack where attacker manipulates DB queries via user input
+
+✔ Simple Definition
+SQL / NoSQL Injection → using malicious input to alter database queries
+
+✔ Root Cause (VERY IMPORTANT)
+- Trusting user input ❌
+- No validation ❌
+- Raw / dynamic queries ❌
+- Direct use of req.body ❌
+
+✔ NoSQL Injection 
+
+Attacker sends:
+```
+{
+  email: { $ne: null },
+  password: { $ne: null }
+}
+```
+
+Result:
+- First user returned
+- Login hacked
+
+
+✔ Common Injection Points
+- Login forms
+- Search APIs
+- Query params
+- JSON body
+- Filters
+- Headers
+
+✔ Injection Types
+- SQL Injection (MySQL, PostgreSQL)
+- NoSQL Injection (MongoDB)
+- Command Injection (exec, shell)
+- LDAP Injection
+
+✔ Hacker Techniques
+- Special characters: `'`, `"`,`{ }`, `$`
+- Mongo operators: `$ne`, `$gt`, `$or`
+- Tools: DevTools, Postman, Burp Suite
+- Automated bots scan 24×7
+
+
+✔ Golden Rule 
+"User input is DATA, never CODE"
+
+✔ Interview Line ⭐
+"SQL and NoSQL injections occur when untrusted user input is directly used in database queries without proper validation."
+
+✔ Prevention (Preview)
+- Schema validation (Zod)
+- Whitelisting fields
+- Avoid spreading req.body
+- Type checking
+- Sanitization
+- Parameterized queries
 
 </details>
 
