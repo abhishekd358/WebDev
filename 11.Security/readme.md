@@ -54,3 +54,54 @@
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+# 2) Using `.env` File in Node.js (Native Way)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+✔ Native `.env` Support (Node.js v20+ )
+- No dotenv package needed
+- Built-in support using `-env-file flag`
+
+
+
+#### 1️⃣ Create `.env` file
+
+```
+PORT=5000
+DB_URL=mongodb://127.0.0.1:27017/app
+JWT_SECRET=superSecretKey
+NODE_ENV=development
+```
+
+#### 2️⃣ Run Node with env file
+
+```bash
+node --env-file=.env index.js
+```
+
+#### 3️⃣ Access in code
+
+```js
+const port = process.env.PORT;
+```
+
+
+✔ Old vs New Way 
+- `dotenv package` → optional / legacy
+- `node --env-file` → modern / native
+
+✔ Multiple Environments (Pro Level)
+
+```
+.env.development
+.env.production
+.env.test
+```
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
