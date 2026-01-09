@@ -359,3 +359,65 @@ export default router;
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
       
+# 5) Same-Origin Policy (SOP) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is Same-Origin Policy (SOP)?
+- Browser security rule
+- One website cannot access data of another website directly
+- Enforced by browser, NOT by server
+
+✔ Simple Definition
+- Same-Origin Policy → browser restricts cross-site data access
+
+✔ What is an Origin?
+- Origin = protocol + domain + port
+
+- Example:
+  - https://example.com:3000
+
+✔ Same Origin Conditions
+- Protocol same
+- Domain same
+- Port same
+(All three must match)
+
+✔ Examples
+- https://a.com  ↔ https://a.com        → Same Origin ✅
+- http://a.com  ↔ https://a.com        → Different ❌
+- https://a.com ↔ https://b.com        → Different ❌
+- https://a.com:3000 ↔ :4000           → Different ❌
+
+✔ Why SOP Exists?
+- Protect user data
+- Prevent malicious websites from stealing cookies/data
+- Stops cross-site attacks
+
+
+✔ What SOP Blocks
+- Reading response data
+- Accessing cookies
+- DOM access across origins
+
+**✔ What SOP Allows**
+- Sending requests (forms, images, scripts)
+- But reading response is blocked
+
+**✔ SOP vs CORS (Quick)**
+- SOP → default browser restriction
+- CORS → controlled relaxation by server
+- SOP is always ON
+
+
+✔ Important Limitation
+- SOP does NOT prevent CSRF
+- Requests can still be sent
+- Only response reading is blocked
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
