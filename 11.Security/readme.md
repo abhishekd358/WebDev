@@ -180,3 +180,74 @@ Result:
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+# 4) Schema-Based Data Validation with Zod
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br> 
+
+✔ What is Validation?
+- Checking whether user input is ALLOWED or NOT
+- Ensures correct type, format, length, rules
+- Invalid input → request rejected before DB
+
+
+✔ What is Zod?
+- Popular validation library for JS/TS
+- Runtime validation (actual data check)
+
+
+✔ Basic Zod Schema Example
+```js
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8)
+});
+```
+✔ How Validation Works
+
+`const result = loginSchema.safeParse(req.body);`
+
+✔ Why `safeParse()` is IMPORTANT
+- Prevents server crash
+- it returns `success`, `data` , `error` 
+
+- `success` → boolean
+    - Indicates validation result.
+    - true = valid data, false = validation failed.
+
+- `data` → parsed & type-safe data
+    - Available only when `success` === `true`.
+
+- `error` → ZodError
+  - Contains validation errors.
+
+
+✔ Common Zod Validators
+- `z.string()`
+- `z.number()`
+- `z.boolean()`
+- `z.array()`
+- `z.object()`
+- `z.enum(["admin", "user"])`
+
+With rules:
+- `.min()`
+- `.max()`
+- `.email()`
+- `.optional()`
+
+✔ Validation vs Sanitization
+Validation → allowed or not (GATEKEEPER)
+Sanitization → clean data (CLEANER)
+
+
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
