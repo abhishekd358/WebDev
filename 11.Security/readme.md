@@ -574,9 +574,75 @@ javascript:alert(document.cookie)
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
+# 7) Fix XSS using DOMPurify
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is the XSS Problem?
+- XSS happens when user input is rendered as HTML without cleaning
+- Attacker injects `<script>`, `onerror`, javascript:
+- Browser executes it as trusted site code
+
+Example (Dangerous):
+```
+div.innerHTML = userInput;   ❌
+```
+
+✔ What is DOMPurify?
+- is library
+- DOMPurify is an HTML sanitizer
+- Removes malicious JavaScript & attributes
+- Keeps safe HTML intact
+- Uses ALLOWLIST approach (most secure)
 
 
+✔ Sanitization vs Escaping
+- Escaping → encodes characters (< > &)
+- Sanitization → removes dangerous code
+- XSS protection requires SANITIZATION
 
+
+✔ Allowlist Concept (IMPORTANT)
+- Only allowed tags & attributes survive
+- Everything else is removed
+- Blocklist is never safe
+- Allowlist = industry standard
+
+- **BEST PRACTICE → Sanitize BOTH**
+
+</details>
+
+---
+---
+
+<details>
+  <summary>👉🏼 Frontend Implementation:</summary>
+
+</br>
+
+
+### ✔ Frontend Usage (React / Browser)
+
+
+- Use when rendering user HTML
+- Especially with `dangerouslySetInnerHTML`
+
+-  1️⃣ Example:
+
+```js
+import DOMPurify from "dompurify";
+
+<div dangerouslySetInnerHTML={{
+  __html: DOMPurify.sanitize(userHTML)
+}} />
+```
+
+- 2️⃣ Simple Example :
+
+```js
 const handleChange = (e) => {
   const dirty = e.target.value;
   const clean = DOMPurify.sanitize(dirty);
@@ -584,3 +650,75 @@ const handleChange = (e) => {
 };
 
 <textarea onChange={handleChange} />
+```
+
+✔ IN FRONTEND IT WORKS ?
+- Browser already has DOM
+- DOMPurify directly uses window
+
+</details>
+
+
+---
+---
+
+<details>
+  <summary>👉🏼 Backend Implementation:</summary>
+
+</br>
+
+
+### ✔ Backend Usage (Node.js)
+
+
+Problem:
+- Node.js has NO DOM so that we import `import { JSDOM } from "jsdom";`
+
+- DOMPurify needs DOM
+- Backend not have window so we create `const window = new JSDOM("").window;` 
+
+
+```js
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
+
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
+
+const cleanHTML = DOMPurify.sanitize(dirtyHTML);
+```
+
+</details>
+
+---
+---
+
+
+<details>
+  <summary>👉🏼 Best Approach of Implementation(in less setup):</summary>
+
+</br>
+
+
+
+### ✅ Best Industry Shortcut (Recommended)
+
+```js
+import DOMPurify from "isomorphic-dompurify";
+
+const cleanHTML = DOMPurify.sanitize(req.body.comment);
+```
+
+✔ Works in browser + Node
+✔ Less setup
+✔ Fewer mistakes
+
+
+- We use isomorphic-dompurify because it works in both browser and Node.js environments and automatically handles DOM availability, reducing configuration errors and improving security consistency.
+
+</details>
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
