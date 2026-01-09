@@ -421,3 +421,62 @@ export default router;
 </details>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+# 6) XSS (Cross-Site Scripting) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is XSS?
+- XSS = Cross-Site Scripting
+- Attacker injects malicious JavaScript
+- Script runs in victim’s browser
+
+✔ Basic Example
+```
+HTML:
+<p>Comment: USER_INPUT</p>
+
+User input:
+<script>alert("Hacked")</script>
+
+Final output:
+<p>Comment: <script>alert("Hacked")</script></p>
+```
+
+✔ What Can Be Stolen?
+- Cookies (if not httpOnly)
+- JWT tokens
+- Session data
+- User actions (CSRF + XSS combo)
+- Fake UI / phishing redirects
+
+✔ Common XSS Locations
+- Comment boxes
+- Search input
+- Profile bio
+- Reviews
+- Admin panels
+
+
+✔ Attacker Mindset
+1. Find input field
+2. Inject <script>
+3. Check response
+4. Improve payload
+5. Exploit users
+
+✔ Escaping vs Sanitization
+- Escaping → encode special characters
+- Sanitization → remove dangerous code
+- XSS protection requires SANITIZATION
+
+✔ Interview Line 
+"XSS is a vulnerability where malicious JavaScript is executed in a user’s browser under a trusted website context."
+
+</details>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
