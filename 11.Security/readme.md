@@ -245,9 +245,117 @@ With rules:
 ✔ Validation vs Sanitization
 Validation → allowed or not (GATEKEEPER)
 Sanitization → clean data (CLEANER)
+  
+</details>
 
 
+---
+---
+
+
+<details>
+  <summary>👉🏼 SIMPLE IMPLEMENTATION:</summary>
+
+### SIMPLE EXAMPLE :
+
+#### Folder structure
+
+```
+project/
+│
+├─ validators/
+│   └─ auth.validator.js
+│
+├─ auth.controller.js
+│
+├─ server.js
+```
+
+#### `validators/auth.validator.js`
+
+```js
+import { z } from "zod";
+
+// Login schema
+export const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+// Register schema
+export const registerSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+```
+
+#### `auth.controller.js`
+
+```js
+import express from "express";
+import { loginSchema, registerSchema } from "./validators/auth.validator.js";
+
+const router = express.Router();
+
+/* ================= LOGIN ================= */
+router.post("/login", async (req, res) => {
+  try {
+    const result = loginSchema.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(400).json({
+        errors: result.error.errors,
+      });
+    }
+
+    const { email, password } = result.data;
+
+    // business logic here (DB, auth, etc.)
+    return res.json({
+      message: "Login successful",
+      data: { email },
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+});
+
+/* ================= REGISTER ================= */
+router.post("/register", async (req, res) => {
+  try {
+    const result = registerSchema.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(400).json({
+        errors: result.error.errors,
+      });
+    }
+
+    const { name, email, password } = result.data;
+
+    // business logic here (DB save, hashing, etc.)
+    return res.json({
+      message: "Registration successful",
+      data: { name, email },
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+});
+
+export default router;
+```
 
 </details>
 
+
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+      
