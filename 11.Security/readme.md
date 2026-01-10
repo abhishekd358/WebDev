@@ -844,4 +844,128 @@ CSP = defense-in-depth layer
 
 </details>
 
+---
+---
+
+<details>
+  <summary>👉🏼 All list of Directive:</summary>
+
+</br>
+
+
+#### Directive Reference Table
+
+| **Directive**              | **Purpose (Simple)**         | **Recommended Value**            | **Why Important**                      | **Use / Avoid** |
+| -------------------------- | ---------------------------- | -------------------------------- | -------------------------------------- | --------------- |
+| `default-src`              | Sab resources ka base rule   | `'self'`                         | Safe default, unknown sources block    | ✅ MUST USE      |
+| `script-src` ⭐             | JavaScript execution control | `'self'`                         | XSS ka main attack surface band        | ✅ MUST USE      |
+| `style-src`                | CSS loading control          | `'self'`                         | Malicious CSS / inline styles block    | ✅ USE           |
+| `img-src`                  | Image sources                | `'self' data:`                   | Base64 images allow, image-XSS prevent | ✅ USE           |
+| `connect-src`              | API / fetch / WebSocket      | `'self' https://api.example.com` | Data exfiltration & rogue APIs block   | ✅ MUST USE      |
+| `font-src`                 | Font sources                 | `'self'`                         | Tracking & font injection prevent      | ✅ USE           |
+| `object-src`               | Plugins (Flash, etc.)        | `'none'`                         | Legacy plugin attacks stop             | ✅ MUST USE      |
+| `frame-ancestors`          | iFrame embedding             | `'none'`                         | Clickjacking prevent                   | ✅ MUST USE      |
+| `base-uri`                 | `<base href>` control        | `'self'`                         | URL rewriting attacks block            | ✅ USE           |
+| `form-action`              | Form submit destination      | `'self'`                         | Credential stealing forms block        | ✅ USE           |
+| `media-src`                | Audio / video sources        | `'self'`                         | Media injection control                | ⚠️ Optional     |
+| `worker-src`               | Web workers                  | `'self'`                         | Malicious background scripts prevent   | ⚠️ Optional     |
+| `manifest-src`             | PWA manifest                 | `'self'`                         | PWA integrity maintain                 | ⚠️ Optional     |
+| `prefetch-src`             | Prefetched resources         | `'self'`                         | Unwanted prefetch block                | ⚠️ Optional     |
+| `frame-src`                | Allowed iframes              | `'self'`                         | iFrame content restriction             | ⚠️ Conditional  |
+| `child-src`                | Nested browsing contexts     | `'self'`                         | Legacy iframe control                  | ⚠️ Rare         |
+| `report-uri` / `report-to` | CSP violation reports        | `/csp-report`                    | Attack detection & debugging           | ⚠️ Optional     |
+
+---
+
+#### 🚨 Dangerous / Disallowed CSP Keywords (EXAM TRAP)
+
+| **Keyword / Pattern**   | **Why Dangerous**                             | **Status**  |
+| ----------------------- | --------------------------------------------- | ----------- |
+| `'unsafe-inline'`       | Inline scripts & event handlers allowed → XSS | ❌ NEVER USE |
+| `'unsafe-eval'`         | `eval()` based JS execution                   | ❌ NEVER USE |
+| `*` (wildcard)          | Any domain allowed                            | ❌ NEVER USE |
+| `data:` in `script-src` | Base64 JS execution possible                  | ❌ NEVER USE |
+| `http:`                 | Allows non-HTTPS scripts                      | ❌ AVOID     |
+
+
+
+#### Safe Advanced Options (When Needed)
+
+| **Option**       | **Use Case**           | **Example**         | **Status**    |
+| ---------------- | ---------------------- | ------------------- | ------------- |
+| `nonce-*`        | Safe inline scripts    | `'nonce-random123'` | ✅ RECOMMENDED |
+| `sha256-*`       | Static inline JS       | `'sha256-AbCd...'`  | ⚠️ Advanced   |
+| `strict-dynamic` | Dynamic script loading | `'strict-dynamic'`  | ⚠️ Expert     |
+
+
+
+#### ✅ Minimal Production-Ready CSP
+
+```bash
+Content-Security-Policy:
+default-src 'self';
+script-src 'self';
+style-src 'self';
+img-src 'self' data:;
+connect-src 'self';
+font-src 'self';
+object-src 'none';
+frame-ancestors 'none';
+base-uri 'self';
+form-action 'self';
+```
+
+
+</details>
+
+
+## 9) Reporting CSP Violations (CSP Report-Only) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is CSP Violation Reporting?
+- Browser reports when a CSP rule is violated
+- no blocking happen 
+- CSP rules are NOT enforced
+- Violations are only reported
+- Application keeps working
+
+
+✔ Route of report Creation 
+- `report-uri /csp-report;` set this directive in header so we receive report
+- `/csp-report` -> you can set any name of ROUTE ex. report-uri /csp-report-violation
+
+Example Header:
+```bash
+Content-Security-Policy-Report-Only:
+  default-src 'self';
+  script-src 'self';
+  report-uri /csp-report;
+```
+
+
+
+✔ Express Example (Capture Reports)
+
+```js
+app.post("/csp-report", express.json(), (req, res) => {
+  console.log("CSP Violation:", req.body);
+  res.status(204).end();
+});
+```
+
+✔ Common Mistakes ❌
+- Enabling strict CSP directly in production
+- Ignoring violation reports
+- Leaving report endpoint unsecured
+
+
+✔ Interview Line ⭐
+"CSP Report-Only mode allows monitoring policy violations without enforcing them."
+
+
+</details>
 
