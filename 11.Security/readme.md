@@ -747,5 +747,101 @@ const cleanHTML = DOMPurify.sanitize(req.body.comment);
 
 
 
+</br>
+</br>
+
+<img src="https://www.animatedimages.org/data/media/562/animated-line-image-0415.gif" border='0' height="15px" width="100%" />
+
+</br>
+
+<center>
+
+# **📝 Content Security Policy (CSP)**
+
+</center>
+
+
+## 8) Content Security Policy (CSP)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is CSP?
+- Content Security Policy is a browser security rule-set
+- Server sends CSP rules via HTTP headers
+- Browser enforces those rules
+- Controls what scripts/resources can run
+
+✔ Simple Definition
+CSP → browser ko batata hai kaunsa code/resource allowed hai
+
+✔ Why CSP Exists?
+- Prevent XSS (Cross-Site Scripting)
+- Block injected / malicious scripts
+- Restrict untrusted external resources
+
+
+✔ Syntax
+- `Content-Security-Policy: <directives>;`
+
+
+✔ Important CSP Directives
+
+- `default-src`
+  - Fallback rule for all resources
+
+- `script-src`
+  - Controls JavaScript sources
+  - Example: `script-src 'self' https://trusted.cdn.com;`
+
+-`style-src`
+  - Controls CSS sources
+  - 'unsafe-inline' ❌ (avoid)
+
+- `img-src`
+  - Controls image sources
+  - Example: `img-src 'self' data:;`
+
+✔ Inline Scripts Warning 
+- Inline JS is blocked by default
+- Developers feel CSP "breaks site"
+- Reality: CSP breaks insecure code
+
+✔ CSP vs DOMPurify
+
+- **DOMPurify**
+  - Sanitizes input
+  - Removes dangerous HTML/JS
+  - First line of defense
+
+- **CSP**
+  - Controls script execution
+  - Browser-level protection
+  - Last line of defense
+
+✔ Example of CSP in Express
+
+```js
+res.setHeader(
+  "Content-Security-Policy",
+  "default-src 'self'; script-src 'self'"
+);
+```
+
+✔ Important Limitations
+- CSP can be misconfigured
+- `'unsafe-inline'` weakens security
+- Not supported fully in old browsers
+
+✔ Security Principle
+CSP ≠ single solution
+CSP = defense-in-depth layer
+
+✔ Interview Line 
+"Content Security Policy restricts what resources the browser is allowed to execute."
+
+</details>
 
 
