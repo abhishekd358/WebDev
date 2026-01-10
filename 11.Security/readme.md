@@ -1,10 +1,20 @@
-# 1) Intro to Security in Node.js
+</br>
+
+<center>
+
+# **📝 CORE SECURITY**
+
+</center>
+
+## 1) Intro to Security in Node.js
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
 ✔ What is Web Security?
 - Protect web apps from unauthorized access & attacks
 - Prevent data theft, misuse, account hijacking
+
+</br>
 
 ✔ Client vs Server Trust Rule (MOST IMPORTANT)
 - Client (Browser) = NEVER TRUST
@@ -53,11 +63,9 @@
 
 </details>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-
-# 2) Using `.env` File in Node.js (Native Way)
+## 2) Using `.env` File in Node.js (Native Way)
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -106,9 +114,21 @@ const port = process.env.PORT;
 
 </details>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+<!-- <a href="https://www.animatedimages.org/cat-lines-562.htm"><img src="https://www.animatedimages.org/data/media/562/animated-line-image-0507.gif" border="0" alt="animated-line-image-0507" /></a> -->
+</br>
+</br>
 
-# 3) SQL Injection & NoSQL Injection 
+<img src="https://www.animatedimages.org/data/media/562/animated-line-image-0415.gif" border='0' height="15px" width="100%" />
+
+</br>
+
+<center>
+
+# **📝 Input Validation & Injection Attacks**
+
+</center>
+
+## 3) SQL Injection & NoSQL Injection 
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -179,12 +199,9 @@ Result:
 
 </details>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-
-
-# 4) Schema-Based Data Validation with Zod
+## 4) Schema-Based Data Validation with Zod
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -355,11 +372,20 @@ export default router;
 
 </details>
 
+</br>
+</br>
 
+<img src="https://www.animatedimages.org/data/media/562/animated-line-image-0415.gif" border='0' height="15px" width="100%" />
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-      
-# 5) Same-Origin Policy (SOP) 
+</br>
+
+<center>
+
+# **📝 Browser Security & XSS**
+
+</center>
+
+## 5) Same-Origin Policy (SOP) 
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -420,10 +446,10 @@ export default router;
 
 </details>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-# 6) XSS (Cross-Site Scripting) 
+
+## 6) XSS (Cross-Site Scripting) 
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -571,10 +597,11 @@ javascript:alert(document.cookie)
 
 </details>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
-# 7) Fix XSS using DOMPurify
+
+
+## 7) Fix XSS using DOMPurify
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -720,5 +747,5 @@ const cleanHTML = DOMPurify.sanitize(req.body.comment);
 
 
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
 
