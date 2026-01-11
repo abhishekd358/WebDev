@@ -1070,7 +1070,7 @@ Content-Security-Policy:
 
 </details>
 
-## 12) 
+## 12) Dynamic Inline Script CSP `Nonce`
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
