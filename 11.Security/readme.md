@@ -1016,3 +1016,57 @@ Content-Security-Policy:
 
 </details>
 
+
+## 11) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is `integrity` attribute?
+- HTML security feature for external scripts
+- Ensures script content is NOT modified
+- Uses SHA-256 + Base64 hash
+- ✔ Match → script execute
+- ❌ Mismatch → script BLOCK
+
+
+✔ Example (External Script Security)
+
+```html
+<script
+  src="https://cdn.example.com/app.js"
+  integrity="sha256-AbCdEf123456Base64Hash=="
+  crossorigin="anonymous">
+</script>
+```
+
+✔ Why `integrity` is IMPORTANT
+- CDN compromise protection
+- Man-in-the-middle attack prevention
+- Script tampering detect karta hai
+
+
+✔ CSP Hash vs `integrity`
+
+| Feature    | CSP Hash        | `integrity` Attribute |
+| ---------- | --------------- | --------------------- |
+| Used for   | Inline scripts  | External scripts      |
+| Defined in | CSP Header      | HTML `<script>` tag   |
+| Purpose    | Allow execution | Verify content        |
+| Hash       | SHA-256 Base64  | SHA-256 Base64        |
+
+
+✔ When to Use `integrity`
+
+- ✅ Third-party CDN scripts
+- ✅ Analytics & libraries
+- ✅ Production hardening
+- ❌ Dynamic scripts
+
+
+
+
+</details>
+
