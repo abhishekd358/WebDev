@@ -969,3 +969,50 @@ app.post("/csp-report", express.json(), (req, res) => {
 
 </details>
 
+## 10) Using Inline Scripts with Hash (CSP)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+✔ What is the Inline Script Problem?
+- Inline JavaScript (<script>...</script>) is blocked by CSP
+- Reason: Inline scripts are common XSS attack vectors
+- When to use : for static Inline script 
+
+✔ Hash Concept (Simple)
+“Sirf wahi inline script chalegi jiska hash allowed hai, ek bhi script ke content mai change then browser block the script”
+
+**✔ What is a CSP Hash?**
+- Hash = cryptographic fingerprint of script content
+- CSP allows inline script ONLY if hash matches exactly
+
+
+✔ Inline Script Example (Blocked)
+
+```js
+<script>
+  console.log("Hello");
+</script>
+```
+
+**✔ How Hash is Generated**
+1. Take inline script content `console.log("Hello");`
+2. Generate SHA-256 hash   `crypto.createHash('sha256').update('console.log("Hello");').digest('base64')
+3. Base64 encode it
+4. Pass hash value in csp `script-src` derivative
+
+✔ CSP Header with Hash
+```bash
+Content-Security-Policy:
+  script-src 'self' 'sha256-abc123...';
+```
+
+✔ Hash vs Nonce (Concept Preview)
+- Hash → static, precomputed
+- Nonce → dynamic, per request (more flexible)
+
+
+
+</details>
+
