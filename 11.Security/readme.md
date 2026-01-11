@@ -1141,3 +1141,99 @@ app.get("/", (req, res) => {
 
 </details>
 
+
+</br>
+</br>
+
+<img src="https://www.animatedimages.org/data/media/562/animated-line-image-0415.gif" border='0' height="15px" width="100%" />
+
+</br>
+
+<center>
+
+# **📝 Clickjacking & Cookie Security**
+
+</center>
+
+## 13) Clickjacking
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is Clickjacking?
+- UI-based web attack
+- User ko visually confuse karke
+  - usse unintended action click karwa liya jata hai
+
+✔ Prevention Method 1: X-Frame-Options
+- Site iframe me load hi nahi hogi
+- `X-Frame-Options: DENY`
+-Options:
+  - DENY
+  - SAMEORIGIN
+
+✔ Prevention Method 2: CSP (BEST)
+- Recommended over X-Frame-Options
+- Modern & flexible
+```bash
+Content-Security-Policy:
+  frame-ancestors 'self';
+```
+
+✔ Interview Line 
+"Clickjacking is a UI-based attack where users are tricked into clicking hidden or disguised elements, often using iframes."
+
+</details>
+
+
+
+## 14)  Domain Attribute in Cookies (Security)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+✔ What is Domain Attribute?
+- `domain` attribute decides which domain or subdomains receive a cookie
+- Browser checks domain match on every request
+
+✔ How to Set Cookie
+
+```js
+res.cookie("sessionId", "abc123", {
+  httpOnly: true,
+  secure: true,
+});
+```
+
+* Browser auto-scopes cookie
+* Restricted to same domain only
+
+✔ Shared Cookie Across Subdomains(.)
+
+```js
+res.cookie("sessionId", "abc123", {
+  domain: ".example.com",
+  httpOnly: true,
+  secure: true,
+});
+```
+* Available to all subdomains
+* dont use (.) instead mention explictly Subdomain name
+
+
+
+
+## ✔ Domain vs Path (IMPORTANT)
+
+| Attribute | Controls                           |
+| --------- | ---------------------------------- |
+| Domain    | Which domain/subdomain gets cookie |
+| Path      | Which URL path gets cookie         |
+
+
+</details>
+
+
