@@ -1017,7 +1017,7 @@ Content-Security-Policy:
 </details>
 
 
-## 11) 
+## 11) `integrity` Attribute for External Scripts
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1066,6 +1066,77 @@ Content-Security-Policy:
 - ❌ Dynamic scripts
 
 
+
+
+</details>
+
+## 12) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+</br>
+
+✔ What is a Nonce?
+- Nonce = random, single-use token
+- Generated fresh on every HTTP request
+- Used for Dynamic inline scripts in CSP
+- Random Byte genereate using `crypto.randomBytes(16).toString()`
+
+✔ CSP with Nonce (Header)
+```bash
+Content-Security-Policy:
+  script-src 'self' 'nonce-abc123';
+```
+
+✔ HTML Script with Nonce
+```js
+<script nonce="abc123">
+  console.log("Secure inline script");
+</script>
+```
+
+✔ Express Example (Dynamic Nonce)
+- Generate nonce per request
+- Attach nonce to CSP header
+- Pass nonce to template (EJS/Pug)
+
+```js
+app.get("/", (req, res) => {
+  // 1️⃣ Generate nonce (per request)
+  const nonce = crypto.randomBytes(16).toString("base64");
+
+  // 2️⃣ Set CSP header with nonce
+  res.setHeader(
+    "Content-Security-Policy",
+    `default-src 'self'; script-src 'self' 'nonce-${nonce}'`
+  );
+
+  // 3️⃣ Send HTML with nonce applied
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>CSP Nonce Demo</title>
+      </head>
+      <body>
+        <h1>Nonce without middleware 🔐</h1>
+
+        <script nonce="${nonce}">
+          console.log("✅ Allowed inline script");
+        </script>
+
+        <script>
+          console.log("❌ This inline script will be blocked");
+        </script>
+      </body>
+    </html>
+  `);
+});
+```
+
+✔ Hash vs Nonce
+- Hash → static inline scripts
+- Nonce → dynamic inline scripts (BEST for SSR apps)
 
 
 </details>
