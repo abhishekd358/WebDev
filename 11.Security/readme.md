@@ -1237,3 +1237,58 @@ res.cookie("sessionId", "abc123", {
 </details>
 
 
+
+## 15)  Top-Level Navigation (Browser + Cookies)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is Top-Level Navigation?
+- User directly navigates to a page
+- Browser loads a new document
+- When a webpage is loaded directly in the main browser window/tab (the address bar URL).
+- Not inside an iframe, embedded element, or popup.
+
+✔ Examples (Top-Level Navigation)
+- Typing URL in address bar
+- Clicking `<a href="...">`
+- `window.location = "..."`
+
+✔ NOT Top-Level Navigation
+- `fetch()` / `XMLHttpRequest`
+- `<img src="...">`
+- `<iframe src="...">`
+- Background API calls
+
+✔ Trust Model
+- User-initiated navigation → more trust
+- Background requests → less trust
+- Top-level GET navigation → cookie SENT ✅
+- Background request → cookie NOT sent ❌
+
+
+✔ Security Angle
+- CSRF attacks rely on **background requests**
+
+
+✔ Top-Level Navigation vs Background Requests
+
+Action            | Cookie Sent (Lax)
+------------------|------------------
+<a href>          | ✅
+Address bar       | ✅
+window.location   | ✅
+fetch()           | ❌
+<img>             | ❌
+<iframe>          | ❌
+
+✔ Interview Line ⭐
+"Top-level navigation is a user-initiated page load that browsers treat differently from background requests when sending cookies."
+
+
+
+</details>
+
+
