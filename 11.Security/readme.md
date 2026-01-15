@@ -1275,6 +1275,7 @@ res.cookie("sessionId", "abc123", {
 
 ✔ Top-Level Navigation vs Background Requests
 
+```
 Action            | Cookie Sent (Lax)
 ------------------|------------------
 <a href>          | ✅
@@ -1283,6 +1284,7 @@ window.location   | ✅
 fetch()           | ❌
 <img>             | ❌
 <iframe>          | ❌
+```
 
 ✔ Interview Line ⭐
 "Top-level navigation is a user-initiated page load that browsers treat differently from background requests when sending cookies."
@@ -1341,11 +1343,106 @@ const options = {
 };
 
 https.createServer(options, app).listen(443);
-
+```
 
 ✔ Interview Line ⭐
 "HTTPS uses TLS encryption and is mandatory for secure cookies and modern browser security features."
 
 
 </details>
+
+## 7) Understanding SameSite Cookie Attribute in Depth
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is SameSite Cookie Attribute?
+* Decides whether cookies are sent with cross-site requests
+* Helps protect against CSRF attacks
+
+✔ Simple Definition
+SameSite → browser decides cookie cross-site request me jayegi ya nahi
+
+✔ Important Clarification
+SameSite ≠ Same-Origin
+SameSite works on **site level**, not origin level
+
+✔ What is “Same-Site”?
+* Based on registrable domain (eTLD+1)
+* Subdomains are considered same-site
+
+```
+Example:
+app.example.com
+api.example.com
+→ Same-site ✅ (example.com)
+```
+
+
+✔ SameSite=Strict
+* Cookie sent ONLY for same-site requests
+* Cross-site navigation ❌
+
+✔ SameSite=Lax (DEFAULT)
+* Cookie sent for top-level navigation (GET)
+* Cookie NOT sent for background requests (POST, fetch, img)
+* Best balance between security and usability
+
+✔ SameSite=None
+* Cookie sent in all cross-site requests
+* Not Secure
+
+</details>
+
+
+## 8) Cross-Site Request Forgery (CSRF)
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ What is Cross-Site Request Forgery (CSRF)?
+* CSRF → attacker tricks the browser into sending authenticated requests without user consent
+* CSRF is a design-level vulnerability,not a bug in code.
+
+✔ Core Reason Behind CSRF
+* Browsers automatically attach cookies to requests
+
+
+✔ Classic CSRF Example (Bank Case)
+
+```html
+* User logged in to bank.com
+* Authentication cookie exists
+
+Attacker page contains:
+<img src="https://bank.com/transfer?to=hacker&amount=10000">
+
+
+Browser behavior:
+* Sees request to bank.com
+* Automatically attaches cookies
+
+Result:
+* Money transferred without user knowing
+```
+
+
+✔ Where CSRF is Possible
+
+* State-changing operations: POST, PUT , DELETE
+* Sensitive actions: Money transfer, Password change, Email update, Logout ...etc
+
+✔ Important Misconception ⚠️
+
+* CSRF does NOT happen only with POST
+* CSRF can happen with GET
+* If GET changes state → bad design
+
+
+</details>
+
 
