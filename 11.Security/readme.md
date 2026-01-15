@@ -1695,10 +1695,157 @@ app.post("/api/update", (req, res) => {
 </details>
 
 
-## 2) 
+## 2) Rate Limiting
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+### 🧠 **Rate Limiting — Concise Remembering Notes (English)**
+
+---
+
+### **What?**
+
+* **Rate Limiting** = allowing a **limited number of requests** from a user / IP / token **within a fixed time window**
+* Normal users ✅, abusers/bots ❌
+
+---
+
+### **Why?**
+
+* **First line of defense against DoS attacks**
+* Reduces brute-force attempts, API abuse, and server overload
+
+
+✔ **Where to Apply? (High-Risk Endpoints)**
+
+✔️ `/login`
+✔️ `/signup`
+✔️ `/otp`
+✔️ `/search`
+✔️ `/password-reset`
+
+
+✔ **Window Types**
+
+⏱️ **Fixed Window**: Simple, but has boundary burst issue
+🔄 **Sliding Window**: Smoother and more accurate
+
+
+✔ **Required Add-on (Important)**
+
+* HTTP Status: **`429 Too Many Requests`**
+
+> *Rate limiting protects system resources by restricting how many requests a client can make within a given time period.*
+
+
+✔ IMPLEMENTATION CODE :(Fixed Window)
+
+
+```js
+import express from "express";
+import bcrypt from "bcrypt";
+
+const app = express();
+const PORT = 4000;
+
+/*
+  Simple CORS setup
+  (Allows requests from any origin – demo only)
+*/
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+/*
+  Home route
+*/
+app.get("/", (req, res) => {
+  res.send("<h1>Hello World!</h1>");
+});
+
+/*
+  In-memory store to track requests per IP
+  Structure:
+  {
+    "IP_ADDRESS": {
+      startTime: Number,
+      count: Number
+    }
+  }
+*/
+const rateLimitStore = {};
+
+/*
+  Rate limiter factory function
+  windowSize        → time window in milliseconds
+  maxRequests       → max allowed requests in that window
+*/
+function rateLimiter({ windowSize, maxRequests }) {
+  return function (req, res, next) {
+    const ip = req.ip;           // client IP
+    const currentTime = Date.now();
+
+    // First request from this IP
+    if (!rateLimitStore[ip]) {
+      rateLimitStore[ip] = {
+        startTime: currentTime,
+        count: 1,
+      };
+      return next();
+    }
+
+    const requestData = rateLimitStore[ip];
+
+    // If time window has passed, reset counter
+    if (currentTime - requestData.startTime > windowSize) {
+      rateLimitStore[ip] = {
+        startTime: currentTime,
+        count: 1,
+      };
+      return next();
+    }
+
+    // Within same window → increase count
+    requestData.count++;
+
+    // If limit exceeded → block request
+    if (requestData.count > maxRequests) {
+      return res.status(429).json({
+        error: "Too many requests. Please slow down.",
+      });
+    }
+
+    next();
+  };
+}
+
+/*
+  Protected route with rate limiting
+  Allows only 5 requests per minute per IP
+*/
+app.get(
+  "/register",
+  rateLimiter({ windowSize: 60_000, maxRequests: 5 }),
+  (req, res) => {
+    // Simulating expensive operation (password hashing)
+    bcrypt.hashSync("123456", 14);
+
+    res.json({ message: "Registered successfully" });
+  }
+);
+
+/*
+  Start server
+*/
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
+
+```
+
 
 </details>
 
