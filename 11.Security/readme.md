@@ -385,7 +385,7 @@ export default router;
 
 </center>
 
-## 5) Same-Origin Policy (SOP) 
+## 1) Same-Origin Policy (SOP) 
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -449,7 +449,7 @@ export default router;
 
 
 
-## 6) XSS (Cross-Site Scripting) 
+## 2) XSS (Cross-Site Scripting) 
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -601,7 +601,7 @@ javascript:alert(document.cookie)
 
 
 
-## 7) Fix XSS using DOMPurify
+## 3) Fix XSS using DOMPurify
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -761,7 +761,7 @@ const cleanHTML = DOMPurify.sanitize(req.body.comment);
 </center>
 
 
-## 8) Content Security Policy (CSP)
+## 1) Content Security Policy (CSP)
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -919,7 +919,7 @@ form-action 'self';
 </details>
 
 
-## 9) Reporting CSP Violations (CSP Report-Only) 
+## 2) Reporting CSP Violations (CSP Report-Only) 
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -969,7 +969,7 @@ app.post("/csp-report", express.json(), (req, res) => {
 
 </details>
 
-## 10) Using Inline Scripts with Hash (CSP)
+## 3) Using Inline Scripts with Hash (CSP)
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1017,7 +1017,7 @@ Content-Security-Policy:
 </details>
 
 
-## 11) `integrity` Attribute for External Scripts
+## 4) `integrity` Attribute for External Scripts
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1070,7 +1070,7 @@ Content-Security-Policy:
 
 </details>
 
-## 12) Dynamic Inline Script CSP `Nonce`
+## 5) Dynamic Inline Script CSP `Nonce`
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1155,7 +1155,7 @@ app.get("/", (req, res) => {
 
 </center>
 
-## 13) Clickjacking
+## 1) Clickjacking
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1189,7 +1189,7 @@ Content-Security-Policy:
 
 
 
-## 14)  Domain Attribute in Cookies (Security)
+## 2)  Domain Attribute in Cookies (Security)
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1238,7 +1238,7 @@ res.cookie("sessionId", "abc123", {
 
 
 
-## 15)  Top-Level Navigation (Browser + Cookies)
+## 3)  Top-Level Navigation (Browser + Cookies)
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1294,7 +1294,7 @@ fetch()           | ❌
 </details>
 
 
-## 6) Self-Signed HTTPS Server in Node.js 
+## 4) Self-Signed HTTPS Server in Node.js 
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1351,7 +1351,7 @@ https.createServer(options, app).listen(443);
 
 </details>
 
-## 7) Understanding SameSite Cookie Attribute in Depth
+## 5) Understanding SameSite Cookie Attribute in Depth
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1397,7 +1397,7 @@ api.example.com
 </details>
 
 
-## 8) Cross-Site Request Forgery (CSRF)
+## 6) Cross-Site Request Forgery (CSRF)
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1446,7 +1446,7 @@ Result:
 </details>
 
 
-## 9) POST + SameSite Lax (2-Minute Problem) 🤯
+## 7) POST + SameSite Lax (2-Minute Problem) 🤯
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1488,7 +1488,7 @@ Result:
 </details>
 
 
-## 10) CSRF Token
+## 8) CSRF Token
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -1632,4 +1632,73 @@ app.post("/api/update", (req, res) => {
 
 </details>
 
+---
+
+</br>
+</br>
+
+<img src="https://www.animatedimages.org/data/media/562/animated-line-image-0415.gif" border='0' height="15px" width="100%" />
+
+</br>
+
+<center>
+
+# **📝 DoS, Rate Limiting & Throttling (PRODUCTION SKILLS)**
+
+</center>
+
+## 1) Denial of Service (DoS) Attack
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+
+✔ **What?**
+* **DoS (Denial of Service)** = overwhelming a server so that **legitimate users can no longer be served**
+
+
+✔ **Why?**
+* Server resources are **limited**
+* Too many requests → **CPU / memory / connections get exhausted** → application goes down
+
+
+✔ **Simple Example (One Look)**
+
+* Endpoint: `POST /login`
+* Attacker: **10,000 requests per second**
+* Result:
+
+  * 💥 CPU spike
+  * 💥 Database overload
+  * 💥 Application DOWN
+
+
+✔ **DoS vs DDoS (Quick)**
+
+* **DoS**: single source, easier to block
+* **DDoS**: multiple sources, harder to block, massive scale
+
+
+✔ **Basic Defenses (High-Level)**
+
+* Rate limiting
+* Request size limits
+* Timeouts
+* Throttling
+
+
+> *A Denial of Service attack makes an application unavailable by overwhelming its resources.*
+
+
+</details>
+
+
+## 2) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</details>
 
