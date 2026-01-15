@@ -1643,7 +1643,7 @@ app.post("/api/update", (req, res) => {
 
 <center>
 
-# **📝 DoS, Rate Limiting & Throttling (PRODUCTION SKILLS)**
+# **📝 DoS Attack, Rate Limiting & DDoS Attack**
 
 </center>
 
@@ -1845,6 +1845,54 @@ app.listen(PORT, "0.0.0.0", () => {
 });
 
 ```
+
+
+</details>
+
+## 3) Solution of DoS :-> `express-rate-limit` Package 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+
+
+### **What?**
+
+* **`express-rate-limit`** = Express middleware that **automatically counts requests**
+* Exceeds limit → request **blocked with `429`**
+- No need to manually handle IPs, timers, or responses
+
+
+✔ **How? (Basic Setup)**
+```js
+const loginLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 5,
+  message: "Too many login attempts",
+});
+```
+
+✔ **Apply Middleware**
+
+✅ **Global**: protects entire app
+✅ **Route-specific (recommended)**: protects only sensitive routes
+
+
+
+✔ **Production Use Case (Login)**
+
+* Very strict limits (e.g., 5 attempts / 10 minutes)
+* Reason: **login = high-risk endpoint**
+
+
+✔ **Common Mistakes ❌**
+
+* Same rate limit for all routes
+* Login & public APIs sharing limits
+* Using in-memory store in large production
+* Ignoring real client IP behind proxy
 
 
 </details>
