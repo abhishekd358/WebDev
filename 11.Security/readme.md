@@ -1487,3 +1487,149 @@ Result:
 
 </details>
 
+
+## 10) CSRF Token
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+✔ **What?**
+
+* **CSRF Token** = a **secret, random value** known only to the **server and the legitimate client**
+* Cookies are sent automatically ❌, **tokens must be sent manually**
+
+
+✔ **Why?**
+
+* Browsers automatically send cookies → CSRF becomes possible
+* An attacker **cannot guess or read the token** → the attack fails
+
+
+✔ **How? (Synchronizer Token Pattern)**
+
+1️⃣ Server generates a token
+2️⃣ Server securely sends it to the client
+3️⃣ Client sends the token with **every state-changing request**
+4️⃣ Server verifies the token
+
+
+✔ **Simple Flow (One Look)**
+
+* Generate: `randomBytes()`
+* Send to client:
+
+  * HTML hidden input (forms)
+  * Header / API response (SPA)
+* Client sends: `X-CSRF-Token`
+* Server: compare token → allow or block request
+
+
+✔ **Where to Store the Token?**
+
+✅ Server-side session
+✅ HttpOnly cookie + double submit (advanced)
+❌ `localStorage` (XSS risk)
+
+
+
+✔ **CSRF Token vs SameSite**
+
+* Token: **Explicit verification, strong protection, SPA-friendly**
+* SameSite: **Browser-enforced rule, partial protection**
+  👉 **Production = use both**
+
+
+
+✔ **Where to Apply CSRF Protection? (Important)**
+
+✔️ POST
+✔️ PUT
+✔️ PATCH
+✔️ DELETE
+❌ GET (no state change)
+
+</details>
+
+---
+
+<details>
+  <summary>👉🏼 CODE IMPLEMENTATION:</summary>
+
+<br/>
+
+## 📌 Backend (Express – Node.js)
+
+```js
+// setup
+import express from "express";
+import crypto from "crypto";
+
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// simple in-memory token (demo only)
+let csrfToken = null;
+
+// generate + send token
+app.get("/form", (req, res) => {
+  csrfToken = crypto.randomBytes(32).toString("hex");
+
+  res.send(`
+    <form method="POST" action="/submit">
+      <input type="hidden" name="csrfToken" value="${csrfToken}" />
+      <input type="text" name="data" />
+      <button type="submit">Submit</button>
+    </form>
+  `);
+});
+
+// verify token
+app.post("/submit", (req, res) => {
+  if (req.body.csrfToken !== csrfToken) {
+    return res.status(403).send("CSRF blocked ❌");
+  }
+  res.send("CSRF passed ✅");
+});
+
+// start server
+app.listen(3000);
+```
+
+---
+
+## 📌 Frontend (SPA / API Request)
+
+```js
+// token received from server
+const csrfToken = "TOKEN_FROM_SERVER";
+
+// send token manually
+fetch("/api/update", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "X-CSRF-Token": csrfToken,
+  },
+  body: JSON.stringify({ data: "test" }),
+});
+```
+
+---
+
+## 📌 Backend (API Verification)
+
+```js
+app.post("/api/update", (req, res) => {
+  if (req.headers["x-csrf-token"] !== csrfToken) {
+    return res.status(403).json({ error: "CSRF blocked" });
+  }
+  res.json({ success: true });
+});
+```
+
+</details>
+
+
