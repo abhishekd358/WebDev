@@ -1446,3 +1446,44 @@ Result:
 </details>
 
 
+## 9) POST + SameSite Lax (2-Minute Problem) 🤯
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+**What?**
+
+* `SameSite=Lax` **normally blocks cross-site POST**
+* **Exception:** Login ke baad **~2 minutes** tak browser **POST me bhi cookie bhej deta hai**
+
+**Why?**
+
+* UX / OAuth / redirect flows ko break hone se bachane ke liye
+
+**Is it delay?**
+
+* ❌ Browser wait nahi karta
+* ✅ Ye **grace window** hota hai (recent login ke baad)
+
+**Risk?**
+
+* ⚠️ **CSRF possible** in first ~2 minutes after login
+* Lax **alone is NOT enough**
+
+**Attack flow (1 line):**
+
+* User login → attacker site → auto POST → cookie sent → CSRF success
+
+**Protection (Must-do):**
+
+1. ✅ **CSRF Token (mandatory)**
+2. 🔒 Sensitive actions → `SameSite=Strict`
+3. 🔍 Check `Origin / Referer`
+4. 🔐 Re-auth / OTP for critical actions
+
+
+> *`SameSite=Lax` doesn’t fully prevent CSRF because browsers allow cookies on cross-site POST requests for a short (~2 min) window after login.*
+
+
+</details>
+
