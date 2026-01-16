@@ -1897,3 +1897,34 @@ const loginLimiter = rateLimit({
 
 </details>
 
+
+## 4) DDoS Attack  
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+* **DDoS** = flooding a server with requests from **many distributed systems(botnet) at the same time**
+* Target is **service availability**, not data
+
+
+✔ **DoS vs DDoS (Crystal Clear)**
+
+| DoS               | DDoS                         |
+| ----------------- | ---------------------------- |
+| Single attacker   | Multiple attackers           |
+| Few IPs           | Thousands of IPs             |
+| Easier to block   | Very hard to block           |
+| App-level defense | Infrastructure-level defense |
+
+✔ **Where Does the Attack Army Come From?**
+
+🤖 **Botnets**
+
+* Infected PCs
+* IoT devices (CCTV, routers)
+* Malware-infected servers
+
+</details>
+
