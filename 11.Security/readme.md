@@ -1928,3 +1928,94 @@ const loginLimiter = rateLimit({
 
 </details>
 
+## 5) Important Security Headers
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+* **No security headers = browser without guards**
+* One line of config → strong protection
+
+### 🔐 **1) X-Frame-Options**
+
+**Problem:** Clickjacking
+
+```http
+X-Frame-Options: DENY
+```
+
+* `DENY` → blocks all iframes
+* `SAMEORIGIN` → allow same-site only
+
+👉 Modern replacement: **CSP `frame-ancestors`**
+
+---
+
+### 🔐 **2) X-Content-Type-Options**
+
+**Problem:** MIME sniffing
+
+```http
+X-Content-Type-Options: nosniff
+```
+
+* Forces browser to respect declared content type
+* Prevents malicious file execution
+
+---
+
+### 🔐 **3) Referrer-Policy**
+
+**Problem:** Sensitive URL data leakage
+
+```http
+Referrer-Policy: strict-origin-when-cross-origin
+```
+
+* Prevents tokens / paths leaking via `Referer` header
+* Safer cross-origin requests
+
+---
+
+### 🔐 **4) Content-Security-Policy (CSP)**
+
+**Problem:** XSS attacks
+
+```http
+Content-Security-Policy: default-src 'self';
+```
+
+* Controls scripts, styles, resources
+* **Strong XSS mitigation**
+
+---
+
+### 🔐 **5) Strict-Transport-Security (HSTS)**
+
+**Problem:** HTTPS downgrade / MITM attacks
+
+```http
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+```
+
+* Forces browser to use **HTTPS only**
+* ⚠️ Enable **only after HTTPS is fully working**
+
+---
+
+### 🔐 **6) Permissions-Policy**
+
+**Problem:** Browser feature abuse
+
+```http
+Permissions-Policy: geolocation=(), camera=(), microphone=()
+```
+
+* Disables sensitive browser features
+* Enable only when required
+
+
+</details>
+
