@@ -2019,3 +2019,69 @@ Permissions-Policy: geolocation=(), camera=(), microphone=()
 
 </details>
 
+## 6) `Helmet.js` for Adding Security Headers
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+### **What?**
+
+* **Helmet.js** = an **Express middleware** that **automatically adds common security headers**
+* Reduces manual work and configuration mistakes ,Writing every security header manually is time-consuming
+
+> *Helmet.js is an Express middleware that improves application security by setting various HTTP headers.*
+
+### **What Does Helmet Protect?**
+
+By default, Helmet helps with:
+
+* Clickjacking protection
+* MIME sniffing prevention
+* Referrer information leaks
+* Some XSS vectors
+
+👉 **Browser-level protections**
+
+---
+
+### **How to Use (Basic Setup)**
+
+1️⃣ Install
+
+* Add Helmet as a dependency
+
+2️⃣ Enable in Express
+
+* Apply globally using `app.use(helmet())`
+
+
+
+* Helmet supports **fine-grained CSP configuration**
+* Allows strict control over scripts and resources
+
+👉 **Helmet + CSP = strong XSS defense**
+
+
+
+#### Helmet in Express
+
+```js
+import helmet from "helmet";
+
+app.use(helmet());
+```
+
+#### Customize Helmet
+
+```js
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
+```
+
+</details>
+
