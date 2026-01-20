@@ -632,11 +632,6 @@ div.innerHTML = userInput;   ❌
 - XSS protection requires SANITIZATION
 
 
-✔ Allowlist Concept (IMPORTANT)
-- Only allowed tags & attributes survive
-- Everything else is removed
-- Blocklist is never safe
-- Allowlist = industry standard
 
 - **BEST PRACTICE → Sanitize BOTH**
 
@@ -940,10 +935,14 @@ form-action 'self';
 
 Example Header:
 ```bash
-Content-Security-Policy-Report-Only:
-  default-src 'self';
-  script-src 'self';
-  report-uri /csp-report;
+res.setHeader(
+  'Content-Security-Policy-Report-Only',
+  `default-src 'self';
+   script-src 'self';
+   report-uri /csp-report;
+   report-to main-endpoint;` //modern-way
+);
+
 ```
 
 
@@ -1151,7 +1150,7 @@ app.get("/", (req, res) => {
 
 <center>
 
-# **📝 Clickjacking & Cookie Security**
+# **📝 Clickjacking & Cookie Security & CSRF**
 
 </center>
 
@@ -2084,4 +2083,7 @@ app.use(
 ```
 
 </details>
+
+
+
 
