@@ -326,5 +326,93 @@ justify-content: center;
 align-items: center;
 ```
 
-👉 Works in almost all layouts
+</details>
 
+<details>
+  <summary> 
+Q20. What is the difference between repaint and reflow (layout)?
+</summary>
+
+
+
+
+**Answer:**
+
+* **Reflow (Layout)**
+
+  * Browser recalculates element size & position
+  * Expensive operation
+* **Repaint**
+
+  * Only visual changes (color, background)
+
+👉 Reflow > Repaint in cost
+
+
+</details>
+
+<details>
+<summary>Q21. Which CSS properties trigger reflow?
+  </summary> 
+
+**Answer:**
+
+* `width`, `height`
+* `padding`, `margin`
+* `display`
+* `position`
+* `font-size`
+
+👉 Animating these causes performance issues
+
+</details>
+
+<details>
+  <summary> 
+Q22. Why are <strong>transform</strong> and <strong>opacity</strong> preferred for animations?
+</summary>
+
+**Answer:**
+
+* They **do not trigger reflow**
+* GPU-accelerated
+
+</details>
+
+<details>
+  <summary> 
+Q24. What is <strong>will-change</strong>? When should you avoid it?
+</summary>
+
+**Answer:**
+
+* Hints browser about upcoming changes
+* Improves performance temporarily
+
+⚠️ Overuse causes memory issues
+👉 Use only when needed, remove later
+
+</details>
+
+<details>
+  <summary> 
+Q25. What is the CSS <strong>contain</strong> property?
+</summary>
+
+**Answer:**
+
+* Limits layout, paint, or size calculations
+* Improves rendering performance
+
+Example:
+
+```css
+contain: layout paint;
+```
+
+👉 Useful for large components
+</details>
+
+<details>
+  <summary> 
+</summary>
