@@ -239,5 +239,92 @@ Q14. Why does <strong>position: sticky</strong> fail sometimes?
 </details>
 
 <details>
+<summary>Q15. What is Block Formatting Context (BFC)?</summary> 
+
+**Answer:**
+
+* A separate layout region in CSS
+* Prevents margin collapse
+* Contains floats
+* Controls layout isolation
+
+**Created by:**
+
+* `overflow: hidden / auto`
+* `display: inline-block`
+* `position: absolute / fixed`
+* `display: flow-root`
+
+👉 Modern fix: `display: flow-root`
+
+</details>
+
+<details>
   <summary> 
+Q16. What is margin collapsing?
 </summary>
+
+**Answer:**
+
+* Vertical margins of **block elements** combine into a **single margin**
+* The **largest margin value** is considered as the combined margin
+* Only top and bottom margins collapse
+* Margin collapsing can be controlled by **specifying top-margin or bottom-margin separately**
+
+**Example**
+
+* `div1 → margin: 40px`
+* `div2 → margin: 20px`
+* Total margin is not 60 between them: **40 + 20 ❌**
+* Collapsed combined margin (applied): **40px ✅**
+
+</details>
+
+<details>
+  <summary> 
+Q17. Why does <strong>inline-block</strong> create unexpected gaps?
+</summary>
+
+**Answer:**
+
+* Browser treats whitespace like text nodes
+
+**Fixes:**
+
+* Remove whitespace in HTML
+* Set `font-size: 0` on parent
+
+</details>
+
+<details>
+  <summary> 
+Q18. Clearfix vs modern solutions — what do you prefer?**
+</summary>
+
+
+**Answer:**
+
+* Clearfix → old hack using pseudo-elements
+* Modern → `overflow: hidden` or `flow-root`
+
+👉 Flexbox/Grid remove need for clearfix
+
+</details>
+
+<details>
+  <summary> 
+Q19. How can you center a <strong>div</strong> both horizontally and vertically?
+</summary>
+
+**Answer:**
+
+* Best way:
+
+```css
+display: flex;
+justify-content: center;
+align-items: center;
+```
+
+👉 Works in almost all layouts
+
