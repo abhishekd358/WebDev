@@ -49,7 +49,7 @@
 
 
 <details>
-  <summary> Q2. Difference between `display: none` and `visibility: hidden` and `opacity: 0` ?</summary>
+  <summary> Q2. Difference between <strong>display: none</strong> and <strong>visibility: hidden</strong> and <strong>opacity: 0</strong> ?</summary>
 
 * `display: none`
 
@@ -119,4 +119,125 @@
 
 👉 `z-index` works **only inside same stacking context**
 
-</deatils>
+</details>
+
+
+<details>
+  <summary>
+ Q7. <strong>Flexbox vs Grid </strong>– when do you use each?</summary>
+
+**Answer:**
+
+* **Flexbox**
+
+  * One-dimensional (row **or** column)
+  * Best for components (navbar, cards, buttons)
+* **Grid**
+
+  * Two-dimensional (rows **and** columns)
+  * Best for full layouts (pages, dashboards)
+
+👉 Rule: *Layout = Grid, Component = Flex*
+
+</details>
+
+
+<details>
+  <summary> Q8. Difference between <strong>justify-content</strong> and <strong>align-items</strong>?
+</strong></summary>
+
+**Answer:**
+
+* `justify-content` → **main axis**
+* `align-items` → **cross axis**
+
+👉 Axis depends on `flex-direction`
+
+</details>
+
+<details>
+  <summary> Q9. Why does <strong>height: 100%</strong> not work sometimes?
+</summary>
+
+**Answer:**
+
+* Parent element has **no defined height**
+* `%` height depends on **parent height**
+
+👉 Fix: define height on parent or better use `100vh`
+</details>
+
+<details>
+  <summary> Q10. Difference between <strong>overflow: hidden</strong> and <strong>overflow: auto</strong>? 
+</summary>
+
+**Answer:**
+
+* `hidden` → clips content, no scroll
+* `auto` → scroll appears **only if needed**
+</details>
+
+<details>
+  <summary> 
+Q11. What is <strong>min-width</strong> and why is it important in responsive design?
+</summary>
+
+**Answer:**
+
+* Prevents element from shrinking below a limit
+* Avoids broken layouts on small screens
+
+👉 Common in tables, cards, images
+</details>
+
+<details>
+  <summary> 
+Q12. Why does <strong>z-index</strong> sometimes not work?
+</summary>
+
+
+**Answer:**
+
+* Element is not **positioned** (`relative`, `absolute`, etc.)
+* Element is in a **different stacking context**
+* Parent has lower `z-index`
+
+👉 `z-index` works **only on positioned elements and within same stacking context**
+
+</details>
+
+<details>
+  <summary> 
+Q13. What is <strong>object-fit</strong> and when do you use it?
+</summary>
+
+**Answer:**
+
+* Controls how images/videos fit inside containers
+* Common values:
+
+  * `cover` → fills container, may crop
+  * `contain` → fully visible, may leave space
+
+👉 Used with `<img>` instead of background images
+
+</details>
+
+
+<details>
+  <summary> 
+Q14. Why does <strong>position: sticky</strong> fail sometimes?
+</summary>
+
+**Answer:**
+
+* Parent has `overflow: hidden/auto/scroll`
+* No `top` value defined
+* Parent height is too small
+
+
+</details>
+
+<details>
+  <summary> 
+</summary>
