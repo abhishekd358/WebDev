@@ -386,11 +386,37 @@ Q24. What is <strong>will-change</strong>? When should you avoid it?
 
 **Answer:**
 
-* Hints browser about upcoming changes
-* Improves performance temporarily
+* **What is `will-change`? (Simple)**
 
-⚠️ Overuse causes memory issues
-👉 Use only when needed, remove later
+* `will-change` tells the **browser in advance** that an element is **going to change**
+* So the browser **optimize performance** before the change happens
+* Mostly used for **animations, transforms, and opacity**
+
+
+
+**Why we use `will-change`**
+
+* To make **animations smoother**
+* To reduce **lag or repaint cost**
+* To prepare browser for **heavy UI changes**
+
+
+
+**Common Values**
+
+* `will-change: transform;`
+* `will-change: opacity;`
+* `will-change: top, left;`
+
+**Simple Example**
+
+```css
+.card {
+  will-change: transform;
+}
+```
+
+👉 Use only when needed, remove later when changes stop.
 
 </details>
 
@@ -411,6 +437,307 @@ contain: layout paint;
 ```
 
 👉 Useful for large components
+</details>
+
+<details>
+  <summary> 
+Q26. What problems do CSS architectures like BEM solve?
+</summary>
+
+**Answer:**
+
+* Prevent class name conflicts
+* Improve readability & scalability
+* Make large CSS codebases maintainable
+
+👉 Common patterns: **BEM, OOCSS, SMACSS**
+
+</details>
+
+<details>
+  <summary> 
+Q27. Explain BEM naming convention.
+</summary>
+
+
+**Answer:**
+
+* **Block** → independent component
+* **Element** → child of block
+* **Modifier** → variation
+
+Example:
+
+```css
+card__title--large
+```
+
+👉 Easy to debug & reuse
+
+</details>
+
+<details>
+  <summary> 
+Q28. Difference between <strong>:is()</strong> and <strong>:where()</strong> selectors?
+</summary>
+
+
+**Answer:**
+
+* `:is()` → **takes highest specificity**
+* `:where()` → **zero specificity**
+
+👉 `:where()` is safer for global styles
+
+</details>
+
+<details>
+  <summary> 
+Q29. What are the risks of global CSS?
+</summary>
+
+**Answer:**
+
+* Style leakage
+* Unintended overrides
+* Hard debugging
+
+👉 Solved by scoped CSS, modules, or naming conventions
+
+</details>
+
+<details>
+  <summary> 
+Q30. What is <strong>:has()</strong> selector and why is it powerful?
+</summary>
+
+
+**Answer:**
+
+* Parent selector
+* Styles element based on its children
+
+Example:
+
+```css
+div:has(img) { border: 1px solid; }
+```
+
+👉 Enables logic without JavaScript
+
+</details>
+
+<details>
+  <summary> 
+Q31. Why is <strong>100vh</strong> problematic on mobile browsers?
+</summary>
+
+
+
+**Answer:**
+
+* Includes browser UI (address bar)
+* Causes content cut-off or extra scroll
+
+👉 Fix:
+
+* Use `dvh`, `svh`, `lvh`
+* Or JavaScript-based height fix
+
+</details>
+
+<details>
+  <summary> 
+Q32. Difference between <strong>vw</strong> and <strong>%</strong>?
+</summary>
+
+
+**Answer:**
+
+* `vw` → relative to **viewport width**
+* `%` → relative to **parent element**
+
+👉 `%` is layout-safe, `vw` is viewport-based
+
+</details>
+
+<details>
+<summary>Q33. What are container queries and why are they better than media queries?
+  </summary> 
+
+**Answer:**
+
+* Styles depend on **parent size**, not viewport
+* Enable truly reusable components
+
+Example:
+
+```css
+@container (min-width: 400px) { }
+```
+
+👉 Solves component-based responsiveness
+
+</details>
+
+<details>
+  <summary> 
+Q34. Common media query mistakes?
+</summary>
+
+**Answer:**
+
+* Overusing breakpoints
+* Designing only for device sizes
+* Ignoring content-based breakpoints
+
+👉 Design should adapt to content, not devices
+
+</details>
+
+<details>
+  <summary> 
+Q35. How do you handle responsive images in CSS?
+</summary>
+
+
+**Answer:**
+
+* Use `max-width: 100%`
+* Use `object-fit`
+* Use `srcset` with HTML images
+
+👉 Prevents image overflow
+
+</details>
+
+<details>
+  <summary> 
+Q36. What are CSS variables and why are they better than preprocessor variables?
+</summary>
+
+
+**Answer:**
+
+* Defined using `--variable-name`
+* Can be changed **at runtime**
+* Inherit through DOM
+
+```css
+/* Declare a CSS Variable */
+--variable-name: value;
+
+/* Declare Variable Globally */
+:root {
+  --primary-color: #3498db;
+  --font-size: 16px;
+}
+/* Use it like this: */
+body {
+  color: var(--primary-color);
+  font-size: var(--font-size);
+}
+
+```
+
+👉 Preprocessor variables (Sass) are **compile-time only**
+
+</details>
+
+<details>
+  <summary> 
+Q37. How do you implement dark mode using CSS?
+</summary>
+
+
+**Answer:**
+
+* Use CSS variables
+* Toggle class or use media query
+
+Example:
+
+```css
+/* Step 1: Define variables */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+}
+
+/* Step 2: Use variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+/* Step 3: Toggle class with JavaScript */
+document.body.classList.toggle("dark");
+
+```
+
+👉 Clean & scalable approach
+
+</details>
+
+<details>
+  <summary> Q38. What is <strong>prefers-color-scheme</strong>?
+</summary>
+
+
+**Answer:**
+
+* Detects system theme (dark/light)
+* Used for automatic theming
+
+Example:
+
+```css
+/* Default (Light Mode) */
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+}
+
+```
+
+</details>
+
+<details>
+  <summary> 
+Q39. Can CSS variables be used inside media queries?
+</summary>
+
+
+**Answer:**
+❌ No, but they **can be changed inside media queries**
+
+👉 Important interview trap question
+
+</details>
+
+<details>
+  <summary> 
+Q40. How do CSS variables help performance?
+</summary>
+
+
+**Answer:**
+
+* Reduce duplicated CSS
+* Avoid reflow-heavy recalculations
+* Enable efficient theming
 </details>
 
 <details>
