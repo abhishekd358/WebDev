@@ -742,4 +742,74 @@ Q40. How do CSS variables help performance?
 
 <details>
   <summary> 
+Q41. Why should <strong>outline: none</strong> be avoided?
 </summary>
+
+
+**Answer:**
+
+* Removes keyboard focus visibility
+* Breaks accessibility (a11y)
+
+👉 Replace with custom focus styles instead
+
+
+</details>
+
+<details>
+  <summary> 
+Q42. Difference between <strong>display: none</strong> and <strong>aria-hidden="true"</strong>?
+</summary>
+
+**Answer:**
+
+* `display: none` → hidden visually & from screen readers
+* `aria-hidden` → hidden only from assistive tech
+
+👉 Used together in accessibility-sensitive UI
+
+</details>
+
+<details>
+  <summary> 
+Q43. What does <strong>pointer-events: none</strong> do?
+</summary>
+
+
+**Answer:**
+
+* Disables mouse interactions
+* Click passes through element
+
+👉 Common in loaders & overlays
+
+</details>
+
+<details>
+  <summary> 
+Q44. What is <strong>user-select</strong> used for?
+</summary>
+
+**Answer:**
+
+* Controls text selection
+* Values: `none`, `text`, `all`
+
+👉 Used to prevent copy in UI elements
+
+</details>
+
+<details>
+  <summary> 
+Q45. How do you create accessible hover effects?
+</summary>
+
+
+**Answer:**
+
+* Combine `:hover` with `:focus-visible`
+* Never rely on color alone
+
+👉 Keyboard users matter
+</details>
+
