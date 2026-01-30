@@ -73,4 +73,64 @@ console.log(obj1 == obj2); // false (different object references)
 
 
 
-// ---------------------------------------------------------------------------------------------------------
+// -----------------------------ARRAY --------------------------------------------------------
+// 👉🏼 Array convert into String ''
+// Splice -> delete the complete index from array completely
+// delete -> only wipe the value of that index , making empty slot
+
+// We can assign value to the Empty Slot
+// index of EMpty Slot is not present
+// Delete doesn’t shrink array length,So Better: use splice() for removing.
+// .length property is writable/changable
+// Default sort is lexicographic.so to sort number : nums.sort((a,b)=>a-b);
+
+let arr = [1, , 3];  
+console.log(arr) //[ 1, <1 empty item>, 3 ]
+console.log(arr.length); // 3
+console.log(arr[1]);     //  undefined (but slot exists!)
+arr[1] = 'hey' // We can assign value to the Empty Slot
+console.log(1 in arr); // false (hole) , index of EMpty Slot is not present
+// Delete doesn’t shrink array
+
+delete arr[0];
+console.log(arr);       // [empty, empty, 3] Delete doesn’t shrink array
+// Better: use splice() for removing.
+
+
+
+
+// ===== sort array
+let nums = [10, 2, 5];
+nums.sort();
+console.log(nums); // [10,2,5] ❌ (string compare)
+nums.sort((a,b)=>a-b);
+console.log(nums); // [2,5,10] ✅
+
+// =====length property is writable
+let arr = [1,2,3,4,5];
+arr.length = 2;
+console.log(arr); // [1,2] (array truncated)
+
+arr.length = 5;
+console.log(arr); // [1,2, empty ×3]
+
+
+
+
+// ---------------------------------------STRING----------------------------------------
+// 👉🏼+ ke saath string concatenation hota hai, lekin -, *, / me string number me convert hota hai.
+
+console.log(" " == 0); // true // Number is present so " "===> convert to 0
+console.log("" == 0);  // true  // Number is present so ""===> convert to 0
+console.log("" == false); // true  // Boolean is present so ""===> convert to false
+
+
+// 👉🏼Lexicographic comparison ("2" > "12" is true).
+
+
+
+
+// ------------------------------------ OBJECT -------------------------
+// 👉🏼 keys are always string
+// 👉🏼 do alag objects kabhi equal nahi honge (jab tak same reference na ho).
+// 👉 Number keys hamesha ascending order me aate hain, baaki keys insertion order follow karte hain.

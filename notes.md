@@ -562,7 +562,7 @@ Q32. Difference between <strong>vw</strong> and <strong>%</strong>?
 </details>
 
 <details>
-<summary>Q33. What are container queries and why are they better than media queries?
+<summary>Q33. What are <strong>container</strong> queries and why are they better than <strong>media</strong> queries?
   </summary> 
 
 **Answer:**
@@ -813,3 +813,15 @@ Q45. How do you create accessible hover effects?
 👉 Keyboard users matter
 </details>
 
+# JS-DOM
+
+
+<details>
+  <summary> Difference between Node, Element and HTMLElement?
+</summary>
+
+**Answer**
+
+- `Node` is the base interface for everything in the DOM.
+- `Element` is a node that represents an HTML or XML tag. 
+- `HTMLElement` is a specialized element interface specific to HTML elements.
