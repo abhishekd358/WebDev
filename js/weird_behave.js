@@ -131,6 +131,20 @@ console.log("" == false); // true  // Boolean is present so ""===> convert to fa
 
 
 // ------------------------------------ OBJECT -------------------------
-// 👉🏼 keys are always string
+// 👉🏼 'keys' are always string
 // 👉🏼 do alag objects kabhi equal nahi honge (jab tak same reference na ho).
 // 👉 Number keys hamesha ascending order me aate hain, baaki keys insertion order follow karte hain.
+
+
+// ✅ Yes, these are the main ways to create prototype relationships:
+// Object.create() ⭐ (recommended)
+// Constructor + .prototype
+// Object.setPrototypeOf()
+// __proto__ (legacy / avoid)
+
+
+// 👉🏼 JSON.stringify = OBJECT -> JSON
+// 👉🏼 JSON.Parse = JSON -> OBJECT
+
+
+
