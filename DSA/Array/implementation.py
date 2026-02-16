@@ -8,13 +8,17 @@ class MyList:
         # size
         # number of element 
 
-    def  __init__(self, size):
-        self.size = size
+    def  __init__(self):
+        self.size = 1
         self.n = 0
+
+        # create a array using __make_array ficntion
+        self.A = self.__make_array(self.size)
 
 
     # here we create a array of size using the C++ module 
-        self.capacity = (ctypes.py_object * size)
+    def __make_array(self, new_capacity):
+        return (ctypes.py_object * new_capacity)()
     
     
 
@@ -23,10 +27,25 @@ class MyList:
         return self.size
 
 
+    # append 
+    def append(self, value): # taking value from user 
+        # check is the array not be fulled . if fulled we have to make the array size double . else we append
+        if(self.n <= self.size):
+            self.A[self.n] = value
+            self.n += 1
+
+
+    
+    
+
     
 
 
 
 
-x = MyList(8)
+x = MyList()
 print(len(x))
+x.append('abhi')
+
+
+
