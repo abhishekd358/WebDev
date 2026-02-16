@@ -35,6 +35,12 @@ class MyList:
             self.n += 1
 
 
+
+
+    # print
+    def __str__(self):
+        for i in range(self.n):
+            return self.A[i]
     
     
 
@@ -46,6 +52,7 @@ class MyList:
 x = MyList()
 print(len(x))
 x.append('abhi')
+print(x)
 
 
 
