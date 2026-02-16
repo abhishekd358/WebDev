@@ -1220,7 +1220,7 @@ res.cookie("sessionId", "abc123", {
 });
 ```
 * Available to all subdomains
-* dont use (.) instead mention explictly Subdomain name
+* don't use (.) instead mention explictly Subdomain name
 
 
 

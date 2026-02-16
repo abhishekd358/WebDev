@@ -30,3 +30,37 @@ IdHeading.style.color='pink'   // change the color to red of the id with value I
 
 attribute_Name.innerText // it return only unhidden means screen visible text.
 attribute_Name.textContent // it return hidden content inside the text.
+
+
+
+
+
+
+
+
+
+// =============================================BOM
+
+// Bom -> BROWSER OBJECT MODEL
+
+// in browser when you do : window
+// it return a object that are all BOM
+
+// ---- imp methods
+// 💥1) window.location -> Used for navigation, redirects, query params
+// 2) window.history -> your current tab visited page history (so you go back , forward on visited page)
+// 💥3) window.scrollTo(x, y) -> to scroll at any postion on page, pass co-ordinate x, y
+// 4) window.open() -> open a new link 
+// 💥5) window.close() -> close the tab
+
+// 6) window.document -> it a DOM
+
+
+// ============================================DOM
+
+// document -> is root parent, it not have any parent
+// window parent is itself
+
+
+// 🤯 console.dir -> return nothing so we get 'undefined'
+// console.log -> return something
