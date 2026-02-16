@@ -33,14 +33,33 @@ class MyList:
         if(self.n <= self.size):
             self.A[self.n] = value
             self.n += 1
+        
+        # if array get fulled we resize the current array capacity
+        self.resize(self.size*2)
 
+    # resize : we double the current array size , array content shift to new array
+    def resize(self, new_capacity):
+        new_capacity_array = self.__make_array(new_capacity)
+        self.size = new_capacity
+
+        # now shift the data from old array to new array . Self.A ----> new_capcity_array
+        for i in range(self.n):
+            new_capacity_array[i] = self.A[i] # shift
+        
+
+        # Finallay , After all shifiting values to new array , we update the old array
+        self.A = new_capacity_array
 
 
 
     # print
     def __str__(self):
+        temp_str = ''
+        
         for i in range(self.n):
-            return self.A[i]
+            temp_str += str(self.A[i])+ ', '
+        
+        return '[' + temp_str[:-2] + ']'
     
     
 
@@ -52,6 +71,9 @@ class MyList:
 x = MyList()
 print(len(x))
 x.append('abhi')
+x.append('rakesh')
+print(len(x))
+x.append('rash')
 print(x)
 
 
