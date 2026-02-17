@@ -24,21 +24,21 @@ class MyList:
 
     # first length find
     def __len__(self):
-        return self.size
+        return self.n
 
 
     # append 
     def append(self, value): # taking value from user 
         # check is the array not be fulled . if fulled we have to make the array size double . else we append
-        if(self.n <= self.size):
+        if(self.n < self.size):
             self.A[self.n] = value
             self.n += 1
         
         # if array get fulled we resize the current array capacity
-        self.resize(self.size*2)
+        self.__resize(self.size*2)
 
     # resize : we double the current array size , array content shift to new array
-    def resize(self, new_capacity):
+    def __resize(self, new_capacity):
         new_capacity_array = self.__make_array(new_capacity)
         self.size = new_capacity
 
@@ -71,7 +71,8 @@ class MyList:
 
     def pop(self):
         if self.n== 0:
-            return 'OperationFail: Empty Array'
+            print('OperationFail: Empty Array')
+            return
         self.A[self.n-1]
         self.n -= 1
 
@@ -89,7 +90,52 @@ class MyList:
         # if value not present
         return "NotFound : item not found"
     
+    def insert(self, index, value):
+
+        # boundary check
+        if index < 0 or index > self.n:
+            print("IndexOutOfBound")
+            return
+
+        # insert when we do : Shifting have to implement
+
+        # first we neeed to check is my arrray have space . 
+        if(self.n == self.size):
+            self.__resize(self.size*2)
+        
+        for i in range(self.n, index, -1): # reverse loop
+            self.A[i] = self.A[i-1]   # shifiting
+
+        # now we here insert after shifiting
+        self.A[index] = value  
+        self.n += 1                             
+
+
+    def __delitem__(self, index):
+        if index <= 0 or index >self.n:
+            return 'IndexOutOfBound'
+        
+        for i in range(index, self.n-1):
+            self.A[i] = self.A[i+1]
+        self.n = self.n-1
+                
     
+    def remove(self, value):
+        
+        index =  self.find(value)
+
+        if(type(index)== int):
+            return self.__delitem__(index)
+        else:
+            return 'item not found in array' 
+
+
+
+
+
+
+
+        
 
 
 
@@ -108,6 +154,12 @@ print(x)
 print(x[3])
 x.pop()
 print(x)
+
+
+x.insert(3, 'ola')
+print(x)
+
+
 
 
 
