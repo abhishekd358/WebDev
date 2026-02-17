@@ -64,6 +64,34 @@ class MyList:
     
 
     
+    def __getitem__(self, index):
+        if 0 <= index< self.n:
+            return self.A[index]
+        return 'IndexOutOfBound : Please enter correct index'
+
+    def pop(self):
+        if self.n== 0:
+            return 'OperationFail: Empty Array'
+        self.A[self.n-1]
+        self.n -= 1
+
+
+
+    def clear(self):
+        self.size = 1
+        self.n = 0
+
+    def find(self, value):
+        for i in range(self.n):
+            if(self.A[i] == value):
+                return i
+        
+        # if value not present
+        return "NotFound : item not found"
+    
+    
+
+
 
 
 
@@ -74,6 +102,11 @@ x.append('abhi')
 x.append('rakesh')
 print(len(x))
 x.append('rash')
+x.append(99)
+print(x)
+
+print(x[3])
+x.pop()
 print(x)
 
 
