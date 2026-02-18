@@ -1,4 +1,4 @@
-num  =[1 ,8, 7, 56, 90]
+num  =[12, 35, 1, 10, 34, 1]
 def largestElement(num):
     largest = 0
 
