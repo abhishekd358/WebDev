@@ -208,3 +208,52 @@
 
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+## 2) Redis Database Management & Namespacing
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+## 1️⃣ Multiple Databases
+- 16 logical DBs (0–15)
+- Default DB = 0
+- Same Redis instance
+- Separate key spaces only
+- `redis.conf` file create and change as you want number* of db.
+
+
+---
+
+## 2️⃣ Switch Database
+- select <db_number>
+- Example: select 1
+- dbsize → count keys in current DB
+
+---
+
+## 3️⃣ Dangerous Commands ⚠
+- FLUSHDB → delete current DB keys
+- FLUSHALL → delete all DB keys
+
+
+## Namespacing
+
+- Namespacing = structured keys using `:` (colon) for grouping.
+- Format: `app:entity:id`  
+- Example: `app:user:1`, `app:cart:123`, `app:otp:9876`
+
+
+## Search / Pattern
+- `SCAN 0 MATCH ecom:user:*`  
+- `KEYS ecom:product:*` *(avoid KEYS in prod)*
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
