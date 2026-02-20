@@ -52,3 +52,105 @@
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
+
+
+## 2) Data Types
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+
+### 1) Strings
+
+* Simplest type (text or binary data)
+* Max size: 512MB
+* Used for: counters, cache, session data
+* Commands:
+  `SET`, `GET`, `MSET`, `MGET`, `SETEX`, `GETSET`,
+  `INCR`, `INCRBY`, `DECR`, `DECRBY`,
+  `APPEND`, `STRLEN`
+
+---
+
+### 2) Lists
+
+* Ordered collection of strings
+* Can push/pop from both ends
+* Used for: queues, task lists
+* Commands:
+  `LPUSH`, `RPUSH`, `LPOP`, `RPOP`,
+  `BLPOP`, `BRPOP`,
+  `LRANGE`, `LLEN`, `LINDEX`, `LSET`, `LTRIM`
+
+---
+
+### 3) Sets
+
+* Unordered collection of unique strings
+* No duplicates
+* Used for: tags, unique visitors
+* Commands:
+  `SADD`, `SREM`, `SMEMBERS`, `SISMEMBER`,
+  `SCARD`, `SPOP`,
+  `SUNION`, `SINTER`, `SDIFF`
+
+---
+
+### 4) Sorted Sets (ZSets)
+
+* Unique strings with a score (sorted by score)
+* Used for: leaderboards, rankings
+* Commands:
+  `ZADD`, `ZREM`, `ZRANGE`, `ZREVRANGE`,
+  `ZRANK`, `ZREVRANK`,
+  `ZSCORE`, `ZINCRBY`, `ZCARD`,
+  `ZRANGEBYSCORE`
+
+---
+
+### 5) Hashes
+
+* Key-value pairs inside a key
+* Used for: storing objects (like user profiles)
+* Commands:
+  `HSET`, `HGET`, `HMSET`, `HMGET`,
+  `HGETALL`, `HDEL`, `HEXISTS`,
+  `HINCRBY`, `HLEN`, `HKEYS`, `HVALS`
+
+---
+
+### 6) Bitmaps
+
+* Bit-level operations on strings
+* Used for: tracking flags (online/offline)
+* Commands:
+  `SETBIT`, `GETBIT`, `BITCOUNT`, `BITOP`, `BITPOS`
+
+---
+
+### 7) HyperLogLog
+
+* Probabilistic unique count
+* Uses very little memory
+* Used for: counting unique visitors
+* Commands:
+  `PFADD`, `PFCOUNT`, `PFMERGE`
+
+---
+
+### 8) Streams
+
+* Log-like data structure
+* Used for: messaging, event sourcing
+* Commands:
+  `XADD`, `XREAD`, `XREADGROUP`,
+  `XGROUP`, `XACK`, `XDEL`,
+  `XRANGE`, `XREVRANGE`, `XLEN`
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
