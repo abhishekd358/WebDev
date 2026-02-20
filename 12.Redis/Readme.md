@@ -154,3 +154,57 @@
 
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+## 2) STRING
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+## 1️⃣ Basic Commands
+- `SET key value` → set value
+- `GET key` → get value
+- `DEL key` → delete key
+- `EXISTS key` → check key present
+- `SETNX key value → if key not exists then added
+
+---
+
+## 2️⃣ Expiry / TTL (Very Important 🔥)
+- `SET key value EX 60` → set with expiry
+- `EXPIRE key 30` → add expiry
+- `TTL key` → remaining time
+- `PERSIST key` → remove expiry
+
+👉 Used in OTP, sessions, tokens
+
+---
+
+## 3️⃣ Counters (Rate Limiting Core)
+- `INCR key` → +1
+- `DECR key` → -1
+- `INCRBY key n`
+- `DECRBY key n`
+
+---
+
+## 4️⃣ String Operations
+- `APPEND key value` → Value ke end me add
+- `STRLEN key` → Length check
+- `GETRANGE key start end` → Substring
+- `SETRANGE key offset value` → Replace part of string
+
+---
+
+## 5️⃣ Multiple Keys set and get
+- MSET k1 v1 k2 v2
+- MGET k1 k2
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
