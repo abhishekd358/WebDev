@@ -327,7 +327,7 @@ main();
 
 
 
-## 6)  
+## 6) Creating getJSON() and setJSON() Utility Methods
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -390,6 +390,103 @@ await SETJSON("doctor", {
 
 console.log(await GETJSON("doctor"));
 ```
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 7)  RedisJSON
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+- Redis module to store & query JSON natively
+- Works with structured data (not raw string)
+- Uses JSONPath for field access
+
+---
+
+### Set JSON
+- `JSON.SET key $ '{json}'`
+- `$` = root
+
+### Get JSON
+- `JSON.GET key` → full document
+- `JSON.GET key $.field` → specific field
+
+### Delete Field
+- `JSON.DEL key $.field`
+
+### Increment Number
+- `JSON.NUMINCRBY key $.field value`
+
+### Array Ops
+- `JSON.ARRAPPEND key $.arr value`
+- `JSON.ARRPOP key $.arr`
+- `JSON.ARRLEN key $.arr`
+
+---
+
+### JSONPath Basics
+- `$` → root
+- `$.name` → field
+- `$.obj.field` → nested field
+- `$[0]` → first array element
+- `$..name` → recursive search
+
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 8) Redis VS MongoDB Speed
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+```
+Redis:
+
+✔ Data RAM me
+✔ No disk I/O
+✔ O(1) lookup
+✔ Simple key access
+
+MongoDB:
+
+✔ Disk read
+✔ Index lookup
+✔ Query parsing
+✔ More overhead
+
+```
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+## 9) 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
 
 
 </details>
