@@ -158,7 +158,7 @@
 
 
 
-## 2) STRING
+## 3) STRING
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -212,7 +212,7 @@
 
 
 
-## 2) Redis Database Management & Namespacing
+## 4) Redis Database Management & Namespacing
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -251,6 +251,145 @@
 ## Search / Pattern
 - `SCAN 0 MATCH ecom:user:*`  
 - `KEYS ecom:product:*` *(avoid KEYS in prod)*
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 5) Connecting Redis in Node.js
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+- 1️⃣ redis (Official – Recommended ✅)
+- 2️⃣ ioredis
+
+- install `npm install redis`
+
+### implemenation
+```js
+import { createClient } from "redis";
+
+const redisClient = createClient({
+  url: "redis://localhost:6379",
+});
+
+// =========== ALL EVENT
+redisClient.on("connect", () =>
+  console.log("Redis connected successfully on 6379")
+);
+
+redisClient.on("end", () =>
+  console.log("Redis connection closed")
+);
+
+redisClient.on("error", (err) =>
+  console.error("Redis error:", err)
+);
+
+const employee = {
+  dept: "electrical",
+  salary: 200,
+  "duty-hrs": 12,
+};
+// =========== run when connect event happen
+async function main() {
+  await redisClient.connect();
+
+  await redisClient.set("city", "abhi");
+  // we make stringfy the js Object
+  await redisClient.set("employee", JSON.stringify(employee));
+
+  const data = await redisClient.get("employee");
+  console.log(JSON.parse(data));
+
+  setTimeout(async () => {
+    console.log("Disconnecting the redis.....");
+    await redisClient.quit();
+  }, 10000);
+}
+
+main();
+```
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+## 6)  
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+- setJSON & getJSON are utility function
+- help to not repeat and parse and stringfy again again
+
+### Implementation
+
+- `redisService.mjs` (JSON helper functions)
+
+```js
+import { createClient } from "redis";
+
+const redisClient = createClient({
+  url: "redis://localhost:6379"
+});
+
+redisClient.on("connect", () =>
+  console.log("Redis Running.......")
+);
+
+redisClient.on("ready", () =>
+  console.log("❤ Redis Ready ❤")
+);
+
+redisClient.on("error", (err) =>
+  console.error("Redis Error:", err)
+);
+
+
+// ============================UTITLITY METHODS
+export const setJSON = async (key, value) => {
+  return await redisClient.set(key, JSON.stringify(value));
+};
+
+export const getJSON = async (key) => {
+  const data = await redisClient.get(key);
+  return data ? JSON.parse(data) : null;
+};
+
+// connect once
+await redisClient.connect();
+
+export default redisClient;
+
+```
+
+### use of methods
+```js
+import { SETJSON, GETJSON } from "./redisService.mjs";
+
+await SETJSON("doctor", {
+  qualification: "MBBS",
+  experience: 10,
+  fee: 20
+});
+
+console.log(await GETJSON("doctor"));
+```
 
 
 </details>
