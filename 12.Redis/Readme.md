@@ -481,13 +481,195 @@ MongoDB:
 
 
 
-## 9) 
+## 9) Redis for Caching
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
 
 </br>
 
+### FLOW
+```
+1️⃣ Check Redis
+2️⃣ If found → return
+3️⃣ If not found → Fetch from Mongo
+4️⃣ Store in Redis
+5️⃣ Return response
+```
+
+### Implementation Code
+
+```js
+app.get("/user/:id", async (req, res) => {
+  const userId = req.params.id;
+  const key = `app:user:${userId}`;
+
+  try {
+    // 1️⃣ Check Cache (Redis)
+    const cachedUser = await redisClient.get(key);
+
+    if (cachedUser) {
+      return res.json({
+        source: "redis",
+        data: JSON.parse(cachedUser)
+      });
+    }
+
+    // 2️⃣ Fetch from MongoDB
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // 3️⃣ Store in Redis (5 minutes TTL = 300 seconds)
+    await redisClient.set(
+      key,
+      JSON.stringify(user),
+      { EX: 300 }
+    );
+
+    // 4️⃣ Return Response
+    return res.json({
+      source: "mongo",
+      data: user
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server Error" });
+  }
+});
+```
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+
+
+## 10) Redis For Session Store
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+### Basic Flow
+```
+Login →
+Generate sessionId →
+Store in Redis with TTL →
+Send sessionId to browser (cookie) →
+Protected routes check Redis session
+```
+
+### Implementation code
+
+```js
+import express from "express";
+import { createClient } from "redis";
+import cookieParser from "cookie-parser";
+import crypto from "crypto";
+
+const app = express();
+app.use(express.json());
+app.use(cookieParser());
+
+/* ---------------- Redis Setup ---------------- */
+
+const redisClient = createClient();
+
+redisClient.on("connect", () => {
+  console.log("✅ Redis Connected");
+});
+
+redisClient.on("error", (err) => {
+  console.error("Redis Error:", err);
+});
+
+await redisClient.connect();
+
+/* ---------------- Login Route ---------------- */
+
+app.post("/login", async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).json({ message: "Username required" });
+  }
+
+  // 🔥 Secure session ID using crypto
+  const sessionId = crypto.randomUUID();
+
+  const sessionData = {
+    username,
+    loginTime: Date.now(),
+  };
+
+  // Store session in Redis with TTL (30 minutes)
+  await redisClient.set(
+    `session:${sessionId}`,
+    JSON.stringify(sessionData),
+    { EX: 1800 } // 1800 sec = 30 minutes
+  );
+
+  // Send session ID in cookie
+  res.cookie("sessionId", sessionId, {
+    httpOnly: true,
+    sameSite: "strict",
+  });
+
+  res.json({ message: "Login successful" });
+});
+
+/* ---------------- Protected Route ---------------- */
+
+app.get("/dashboard", async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+
+  if (!sessionId) {
+    return res.status(401).json({ message: "Not logged in" });
+  }
+
+  const session = await redisClient.get(`session:${sessionId}`);
+
+  if (!session) {
+    return res.status(401).json({ message: "Session expired or invalid" });
+  }
+
+  const user = JSON.parse(session);
+
+  res.json({
+    message: "Welcome to dashboard",
+    user,
+  });
+});
+
+/* ---------------- Logout Route ---------------- */
+
+app.post("/logout", async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+
+  if (sessionId) {
+    await redisClient.del(`session:${sessionId}`);
+  }
+
+  res.clearCookie("sessionId");
+
+  res.json({ message: "Logged out successfully" });
+});
+
+/* ---------------- Start Server ---------------- */
+
+app.listen(4000, () => {
+  console.log("🚀 Server running on port 4000");
+});
+```
 
 </details>
 
