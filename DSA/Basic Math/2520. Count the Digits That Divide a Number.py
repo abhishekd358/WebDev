@@ -7,9 +7,7 @@ def countDigits(num):
 
     return count
         
-        
-
-
+    
 
 
 
