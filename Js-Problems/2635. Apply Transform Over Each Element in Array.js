@@ -10,3 +10,17 @@ function xyz(arr, fn) {
 
 
 console.log(xyz([1,2, 3])())
+
+
+/**
+ * @param {number[]} arr
+ * @param {Function} fn
+ * @return {number[]}
+ */
+var map = function(arr, fn) {
+    for(num in arr){
+        arr[i] = fn(arr[i], i)
+    }
+    return arr
+};
+

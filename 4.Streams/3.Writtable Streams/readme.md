@@ -3,8 +3,8 @@
 
 # 🎥 **Writable Stream Kya Hoti Hai?**
 
-Readable stream → tum data **read** karte ho
-Writable stream → tum data **send/write** karte ho
+- Readable stream → tum data **read** karte ho
+- Writable stream → tum data **send/write** karte ho
 
 Example:
 

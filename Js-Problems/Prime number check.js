@@ -1,3 +1,4 @@
+
 function isPrime(n) {
   if (n <= 1) return false; // 0 and 1 are not prime
   for (let i = 2; i < n; i++) {
@@ -8,7 +9,6 @@ function isPrime(n) {
 
 console.log(isPrime(7));  // true
 console.log(isPrime(15)); // false
-
 
 
 
@@ -25,3 +25,5 @@ console.log(isPrime2(29)); // true
 console.log(isPrime2(100)); // false
 
 
+
+console.log('')
