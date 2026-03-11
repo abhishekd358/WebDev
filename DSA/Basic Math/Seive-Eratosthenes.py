@@ -12,7 +12,7 @@ def countPrimes(n):
   # we go first multiple of 2
   while(p<n):
     # first 2 will be True , and all its multiple became false
-    if(primeArray[p]):
+    if(primeArray[p]): # if current pointer is true then we make all it Multiple False
       for i in range(p*p, n, p):
         primeArray[i] = False  
     p+=1
