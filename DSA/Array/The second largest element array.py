@@ -3,29 +3,31 @@
 # If the second largest element doesn't exist then return -1.
 
 
-num  = [12, 35, 9, 1, 34, 1]
-
-def finalApproach(arr):
-    newarr = arr
-    sortedArray = []
-    less = num[0]
-
-    for i in range(len(newarr)):
-        for j in range(len(newarr)):
-            if(newarr[j] < newarr[i]):
-                if(newarr[j]< less):
-                    less = newarr[j]
-        print(len(newarr))
-        newarr= newarr.remove(less)
-    sortedArray.append(less)
-        
-
+# ========================================== RIGHT APPROACH ✅
+def getSecondLargest(arr):
+    largest = arr[0]
+    second = -1
+    
+    for i in range(1, len(arr)):
+        if arr[i] > largest:
+            second = largest
+            largest = arr[i]
             
+        elif arr[i] < largest and arr[i] > second:
+            second = arr[i]
+    return second
+        
+num  = [12, 35, 9, 1, 34, 1]
+num1 = [10, 10, 10]
+num2 = [10, 5, 10]
+num3 = [13, 15, 4, 1]
 
-    print(sortedArray)
 
-
-finalApproach(num)
+print(getSecondLargest(num))
+print(getSecondLargest(num1))
+print(getSecondLargest(num2))
+print(getSecondLargest(num3))
+                
 
 # def getSecondLargest(arr):
 #     largest = []
