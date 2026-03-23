@@ -9,7 +9,7 @@
 
 def leftRotateByK(arr, k):
     # ================================================= REVERSE APPROACH ✅
-    #==================================================TIME: O(N) SPCAE: O(1)
+    #==================================================TIME: O(N) SPACE: O(1)
     def reverse(arr, start, end):
 
         # we reverese 
@@ -17,11 +17,15 @@ def leftRotateByK(arr, k):
             arr[start], arr[end] = arr[end], arr[start]
             start+=1
             end-=1
-            print(arr)
-        print(arr)
-        print('===========')
         return arr
     
+
+    # when we need not to call reverse
+    if k == 0 or len(arr)==0:
+        return arr
+
+
+    # when the k is greater 
     if k > len(arr):
         k = k%len(arr)
     
