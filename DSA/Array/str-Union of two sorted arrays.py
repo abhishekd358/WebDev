@@ -23,12 +23,12 @@ def unionArray(nums1, nums2):
     # reamining copy
     
     while  left < len(nums1):
-        if len(temp) == 0 or temp[-1] != nums1[left]:
+        if temp[-1] != nums1[left]:
            temp.append(nums1[left])
         left+=1
 
     while  right < len(nums2):
-        if len(temp) == 0 or temp[-1] != nums2[right]:
+        if temp[-1] != nums2[right]:
             temp.append(nums2[right])
         right+=1
         
