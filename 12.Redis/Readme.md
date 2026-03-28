@@ -158,7 +158,7 @@
 
 
 
-## 3) STRING
+## 3) BASIC CMD , STRING CMD, TTL CMD
 
 <details>
   <summary>👉🏼 READ IN DETAILS:</summary>
@@ -170,7 +170,7 @@
 - `GET key` → get value
 - `DEL key` → delete key
 - `EXISTS key` → check key present
-- `SETNX key value → if key not exists then added
+- `SETNX key value` → if key not exists then added
 
 ---
 
@@ -201,8 +201,8 @@
 ---
 
 ## 5️⃣ Multiple Keys set and get
-- MSET k1 v1 k2 v2
-- MGET k1 k2
+- `MSET k1 v1 k2 v2`
+- `MGET k1 k2`
 
 </details>
 
@@ -230,15 +230,17 @@
 ---
 
 ## 2️⃣ Switch Database
-- select <db_number>
+- `select <db_number>`
 - Example: select 1
-- dbsize → count keys in current DB
+
+## DB SIZE CHECK
+- `dbsize` → count keys in current DB
 
 ---
 
 ## 3️⃣ Dangerous Commands ⚠
-- FLUSHDB → delete current DB keys
-- FLUSHALL → delete all DB keys
+- `FLUSHDB` → delete current DB keys
+- `FLUSHALL` → delete all DB keys
 
 
 ## Namespacing
@@ -249,7 +251,7 @@
 
 
 ## Search / Pattern
-- `SCAN 0 MATCH ecom:user:*`  
+- `SCAN <db_no> MATCH <key>` → Example: `SCAN 0 MATCH ecom:user:*`  
 - `KEYS ecom:product:*` *(avoid KEYS in prod)*
 
 
