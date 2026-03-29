@@ -21,7 +21,7 @@ await client.on('connect', async()=> {
 
 
     // =========================== JSON DATA TYPE : HAVE MORE CONTROL ON EACH FIELD OF DATA
-    await client.json.set('user:user3',$,employee)
+    // await client.json.set('user:user3',"$",employee)
 
     
 
