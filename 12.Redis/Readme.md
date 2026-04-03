@@ -677,3 +677,254 @@ app.listen(4000, () => {
 
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 11) Search and Indexing
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+- Search and Indexing work with `HASH` and `JSON`
+
+### What is Redis Search
+
+- Redis Search is a module that enables:
+
+- ✔ Full-text search
+- ✔ Filtering
+- ✔ Indexing
+- ✔ Sorting
+- ✔ Fuzzy search
+
+
+### What is an Index?
+
+- index is an optimized data structure created to make searches fast. 
+
+- syntax
+
+```bash
+FT.CREATE <idx_name> 
+ON <JSON / HASH>
+PREFIX <no_of_namespace> <namespaces> 
+SCHEMA 
+$.<on_which_field_index> AS <alias_name> <TYPE> 
+```
+
+- Example
+```bash
+FT.CREATE productIdx 
+ON JSON 
+PREFIX 1 product: 
+SCHEMA 
+$.name AS name TEXT 
+$.category AS category TAG 
+$.price AS price NUMERIC
+```
+
+
+### Search Query Examples
+
+#### Text Search
+```FT.SEARCH productIdx "iphone"```
+
+#### Filter by Category
+```FT.SEARCH productIdx "@category:{mobile}"```
+
+#### Numeric Price Range
+```FT.SEARCH productIdx "@price:[0 50000]"```
+
+
+
+</br>
+
+
+</details>
+
+
+
+
+
+### Implement Searching and Index in Node.js
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+### ✅ Create Index
+
+```js
+await client.ft.create(
+  "productIdx",
+  {
+    name: {
+      type: "TEXT",
+      SORTABLE: true
+    },
+    category: {
+      type: "TAG"
+    },
+    price: {
+      type: "NUMERIC"
+    }
+  },
+  {
+    ON: "JSON",
+    PREFIX: "product:"
+  }
+);
+```
+
+### ✅ Insert Data
+
+```js
+await client.json.set("product:1", "$", {
+  name: "iPhone 14",
+  category: "mobile",
+  price: 80000
+});
+
+await client.json.set("product:2", "$", {
+  name: "Samsung M34",
+  category: "mobile",
+  price: 20000
+})
+```
+
+### ✅ Search Query
+```js
+// Text Search
+const result = await client.ft.search("productIdx", "iphone");
+```
+
+</details>
+
+
+
+### All Methods of Search Query
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+### 1️⃣ Basic Text Search
+
+```bash
+FT.SEARCH idx:products "iphone"
+```
+
+
+### 2️⃣ Exact Match (TAG Field)
+- ✔ Used for filtering
+- ✔ Case-sensitive (by default)
+
+```bash
+FT.SEARCH idx:products "@category:{mobile}"
+```
+
+
+### 3️⃣ Numeric Range Query `[min max]`
+
+```bash
+FT.SEARCH idx:products "@price:[10000 50000]"
+```
+
+### 4️⃣ AND Query `q1 q2`
+
+```bash
+FT.SEARCH idx:products "iphone samsung"
+```
+
+
+### 5️⃣ OR Query `q1 | q2`
+
+```bash
+FT.SEARCH idx:products "iphone | samsung"
+```
+
+
+### 6️⃣ NOT Query `-query`
+
+- ✔ Exclude keyword
+
+```bash
+FT.SEARCH idx:products "-iphone"
+```
+
+
+### 8️⃣ Prefix Search (Wildcard) `word*`
+
+- ✔ Autocomplete-like behavior
+
+```bash
+FT.SEARCH idx:products "iph*"
+```
+
+
+### 9️⃣ Fuzzy Search (Spelling Mistakes) `%word%`
+
+- ✔ Handles typos 
+
+```bash
+FT.SEARCH idx:products "%iphon%"
+```
+
+
+### 1️⃣1️⃣ Sorting `SORTBY`
+
+- ✔ Sort by numeric/text field
+
+```bash
+FT.SEARCH idx:products "*" SORTBY price ASC
+```
+
+
+
+###  1️⃣2️⃣ Pagination `LIMIT`
+
+- ✔ Offset + count
+- (skip first 10, get next 20)
+
+
+```bash
+FT.SEARCH idx:products "*" LIMIT 10 20
+```
+
+### 1️⃣3️⃣ Return Specific Fields `RETURN`
+
+- ✔ Optimize response size
+
+```bash
+FT.SEARCH idx:products "*" RETURN 2 name price
+```
+
+
+
+### 1️⃣5️⃣ Aggregation `AGGREGATE`
+
+- ✔ Count products per category
+
+```bash
+FT.AGGREGATE idx:products "*" GROUPBY 1 @category REDUCE COUNT 0
+```
+
+
+
+### 1️⃣6️⃣ Phrase Search `\ "word" \`
+
+- ✔ Exact phrase match
+
+```bash
+FT.SEARCH idx:products "\"iphone 14\""
+```
+
+
+
+</details>
+
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
