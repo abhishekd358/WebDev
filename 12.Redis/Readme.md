@@ -928,3 +928,116 @@ FT.SEARCH idx:products "\"iphone 14\""
 
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 12) SCAN and KEYS 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+
+### Problem – KEYS Command
+
+```bash
+KEYS app:user:*
+```
+
+
+
+### ❌ What’s the Problem?
+
+* It scans the **entire database**
+* It is a **blocking operation**
+* **Synchronous call**
+
+In large datasets:
+
+👉 Server freezes
+👉 APIs slow down
+👉 Production crashes 💣
+
+
+---
+
+
+### 🚀 2️⃣ Solution – SCAN Command
+
+- `SCAN` = Non-blocking iteration
+
+Meaning:
+
+✔ Returns data in chunks
+✔ Does NOT block the server
+✔ Safe for production
+
+
+```bash
+SCAN cursor
+```
+
+### Cursor Concept
+
+* SCAN returns a **cursor**
+* Until cursor = `"0"` → keep iterating
+- When cursor becomes `0` → iteration complete
+
+- Iteration Example
+```bash
+SCAN 0
+SCAN 23
+SCAN 56
+.
+.
+.
+SCAN 0 -> STOP Scanning
+```
+
+
+### SCAN with `MATCH`
+
+```bash
+SCAN 0 MATCH app:user:*
+```
+
+👉 Filters keys using a pattern
+
+### SCAN with `COUNT`
+
+```bash
+SCAN 0 COUNT 10
+```
+
+👉 Returns approximately 10 keys (not guaranteed)
+
+
+### 💻 Node.js Implementation (Production)
+
+```js
+  // import createClient
+  // create clientwith redis server
+  // connect
+  
+  let cursor = "0";
+  let keys = [];
+
+  do {
+    const result = await client.scan(cursor, {
+      MATCH: pattern,
+      COUNT: 10
+    });
+
+    cursor = result.cursor;
+    keys.push(...result.keys);
+
+  } while (cursor !== "0");
+
+```
+
+</br>
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
