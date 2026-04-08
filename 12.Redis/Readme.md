@@ -1041,3 +1041,88 @@ SCAN 0 COUNT 10
 
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+
+
+## 13) Sets 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+- A collection of unique values (no duplicates allowed and unordered)
+
+### Example:
+
+```text
+["user1", "user2", "user3"]
+```
+
+
+#### SADD (Add Value)
+
+```bash
+SADD users user1
+```
+
+
+####  SMEMBERS (Get All Members)
+
+```bash
+SMEMBERS users
+```
+
+#### SISMEMBER (Check if Exists)
+
+```bash
+SISMEMBER users user1
+```
+
+
+#### SREM (Remove Value)
+
+```bash
+SREM users user1
+```
+
+
+
+#### SCARD (Count Elements)
+
+```bash
+SCARD users
+```
+
+
+#### SINTER (Intersection)
+
+```bash
+SINTER set1 set2
+```
+
+#### SUNION (Union)
+
+```bash
+SUNION set1 set2
+```
+
+#### SDIFF (Difference)
+
+```bash
+SDIFF set1 set2
+```
+
+
+#### Interview Question
+
+**Q: Why are Redis Sets used for a followers system?**
+
+**Answer:**
+Because Sets automatically enforce uniqueness, allow fast membership checks, and support efficient operations like intersection for finding mutual connections.
+
+
+</details>
+
+
+
+
+
