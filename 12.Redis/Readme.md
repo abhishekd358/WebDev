@@ -1122,6 +1122,7 @@ Because Sets automatically enforce uniqueness, allow fast membership checks, and
 
 </details>
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 ## 14) HASH
 
@@ -1184,6 +1185,79 @@ Because Hash allows field-level updates and retrieval without rewriting the enti
 </details>
 
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## 15) Pub/Sub 
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+
+#### Redis Pub/Sub – Key Points
+
+* Pub/Sub = real-time messaging system
+* Publisher → sends message
+* Subscriber → listens to channel
+* Messages are **instant but not stored**
+
+### (Subscriber)
+
+```bash
+SUBSCRIBE chat
+```
+
+### (Publisher)
+
+```bash
+PUBLISH chat "Hello World"
+```
+
+
+### MERN Use Case – Chat App
+
+#### Send Message
+
+```js
+await publisher.publish("chat:room1", JSON.stringify({
+  user: "Abhi",
+  message: "Hello"
+}));
+```
+
+
+#### Receive Message
+
+```js
+subscriber.subscribe("chat:room1", (msg) => {
+  const data = JSON.parse(msg);
+  console.log(data);
+});
+```
+
+
+
+#### Real-World Architecture
+
+```text
+User → WebSocket → Redis Pub/Sub → Other Users
+```
+
+
+#### Interview Question
+
+**Q: What is the main limitation of Redis Pub/Sub?**
+
+**Answer:**
+Messages are not stored, so if a subscriber is offline, it will miss the message.
+
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
 
