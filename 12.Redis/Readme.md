@@ -1123,6 +1123,79 @@ Because Sets automatically enforce uniqueness, allow fast membership checks, and
 </details>
 
 
+## 14) HASH
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+- Redis hash are map/Dictionary
+- store field-value pairs
+- no nested allowed .(Only stringify allowed but avoid)
+
+
+#### HSET (set field)
+```bash
+HSET user:1 name Yabi age 23 city Pandora
+```
+
+
+#### HGET (get field one)
+```bash
+HGET user:1 name
+```
+
+
+#### HGETALL (get all field)
+```bash
+HGETALL user:1
+```
+
+#### HDEL (delete field)
+```bash
+HDEL user:1 age
+```
+
+#### HKEYS (get all keys)
+
+```bash
+HKEYS user:1
+```
+
+#### HVALS (get all values)
+
+```bash
+HVALS user:1
+```
+
+#### HEXISTS (exists field)
+```bash
+HEXISTS user:1 name
+```
+
+
+#### INTERVIEW
+
+- Q: Why use Redis Hash instead of storing JSON as a string?
+
+```txt
+Because Hash allows field-level updates and retrieval without rewriting the entire object, which improves performance and efficiency.
+```
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
