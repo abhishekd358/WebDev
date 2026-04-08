@@ -1260,6 +1260,61 @@ Messages are not stored, so if a subscriber is offline, it will miss the message
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
+## 16) AUTH in Redis
+
+<details>
+  <summary>👉🏼 READ IN DETAILS:</summary>
+
+</br>
+
+
+#### 1. Enable Password
+
+```bash
+sudo nano /etc/redis/redis.conf
+```
+
+#### 2. Set Password
+
+```
+requirepass yourPassword
+```
+
+#### 3. Restart:
+
+```bash
+sudo service redis-server restart
+```
+
+---
+
+#### 1. Connect
+
+```bash
+redis-cli -a yourPassword
+```
+
+OR
+
+```bash
+AUTH yourPassword
+```
+
+---
+
+## 💻 Node.js
+
+```js
+createClient({
+  url: "redis://:password@localhost:6379"
+});
+```
+
+
+</details>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 
 
