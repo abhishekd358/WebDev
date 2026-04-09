@@ -86,3 +86,81 @@
 
 
 
+
+# ================================ INSERTION SORT
+
+# def insertionSort(arr):
+    
+#     for i in range(1, len(arr)):
+#         j = i-1
+#         currVal = arr[i]
+#         while j >=0 and currVal < arr[j]:
+#             arr[j+1] = arr[j]
+#             j-=1
+#         arr[j+1] = currVal
+#     return arr
+            
+
+# print(insertionSort([7, 4, 1, 5, 3]))
+
+
+
+def mergeSort(arr, low, high):
+    # ======== DIVIDE karenge
+    # Base case
+    if low == high:
+        return 
+    mid = (low+ high) // 2
+
+
+    # ========= MERGE karenge
+    def merge(arr, low, mid ,high):
+        left = low
+        right = mid+1
+
+        # temp arr  
+        temp = []
+
+        # now we sort the each divide or half of array
+        while left <= mid and right <= high:
+            # check karegne
+            if arr[left] < arr[right]:
+                temp.append(arr[left])
+                left+=1
+            else:
+                # right wala chota hai 
+                temp.append(arr[right])
+                right +=1
+
+        # ab kuch element kisi bhi ek array mai reamin honge us ko copy kar denge
+        while left<= mid:
+            temp.append(arr[left])
+            left+=1
+        while right<=high:
+            temp.append(arr[right])
+            right+=1
+
+        #  now we get complete the temp array sorted 
+        for i in range(low , high+1):
+            arr[i] = temp[i-low]
+
+        return arr
+
+
+# =============== Recurisoion calls
+    # first half
+    mergeSort(arr, low, mid)
+    # second half
+    mergeSort(arr, mid+1, high)
+
+    # both get merge
+    merge(arr, low, mid, high)
+    return arr
+
+
+
+
+print(mergeSort([7, 4, 1, 5, 3], low=0, high=4))
+
+
+
