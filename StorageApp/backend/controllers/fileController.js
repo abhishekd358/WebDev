@@ -3,6 +3,7 @@ import { rm } from "fs/promises";
 import path from "path";
 import Directory from "../models/directoryModel.js";
 import File from "../models/fileModel.js";
+import {pipeline} from 'node:stream/promises'
 
 export const uploadFile = async (req, res, next) => {
   const parentDirId = req.params.parentDirId || req.user.rootDirId;
@@ -18,8 +19,25 @@ export const uploadFile = async (req, res, next) => {
     }
 
     const filename = req.headers.filename || "untitled";
-    const filesize = req.headers.filesize;
+    const filesize = Number(req.headers.filesize);
+    // console.log(filename, filesize)
     // console.log(typeof filesize);
+
+    //  Blocking the request if the SIze is greater 
+    if(filesize > 50 * 1024 * 1024){
+      // 1. Set the status code
+      res.status(413);
+        
+      // 2. we send a msg
+      console.log('file size big')
+      res.write('File too large. Connection terminated.');
+        
+      // 3. Destroy the connection immediately
+      return res.destroy(); 
+    }
+
+
+
     const extension = path.extname(filename);
 
     const insertedFile = await File.insertOne({
@@ -33,9 +51,45 @@ export const uploadFile = async (req, res, next) => {
     const fileId = insertedFile.id;
 
     const fullFileName = `${fileId}${extension}`;
+    const filePath = `./storage/${fullFileName}`
 
-    const writeStream = createWriteStream(`./storage/${fullFileName}`);
-    req.pipe(writeStream);
+    const writeStream = createWriteStream(filePath);
+    //============ checking the size of file when receiving to sever using chunk . so from postamn or frotend even after manumulation of file size we validate every chuck size . this help less bandwidth use and security 
+    let totalFileSize = 0
+    let isAborted = false
+    req.on('data', async(chunk)=>{
+
+      // if aborted 
+      if(isAborted){
+        return 
+      }
+
+      totalFileSize += chunk.length
+      isAborted = true
+      if (totalFileSize > filesize){
+        // remove the file also
+        writeStream.close()
+        res.status(413);
+        await insertedFile.deleteOne()
+        await rm(filePath)
+        return res.destroy()
+      }
+
+      // ------------------ Backpressure manual handling
+
+      // we write on our stram
+      let canWrite= writeStream.write(chunk)
+      if (!canWrite){
+        //  if not writable we pasue the readble stream
+        req.paused()
+
+        // else we check drain event
+        writeStream.once('drain', ()=>{
+          // drain ho gaya to resume kar denge
+          req.resume()
+        })
+      }
+    })
 
     req.on("end", async () => {
       return res.status(201).json({ message: "File Uploaded" });
