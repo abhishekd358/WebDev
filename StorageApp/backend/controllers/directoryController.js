@@ -27,7 +27,7 @@ export const getDirectory = async (req, res) => {
 export const createDirectory = async (req, res, next) => {
   const user = req.user;
 
-  const parentDirId = req.params.parentDirId || user.rootDirId?.toString();
+  const parentDirId = req.params.parentDirId || user.rootDirId.toString();
   const dirname = req.headers.dirname || "New Folder";
   try {
     const parentDir = await Directory.findOne({
