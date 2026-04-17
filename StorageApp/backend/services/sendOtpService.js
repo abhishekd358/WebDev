@@ -42,7 +42,8 @@ export async function sendOtpService(email) {
     }),
   });
 
-   
+  // const data = await response.json();
+  // console.log("BREVO RESPONSE:", data);
 
     return { success: true, message: `OTP sent to ${email}` };
   } catch (error) {

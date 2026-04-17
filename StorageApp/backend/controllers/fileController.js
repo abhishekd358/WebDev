@@ -81,7 +81,7 @@ export const uploadFile = async (req, res, next) => {
       let canWrite= writeStream.write(chunk)
       if (!canWrite){
         //  if not writable we pasue the readble stream
-        req.paused()
+        req.pause()
 
         // else we check drain event
         writeStream.once('drain', ()=>{
