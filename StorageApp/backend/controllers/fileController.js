@@ -58,7 +58,6 @@ export const uploadFile = async (req, res, next) => {
     let totalFileSize = 0
     let isAborted = false
     req.on('data', async(chunk)=>{
-
       // if aborted 
       if(isAborted){
         return 
@@ -92,6 +91,19 @@ export const uploadFile = async (req, res, next) => {
     })
 
     req.on("end", async () => {
+      // // === when file uploaded we increase the folder size also
+      // parentDirData.size += Number(filesize)
+      // await parentDirData.save()
+
+      //  loggic to setup the root and parent folder size
+      let parentId = parentDirId
+      while(parentId){
+        const dir = await Directory.findById(parentId)
+        dir.size += totalFileSize
+        await dir.save()
+        parentId = dir.parentDirId
+      }
+
       return res.status(201).json({ message: "File Uploaded" });
     });
 
@@ -168,6 +180,15 @@ export const deleteFile = async (req, res, next) => {
   try {
     await rm(`./storage/${id}${file.extension}`);
     await file.deleteOne();
+
+    //  folder size reduce
+    let parentId = file.parentDirId
+      while(parentId){
+        const dir = await Directory.findById(parentId)
+        dir.size += -file.size
+        await dir.save()
+        parentId = dir.parentDirId
+      }
     return res.status(200).json({ message: "File Deleted Successfully" });
   } catch (err) {
     next(err);

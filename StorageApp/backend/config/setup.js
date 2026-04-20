@@ -72,6 +72,9 @@ try {
           userId: {
             bsonType: "objectId",
           },
+          size: {
+            bsonType: "int",
+          },
           parentDirId: {
             bsonType: ["objectId", "null"],
           },
