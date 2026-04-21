@@ -1,6 +1,7 @@
 import { rm } from "fs/promises";
 import Directory from "../models/directoryModel.js";
 import File from "../models/fileModel.js";
+import { updateDirectoriesSize } from "./fileController.js";
 
 export const getDirectory = async (req, res) => {
   const user = req.user;
@@ -95,8 +96,7 @@ export const deleteDirectory = async (req, res, next) => {
         .select("extension")
         .lean();
       let directories = await Directory.find({ parentDirId: id })
-        .select("_id")
-        .lean();
+      .lean();
 
       for (const { _id } of directories) {
         const { files: childFiles, directories: childDirectories } =
@@ -122,6 +122,7 @@ export const deleteDirectory = async (req, res, next) => {
     await Directory.deleteMany({
       _id: { $in: [...directories.map(({ _id }) => _id), id] },
     });
+    await updateDirectoriesSize(directoryData.parentDirId, -directoryData.size)
   } catch (err) {
     next(err);
   }

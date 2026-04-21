@@ -5,6 +5,24 @@ import Directory from "../models/directoryModel.js";
 import File from "../models/fileModel.js";
 import {pipeline} from 'node:stream/promises'
 
+
+// direcoty size function
+export const updateDirectoriesSize = async(parentId, deltaSize)=>{
+  // parentDirData.size += Number(filesize)
+      // await parentDirData.save()
+
+      //  loggic to setup the root and parent folder size
+      // let parentId = parentDirId
+      while(parentId){
+        const dir = await Directory.findById(parentId)
+        dir.size += deltaSize
+        await dir.save()
+        parentId = dir.parentDirId
+      }
+
+}
+
+
 export const uploadFile = async (req, res, next) => {
   const parentDirId = req.params.parentDirId || req.user.rootDirId;
   try {
@@ -64,9 +82,10 @@ export const uploadFile = async (req, res, next) => {
       }
 
       totalFileSize += chunk.length
-      isAborted = true
-      if (totalFileSize > filesize){
-        // remove the file also
+
+        if (totalFileSize > filesize){
+          // remove the file also
+          isAborted = true
         writeStream.close()
         res.status(413);
         await insertedFile.deleteOne()
@@ -92,17 +111,8 @@ export const uploadFile = async (req, res, next) => {
 
     req.on("end", async () => {
       // // === when file uploaded we increase the folder size also
-      // parentDirData.size += Number(filesize)
-      // await parentDirData.save()
-
-      //  loggic to setup the root and parent folder size
-      let parentId = parentDirId
-      while(parentId){
-        const dir = await Directory.findById(parentId)
-        dir.size += totalFileSize
-        await dir.save()
-        parentId = dir.parentDirId
-      }
+      
+      await updateDirectoriesSize(parentDirId, totalFileSize)
 
       return res.status(201).json({ message: "File Uploaded" });
     });
@@ -169,26 +179,23 @@ export const renameFile = async (req, res, next) => {
 export const deleteFile = async (req, res, next) => {
   const { id } = req.params;
   const file = await File.findOne({
-    _id: id,
-    userId: req.user._id,
-  }).select("extension");
+  _id: id,
+  userId: req.user._id,
+  }).select("extension size parentDirId");
 
   if (!file) {
-    return res.status(404).json({ error: "File not found!" });
+  return res.status(404).json({ error: "File not found!" });
   }
+
+
+
 
   try {
     await rm(`./storage/${id}${file.extension}`);
     await file.deleteOne();
 
     //  folder size reduce
-    let parentId = file.parentDirId
-      while(parentId){
-        const dir = await Directory.findById(parentId)
-        dir.size += -file.size
-        await dir.save()
-        parentId = dir.parentDirId
-      }
+    await updateDirectoriesSize(file.parentDirId, -file.size)
     return res.status(200).json({ message: "File Deleted Successfully" });
   } catch (err) {
     next(err);
