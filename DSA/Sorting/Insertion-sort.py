@@ -32,3 +32,24 @@ def insertionSort(arr):
         print(arr)
 
 insertionSort([7, 4, 1, 5, 3])
+
+
+
+
+
+# =================================== 
+
+# ====================== INSERTION Only with SWAP 
+def insertionSort(arr):
+    
+    # first pointer decalrer
+
+    for i in range(len(arr)):
+        j = i 
+        while j > 0 and arr[j-1]> arr[j]:
+            arr[j], arr[j-1] = arr[j-1], arr[j]
+            j-=1
+        
+    return arr
+
+print(insertionSort([14,9, 15, 12, 6, 8 ,13]))
