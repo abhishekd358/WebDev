@@ -31,7 +31,6 @@ def leftRotateByK(arr, k):
     
     reverse(arr, 0, k-1)
     reverse(arr, k, len(arr)-1)
-    reverse(arr, k+1, len(arr)-1)
     reverse(arr, 0, len(arr)-1)
     
 
