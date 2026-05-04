@@ -226,16 +226,37 @@
 # ===========================================================
 #  taking input 
 
-N = int(input().strip())
+# N = int(input().strip())
 
-temp = []
+# temp = []
 
-for i in range(N):
-    a , b = map(int, input.split())
-    temp.append([a, b])
+# for i in range(N):
+#     a , b = map(int, input.split())
+#     temp.append([a, b])
 
 
 
-# output 
-for a, b in temp:
-    print(a, b)
+# # output 
+# for a, b in temp:
+#     print(a, b)
+
+# ============================ two sum array revise 
+
+def twoSum(nums, target):
+    
+    # create a frequecy of each
+    hash = {}
+    for i in range(len(nums)):
+        hash[nums[i]] = i
+    
+    # now checking the diff present in hash or not
+    for i in range(len(nums)):
+        # calculate diff 
+        diff = target - nums[i]
+        if diff in hash and hash[diff] != i:
+            return [i, hash[diff]]
+    
+    return 0
+
+
+print(twoSum(nums = [1, 3, 5, -7, 6, -3], target = 0))
