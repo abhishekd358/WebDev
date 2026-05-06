@@ -1,5 +1,5 @@
 # ====================== TIme : n2 and space: (1)
-def longestConsecutive(nums):
+def longestConsecutive1(nums):
 
     longest = 1
 
@@ -25,7 +25,7 @@ def longestConsecutive(nums):
         
         
 # ================================= time : N2 and space : (1)
-def longestConsecutive(nums):
+def longestConsecutive2(nums):
 
     #  case base: where array mai 0 element hai 
     if not nums:
@@ -50,7 +50,7 @@ def longestConsecutive(nums):
             count = 1
         longest = max(longest, count)
         
-    return longest   
+    return longest  
 
 
 
@@ -60,40 +60,47 @@ def longestConsecutive(nums):
 
 
 
-# ================================== 
-def longestConsecutive(nums):
+
+# ==================================  O(N) O(1)
+def longestConsecutive3(nums):
+
+    # base case
+    if not nums:
+        return 0
     
     # create a set so lookup only take time complexity : O(1)
     numSet = set(nums)
 
 
     longest = 1
+    # hum each element ke liye loop chalyenge or uske sabhi conswqutive ko check karenge
     for num in numSet:
         
+        if num-1 not in numSet: # check ki current num ka PREVIOUS CONSEQUTIVE HAI ya NHI
+            # if nahi hai to hum currentNUM se start karenge
+            count =1
+            start = num
+
+            # ab loop chalyenge or sab consequtive ko check karegene
+            while start + 1 in numSet:
+                count +=1
+                start+= 1
+            
+            # sab consequtive count mile ke baad 
+            longest = max(longest, count)
+    return longest
+
+            
+        
+print(longestConsecutive1([101, 4, 200, 100, 1, 2,4 ,4 , 3, 1,]))
+
+print(longestConsecutive2([101, 4, 200, 100, 1, 2,4 ,4 , 3, 1]))
+print(longestConsecutive3([101, 4, 200, 100, 1, 2,4 ,4 , 3, 1]))
+        
         
 
 
 
 
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print(longestConsecutive([100,4,200,1,3,2]))
 
 
