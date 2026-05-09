@@ -1,26 +1,7 @@
 # ====================================== BRUTH FORCE APPROACH 
-# def rotate(matrix):
+# Time → O(n²)
+# Space → O(n²)
 
-#     rows = len(matrix)
-#     cols = len(matrix[0])
-    
-#     # create a temp matrix
-    
-#     tempMatrix = [[0 for _ in range(cols)] for _ in range(rows)]
-#     # n*n
-#     # now we loop 
-#     for r in range(rows):
-#         for c in range(cols):
-#             # swap karenge [r][c] ke postion ko and waha pe current element put kardenge
-#             tempMatrix[c][r] = matrix[r][c]
-    
-#     # n*n
-#     for r in range(rows): # complexity : n 
-#         tempMatrix[r].reverse() # complexoty : n
-
-#     return tempMatrix
-
-# ================================================================ OPTIMAL APPRAOCH
 def rotate(matrix):
 
     rows = len(matrix)
@@ -29,6 +10,29 @@ def rotate(matrix):
     # create a temp matrix
     
     tempMatrix = [[0 for _ in range(cols)] for _ in range(rows)]
+    # n*n
+    # now we loop 
+    for r in range(rows):
+        for c in range(cols):
+            # swap karenge [r][c] ke postion ko and waha pe current element put kardenge
+            tempMatrix[c][r] = matrix[r][c]
+    
+    # n*n
+    for r in range(rows): # complexity : n 
+        tempMatrix[r].reverse() # complexoty : n
+
+    return tempMatrix
+
+# ================================================================ OPTIMAL APPRAOCH
+# Time → O(n²)
+# Space → O(1)
+
+def rotate(matrix):
+
+    rows = len(matrix)
+    cols = len(matrix[0])
+    
+
     # n*n
     # now we loop 
     for r in range(rows):
