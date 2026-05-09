@@ -1,6 +1,47 @@
 class Solution:
     def setZeroes(self, matrix: List[List[int]]) -> None:
-    # ======================================== Better : 
+
+# ====================================== OPTIMAL : 
+                                            # time : (n*m)
+                                            # space : O(1)
+        rows = len(matrix)
+        cols = len(matrix[0])
+        isFirstElementZero = False
+        # 1 step : we loop through and put 0 of respective row and col in 1st row and 1s col
+        for r in range(rows):
+            for c in range(cols):
+                # now check is zero
+                if matrix[r][c] == 0:
+                    # make matrix 1st row index's 0
+                    matrix[0][c] = 0
+
+                    # ALSO make matrix 1st column index's to 0 expect [0][0]
+                    if r > 0:
+                        matrix[r][0] = 0
+                    else:
+                        isFirstElementZero = True
+
+        # Step 2 : now we place 0 except 1st ROW and 1st COLUMN
+        for r in range(1, rows):
+            for c in range(1, cols):
+                if matrix[r][0]==0 or matrix[0][c] == 0:
+                    matrix[r][c] = 0
+        
+        #Step 3: now we place 0 in the 1st COLUMN
+        if matrix[0][0] == 0:
+            for r in range(rows):
+                matrix[r][0] = 0
+                
+        # STEP 4: if mera [0][0] means isFirstElementZero hai to ROW BHi 0 hoga
+        if isFirstElementZero:
+            for c in range(cols):
+                matrix[0][c] = 0
+
+    
+
+
+
+# ======================================== Better : 
                                         # time : (n*m)
                                         # space : (n+m)
                                        
