@@ -19,20 +19,17 @@ def spiralMatrix(matrix):
         right-=1
 
         # step 3: right -> left   #printing Bottom
-        for c in range(right,left-1, -1):
-            temp.append(matrix[bottom][c])
-        bottom-=1
+        if top <= bottom:
+            for c in range(right,left-1, -1):
+                temp.append(matrix[bottom][c])
+            bottom-=1
 
         # step 4: bttom -> top # printing LEFT
-        for r in range(bottom, top-1, -1):
-            temp.append(matrix[r][left])
-        left+=1
+        if left <= right:
+            for r in range(bottom, top-1, -1):
+                temp.append(matrix[r][left])
+            left+=1
 
-    #  my code work properly for 4*4 , 4*3 : ONLY Making problem for 3*4 matrixes 
-    r = len(matrix)
-    c = len(matrix[0])
-    if r < c: 
-        return temp[:-1]
     return temp
 
 
